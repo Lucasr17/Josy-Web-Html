@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-const port = 3000;
+//const port = 3000;
 
 // Middleware pour servir les fichiers statiques (HTML, CSS, etc.) dans le dossier "public"
 app.use(express.static(path.join(__dirname, 'public_html')));
