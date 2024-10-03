@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 // Middleware pour servir les fichiers statiques (HTML, CSS, etc.) dans le dossier "public"
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public_html')));
 app.use(express.json());
 
 // Endpoint pour mettre à jour le fichier JSON
