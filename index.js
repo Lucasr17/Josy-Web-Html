@@ -5,13 +5,13 @@ const app = express();
 const port = 3000;
 
 // Middleware pour servir les fichiers statiques
-app.use(express.static('public'));
+app.use(express.static('public_html'));
 app.use(express.json());
 
 // Endpoint pour mettre à jour le fichier JSON
 app.post('/update-json', (req, res) => {
     const updatedData = req.body;
-    const filePath = path.join(__dirname, 'public', 'motsJOSY.json');
+    const filePath = path.join(__dirname, 'public_html', 'motsJOSY.json');
 
     fs.writeFile(filePath, JSON.stringify(updatedData, null, 2), (err) => {
         if (err) {
@@ -28,7 +28,7 @@ app.listen(port, () => {
 
 // Route de base pour répondre à "/"
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
 });
 
 // Démarrage du serveur sur le port défini par Fly.io
