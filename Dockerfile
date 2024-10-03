@@ -1,20 +1,20 @@
-# Utilisation de l'image officielle Node.js comme image de base
-FROM node:14
+# Utilisation d'une image de base légère
+FROM node:14-alpine
 
-# Création du répertoire de travail de l'application
+# Création du répertoire de l'application
 WORKDIR /app
 
-# Copie des fichiers package.json et package-lock.json
+# Copie de package.json et package-lock.json
 COPY package*.json ./
 
 # Installation des dépendances
-RUN npm install
+RUN npm install --production
 
-# Copie du reste du projet
+# Copie du reste des fichiers
 COPY . .
 
-# Exposition du port que l'application va utiliser
+# Exposition du port (si nécessaire)
 EXPOSE 3000
 
 # Commande pour démarrer l'application
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
