@@ -25,3 +25,14 @@ app.post('/update-json', (req, res) => {
 app.listen(port, () => {
     console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
 });
+
+// Route de base pour répondre à "/"
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
+// Démarrage du serveur sur le port défini par Fly.io
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
+});
