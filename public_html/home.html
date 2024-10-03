@@ -453,10 +453,8 @@ text {
 
 
 .modal p {
-  margin-top: 7px;
   font-size: 18px;
   line-height: 22px;
-  font-style: italic; /* Ajoute cette ligne pour rendre le texte en italique */
 }
 
 .modal .buttone {
@@ -1155,6 +1153,14 @@ text {
             transform: translateX(-50) translateY(0); /*  transition: transform 1s ease-in-out;*/
         }
         
+        .T_shirt_Josy_2 {
+            position: fixed;
+            top: 30vh;
+            left: 40%; 
+            width: 55%; 
+            opacity: 0; /* L'image est initialement invisible */   
+            transform: translateX(0) translateY(0) rotate(0deg); /* Ajout de la rotation */
+       }
         
         .Pull_Josydole {
             position: fixed;
@@ -1173,25 +1179,15 @@ text {
             opacity: 0; /* L'image est initialement invisible */   
             transform: translateX(0) translateY(0) rotate(0deg); /* Ajout de la rotation */
        }
-
-       .T_shirt_Josy_2 {
-            position: fixed;
-            top: 30vh;
-            left: 38.7%; 
-            width: 55%; 
-            opacity: 0; /* L'image est initialement invisible */   
-            transform: translateX(0) translateY(0) rotate(0deg); /* Ajout de la rotation */
-            clip-path: inset(0 0 10% 0); /* Rogne 20% en bas de l'image */
-       }
         
         .T_shirt_Josyimaginaire {
             position: fixed;
             top: 30vh;
-            left: 6.7%; /* Position initiale en dehors de l'écran à gauche */
+            left: 5%; /* Position initiale en dehors de l'écran à gauche */
             width: 55%; /* Taille de l'image à 40% */
             opacity: 0; /* L'image est initialement invisible */   
-            transform: translateX(0) translateY(0) rotate(0deg); /* Ajout de la rotation */  
-            clip-path: inset(0 0 10% 0); /* Rogne 20% en bas de l'image */
+            transform: translateX(0) translateY(0) rotate(0deg); /* Ajout de la rotation */
+
         }
 
 
@@ -1532,7 +1528,7 @@ text {
     });
     
     gsap.fromTo(".T_shirt_Josyimaginaire", {
-        x: 0,
+        x: 220,
         y: -30,
         scale: 0.7,
         transform: "translateX(0) translateY(0) rotate(0deg)" // Ajout de la rotation initiale
@@ -2347,76 +2343,6 @@ window.addEventListener('resize', () => {
     }
 });
 
-//JOSYmaginaire
-gsap.fromTo(".T_shirt_Josyimaginaire", {
-    x: sreen_largeur * 0.10 + 66,
-    opacity: 0
-}, {
-    x: sreen_largeur * 0.10 + 66,
-    opacity: 1,
-    scrollTrigger: {
-        trigger: document.body, // Déclencher par rapport au body
-        start: "4900px",
-        end: "4940px",
-        scrub: 0, 
-        markers: false
-    }
-});
-
-gsap.fromTo(".T_shirt_Josyimaginaire", {
-    x: sreen_largeur * 0.10 + 66,
-    y: -42,
-    scale: 0.7,
-    transform: "translateX(0) translateY(0) rotate(0deg)" // Ajout de la rotation initiale
-}, {
-    x: 0,
-    y: 0, // Pas de changement de position, seulement la rotation
-    scale: 1,
-    transform: "translateX(0) translateY(0) rotate(-35deg)", // Ajout de la rotation finale
-    scrollTrigger: {
-        trigger: document.body, // Déclencher par rapport au body
-        start: "4950px",  // Démarre après la première animation
-        end: "5300px",    // Fin de l'animation à 5200px
-        scrub: 0,  
-        markers: false // Pour désactiver les repères de démarrage et de fin
-    }
-});
-
-//Josy 2
-gsap.fromTo(".T_shirt_Josy_2", {
-    x: - sreen_largeur * 0.10 - 66,
-    opacity: 0
-}, {
-    x: - sreen_largeur * 0.10 - 66,
-    opacity: 1,
-    scrollTrigger: {
-        trigger: document.body, // Déclencher par rapport au body
-        start: "4900px",
-        end: "4940px",
-        scrub: 0, 
-        markers: false
-    }
-});
-
-gsap.fromTo(".T_shirt_Josy_2", {
-    x: - sreen_largeur * 0.10 - 66,
-    y: -42,
-    scale: 0.7,
-    transform: "translateX(0) translateY(0) rotate(0deg)" // Ajout de la rotation initiale
-}, {
-    x: 0,
-    y: 0, // Pas de changement de position, seulement la rotation
-    scale: 1,
-    transform: "translateX(0) translateY(0) rotate(35deg)", // Ajout de la rotation finale
-    scrollTrigger: {
-        trigger: document.body, // Déclencher par rapport au body
-        start: "4950px",  // Démarre après la première animation
-        end: "5300px",    // Fin de l'animation à 5200px
-        scrub: 0,  
-        markers: false // Pour désactiver les repères de démarrage et de fin
-    }
-});
-
 ScrollTrigger.refresh();
 //fin refresh 
     });
@@ -2464,10 +2390,8 @@ gsap.fromTo(".T_shirt_Josy_2", {
 
 //JOSYmaginaire
 gsap.fromTo(".T_shirt_Josyimaginaire", {
-    x: sreen_largeur * 0.10 + 66,
     opacity: 0
 }, {
-    x: sreen_largeur * 0.10 + 66,
     opacity: 1,
     scrollTrigger: {
         trigger: document.body, // Déclencher par rapport au body
@@ -2479,7 +2403,7 @@ gsap.fromTo(".T_shirt_Josyimaginaire", {
 });
 
 gsap.fromTo(".T_shirt_Josyimaginaire", {
-    x: sreen_largeur * 0.10 + 66,
+    x: 200,
     y: -42,
     scale: 0.7,
     transform: "translateX(0) translateY(0) rotate(0deg)" // Ajout de la rotation initiale
@@ -2500,10 +2424,8 @@ gsap.fromTo(".T_shirt_Josyimaginaire", {
 
 //Josy 2
 gsap.fromTo(".T_shirt_Josy_2", {
-    x: - sreen_largeur * 0.10 - 66,
     opacity: 0
 }, {
-    x: - sreen_largeur * 0.10 - 66,
     opacity: 1,
     scrollTrigger: {
         trigger: document.body, // Déclencher par rapport au body
@@ -2515,7 +2437,7 @@ gsap.fromTo(".T_shirt_Josy_2", {
 });
 
 gsap.fromTo(".T_shirt_Josy_2", {
-    x: - sreen_largeur * 0.10 - 66,
+    x: -200,
     y: -42,
     scale: 0.7,
     transform: "translateX(0) translateY(0) rotate(0deg)" // Ajout de la rotation initiale
