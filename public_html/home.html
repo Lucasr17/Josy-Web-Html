@@ -485,7 +485,8 @@ text {
             z-index: 99000; /* Index élevé pour assurer la visibilité */
             position: relative; /* Pour gérer le z-index */
         }
-        .modal button {
+
+.modal button {
             margin-top : 30px;
             margin-bottom : 10px;
             background-color: #6a5acd; /* Violet */
@@ -498,8 +499,30 @@ text {
             z-index: 99000; /* Index élevé pour assurer la visibilité */
             position: relative; /* Pour gérer le z-index */
         }
+
 .modal button:hover {
             background-color: #8a2be2; /* Violet plus foncé au survol */
+}
+
+
+
+
+#button-open-game {
+            position: absolute; /* Pour gérer le z-index */
+            margin-top : 5px;
+            margin-bottom : 10px;
+            right : 30px;
+            color: var(--Color_1);
+            padding: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 99000; /* Index élevé pour assurer la visibilité */  
+        }
+
+#button-open-game:hover {
+            color: var(--Color_3); /* Violet plus foncé au survol */
 }
 
 .modal .modal-svg {
@@ -1619,6 +1642,7 @@ text {
        <button onclick="compterMot()">Valider</button>
        <br>
        <p id="resultat"></p>
+       <button2 id="button-open-game">Autre Josy jeu...</button2>
        <br>
         <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
           <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
@@ -3132,41 +3156,26 @@ function sauvegarderDonneesLocalement() {
     console.log('Données mises à jour localement.');
 }
 
-const express = require('express');
-const fs = require('fs');
-const app = express();
-
-app.use(express.json());
-
-// Route pour charger les données JSON
-app.get('/get-json', (req, res) => {
-    fs.readFile('../motsJOSY.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Erreur lors du chargement du fichier JSON');
-        }
-        res.json(JSON.parse(data)); // Envoie les données JSON au frontend
+document.querySelector("#button-open-game").addEventListener("click", function() {
+  // Modifier l'URL sans recharger la page
+  window.history.pushState({}, '', '/Josy-Jeu');
+  
+  // Charger le contenu de la page Josy_Jeu_mot.html
+  fetch('../JOSYmot/Josy_Jeu_mot.html')
+    .then(response => response.text())
+    .then(data => {
+      // Injecter le contenu dans le conteneur
+      document.querySelector("#page-container").innerHTML = data;
+    })
+    .catch(error => {
+      console.error("Erreur lors du chargement de la page :", error);
     });
 });
 
-// Route pour mettre à jour le fichier JSON
-app.post('/update-json', (req, res) => {
-    const updatedData = req.body;
-
-    fs.writeFile('../motsJOSY.json', JSON.stringify(updatedData, null, 2), 'utf8', (err) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Erreur lors de la sauvegarde du fichier JSON');
-        }
-        res.json({ message: 'Fichier JSON mis à jour avec succès' });
-    });
+window.addEventListener('popstate', function(event) {
+  // Lorsque l'utilisateur appuie sur le bouton retour du navigateur
+  document.querySelector("#page-container").innerHTML = "<!-- contenu initial ici -->";
 });
-
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Serveur en cours d'exécution sur le port ${port}`);
-});
-
 
 </script>
 
