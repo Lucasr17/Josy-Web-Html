@@ -2,9 +2,11 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-//const port = 3000;
 
-// Middleware pour servir les fichiers statiques (HTML, CSS, etc.) dans le dossier "public"
+// Utilisation du port dynamique fourni par Fly.io ou du port 3000 par défaut
+const port = process.env.PORT || 3000;
+
+// Middleware pour servir les fichiers statiques (HTML, CSS, etc.) dans le dossier "public_html"
 app.use(express.static(path.join(__dirname, 'public_html')));
 app.use(express.json());
 
@@ -22,17 +24,12 @@ app.post('/update-json', (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
-});
-
 // Route de base pour répondre à "/"
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
 });
 
 // Démarrage du serveur sur le port défini par Fly.io
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
