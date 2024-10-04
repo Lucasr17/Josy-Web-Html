@@ -12,9 +12,6 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .word {
             position: absolute;
@@ -23,7 +20,6 @@
             font-family: Arial, sans-serif;
             white-space: nowrap;
             transition: transform 0.3s;
-            transform: translateX(-50%,-50%);
         }
         .button-container {
             position: absolute;
@@ -36,6 +32,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             text-align: center;
             animation: border-animation 10s linear forwards; /* Animation du contour */
+            z-index: 10; /* S'assurer que le bouton est au-dessus des mots */
         }
         .button-container h2 {
             font-size: 12px; /* Taille du texte pour le message */
@@ -45,6 +42,13 @@
         .button-container .random-word {
             font-size: 24px; /* Taille du mot aléatoire */
             color: white;
+        }
+        .word-container {
+            position: absolute; /* Positionnement absolu pour le conteneur de mots */
+            width: 100%; /* Prend toute la largeur de l'écran */
+            height: 100%; /* Prend toute la hauteur de l'écran */
+            top: 0; /* Assurez-vous que le conteneur est en haut */
+            left: 0; /* Assurez-vous que le conteneur est à gauche */
         }
         @keyframes border-animation {
             0% {
@@ -61,6 +65,8 @@
         <h2>Trouvez le mot en moins de 10s</h2>
         <div class="random-word" id="random-word"></div>
     </div>
+
+    <div class="word-container" id="word-container"></div> <!-- Conteneur pour les mots -->
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -98,9 +104,9 @@
 
             // Fonction pour placer les mots de manière aléatoire
             function placeWords(words) {
-                const body = document.body;
-                const bodyWidth = body.clientWidth;
-                const bodyHeight = body.clientHeight;
+                const wordContainer = document.getElementById('word-container');
+                const bodyWidth = window.innerWidth;
+                const bodyHeight = window.innerHeight;
                 const placedElements = [];
 
                 words.forEach(word => {
@@ -115,19 +121,19 @@
                         const wordWidth = span.offsetWidth;
                         const wordHeight = span.offsetHeight;
 
-                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
-                        const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin - 50);
+                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin);
+                        const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin);
                         const randomAngle = getRandomValue(-40, 40);
                         const randomScale = getRandomValue(0.6, 1.15);
 
                         span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
-                        body.appendChild(span);
+                        wordContainer.appendChild(span);
 
                         if (!isOverlapping(span, placedElements)) {
                             placedElements.push(span);
                             placed = true;
                         } else {
-                            body.removeChild(span);
+                            wordContainer.removeChild(span);
                         }
 
                         attempts++;
