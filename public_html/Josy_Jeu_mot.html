@@ -12,6 +12,9 @@
             position: relative;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .word {
             position: absolute;
@@ -21,9 +24,43 @@
             white-space: nowrap;
             transition: transform 0.3s;
         }
+        .button-container {
+            position: absolute;
+            top: 20px; /* Positionner le bouton en haut */
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid black; /* Contour noir initial */
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: border-animation 10s linear forwards; /* Animation du contour */
+        }
+        .button-container h2 {
+            font-size: 12px; /* Taille du texte pour le message */
+            color: white;
+            margin: 0;
+        }
+        .button-container .random-word {
+            font-size: 24px; /* Taille du mot aléatoire */
+            color: white;
+        }
+        @keyframes border-animation {
+            0% {
+                border-color: black; /* Couleur initiale du contour */
+            }
+            100% {
+                border-color: violet; /* Couleur finale du contour */
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="button-container" id="button-container">
+        <h2>Trouvez le mot en moins de 10s</h2>
+        <div class="random-word" id="random-word"></div>
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
@@ -74,10 +111,9 @@
                     let placed = false;
 
                     while (attempts < maxAttempts && !placed) {
-
-                       const wordWidth = span.offsetWidth;
+                        const wordWidth = span.offsetWidth;
                         const wordHeight = span.offsetHeight;
-                        
+
                         const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
                         const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin - 50);
                         const randomAngle = getRandomValue(-40, 40);
@@ -105,6 +141,10 @@
             // Initialiser les données et placer les mots
             fetchData().then(words => {
                 placeWords(words);
+
+                // Choisir un mot aléatoire pour l'afficher dans le bouton
+                const randomWord = words[Math.floor(Math.random() * words.length)];
+                document.getElementById("random-word").textContent = randomWord;
             });
         });
     </script>
