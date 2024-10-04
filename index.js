@@ -34,13 +34,13 @@ app.get('/:subdomain', (req, res) => {
     const subdomain = req.params.subdomain;
 
     switch (subdomain) {
-        case 'carte':
+        case 'Carte':
             res.sendFile(path.join(__dirname, 'public_html', 'carte.html')); // Assurez-vous que le fichier existe
             break;
-        case 'jeu':
+        case 'Josy_Jeu':
             res.sendFile(path.join(__dirname, 'public_html', 'Josy_Jeu_mot.html')); // Assurez-vous que le fichier existe
             break;
-        case 'home':
+        case 'Home':
         default:
             res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
             break;
