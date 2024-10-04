@@ -3164,12 +3164,12 @@ function Button_open_game() {
   window.history.pushState({}, '', '/Josy_Jeu');
   
   // Charger le contenu de la page Josy_Jeu_mot.html
-  fetch('../JOSYmot/Josy_Jeu_mot.html')
+  fetch('../Josy_Jeu_mot.html')
     .then(response => response.text())
     .then(data => {
       // Injecter le contenu dans le conteneur
       document.querySelector("#page-container").innerHTML = data;
-      <iframe src="../JOSYmot/Josy_Jeu_mot.html" width="100%" height="auto"></iframe>
+    //  <iframe src="../Josy_Jeu_mot.html" width="100%" height="auto"></iframe>
       console.log("Open game réussi !");
     })
     .catch(error => {
