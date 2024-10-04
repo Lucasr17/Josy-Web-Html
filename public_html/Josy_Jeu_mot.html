@@ -27,12 +27,12 @@
             top: 20px; /* Positionner le bouton en haut */
             left: 50%;
             transform: translateX(-50%);
-            border: 2px solid black; /* Contour noir initial */
+            border: 2px solid transparent; /* Contour transparent initial */
             padding: 10px;
             border-radius: 8px;
             background-color: rgba(0, 0, 0, 0.5);
             text-align: center;
-            animation: border-animation 10s linear forwards; /* Animation du contour */
+            overflow: hidden; /* Assurer que l'animation ne déborde pas */
             z-index: 10; /* S'assurer que le bouton est au-dessus des mots */
         }
         .button-container h2 {
@@ -43,7 +43,7 @@
         .button-container .random-word {
             font-size: 24px; /* Taille du mot aléatoire */
             color: white;
-            margin-top: 10px;
+             margin-top: 10px;
         }
         .word-container {
             position: absolute; /* Positionnement absolu pour le conteneur de mots */
@@ -72,12 +72,37 @@
             padding: 20px;
             border-radius: 8px;
         }
-        @keyframes border-animation {
+
+        /* Animation du vaisseau lumineux */
+        .button-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border-radius: 8px;
+            border: 2px solid violet; /* Couleur du vaisseau lumineux */
+            transform: translateX(-50%);
+            animation: glow-animation 10s linear infinite; /* Animation du vaisseau */
+        }
+
+        @keyframes glow-animation {
             0% {
-                border-color: black; /* Couleur initiale du contour */
+                transform: translate(-100%, -50%) rotate(0deg);
+            }
+            25% {
+                transform: translate(0%, -100%) rotate(90deg);
+            }
+            50% {
+                transform: translate(100%, 0%) rotate(180deg);
+            }
+            75% {
+                transform: translate(0%, 100%) rotate(270deg);
             }
             100% {
-                border-color: violet; /* Couleur finale du contour */
+                transform: translate(-100%, 0%) rotate(360deg);
             }
         }
     </style>
