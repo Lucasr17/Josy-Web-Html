@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Les JOSYmots</title>
     <style>
+
+:root {
+  --width: 30vw;
+  --height: 10vh;
+  --stroke: 4px;
+  --border: calc(var(--stroke)) solid #276A88; /* Couleur légèrement foncée */
+  --transition-duration: 10s; /* Durée totale de l'animation */
+  --segment-duration: calc(var(--transition-duration) / 4); /* Durée d'un segment (chaque côté) */
+  --pipeline-width: calc(var(--width) + var(--stroke));
+  --pipeline-height: calc(var(--height) + var(--stroke));
+}
+
         body {
             background-color: black;
             margin: 0;
@@ -13,6 +25,103 @@
             width: 100vw;
             height: 100vh;
         }
+
+        .h2 {
+            font-size: 14px;
+            color: white;
+            margin-top: 10;
+        }
+        .random-word {
+            font-size: 24px;
+            color: white;
+        }
+
+
+.box {
+  width: var(--width);
+  height: var(--height);
+  background: var(--primary-color);
+  margin: auto;
+  border: var(--border);
+  text-align: center;
+  color: #fff;
+  position: relative;
+  border-radius: 15px;
+  top: 50px;
+  cursor: pointer;
+  
+}
+
+.box::before,
+.box::after,
+.box-inner::after,
+.box-inner::before {
+  position: absolute;
+  background: #9400D3;;
+  content: '';
+  transition: none;
+}
+
+.box::before {
+  width: 0;
+  height: var(--stroke);
+  top: calc(-1 * var(--stroke));
+  left: calc(-1 * var(--stroke));
+  transition: width var(--segment-duration) linear;
+  transition-delay: 0s;
+}
+
+.box::after {
+  width: var(--stroke);
+  height: 0;
+  top: calc(-1 * var(--stroke));
+  right: calc(-1 * var(--stroke));
+  transition: height var(--segment-duration) linear;
+  transition-delay: var(--segment-duration);
+}
+
+.box-inner::after {
+  width: 0;
+  height: var(--stroke);
+  bottom: calc(-1 * var(--stroke));
+  right: calc(-1 * var(--stroke));
+  transition: width var(--segment-duration) linear;
+  transition-delay: calc(var(--segment-duration) * 2);
+}
+
+.box-inner::before {
+  width: var(--stroke);
+  height: 0;
+  bottom: calc(-1 * var(--stroke));
+  left: calc(-1 * var(--stroke));
+  transition: height var(--segment-duration) linear;
+  transition-delay: calc(var(--segment-duration) * 3);
+}
+
+/* Classe pour activer l'animation */
+.box.animated:hover,
+.box.animated {
+  border-color: transparent;
+ /* background: #1D546A; /* Couleur foncée au hover */
+}
+
+.box.animated::before {
+  width: var(--pipeline-width);
+}
+
+.box.animated::after {
+  height: var(--pipeline-height);
+}
+
+.box.animated .box-inner::after {
+  width: var(--pipeline-width);
+}
+
+.box.animated .box-inner::before {
+  height: var(--pipeline-height);
+}
+
+        
         .word {
             position: absolute;
             color: white;
@@ -22,7 +131,11 @@
             transition: transform 0.3s;
             cursor: pointer;
         }
-        .button-container {
+
+ 
+
+
+    /*    .button-container {
             position: absolute;
             top: 20px;
             left: 50%;
@@ -34,16 +147,8 @@
             overflow: hidden;
             z-index: 10;
             border: 2px solid transparent;
-        }
-        .button-container h2 {
-            font-size: 12px;
-            color: white;
-            margin: 0;
-        }
-        .button-container .random-word {
-            font-size: 24px;
-            color: white;
-        }
+        }*/
+
         .word-container {
             position: absolute;
             width: 100%;
@@ -73,7 +178,7 @@
         }
 
         /* Animation du serpent lumineux */
-        .button-container::before {
+   /*     .button-container::before {
             content: '';
             position: absolute;
             top: 0;
@@ -84,7 +189,7 @@
             transform: rotate(0deg);
             border-radius: 8px;
             animation: snake-animation 10s linear forwards;
-            pointer-events: none; /* Désactiver les interactions avec cet élément */
+            pointer-events: none; /* Désactiver les interactions avec cet élément 
         }
 
         @keyframes snake-animation {
@@ -94,22 +199,36 @@
             100% {
                 transform: rotate(360deg);
             }
-        }
+        }*/
     </style>
 </head>
 <body>
-    <div class="button-container" id="button-container">
-        <h2>Trouvez le mot en moins de 10s</h2>
-        <div class="random-word" id="random-word"></div>
-    </div>
+
+
 
     <div class="word-container" id="word-container"></div>
+
+    <div class="box">
+        <div class="box-inner">
+            <h2 class="h2">  Trouvez le mot en moins de 10s</h2>
+            <div class="random-word" id="random-word"></div>
+        </div>
+      </div>
 
     <div class="overlay" id="overlay">
         <div class="congratulations" id="congratulations-message">Félicitations ! Vous avez trouvé le mot !</div>
     </div>
 
+    
+
     <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      document.querySelector('.box').classList.add('animated');
+    }, 100); // Délai de 100 ms
+  });
+
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
             const maxAttempts = 100;
