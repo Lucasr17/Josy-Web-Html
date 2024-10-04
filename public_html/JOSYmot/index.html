@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les JOSYmots</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .word {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            white-space: nowrap;
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const margin = 100;
+            const maxAttempts = 100;
+
+            // Fonction pour récupérer les données depuis le fichier JSON
+            function fetchData() {
+                return fetch('data.json')
+                    .then(response => response.json())
+                    .catch(error => console.error('Erreur lors de la récupération des données:', error));
+            }
+
+            // Fonction pour obtenir une valeur aléatoire dans une plage donnée
+            function getRandomValue(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            // Fonction pour vérifier la superposition des mots
+            function isOverlapping(newElem, existingElems) {
+                const newRect = newElem.getBoundingClientRect();
+
+                for (let elem of existingElems) {
+                    const rect = elem.getBoundingClientRect();
+                    if (!(newRect.right < rect.left || 
+                          newRect.left > rect.right || 
+                          newRect.bottom < rect.top || 
+                          newRect.top > rect.bottom)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            // Fonction pour placer les mots de manière aléatoire
+            function placeWords(words) {
+                const body = document.body;
+                const bodyWidth = body.clientWidth;
+                const bodyHeight = body.clientHeight;
+                const placedElements = [];
+
+                words.forEach(word => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = word;
+
+                    let attempts = 0;
+                    let placed = false;
+
+                    while (attempts < maxAttempts && !placed) {
+                        const randomX = getRandomValue(margin, bodyWidth - margin);
+                        const randomY = getRandomValue(margin, bodyHeight - margin);
+                        const randomAngle = getRandomValue(-40, 40);
+                        const randomScale = getRandomValue(0.6, 1.15);
+
+                        span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
+                        body.appendChild(span);
+
+                        if (!isOverlapping(span, placedElements)) {
+                            placedElements.push(span);
+                            placed = true;
+                        } else {
+                            body.removeChild(span);
+                        }
+
+                        attempts++;
+                    }
+
+                    if (!placed) {
+                        console.warn(`Could not place word: ${word}`);
+                    }
+                });
+            }
+
+            // Initialiser les données et placer les mots
+            fetchData().then(words => {
+                placeWords(words);
+            });
+        });
+    </script>
+</body>
+</html>
