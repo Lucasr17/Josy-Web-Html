@@ -20,6 +20,7 @@
             font-family: Arial, sans-serif;
             white-space: nowrap;
             transition: transform 0.3s;
+            cursor: pointer; /* Changer le curseur pour indiquer que c'est cliquable */
         }
         .button-container {
             position: absolute;
@@ -50,6 +51,26 @@
             top: 0; /* Assurez-vous que le conteneur est en haut */
             left: 0; /* Assurez-vous que le conteneur est à gauche */
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Fond flou */
+            display: none; /* Masqué par défaut */
+            justify-content: center;
+            align-items: center;
+            z-index: 20; /* Au-dessus de tout le reste */
+        }
+        .congratulations {
+            color: white;
+            font-size: 32px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+        }
         @keyframes border-animation {
             0% {
                 border-color: black; /* Couleur initiale du contour */
@@ -67,11 +88,20 @@
     </div>
 
     <div class="word-container" id="word-container"></div> <!-- Conteneur pour les mots -->
+    
+    <div class="overlay" id="overlay">
+        <div class="congratulations" id="congratulations-message">Félicitations ! Vous avez trouvé le mot !</div>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
             const maxAttempts = 100;
+            const overlay = document.getElementById('overlay');
+            const buttonContainer = document.getElementById('button-container');
+            const randomWordElement = document.getElementById("random-word");
+            let timeLimit = 10; // Durée en secondes
+            let timer;
 
             // Fonction pour récupérer les données depuis le fichier JSON
             function fetchData() {
@@ -132,6 +162,13 @@
                         if (!isOverlapping(span, placedElements)) {
                             placedElements.push(span);
                             placed = true;
+                            
+                            // Ajouter un gestionnaire d'événements pour le clic
+                            span.addEventListener('click', () => {
+                                if (span.textContent === randomWordElement.textContent) {
+                                    showCongratulations();
+                                }
+                            });
                         } else {
                             wordContainer.removeChild(span);
                         }
@@ -145,13 +182,25 @@
                 });
             }
 
+            // Fonction pour afficher le message de félicitations
+            function showCongratulations() {
+                overlay.style.display = 'flex'; // Afficher l'overlay
+                clearTimeout(timer); // Arrêter le chronomètre
+            }
+
             // Initialiser les données et placer les mots
             fetchData().then(words => {
                 placeWords(words);
 
                 // Choisir un mot aléatoire pour l'afficher dans le bouton
                 const randomWord = words[Math.floor(Math.random() * words.length)];
-                document.getElementById("random-word").textContent = randomWord;
+                randomWordElement.textContent = randomWord;
+
+                // Démarrer le chronomètre de 10 secondes
+                timer = setTimeout(() => {
+                    overlay.style.display = 'flex'; // Afficher l'overlay si le temps expire
+                    document.getElementById("congratulations-message").textContent = "Temps écoulé !"; // Message de temps écoulé
+                }, timeLimit * 1000);
             });
         });
     </script>
