@@ -74,8 +74,8 @@
                     let placed = false;
 
                     while (attempts < maxAttempts && !placed) {
-                        const randomX = getRandomValue(margin, bodyWidth - margin);
-                        const randomY = getRandomValue(margin, bodyHeight - margin);
+                        const randomX = getRandomValue(margin - 10, bodyWidth - margin + 10);
+                        const randomY = getRandomValue(margin - 10, bodyHeight - margin + 10);
                         const randomAngle = getRandomValue(-40, 40);
                         const randomScale = getRandomValue(0.6, 1.15);
 
