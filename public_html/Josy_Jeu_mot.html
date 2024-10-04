@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Les JOSYmots</title>
     <style>
-        :root {
-            --width: 30vw;
-            --height: 10vh;
-            --stroke: 4px;
-            --border: calc(var(--stroke)) solid #276A88; /* Couleur légèrement foncée */
-            --transition-duration: 10s; /* Durée totale de l'animation */
-            --speed: 1; /* Vitesse de l'animation en pixels par seconde */
-            --segment-duration-top-bottom: calc(var(--width) / var(--speed)); /* Durée pour haut/bas */
-            --segment-duration-left-right: calc(var(--height) / var(--speed)); /* Durée pour gauche/droite */
-            --segment-duration: calc(var(--transition-duration) / 4); /* Durée d'un segment (chaque côté) */
-            --pipeline-width: calc(var(--width) + var(--stroke));
-            --pipeline-height: calc(var(--height) + var(--stroke));
-        }
+
+:root {
+  --width: 30vw;
+  --height: 10vh;
+  --stroke: 4px;
+  --border: calc(var(--stroke)) solid #276A88; /* Couleur légèrement foncée */
+  --transition-duration: 10s; /* Durée totale de l'animation */
+  --speed: 1; /* Vitesse de l'animation en pixels par seconde */
+  --segment-duration-top-bottom: calc(var(--width) / var(--speed)); /* Durée pour haut/bas */
+  --segment-duration-left-right: calc(var(--height) / var(--speed)); /* Durée pour gauche/droite */
+  --segment-duration: calc(var(--transition-duration) / 4); /* Durée d'un segment (chaque côté) */
+  --pipeline-width: calc(var(--width) + var(--stroke));
+  --pipeline-height: calc(var(--height) + var(--stroke));
+}
+
+.red {
+    color: rgb(254, 25, 25);
+}
+
+.green {
+    color: rgb(39, 255, 107);
+}
 
         body {
             background-color: black;
@@ -38,88 +47,95 @@
             color: white;
         }
 
-        .box {
-            width: var(--width);
-            height: var(--height);
-            background: var(--primary-color);
-            margin: auto;
-            border: var(--border);
-            text-align: center;
-            color: #fff;
-            position: relative;
-            border-radius: 15px;
-            top: 20px;
-            cursor: pointer;
-        }
 
-        .box::before,
-        .box::after,
-        .box-inner::after,
-        .box-inner::before {
-            position: absolute;
-            background: #9400D3;;
-            content: '';
-            transition: none;
-        }
+.box {
+  width: var(--width);
+  height: var(--height);
+  background: var(--primary-color);
+  margin: auto;
+  border: var(--border);
+  text-align: center;
+  color: #fff;
+  position: relative;
+  border-radius: 15px;
+  top: 20px;
+  cursor: pointer;
+  
+}
 
-        .box::before {
-            width: 0;
-            height: var(--stroke);
-            top: calc(-1 * var(--stroke));
-            left: calc(-1 * var(--stroke));
-            transition: 3.75s linear;
-            transition-delay: 0s;
-        }
+.box::before,
+.box::after,
+.box-inner::after,
+.box-inner::before {
+  position: absolute;
+  background: #9400D3;;
+  content: '';
+  transition: none;
+}
 
-        .box::after {
-            width: var(--stroke);
-            height: 0;
-            top: calc(-1 * var(--stroke));
-            right: calc(-1 * var(--stroke));
-            transition: 1.25s linear;
-            transition-delay: 3.75s;
-        }
+.box::before {
+  width: 0;
+  height: var(--stroke);
+  top: calc(-1 * var(--stroke));
+  left: calc(-1 * var(--stroke));
+ /* transition: width var(--segment-duration) linear;*/
+ transition: 3.75s linear;
+ /* transition: width var(--segment-duration-top-bottom) linear; /* Utiliser la durée pour le haut/bas */
+   
+transition-delay: 0s;
+}
 
-        .box-inner::after {
-            width: 0;
-            height: var(--stroke);
-            bottom: calc(-1 * var(--stroke));
-            right: calc(-1 * var(--stroke));
-            transition: 3.75s linear;
-            transition-delay: 5s;
-        }
+.box::after {
+  width: var(--stroke);
+  height: 0;
+  top: calc(-1 * var(--stroke));
+  right: calc(-1 * var(--stroke));
+  transition: 1.25s linear;
+  transition-delay: 3.75s;
+}
 
-        .box-inner::before {
-            width: var(--stroke);
-            height: 0;
-            bottom: calc(-1 * var(--stroke));
-            left: calc(-1 * var(--stroke));
-            transition: 1.25s linear;
-            transition-delay: 8.75s;
-        }
+.box-inner::after {
+  width: 0;
+  height: var(--stroke);
+  bottom: calc(-1 * var(--stroke));
+  right: calc(-1 * var(--stroke));
+  transition: 3.75s linear;
+  transition-delay: 5s;
+}
 
-        /* Classe pour activer l'animation */
-        .box.animated:hover,
-        .box.animated {
-            border-color: transparent;
-        }
+.box-inner::before {
+  width: var(--stroke);
+  height: 0;
+  bottom: calc(-1 * var(--stroke));
+  left: calc(-1 * var(--stroke));
+  transition: 1.25s linear;
+  transition-delay: 8.75s;
+}
 
-        .box.animated::before {
-            width: var(--pipeline-width);
-        }
+/* Classe pour activer l'animation */
+.box.animated:hover,
+.box.animated {
+  border-color: transparent;
+ /* background: #1D546A; /* Couleur foncée au hover */
+}
 
-        .box.animated::after {
-            height: var(--pipeline-height);
-        }
+.box.animated::before {
+  width: var(--pipeline-width);
+}
 
-        .box.animated .box-inner::after {
-            width: var(--pipeline-width);
-        }
+.box.animated::after {
+  height: var(--pipeline-height);
+}
 
-        .box.animated .box-inner::before {
-            height: var(--pipeline-height);
-        }
+.box.animated .box-inner::after {
+  width: var(--pipeline-width);
+}
 
+.box.animated .box-inner::before {
+  height: var(--pipeline-height);
+}
+
+        
         .word {
             position: absolute;
             color: white;
@@ -130,6 +146,23 @@
             cursor: pointer;
         }
 
+ 
+
+
+    /*    .button-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            overflow: hidden;
+            z-index: 10;
+            border: 2px solid transparent;
+        }*/
+
         .word-container {
             position: absolute;
             width: 100%;
@@ -137,7 +170,6 @@
             top: 0;
             left: 0;
         }
-        
         .overlay {
             position: fixed;
             top: 0;
@@ -150,7 +182,6 @@
             align-items: center;
             z-index: 20;
         }
-        
         .congratulations {
             color: white;
             font-size: 32px;
@@ -159,37 +190,64 @@
             padding: 20px;
             border-radius: 8px;
         }
+
+        /* Animation du serpent lumineux */
+   /*     .button-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, violet, transparent 20deg);
+            transform: rotate(0deg);
+            border-radius: 8px;
+            animation: snake-animation 10s linear forwards;
+            pointer-events: none; /* Désactiver les interactions avec cet élément 
+        }
+
+        @keyframes snake-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }*/
     </style>
 </head>
 <body>
+
+
 
     <div class="word-container" id="word-container"></div>
 
     <div class="box">
         <div class="box-inner">
-            <h2 class="h2"> Trouvez le mot en moins de 10s</h2>
+            <h2 class="h2">  Trouvez le mot en moins de 10s</h2>
             <div class="random-word" id="random-word"></div>
-            <div class="timer-message" id="timer-message" style="color: red; font-size: 24px; margin-top: 10px;"></div> <!-- Zone pour afficher le mot lorsque le temps est écoulé -->
         </div>
-    </div>
+      </div>
 
     <div class="overlay" id="overlay">
         <div class="congratulations" id="congratulations-message">Félicitations ! Vous avez trouvé le mot !</div>
     </div>
 
+    
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(function () {
-                document.querySelector('.box').classList.add('animated');
-            }, 100); // Délai de 100 ms
-        });
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      document.querySelector('.box').classList.add('animated');
+    }, 100); // Délai de 100 ms
+  });
 
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
-            const maxAttempts = 100;
+            const maxAttempts = 500;
             const overlay = document.getElementById('overlay');
             const randomWordElement = document.getElementById("random-word");
-            const timerMessageElement = document.getElementById("timer-message"); // Éléments pour afficher le mot à la fin
             let timeLimit = 10; // Durée en secondes
             let timer;
 
@@ -255,6 +313,7 @@
                             // Ajouter un gestionnaire d'événements pour le clic
                             span.addEventListener('click', () => {
                                 if (span.textContent === randomWordElement.textContent) {
+                                    span.classList.add('green');
                                     showCongratulations();
                                 }
                             });
@@ -279,6 +338,19 @@
                 clearTimeout(timer); // Arrêter le chronomètre
             }
 
+    function highlightMatchingWords() {
+    const randomWord = randomWordElement.textContent; // Mot du bouton
+
+    placedElements.forEach(span => {
+        if (span.textContent === randomWord) {
+            span.classList.add('red'); // Ajoute la classe pour changer la couleur en rouge
+        } else {
+            span.classList.remove('red'); // Retire la classe si le mot ne correspond pas
+        }
+    });
+}
+
+
             // Initialiser les données et placer les mots
             fetchData().then(words => {
                 placeWords(words);
@@ -289,9 +361,11 @@
 
                 // Démarrer le chronomètre de 10 secondes
                 timer = setTimeout(() => {
-                    document.getElementById("congratulations-message").textContent = "Temps écoulé !"; // Message de temps écoulé
-                    timerMessageElement.textContent = randomWord; // Afficher le mot correspondant dans la zone rouge
                     overlay.style.display = 'flex'; // Afficher l'overlay si le temps expire
+                    document.getElementById("congratulations-message").textContent = "Temps écoulé !"; // Message de temps écoulé
+                   
+                    highlightMatchingWords();
+
                 }, timeLimit * 1000);
             });
         });
