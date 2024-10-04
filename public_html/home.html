@@ -441,6 +441,7 @@ text {
   background: var(--Color_2);
   padding: 35px;
   height: 300px;
+  width : 550px;
   display: inline-block;
   border-radius: 10px;
   font-weight: 300;
@@ -511,11 +512,10 @@ text {
 
 #button-open-game {
             position: absolute; /* Pour gérer le z-index */
-            margin-top : 5px;
-            margin-bottom : 10px;
-            right : 30px;
+            right : 40px;
+            bottom : 2px;
             color: var(--Color_1);
-            padding: 10px 10px;
+            padding: 3px 3px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -3160,21 +3160,8 @@ function sauvegarderDonneesLocalement() {
 
 function Button_open_game() {
     console.log("Click bouton open game ");
-  // Modifier l'URL sans recharger la page
-  window.history.pushState({}, '', '/Josy_Jeu');
-  
-  // Charger le contenu de la page Josy_Jeu_mot.html
-  fetch('../Josy_Jeu_mot.html')
-    .then(response => response.text())
-    .then(data => {
-      // Injecter le contenu dans le conteneur
-      document.querySelector("#page-container").innerHTML = data;
-    //  <iframe src="../Josy_Jeu_mot.html" width="100%" height="auto"></iframe>
-      console.log("Open game réussi !");
-    })
-    .catch(error => {
-      console.error("Erreur lors du chargement de la page :", error);
-    });
+    
+    window.location.href = "https://josy.fly.dev/Josy_Jeu";
 };
 
 
