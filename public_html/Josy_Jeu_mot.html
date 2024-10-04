@@ -26,7 +26,7 @@
 <body>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const margin = 10;
+            const margin = 20;
             const maxAttempts = 100;
 
             // Fonction pour récupérer les données depuis le fichier JSON
@@ -78,8 +78,8 @@
                        const wordWidth = span.offsetWidth;
                         const wordHeight = span.offsetHeight;
                         
-                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin);
-                        const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin);
+                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
+                        const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin - 50);
                         const randomAngle = getRandomValue(-40, 40);
                         const randomScale = getRandomValue(0.6, 1.15);
 
