@@ -3161,7 +3161,7 @@ function sauvegarderDonneesLocalement() {
 function Button_open_game() {
     console.log("Click bouton open game ");
   // Modifier l'URL sans recharger la page
-  window.history.pushState({}, '', '/Josy-Jeu');
+  window.history.pushState({}, '', '/Josy_Jeu');
   
   // Charger le contenu de la page Josy_Jeu_mot.html
   fetch('../JOSYmot/Josy_Jeu_mot.html')
@@ -3169,6 +3169,8 @@ function Button_open_game() {
     .then(data => {
       // Injecter le contenu dans le conteneur
       document.querySelector("#page-container").innerHTML = data;
+      <iframe src="../JOSYmot/Josy_Jeu_mot.html" width="100%" height="auto"></iframe>
+      console.log("Open game réussi !");
     })
     .catch(error => {
       console.error("Erreur lors du chargement de la page :", error);
