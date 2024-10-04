@@ -121,8 +121,8 @@
                         const wordWidth = span.offsetWidth;
                         const wordHeight = span.offsetHeight;
 
-                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin);
-                        const randomY = getRandomValue(margin, bodyHeight - wordHeight - margin);
+                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
+                        const randomY = getRandomValue(margin + 80, bodyHeight - wordHeight - margin);
                         const randomAngle = getRandomValue(-40, 40);
                         const randomScale = getRandomValue(0.6, 1.15);
 
