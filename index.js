@@ -26,10 +26,28 @@ app.post('/update-json', (req, res) => {
 
 // Route de base pour répondre à "/"
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
+    res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
+});
+
+// Route pour gérer les sous-domaines
+app.get('/:subdomain', (req, res) => {
+    const subdomain = req.params.subdomain;
+
+    switch (subdomain) {
+        case 'carte':
+            res.sendFile(path.join(__dirname, 'public_html', 'carte.html')); // Assurez-vous que le fichier existe
+            break;
+        case 'jeu':
+            res.sendFile(path.join(__dirname, 'public_html', 'Josy_Jeu_mot.html')); // Assurez-vous que le fichier existe
+            break;
+        case 'home':
+        default:
+            res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
+            break;
+    }
 });
 
 // Démarrage du serveur sur le port défini par Fly.io
 app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+    console.log(`App running on port ${port}`);
 });
