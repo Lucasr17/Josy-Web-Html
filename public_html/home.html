@@ -1644,7 +1644,7 @@ text {
        <button onclick="compterMot()">Valider</button>
        <br>
        <p id="resultat"></p>
-       <button2 id="button-open-game">Autre Josy jeu...</button2>
+       <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2>
        <br>
         <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
           <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
@@ -3157,7 +3157,9 @@ function sauvegarderDonneesLocalement() {
     console.log('Données mises à jour localement.');
 }
 
-document.querySelector("#button-open-game").addEventListener("click", function() {
+
+function Button_open_game() {
+    console.log("Click bouton open game ");
   // Modifier l'URL sans recharger la page
   window.history.pushState({}, '', '/Josy-Jeu');
   
@@ -3171,7 +3173,8 @@ document.querySelector("#button-open-game").addEventListener("click", function()
     .catch(error => {
       console.error("Erreur lors du chargement de la page :", error);
     });
-});
+};
+
 
 window.addEventListener('popstate', function(event) {
   // Lorsque l'utilisateur appuie sur le bouton retour du navigateur
