@@ -143,7 +143,7 @@ body {
            /* border: 4px solid var(--Color_3);*/
             transform: translate(-50%, -50%);
             text-align: justify; /* Justifie le texte */
-            font-size: 19px;
+            font-size: 22px;
             border-radius: 20px;
             transform-origin: center center; /* Origine de transformation en bas à gauche */
             transform: scale(0); /* Réduit la taille à zéro au début */
@@ -1495,19 +1495,19 @@ text {
         <div class="scroll-bar" id="scrollBar"></div>
 
         <!-- Points avec info-bulles -->
-        <div class="scroll-point" id="point100"  style="top: calc(2% - 5px);" data-tooltip="Point à 100%">
-            <div class="tooltip">100 pixels de défilement</div>
+        <div class="scroll-point" onclick="scrollToPosition_1()" id="point100"  style="top: calc(2% - 5px);" data-tooltip="Point à 100%">
+            <div class="tooltip">Josy une histoire d'amis</div>
         </div>
         <div class="scroll-point" onclick="scrollToPosition_2()" id="point200" style="top: calc(23% - 5px);" data-tooltip="Point à 200%">
             <div class="tooltip">Josy touche !</div>
         </div>
-        <div class="scroll-point" id="point300" style="top: calc(45% - 5px);" data-tooltip="Point à 300%">
+        <div class="scroll-point" onclick="scrollToPosition_3()" id="point300" style="top: calc(48% - 5px);" data-tooltip="Point à 300%">
             <div class="tooltip">Descriptif T-shirt</div>
         </div>
-        <div class="scroll-point" id="point400" style="top: calc(53% - 5px);" data-tooltip="Point à 400%">
+        <div class="scroll-point" onclick="scrollToPosition_4()" id="point400" style="top: calc(53% - 5px);" data-tooltip="Point à 400%">
             <div class="tooltip">Qualité du T-shirt</div>
         </div>
-        <div class="scroll-point" id="point500" style="top: calc(58% - 5px);" data-tooltip="Point à 500%">
+        <div class="scroll-point" onclick="scrollToPosition_5()" id="point500" style="top: calc(60% - 5px);" data-tooltip="Point à 500%">
             <div class="tooltip">Les variantes...</div>
         </div>
         <div class="scroll-point" id="point600" style="top: calc(66% - 5px);" data-tooltip="Point à 600%">
@@ -2821,10 +2821,38 @@ function closePopup() {
         }
 
 
+                        // Fonction pour défiler à 2150px
+function scrollToPosition_1() {
+            window.scrollTo({
+                top: 180,
+                behavior: 'smooth' // défilement fluide
+            });
+        }
                 // Fonction pour défiler à 2150px
 function scrollToPosition_2() {
             window.scrollTo({
                 top: 2150,
+                behavior: 'smooth' // défilement fluide
+            });
+        }
+
+function scrollToPosition_3() {
+            window.scrollTo({
+                top: 4450,
+                behavior: 'smooth' // défilement fluide
+            });
+        }
+
+function scrollToPosition_4() {
+            window.scrollTo({
+                top: 4900,
+                behavior: 'smooth' // défilement fluide
+            });
+        }
+
+function scrollToPosition_4() {
+            window.scrollTo({
+                top: 5600,
                 behavior: 'smooth' // défilement fluide
             });
         }
