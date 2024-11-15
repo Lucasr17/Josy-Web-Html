@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/MotionPathPlugin.min.js"></script>
 
@@ -130,25 +130,41 @@ body {
             opacity: 0;
         }
 
-
+/*
         .box_histoire_6 {
             position: absolute;
-            width: 800px;
+            width: 1000px;
             height: 35px;
-            top: 250vh;
+            top: 290vh;
             left: 20vw;
             background-color: transparent; 
-            padding: 2px; /* Ajoute une marge intérieure */
+            padding: 2px; /* Ajoute une marge intérieure 
             color: var(--Color_2);
-           /* border: 4px solid var(--Color_3);*/
+            border: 4px solid var(--Color_3);
             transform: translate(-50%, -50%);
-            text-align: justify; /* Justifie le texte */
+            text-align: justify; /* Justifie le texte 
             font-size: 22px;
             border-radius: 20px;
-            transform-origin: center center; /* Origine de transformation en bas à gauche */
-            transform: scale(0); /* Réduit la taille à zéro au début */
+            transform-origin: center center; /* Origine de transformation en bas à gauche 
+            transform: scale(0); /* Réduit la taille à zéro au début 
             opacity: 0;
-        }
+        }*/
+
+
+#phrase-container {
+  position: absolute;
+  transform: translate(50%, -50%);
+  font-size: 2rem;
+  color: var(--Color_2);
+  top: 290vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem;
+  font-size: 22px;
+  opacity: 1; /* Caché par défaut */
+}
+
 
 
 
@@ -1378,6 +1394,10 @@ text {
     </div>
 
     <div class="common-section">
+
+        <div class="buttons">
+            <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button> 
+        </div>
     
     <div class="brick">
         
@@ -1560,11 +1580,14 @@ text {
          
                  <path id="theLine" class="theLine" 
                  d="M -5,0
-                 Q 10 30 400 70 
-                 T 270 180
-                 Q -220 250 350 300
-                 T 30 450"
-                     fill="none" stroke=var(--Color_2) stroke-width="4px" />
+                    Q 10 30 400 70 
+                    T 300 220
+                    Q -220 340 340 430
+                    T 200 550"
+                 fill="none" 
+                 stroke="var(--Color_2)" 
+                 stroke-width="4px" 
+                 stroke-linejoin="round" />
          
                  <circle class="ball ball01" r="8"></circle>
                  <circle class="ball_ ball02" r="5"></circle>
@@ -1593,9 +1616,26 @@ text {
                 Porter Josy, c'est plus qu'une déclaration de style, c'est un état d'esprit. Rejoignez-nous dans cette aventure où le rire est la tenue parfaite, où chaque vêtement est une punchline, et où la mode devient une fête.
             </div>
 
-            <div class="box_histoire_6">
-                Josy - Parce que la vie est trop courte pour ne pas en rire, et la mode trop amusante pour être sérieuse.
-            </div>
+            <div id="phrase-container">
+                <span>J</span><span>o</span><span>s</span><span>y</span>
+                <span>&nbsp;</span>
+                <span>-</span>
+                <span>&nbsp;</span>
+                <span>L</span><span>a</span><span>&nbsp;</span>
+                <span>m</span><span>o</span><span>d</span><span>e</span><span>&nbsp;</span>
+                <span>q</span><span>u</span><span>i</span><span>&nbsp;</span>
+                <span>f</span><span>a</span><span>i</span><span>t</span><span>&nbsp;</span>
+                <span>s</span><span>o</span><span>u</span><span>r</span><span>i</span><span>r</span><span>e</span><span>,</span><span>&nbsp;</span>
+                <span>p</span><span>a</span><span>r</span><span>c</span><span>e</span><span>&nbsp;</span>
+                <span>q</span><span>u</span><span>e</span><span>&nbsp;</span>
+                <span>l</span><span>a</span><span>&nbsp;</span>
+                <span>v</span><span>i</span><span>e</span><span>&nbsp;</span>
+                <span>e</span><span>s</span><span>t</span><span>&nbsp;</span>
+                <span>t</span><span>r</span><span>o</span><span>p</span><span>&nbsp;</span>
+                <span>c</span><span>o</span><span>u</span><span>r</span><span>t</span><span>e</span><span>!</span>
+              </div>
+
+        
 
             <div class="carree2" id="carree2"></div>
 
@@ -1781,7 +1821,7 @@ const main = gsap.timeline({
                 trigger: "#svg_histoire",
                 scrub: true,
                 start: "top 80%", // Adapter pour mieux synchroniser
-                end: "bottom 110%"
+                end: "bottom 30%"
             }
         })
 .to(".ball01", {autoAlpha: 1, duration: 0.05})
@@ -1904,6 +1944,7 @@ gsap.fromTo(".box_histoire_5", {
     }
 });
 
+/*
 gsap.fromTo(".box_histoire_6", {
     scaleX: 0,  // Réduit la largeur à zéro au début
     scaleY: 0,  // Réduit la hauteur à zéro au début
@@ -1919,7 +1960,7 @@ gsap.fromTo(".box_histoire_6", {
         scrub: 0,
         markers: false
     }
-});
+});*/
 
   
 
@@ -3197,6 +3238,10 @@ window.addEventListener('popstate', function(event) {
   // Lorsque l'utilisateur appuie sur le bouton retour du navigateur
   document.querySelector("#page-container").innerHTML = "<!-- contenu initial ici -->";
 });
+
+
+
+
 
 </script>
 
