@@ -1549,6 +1549,35 @@ text {
 
     <div id="scroll-position"></div>
 
+    <script>
+
+    function startTyping() {
+        // Texte à afficher progressivement
+        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
+
+        // Sélection du conteneur où le texte sera affiché
+        var textContainer = document.getElementById('textContainer');
+
+        // Fonction pour afficher le texte progressivement
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                textContainer.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, 50); // Délai entre chaque caractère (en millisecondes)
+            }
+        }
+
+        // Efface le contenu précédent du conteneur de texte
+        textContainer.innerHTML = '';
+
+        // Délai initial de 2 secondes avant de commencer à écrire
+        setTimeout(function() {
+            typeWriter(text, 0);
+        }, 900);
+    }
+    </script>
 
     </div>
 
@@ -1557,6 +1586,30 @@ text {
       <!-- Téléphone -->
     <div class="tel-section">
 
+        <div class="brick">
+
+        <!-- Modal Container -->
+<div id="modal-container">
+    <div class="modal-background">
+      <div class="modal">
+        <h2>Le Josy Jeu</h2>
+        <p><span id="textContainer"></span></p>
+       <label for="motInput">Entrez un mot : JOSY</label>
+       <input type="text" id="motInput">
+       <br>
+       <button onclick="compterMot()">Valider</button>
+       <br>
+       <p id="resultat"></p>
+       <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2>
+       <br>
+        <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+          <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
 
     </div>
 
@@ -1696,6 +1749,7 @@ text {
 
   <!-- Scripts -->
 
+  
                  <div class="buttons">
                 <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button> 
                 </div>
@@ -2757,32 +2811,7 @@ function updatePointsVisibility(scrollTop) {
         });
 
   
-function startTyping() {
-        // Texte à afficher progressivement
-        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
 
-        // Sélection du conteneur où le texte sera affiché
-        var textContainer = document.getElementById('textContainer');
-
-        // Fonction pour afficher le texte progressivement
-        function typeWriter(text, i) {
-            if (i < text.length) {
-                textContainer.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(function() {
-                    typeWriter(text, i);
-                }, 50); // Délai entre chaque caractère (en millisecondes)
-            }
-        }
-
-        // Efface le contenu précédent du conteneur de texte
-        textContainer.innerHTML = '';
-
-        // Délai initial de 2 secondes avant de commencer à écrire
-        setTimeout(function() {
-            typeWriter(text, 0);
-        }, 900);
-    }
 
 
 
