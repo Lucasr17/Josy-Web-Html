@@ -1425,6 +1425,8 @@ text {
     <div class="brick">
         
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
+<img src= '../Image/Josy - St barth 5.jpeg' class="photodrone" alt="Image">
+
     
         </div>
     
@@ -1632,7 +1634,31 @@ text {
     </div>
   </div>
 
-</div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            var photodrone = document.querySelector('.photodrone');
+                        
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+
+            if (scrollTop >= 6000 && scrollTop <= 6390) {
+                photodrone_text.style.opacity = "1";
+                
+            } else {
+                photodrone_text.style.opacity = "0";
+            }
+
+        
+
+        });
+        </script>
+
+        </div>
+
 
 
 
