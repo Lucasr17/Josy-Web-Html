@@ -1526,7 +1526,7 @@ text {
     
     <div class="brick">
         
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
+  <!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    --> 
 <img src= '../Image/Josy - St barth 5.jpeg' class="photodrone" alt="Image">
 
     
@@ -2310,6 +2310,7 @@ gsap.fromTo("#T_shirt_1", {
     opacity: 1
 }, {
     opacity: 1,
+    x: variables + 0.01,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2327,6 +2328,7 @@ gsap.fromTo("#T_shirt_2", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2344,6 +2346,7 @@ gsap.fromTo("#T_shirt_3", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2361,6 +2364,7 @@ gsap.fromTo("#T_shirt_4", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2378,6 +2382,7 @@ gsap.fromTo("#T_shirt_5", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2395,6 +2400,7 @@ gsap.fromTo("#T_shirt_6", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2412,6 +2418,7 @@ gsap.fromTo("#T_shirt_7", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2429,6 +2436,7 @@ gsap.fromTo("#T_shirt_8", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2446,6 +2454,7 @@ gsap.fromTo("#T_shirt_9", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2463,6 +2472,7 @@ gsap.fromTo("#T_shirt_10", {
    opacity: opacitys
 }, {
     opacity: 1,
+    x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
         start: "0px",
@@ -2736,13 +2746,24 @@ gsap.fromTo(".box_histoire_6", {
                 text1.style.opacity = "0";
             }
 
-            if (scrollTop >= 4899 && scrollTop <= 5300) {
+            if (scrollTop >= 4898 && scrollTop <= 5300) {
                 carree3.style.zIndex = "9999";
             } else {
-                carree3.style.zIndex = "0";
+                carree3.style.zIndex = "3";
             }
-            
+        
+
             if (scrollTop >= 4909 && scrollTop <= 5600) {
+                T_shirt_1.style.zIndex = "3010";
+                T_shirt_2.style.zIndex = "3009";
+                T_shirt_3.style.zIndex = "3008";
+                T_shirt_4.style.zIndex = "3007";
+                T_shirt_5.style.zIndex = "3006";
+                T_shirt_6.style.zIndex = "3005";
+                T_shirt_7.style.zIndex = "3004";
+                T_shirt_8.style.zIndex = "3003";
+                T_shirt_9.style.zIndex = "3002";
+                T_shirt_10.style.zIndex = "3001";
                 T_shirt_1.style.opacity = "1"; // Permet les interactions
                 T_shirt_2.style.opacity = "1";
                 T_shirt_3.style.opacity = "1";
@@ -2755,6 +2776,17 @@ gsap.fromTo(".box_histoire_6", {
                 T_shirt_10.style.opacity = "1";
             } else {
                // tshirt.style.pointerEvents = "none"; // Désactive les interactions
+               T_shirt_1.style.zIndex = "1";
+               T_shirt_2.style.zIndex = "0";
+               T_shirt_3.style.zIndex = "0";
+               T_shirt_4.style.zIndex = "0";
+               T_shirt_5.style.zIndex = "0";
+               T_shirt_6.style.zIndex = "0";
+               T_shirt_7.style.zIndex = "0";
+               T_shirt_8.style.zIndex = "0";
+               T_shirt_9.style.zIndex = "0";
+               T_shirt_10.style.zIndex = "0";
+
                T_shirt_1.style.opacity = "0";
                T_shirt_2.style.opacity = "0";
                T_shirt_3.style.opacity = "0";
@@ -2766,6 +2798,20 @@ gsap.fromTo(".box_histoire_6", {
                T_shirt_9.style.opacity = "0";
                T_shirt_10.style.opacity = "0";
             }
+
+            if (scrollTop >= 0 && scrollTop <= 5000) {
+
+T_shirt_1.style.transformx = variables ;
+T_shirt_2.style.transformx = variables - variables_2;
+T_shirt_3.style.transformx = variables - variables_2*2;
+
+function disableMouseOver() {
+tshirts.forEach((tshirt) => {
+tshirt.removeEventListener("mouseover", handleMouseOver);
+tshirt.removeEventListener("mouseleave", handleMouseLeave);
+});
+}
+}
 
             
 
