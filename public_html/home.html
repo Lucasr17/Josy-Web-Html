@@ -14,7 +14,7 @@
      
 
 :root {
-    --Color_1: #121212;
+    --Color_1: #202020;
     --Color_2: #EAEAEA;
     --Color_3: #9400D3;
 }
@@ -32,6 +32,62 @@ body {
             /*height: 2000vh; /* Increase the height to make scrolling possible */
 }
 
+/*T SHIRT cintré visuel*/
+
+ /* Barre noire en haut */
+ .carree3 {
+  position: fixed;
+  opacity: 0%;
+  top: 22vh;
+  right: -0.6;
+  width: 98vw;
+  height: 100vh;
+  background-color: var(--Color_1);
+  display: flex;
+  z-index: 9999;
+ /* cursor: pointer;*/
+}
+
+
+.rack {
+      display: flex;
+      position: fixed;
+      width: fit-content;
+      transform: translateX(0%);
+      top : 23%;
+      left : 35%;
+      z-index: 3000;
+    }
+
+    .tshirt {
+      height: auto;
+      width: 42vw;
+      opacity: 0.5;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      position: relative;
+      margin-left: -8.5%; /* Chevauchement des t-shirts */
+      z-index: calc(5 - var(--order)); /* Inverser l'empilement */
+      cursor: pointer;
+     /* pointer-events: none; /* Par défaut, désactive le survol */
+    }
+
+
+
+ /*   .rack .tshirt:first-child {
+      margin-left: 0; /* Pas de décalage pour le premier élément 
+    }
+
+    .tshirt:hover {
+      opacity: 1;
+      transform: translateX(-10px); /* T-shirt survolé avance légèrement */
+    /*  z-index: 10; /* Passe au premier plan lorsqu'il est survolé 
+    }
+
+    .rack .tshirt:not(:hover) {
+      opacity: 1;
+    }*/
+
+    /*fin t shirt cintre*/
 
         /*histoire josy */
         .box_histoire_1 {
@@ -228,6 +284,50 @@ text {
 /*fin chemin */
 
 /* deco */
+
+.circle {
+  width: 25px;
+  height: 25px;
+  background-color: rgb(84, 84, 84);
+  opacity: 0;
+  position: fixed;
+  top: 40%;
+  left: 60%;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Style pour la bulle d'information */
+.circle::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -140%; /* Position au-dessus du rond */
+  left: 260%;
+  transform: translateX(-50%);
+  width: 70px; /* Largeur de la bulle */
+  height: 20px; /* Hauteur de la bulle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 12px;
+  color: white;
+  background: rgba(0, 0, 0, 0.9); /* Couleur noire avec opacité pour le fond */
+  backdrop-filter: blur(10px); /* Flou appliqué à l'arrière-plan */
+  padding: 8px;
+  border-radius: 10px;
+  opacity: 0; /* Initialement masqué */
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+/* Affichage de la bulle quand on survole le rond */
+.circle:hover::after {
+  opacity: 0.9;
+  visibility: visible;
+}
 
       
 
@@ -1418,9 +1518,11 @@ text {
 
     <div class="common-section">
 
+
         <div class="buttons">
             <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button> 
         </div>
+        
     
     <div class="brick">
         
@@ -1429,71 +1531,7 @@ text {
 
     
         </div>
-    
-        <script>
 
-    
-            // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
-            window.addEventListener('scroll', function() {
-                var text1 = document.getElementById('text1');
-                var text2 = document.getElementById('text2');
-                var txt_josy_histoire_amis = document.getElementById('txt_josy_histoire_amis');
-                var text3 = document.getElementById('text3');
-                var photodrone_text = document.getElementById('photodrone_text');
-                var descriptif_tshirt = document.getElementById('descriptif_tshirt');
-                
-                var image = document.querySelector('.image');
-                var one = document.querySelector('.one');
-                
-                var gallery = document.querySelector('.gallery');
-                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-             /*   var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_1');
-                var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_2');
-                var T_shirt_Josy_1 = document.querySelector('.Pull_Josydole');
-                var T_shirt_Josy_1 = document.querySelector('.Casquette_1');
-                var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josyimaginaire');*/
-                            
-                
-                gsap.registerPlugin(ScrollTrigger);
-    
-      
-            });
-            
-            
-      
-
-    //
-   
-    let sreen_largeur = window.innerWidth;
-
-    window.addEventListener('scroll', function() {
-        let scrollPosition = window.scrollY;
-        document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
-    });
-    
-
-    window.addEventListener('resize', () => {
-        // Recalcule la largeur et met à jour la position x
-    sreen_largeur = window.innerWidth;
-      //  document.getElementById('scroll-position').textContent = `Scroll position: ${sreen_largeur}px`;
-
-    let scrollPosition = window.scrollY;
-
-        document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
-
-    // Recharger la page
-   // location.reload();
-
-    /*window.scrollTo({
-        top: scrollPosition,
-       // behavior: 'smooth' // défilement fluide
-    });*/
-
-//fin refresh 
-    });
-
-            
-        </script>
 
 
         <div class="instagram-section">
@@ -1533,6 +1571,7 @@ text {
     <button onclick="alert('Bouton 4 cliqué')">Nos produits</button>
     <button onclick="alert('Bouton 5 cliqué')">Nous découvrir</button>
 </div>
+
 
 
     <!-- Barre de défilement personnalisée -->
@@ -1576,32 +1615,77 @@ text {
 
     <script>
 
-    function startTyping() {
-        // Texte à afficher progressivement
-        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
 
-        // Sélection du conteneur où le texte sera affiché
-        var textContainer = document.getElementById('textContainer');
+                   // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
+                   window.addEventListener('scroll', function() {
+                var one = document.querySelector('.one');
 
-        // Fonction pour afficher le texte progressivement
-        function typeWriter(text, i) {
-            if (i < text.length) {
-                textContainer.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(function() {
-                    typeWriter(text, i);
-                }, 50); // Délai entre chaque caractère (en millisecondes)
-            }
-        }
+                gsap.registerPlugin(ScrollTrigger);
 
-        // Efface le contenu précédent du conteneur de texte
-        textContainer.innerHTML = '';
-
-        // Délai initial de 2 secondes avant de commencer à écrire
-        setTimeout(function() {
-            typeWriter(text, 0);
-        }, 900);
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+                            
+    if (scrollTop <= 31) {
+        one.style.opacity = "1";
+    } else {
+        one.style.opacity = "0";
     }
+
+                var text1 = document.getElementById('text1');
+                var text2 = document.getElementById('text2');
+                var txt_josy_histoire_amis = document.getElementById('txt_josy_histoire_amis');
+                var text3 = document.getElementById('text3');
+                var photodrone_text = document.getElementById('photodrone_text');
+                var descriptif_tshirt = document.getElementById('descriptif_tshirt');
+                
+                var image = document.querySelector('.image');
+                
+                
+                var gallery = document.querySelector('.gallery');
+             /*   var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_1');
+                var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_2');
+                var T_shirt_Josy_1 = document.querySelector('.Pull_Josydole');
+                var T_shirt_Josy_1 = document.querySelector('.Casquette_1');
+                var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josyimaginaire');*/
+                            
+                
+ 
+      
+            });
+            
+            
+      
+
+    //
+   
+    let sreen_largeur = window.innerWidth;
+
+    window.addEventListener('scroll', function() {
+        let scrollPosition = window.scrollY;
+        document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+    });
+    
+
+    window.addEventListener('resize', () => {
+        // Recalcule la largeur et met à jour la position x
+    sreen_largeur = window.innerWidth;
+      //  document.getElementById('scroll-position').textContent = `Scroll position: ${sreen_largeur}px`;
+
+    let scrollPosition = window.scrollY;
+
+        document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+
+    // Recharger la page
+   // location.reload();
+
+    /*window.scrollTo({
+        top: scrollPosition,
+       // behavior: 'smooth' // défilement fluide
+    });*/
+
+//fin refresh 
+    });
+
     </script>
 
     </div>
@@ -1672,6 +1756,8 @@ text {
         <!-- Section 1 -->        
         <div class="brick">
 
+            <div class="circle" data-tooltip="Pull en coton"></div>
+
 
             <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" style="width: 100%; height: auto;">
                 <!-- <path class="line01 line" d="M 10 200  600 200"></path>
@@ -1680,14 +1766,21 @@ text {
                  <path class="line04 line" d="M 10 800  600 800"></path>
                  <text class="text01" x="30" y="190">2018</text>
                  <text class="text02" x="30" y="390">2019</text>
-                 <text class="text03" x="30" y="590">2020</text> -->
+                 <text class="text03" x="30" y="590">2020</text>
+                 
+                 
+                  d="M -5,0
+                    Q 10 30 350 70 
+                    T 350 330
+                    Q -220 340 340 430
+                    T 200 550"-->
          
                  <path id="theLine" class="theLine" 
-                 d="M -5,0
-                    Q 10 30 400 70 
-                    T 300 220
-                    Q -220 340 340 430
-                    T 200 550"
+                  
+
+                 d="M10,10 H500 A10,10 0 0 1 500,30 H100 A20,10 0 0 0 100,50 H500 A10,10 0 0 1 500,70 H10" 
+        
+
                  fill="none" 
                  stroke="var(--Color_2)" 
                  stroke-width="4px" 
@@ -1774,6 +1867,7 @@ text {
 
                
 
+            
 
 
 <!-- Modal Container -->
@@ -1801,9 +1895,7 @@ text {
   <!-- Scripts -->
 
   
-                 <div class="buttons">
-                <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button> 
-                </div>
+
 
                 <button onclick="open_carte()" id="four" class="button_carte">Accéder à notre carte</button> 
 
@@ -1885,8 +1977,55 @@ text {
 
    
     <div id="transitionOverlay" class="transition-overlay"></div>
+
+    <div class="rack">
+        <img src="https://static.wixstatic.com/media/091b9b_1c79e407629c4822a118d240d0b92e4d~mv2.png" id="T_shirt_1" class="tshirt" style="--order: 1;" alt="T-shirt 1",>
+        <img src="https://static.wixstatic.com/media/091b9b_940e3ba7a1aa470cac8af8649291431f~mv2.png" id="T_shirt_2" class="tshirt" style="--order: 2;" alt="T-shirt 2",>
+        <img src="https://static.wixstatic.com/media/091b9b_a50f0491950940a590444cc4e5e33a6e~mv2.png" id="T_shirt_3" class="tshirt" style="--order: 3;" alt="T-shirt 3",>
+        <img src="https://static.wixstatic.com/media/091b9b_f2529b92afc9436c9407d0f22ef36b52~mv2.png" id="T_shirt_4" class="tshirt" style="--order: 4;" alt="T-shirt 4",>
+        <img src="https://static.wixstatic.com/media/091b9b_72ded7420c164655a7e68727a8a1d055~mv2.png" id="T_shirt_5" class="tshirt" style="--order: 5;" alt="T-shirt 5">
+        <img src="https://static.wixstatic.com/media/091b9b_a2b3596bab8e49fb80dccf81c59008e9~mv2.png" id="T_shirt_6" class="tshirt" style="--order: 6;" alt="T-shirt 6">
+        <img src="https://static.wixstatic.com/media/091b9b_67ab2016b9cd4fa9bd14e58f61c4d0e7~mv2.png" id="T_shirt_7" class="tshirt" style="--order: 7;" alt="T-shirt 7">
+        <img src="https://static.wixstatic.com/media/091b9b_9fe2dd65cbd544b6823c6a712533a904~mv2.png" id="T_shirt_8" class="tshirt" style="--order: 8;" alt="T-shirt 8">
+        <img src="https://static.wixstatic.com/media/091b9b_573fe71a33604d6e8ebd37d900d06895~mv2.png" id="T_shirt_9" class="tshirt" style="--order: 9;" alt="T-shirt 9">
+        <img src="https://static.wixstatic.com/media/091b9b_863866073eae48df9ef7a50b43ae29b7~mv2.png" id="T_shirt_10" class="tshirt" style="--order: 10;" alt="T-shirt 10">
+      </div>
+
+      <div class="carree3" id="carree3"></div>
     
         <script>
+
+function startTyping() {
+        // Texte à afficher progressivement
+        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
+
+        // Sélection du conteneur où le texte sera affiché
+        var textContainer = document.getElementById('textContainer');
+
+        // Fonction pour afficher le texte progressivement
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                textContainer.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, 50); // Délai entre chaque caractère (en millisecondes)
+            }
+        }
+
+        // Efface le contenu précédent du conteneur de texte
+        textContainer.innerHTML = '';
+
+        // Délai initial de 2 secondes avant de commencer à écrire
+        setTimeout(function() {
+            typeWriter(text, 0);
+        }, 900);
+    }
+
+            /*T shirt cintre Debut*/
+
+
+    /*T Shrit cintre fin */
 
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -1955,6 +2094,385 @@ gsap.fromTo("#svg_histoire", {
 });
 
 //fin chemin 
+
+variables = 433;
+variables_2 = 90.7;
+opacitys = 1;
+
+//debut t shirt cintre
+
+gsap.fromTo("#T_shirt_1", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    opacity: 1
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_2", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_3", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_4", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_5", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_6", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_7", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_8", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_9", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_10", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "5000px",
+        end: "5300px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+
+gsap.fromTo("#T_shirt_1", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    opacity: 1
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_2", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_3", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_4", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_5", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_6", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_7", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_8", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_9", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+gsap.fromTo("#T_shirt_10", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
+    y: 0,
+   // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+   opacity: opacitys
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "0px",
+        end: "5000px",
+        scrub: 0,
+        markers: false
+    }
+});
+
+//fin t shirt cintre
 
 
 //hisotire
@@ -2080,8 +2598,11 @@ gsap.fromTo(".box_histoire_6", {
             var text3 = document.getElementById('text3');
             var descriptif_tshirt = document.getElementById('descriptif_tshirt');
             var photodrone_text = document.getElementById('photodrone_text');
+           
+            var circle = document.querySelector('.circle');
             
-            var one = document.querySelector('.buttons');
+            var tshirt = document.querySelector('.tshirt');
+            var carree3 = document.querySelector('.carree3');
             
 			var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_1');
             var T_shirt_Josy_1_ = document.querySelector('.T_shirt_Josy_1_');
@@ -2095,6 +2616,118 @@ gsap.fromTo(".box_histoire_6", {
             
             gsap.registerPlugin(ScrollTrigger);
 
+            document.addEventListener("DOMContentLoaded", () => {
+
+                
+    const tshirts = document.querySelectorAll(".tshirt");
+
+    // Fonction pour activer/désactiver les événements selon la position du scroll
+    const handleScroll = () => {
+        const scrollTop = window.scrollY; // Obtenir la position actuelle du scroll
+
+        if (scrollTop >= 5300 && scrollTop <= 5600) {
+            tshirts.forEach((tshirt, index) => {
+                tshirt.addEventListener("mouseover", () => {
+                    tshirts.forEach((other, i) => {
+                        if (i > index) {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "0.5";
+                        } else if (i === index) {
+                            other.style.transform = "translateX(7%)";
+                            other.style.opacity = "1";
+                        } else {
+                            other.style.transform = "translateX(-20%)";
+                            other.style.opacity = "0.5";
+                        }
+                    });
+                });
+
+                tshirt.addEventListener("mouseleave", () => {
+                    tshirts.forEach((other) => {
+                        other.style.transform = "translateX(0px)";
+                        other.style.opacity = "1";
+                    });
+                });
+
+            });
+
+        } else  if (scrollTop >= 4900 && scrollTop < 5300) {
+
+    function disableMouseOver() {
+    tshirts.forEach((tshirt) => {
+        tshirt.removeEventListener("mouseover", handleMouseOver);
+        tshirt.removeEventListener("mouseleave", handleMouseLeave);
+    });
+}
+
+            tshirts.forEach((tshirt, index) => {
+                tshirt.addEventListener("mouseover", () => {
+                    tshirts.forEach((other, i) => {
+                        if (i > index) {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "1";
+                        } else if (i === index) {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "1";
+                        } else {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "1";
+                        }
+                    });
+                });
+
+                tshirt.addEventListener("mouseleave", () => {
+                    tshirts.forEach((other) => {
+                        other.style.transform = `translateX(0px)`;
+                        other.style.opacity = "1";
+                    });
+                });
+
+            });
+            
+
+      
+    }else{
+
+        tshirts.forEach((tshirt, index) => {
+                tshirt.addEventListener("mouseover", () => {
+                    tshirts.forEach((other, i) => {
+                        if (i > index) {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "0";
+                        } else if (i === index) {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "0";
+                        } else {
+                            other.style.transform = `translateX(0px)`;
+                            other.style.opacity = "0";
+                        }
+                    });
+                });
+
+                tshirt.addEventListener("mouseleave", () => {
+                    tshirts.forEach((other) => {
+                        other.style.transform = `translateX(0px)`;
+                        other.style.opacity = "0";
+                    });
+                });
+
+            });
+
+    function disableMouseOver() {
+    tshirts.forEach((tshirt) => {
+        tshirt.removeEventListener("mouseover", handleMouseOver);
+        tshirt.removeEventListener("mouseleave", handleMouseLeave);
+    });
+}
+
+    }
+    };
+
+    // Écouter l'événement de scroll
+    window.addEventListener("scroll", handleScroll);
+});
+
             
             //Début
             if (scrollTop <= 30) {
@@ -2102,12 +2735,40 @@ gsap.fromTo(".box_histoire_6", {
             } else {
                 text1.style.opacity = "0";
             }
-            
-            if (scrollTop <= 31) {
-                one.style.opacity = "1";
+
+            if (scrollTop >= 4899 && scrollTop <= 5300) {
+                carree3.style.zIndex = "9999";
             } else {
-                one.style.opacity = "0";
+                carree3.style.zIndex = "0";
             }
+            
+            if (scrollTop >= 4909 && scrollTop <= 5600) {
+                T_shirt_1.style.opacity = "1"; // Permet les interactions
+                T_shirt_2.style.opacity = "1";
+                T_shirt_3.style.opacity = "1";
+                T_shirt_4.style.opacity = "1";
+                T_shirt_5.style.opacity = "1";
+                T_shirt_6.style.opacity = "1";
+                T_shirt_7.style.opacity = "1";
+                T_shirt_8.style.opacity = "1";
+                T_shirt_9.style.opacity = "1";
+                T_shirt_10.style.opacity = "1";
+            } else {
+               // tshirt.style.pointerEvents = "none"; // Désactive les interactions
+               T_shirt_1.style.opacity = "0";
+               T_shirt_2.style.opacity = "0";
+               T_shirt_3.style.opacity = "0";
+               T_shirt_4.style.opacity = "0";
+               T_shirt_5.style.opacity = "0";
+               T_shirt_6.style.opacity = "0";
+               T_shirt_7.style.opacity = "0";
+               T_shirt_8.style.opacity = "0";
+               T_shirt_9.style.opacity = "0";
+               T_shirt_10.style.opacity = "0";
+            }
+
+            
+
             
             //galerie histoire josy
 
@@ -2133,7 +2794,7 @@ gsap.fromTo(".box_histoire_6", {
                 descriptif_tshirt.style.opacity = "0";
             }
 
-            if (scrollTop >= 4450 && scrollTop <= 6300) {
+            if (scrollTop >= 4450 && scrollTop <= 4910) {
                 T_shirt_Josy_1_.style.opacity = "1";
             } else {
                 T_shirt_Josy_1_.style.opacity = "0";
@@ -2159,12 +2820,12 @@ gsap.fromTo(".box_histoire_6", {
             }
 
 
-          /*  if (scrollTop >= 0 && scrollTop <= 85) {
-                photodrone.style.opacity = "1";
+            if (scrollTop >= 4880 && scrollTop <= 4950) {
+                circle.style.opacity = "0.8";
                 
             } else {
-                photodrone.style.opacity = "0";
-            }*/
+                circle.style.opacity = "0";
+            }
 
             if (scrollTop >= 6000 && scrollTop <= 6390) {
                 photodrone_text.style.opacity = "1";
@@ -2173,13 +2834,13 @@ gsap.fromTo(".box_histoire_6", {
                 photodrone_text.style.opacity = "0";
             }
 
-            if (scrollTop >= 4900 && scrollTop <= 6300) {
+           /* if (scrollTop >= 4900 && scrollTop <= 6300) {
                 T_shirt_Josy_2.style.opacity = "1";
                 T_shirt_Josyimaginaire.style.opacity = "1";
             } else {
                 T_shirt_Josy_2.style.opacity = "0";
                 T_shirt_Josyimaginaire.style.opacity = "0";
-            }
+            }*/
 
             if (scrollTop >= 6850 && scrollTop <= 8000) {
                 contact_form.style.opacity = "1";
@@ -2264,7 +2925,7 @@ if (scrollTop >= 4450 && scrollTop <= 4900) {
 }
 
 if (scrollTop >= 4900 && scrollTop <= 5300) {
-    
+/*    
 gsap.fromTo(".T_shirt_Josyimaginaire", {
     x: sreen_largeur * 0.10 + 66,
     opacity: 0
@@ -2331,12 +2992,12 @@ gsap.fromTo(".T_shirt_Josy_2", {
         scrub: 0,  
         markers: false // Pour désactiver les repères de démarrage et de fin
     }
-});
+});*/
 
 }
 
 }
-
+/*
 gsap.fromTo(".T_shirt_Josy_1_", {
     x: 0,
     y: 0,
@@ -2353,7 +3014,7 @@ gsap.fromTo(".T_shirt_Josy_1_", {
         markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
     }
 });
-
+*/
 // Réinitialiser la position au scroll
 window.addEventListener('scroll', updateTshirtPosition);
 
@@ -2366,7 +3027,7 @@ window.addEventListener('resize', () => {
       //  document.getElementById('scroll-position').textContent = `Scroll position: ${sreen_largeur}px`;
 
       updateTshirtPosition();  // Réactualiser la position du t-shirt
-      
+    /*  
 gsap.fromTo(".T_shirt_Josyimaginaire", {
     x: sreen_largeur * 0.10 + 66,
     opacity: 0
@@ -2434,13 +3095,13 @@ gsap.fromTo(".T_shirt_Josy_2", {
         scrub: 0,  
         markers: false // Pour désactiver les repères de démarrage et de fin
     }
-});
+});*/
 
 ScrollTrigger.refresh();
 //fin refresh 
     });
 
-
+/*
 gsap.fromTo(".T_shirt_Josyimaginaire", {
     x: 0,
     y: 0,
@@ -2552,7 +3213,7 @@ gsap.fromTo(".T_shirt_Josy_2", {
     }
 });
 
-
+*/
 gsap.fromTo(".T_shirt_Josy_1", {
         opacity : 0
     }, {
@@ -3232,26 +3893,6 @@ function compterMot() {
         // Effacer le champ de saisie après comptage
         document.getElementById("motInput").value = "";
     }
-/*
-     // Fonction pour mettre à jour le fichier JSON
-function mettreAJourJSON(updatedData) {
-            return fetch('/update-json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la mise à jour du fichier JSON:', error);
-                document.getElementById("resultat").textContent = 'error sauvegarde JSON : ', error;
-            });
-        }
-*/
 
 
 // Fonction pour charger les données JSON existantes
