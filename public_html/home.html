@@ -379,7 +379,7 @@ text {
   height: 100%;
   width: 100%;
   transform: scale(0);
-  z-index: 2001;
+  z-index: 9999;
 }
 
 #modal-container_carte.four {
@@ -517,7 +517,7 @@ text {
   top: 0;
   left: 0;
   transform: scale(0);
-  z-index: 2001;
+  z-index: 9999;
 }
 
 #modal-container.one {
@@ -558,6 +558,7 @@ text {
   padding: 35px;
   height: 300px;
   width : 80vw;
+  min-width: 550px;
   display: inline-block;
   border-radius: 10px;
   font-weight: 300;
@@ -1537,6 +1538,30 @@ text {
               <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button>
           </div>
 
+          <div id="typewriter-container"></div>
+
+          <!-- Modal Container -->
+<div id="modal-container">
+    <div class="modal-background">
+      <div class="modal">
+        <h2>Le Josy Jeu</h2>
+        <p><span id="textContainer"></span></p>
+       <label for="motInput">Entrez un mot : JOSY</label>
+       <input type="text" id="motInput">
+       <br>
+       <button onclick="compterMot()">Valider</button>
+       <br>
+       <p id="resultat"></p>
+       <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2>
+       <br>
+        <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+          <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+
         <div class="instagram-section">
     <a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank">
         <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram">
@@ -1556,6 +1581,8 @@ text {
     
             </div>
         </div>
+
+
 
  <!-- Bouton pour le menu -->
  <div class="menu-toggle" id="menuToggle">
@@ -1618,32 +1645,7 @@ text {
 
     <script>
 
-function startTyping() {
-        // Texte à afficher progressivement
-        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
 
-        // Sélection du conteneur où le texte sera affiché
-        var textContainer = document.getElementById('textContainer');
-
-        // Fonction pour afficher le texte progressivement
-        function typeWriter(text, i) {
-            if (i < text.length) {
-                textContainer.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(function() {
-                    typeWriter(text, i);
-                }, 50); // Délai entre chaque caractère (en millisecondes)
-            }
-        }
-
-        // Efface le contenu précédent du conteneur de texte
-        textContainer.innerHTML = '';
-
-        // Délai initial de 2 secondes avant de commencer à écrire
-        setTimeout(function() {
-            typeWriter(text, 0);
-        }, 900);
-    }
 
 
                    // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
@@ -1731,7 +1733,7 @@ function startTyping() {
 
         <div class="brick">
 
-        <!-- Modal Container -->
+        <!-- Modal Container 
 <div id="modal-container">
     <div class="modal-background">
       <div class="modal">
@@ -1750,7 +1752,7 @@ function startTyping() {
         </svg>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
   <script>
@@ -1901,29 +1903,7 @@ function startTyping() {
 
                
 
-            
-
-
-<!-- Modal Container -->
-<div id="modal-container">
-    <div class="modal-background">
-      <div class="modal">
-        <h2>Le Josy Jeu</h2>
-        <p><span id="textContainer"></span></p>
-       <label for="motInput">Entrez un mot : JOSY</label>
-       <input type="text" id="motInput">
-       <br>
-       <button onclick="compterMot()">Valider</button>
-       <br>
-       <p id="resultat"></p>
-       <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2>
-       <br>
-        <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-          <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
-        </svg>
-      </div>
-    </div>
-  </div>
+        
 
 
   <!-- Scripts -->
@@ -1933,7 +1913,7 @@ function startTyping() {
 
                 <button onclick="open_carte()" id="four" class="button_carte">Accéder à notre carte</button> 
 
-                <div id="typewriter-container"></div>
+             
 
 
       <div class="gallery2-container">
@@ -3720,6 +3700,48 @@ function scrollToPosition_8() {
 function ToBoutique() {
             window.location.href = 'https://josyte.wixstudio.io/josys/category/all-products';
     }
+
+    function startTyping() {
+    try {
+        console.log("Lancement de la fonction startTyping.");
+
+        // Texte à afficher progressivement
+        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
+
+        // Sélection du conteneur où le texte sera affiché
+        var textContainer = document.getElementById('textContainer');
+        if (!textContainer) {
+            throw new Error("Élément avec l'ID 'textContainer' introuvable.");
+        }
+
+        // Fonction pour afficher le texte progressivement
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                textContainer.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, 50); // Délai entre chaque caractère (en millisecondes)
+            } else {
+                console.log("Texte affiché avec succès.");
+            }
+        }
+
+        // Efface le contenu précédent du conteneur de texte
+        textContainer.innerHTML = '';
+        console.log("Contenu précédent effacé.");
+
+        // Délai initial de 2 secondes avant de commencer à écrire
+        setTimeout(function() {
+            typeWriter(text, 0);
+        }, 900);
+    } catch (error) {
+        console.error("Erreur dans startTyping :", error.message);
+        throw error; // Facultatif : pour arrêter le script si nécessaire
+    }
+}
+
+
 
 
 
