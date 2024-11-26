@@ -38,7 +38,7 @@ body {
  .carree3 {
   position: fixed;
   opacity: 0%;
-  top: 22vh;
+  top: 24vh;
   right: -0.6;
   width: 98vw;
   height: 100vh;
@@ -54,7 +54,7 @@ body {
       position: fixed;
       width: fit-content;
       transform: translateX(0%);
-      top : 23%;
+      top : 24.1vh;
       left : 35%;
       z-index: 3000;
     }
@@ -685,6 +685,8 @@ text {
       transform: translate(-50%, -50%);
       z-index: 2000;
       cursor:pointer;
+      opacity: 1;
+      transition: opacity 0.3s ease; /* Animation pour le changement d'opacité */
       &:hover {
         color:var(--Color_2);
         background:var(--Color_3);
@@ -1517,14 +1519,12 @@ text {
     </div>
 
     <div class="common-section">
-
-
-        <div class="buttons">
-            <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button> 
-        </div>
         
     
     <div class="brick">
+
+
+    
         
   <!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
 <img src= '../Image/Josy - St barth 5.jpeg' class="photodrone" alt="Image"> -->
@@ -1532,7 +1532,10 @@ text {
     
         </div>
 
-
+        <div class="buttons">
+            <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
+              <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button>
+          </div>
 
         <div class="instagram-section">
     <a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank">
@@ -1615,21 +1618,52 @@ text {
 
     <script>
 
+function startTyping() {
+        // Texte à afficher progressivement
+        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
+
+        // Sélection du conteneur où le texte sera affiché
+        var textContainer = document.getElementById('textContainer');
+
+        // Fonction pour afficher le texte progressivement
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                textContainer.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, 50); // Délai entre chaque caractère (en millisecondes)
+            }
+        }
+
+        // Efface le contenu précédent du conteneur de texte
+        textContainer.innerHTML = '';
+
+        // Délai initial de 2 secondes avant de commencer à écrire
+        setTimeout(function() {
+            typeWriter(text, 0);
+        }, 900);
+    }
+
 
                    // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
                    window.addEventListener('scroll', function() {
-                var one = document.querySelector('.one');
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+
+                    var button_one = document.querySelector('.buttons .button');
 
                 gsap.registerPlugin(ScrollTrigger);
 
-                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-                            
-    if (scrollTop <= 31) {
-        one.style.opacity = "1";
+            if (scrollTop <= 31) {
+        button_one.style.opacity = '1';
     } else {
-        one.style.opacity = "0";
+        button_one.style.opacity = '0';
     }
+
+              
+                            
+
 
                 var text1 = document.getElementById('text1');
                 var text2 = document.getElementById('text2');
@@ -1995,32 +2029,6 @@ text {
     
         <script>
 
-function startTyping() {
-        // Texte à afficher progressivement
-        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
-
-        // Sélection du conteneur où le texte sera affiché
-        var textContainer = document.getElementById('textContainer');
-
-        // Fonction pour afficher le texte progressivement
-        function typeWriter(text, i) {
-            if (i < text.length) {
-                textContainer.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(function() {
-                    typeWriter(text, i);
-                }, 50); // Délai entre chaque caractère (en millisecondes)
-            }
-        }
-
-        // Efface le contenu précédent du conteneur de texte
-        textContainer.innerHTML = '';
-
-        // Délai initial de 2 secondes avant de commencer à écrire
-        setTimeout(function() {
-            typeWriter(text, 0);
-        }, 900);
-    }
 
             /*T shirt cintre Debut*/
 
@@ -2095,15 +2103,15 @@ gsap.fromTo("#svg_histoire", {
 
 //fin chemin 
 
-variables = 433;
-variables_2 = 90.7;
-opacitys = 1;
+variables =  sreen_largeur * 0.30 + 0;//433;
+variables_2 = sreen_largeur * 0.063 + 0;//90.7;
+opacitys = 0;
 
 //debut t shirt cintre
 
 gsap.fromTo("#T_shirt_1", {
     scale: 1,  // Réduit la largeur à zéro au début
-    x: variables,// sreen_largeur * 0.40 + 60,
+    x: variables,//
     y: 0,
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
     opacity: 1
@@ -2131,7 +2139,7 @@ gsap.fromTo("#T_shirt_2", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2151,7 +2159,7 @@ gsap.fromTo("#T_shirt_3", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2171,7 +2179,7 @@ gsap.fromTo("#T_shirt_4", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2191,7 +2199,7 @@ gsap.fromTo("#T_shirt_5", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2211,7 +2219,7 @@ gsap.fromTo("#T_shirt_6", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2231,7 +2239,7 @@ gsap.fromTo("#T_shirt_7", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2251,7 +2259,7 @@ gsap.fromTo("#T_shirt_8", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2271,7 +2279,7 @@ gsap.fromTo("#T_shirt_9", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2291,7 +2299,7 @@ gsap.fromTo("#T_shirt_10", {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
+    opacity: opacitys,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2327,7 +2335,7 @@ gsap.fromTo("#T_shirt_2", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2345,7 +2353,7 @@ gsap.fromTo("#T_shirt_3", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2363,7 +2371,7 @@ gsap.fromTo("#T_shirt_4", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2381,7 +2389,7 @@ gsap.fromTo("#T_shirt_5", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2399,7 +2407,7 @@ gsap.fromTo("#T_shirt_6", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2417,7 +2425,7 @@ gsap.fromTo("#T_shirt_7", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2435,7 +2443,7 @@ gsap.fromTo("#T_shirt_8", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2453,7 +2461,7 @@ gsap.fromTo("#T_shirt_9", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2471,7 +2479,7 @@ gsap.fromTo("#T_shirt_10", {
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
    opacity: opacitys
 }, {
-    opacity: 1,
+    opacity: opacitys,
     x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2622,11 +2630,17 @@ gsap.fromTo(".box_histoire_6", {
 			var T_shirt_Josyimaginaire = document.querySelector('.T_shirt_Josyimaginaire');
 
             var photodrone = document.querySelector('.photodrone');
+
+
 						
             
             gsap.registerPlugin(ScrollTrigger);
 
+
+
             document.addEventListener("DOMContentLoaded", () => {
+
+
 
                 
     const tshirts = document.querySelectorAll(".tshirt");
@@ -2739,6 +2753,9 @@ gsap.fromTo(".box_histoire_6", {
 });
 
             
+
+
+
             //Début
             if (scrollTop <= 30) {
                 text1.style.opacity = "1";
