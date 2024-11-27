@@ -48,6 +48,18 @@ body {
  /* cursor: pointer;*/
 }
 
+#textContainer {
+  position: absolute;
+  left: 50%;
+  margin-bottom: 20px; /* Ajoute un espace au-dessus de l'input */
+  transform: translateX(-50%);
+  white-space: nowrap; /* Évite que le texte s'étale sur plusieurs lignes */
+}
+
+p {
+  margin-bottom: 20px; /* Ajoute un espace sous la phrase */
+}
+
 
 .rack {
       display: flex;
@@ -94,8 +106,8 @@ body {
             position: absolute;
             width: 450px;
             height: 125px;
-            top: 100vh;
-            left: 15vw;
+            top: 90vh;
+            left: 12vw;
             background-color: transparent; 
             padding: 5px; /* Ajoute une marge intérieure */
             color: var(--Color_2);
@@ -114,8 +126,8 @@ body {
             position: absolute;
             width: 400px;
             height: 200px;
-            top: 105vh;
-            left: 58vw;
+            top: 125vh;
+            left: 53vw;
             background-color: transparent; 
             padding: 20px; /* Ajoute une marge intérieure */
             color: var(--Color_2);
@@ -133,8 +145,8 @@ body {
             position: absolute;
             width: 240px;
             height: 295px;
-            top: 165vh;
-            left: 72vw;
+            top: 160vh;
+            left: 20vw;
             background-color: transparent; 
             padding: 20px; /* Ajoute une marge intérieure */
             color: var(--Color_2);
@@ -152,8 +164,8 @@ body {
             position: absolute;
             width: 240px;
             height: 300px;
-            top: 125vh;
-            left: 10vw;
+            top: 162vh;
+            left: 75vw;
             background-color: transparent; 
             padding: 20px; /* Ajoute une marge intérieure */
             color: var(--Color_2);
@@ -171,8 +183,8 @@ body {
             position: absolute;
             width: 240px;
             height: 260px;
-            top: 205vh;
-            left: 18vw;
+            top: 216vh;
+            left: 68vw;
             background-color: transparent; 
             padding: 20px; /* Ajoute une marge intérieure */
             color: var(--Color_2);
@@ -212,7 +224,7 @@ body {
   transform: translate(50%, -50%);
   font-size: 2rem;
   color: var(--Color_2);
-  top: 290vh;
+  top: 262vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -230,12 +242,12 @@ body {
 /* Premier SVG : positionné en haut avec un décalage */
 #svg_histoire {
   max-width: 95%; /* Limite la largeur maximale du SVG à celle de la fenêtre */
-  margin-top: 110vh;
+  margin-top: 105vh;
   height : 100vw;
   width: 95%;
+  left: 0px;
   overflow-x: hidden;
-  left: 0%;
-  opacity: 0;
+  opacity: 1;
 }
 
 /* Balles et lignes du SVG */
@@ -557,7 +569,7 @@ text {
   background: var(--Color_2);
   padding: 35px;
   height: 300px;
-  width : 80vw;
+  width : 550px;
   min-width: 550px;
   display: inline-block;
   border-radius: 10px;
@@ -1795,7 +1807,7 @@ text {
             <div class="circle" data-tooltip="Pull en coton"></div>
 
 
-            <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" style="width: 100%; height: auto;">
+            <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: auto;">
                 <!-- <path class="line01 line" d="M 10 200  600 200"></path>
                  <path class="line02 line" d="M 10 400  600 400"></path>
                  <path class="line03 line" d="M 10 600  600 600"></path>
@@ -1810,12 +1822,32 @@ text {
                     T 350 330
                     Q -220 340 340 430
                     T 200 550"-->
+
+ <!--Commande modifiée
+d="M10,10 H500 A10,10 0 0 1 510,30 H150 A20,10 0 0 0 150,50 H510 A10,10 0 0 1 520,70 H10"
+Changements apportés
+Augmenter la largeur après les virages :
+H500 devient H510 et H100 devient H150, ce qui augmente les segments horizontaux.
+Adapter les courbes :
+Les coordonnées des courbes après chaque segment horizontal ont été ajustées légèrement pour s'adapter à la nouvelle position.
+Explication des commandes dans d
+M10,10 : Déplacement initial du stylet à la position (10,10).
+H500 : Ligne horizontale jusqu'à x=500.
+A10,10 0 0 1 500,30 : Arc courbé de rayon 10 avec un virage à y=30.
+H100 : Ligne horizontale jusqu'à x=100.
+A20,10 0 0 0 100,50 : Arc courbé de rayon 20.
+H500 : Ligne horizontale jusqu'à x=500.
+A10,10 0 0 1 500,70 : Arc final courbé à y=70.
+-->
          
                  <path id="theLine" class="theLine" 
                   
 
-                 d="M10,10 H500 A10,10 0 0 1 500,30 H100 A20,10 0 0 0 100,50 H500 A10,10 0 0 1 500,70 H10" 
-        
+                 d="M20,20 H500 A20,20 0 0 1 500, 
+                 160 H150 A20,20 0 0 0 150,
+                 310 H510 A20,20 0 0 1 510,
+                 460 H280"
+                
 
                  fill="none" 
                  stroke="var(--Color_2)" 
@@ -2021,9 +2053,9 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 // Initialiser les balles à leur position initiale sur le chemin
 gsap.set(".ball", { opacity:  1});
 
-gsap.set(".ball02", {x:75, y:27});
-gsap.set(".ball03", {x:500, y:84});
-gsap.set(".ball04", {x:440, y:154});
+gsap.set(".ball02", {x:75, y:20});
+gsap.set(".ball03", {x:530, y:154});
+gsap.set(".ball04", {x:120, y:160});
 
 // Fonction pour imiter le dessin du chemin
 const path = document.querySelector("#theLine");
@@ -2044,16 +2076,16 @@ const pulses = gsap.timeline({
         ease: "elastic(2.5, 1)"
     }
 })
-.to(".ball02, .text01", {}, 0.06) 
-.to(".ball03, .text02", {}, 0.46)
+.to(".ball02, .text01", {}, 0.04) 
+.to(".ball03, .text02", {}, 0.62)
 .to(".ball04, .text03", {}, 0.70);
 
 const main = gsap.timeline({
             scrollTrigger: {
                 trigger: "#svg_histoire",
                 scrub: true,
-                start: "top 80%", // Adapter pour mieux synchroniser
-                end: "bottom 30%"
+                start: "top 75%", // Adapter pour mieux synchroniser
+                end: "bottom 100%"
             }
         })
 .to(".ball01", {autoAlpha: 1, duration: 0.05})
@@ -2504,8 +2536,8 @@ gsap.fromTo(".box_histoire_2", {
     opacity: 1,
     scrollTrigger: {
         trigger: document.body,
-        start: "416px",
-        end: "426px",
+        start: "468px",
+        end: "494px",
         scrub: 0,
         markers: false
     }
@@ -2522,8 +2554,8 @@ gsap.fromTo(".box_histoire_3", {
     opacity: 1,
     scrollTrigger: {
         trigger: document.body,
-        start: "509px",
-        end: "519px",
+        start: "712px",
+        end: "730px",
         scrub: 0,
         markers: false
     }
@@ -3719,9 +3751,9 @@ function ToBoutique() {
             if (i < text.length) {
                 textContainer.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(function() {
+                setTimeout(function () {
                     typeWriter(text, i);
-                }, 50); // Délai entre chaque caractère (en millisecondes)
+                }, 60); // Délai entre chaque caractère (en millisecondes)
             } else {
                 console.log("Texte affiché avec succès.");
             }
@@ -3731,12 +3763,21 @@ function ToBoutique() {
         textContainer.innerHTML = '';
         console.log("Contenu précédent effacé.");
 
-        // Délai initial de 2 secondes avant de commencer à écrire
-        setTimeout(function() {
+        // Calcule la largeur totale du texte final
+        textContainer.innerHTML = text; // Place temporairement tout le texte pour mesurer
+        const textWidth = textContainer.offsetWidth;
+        textContainer.innerHTML = ''; // Vide après la mesure
+
+        // Centrer à 50 % de la largeur finale
+        textContainer.style.left = `calc(50% - ${textWidth / 2}px)`;
+        textContainer.style.transform = 'translateX(0)'; // Annule le translate si ajustement précis
+
+        // Délai initial avant de commencer à écrire
+        setTimeout(function () {
             typeWriter(text, 0);
-        }, 900);
+        }, 1000);
     } catch (error) {
-        console.error("Erreur dans startTyping :", error.message);
+        console.error("Erreur dans startTyping :", error.message);
         throw error; // Facultatif : pour arrêter le script si nécessaire
     }
 }
