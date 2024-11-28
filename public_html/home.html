@@ -4082,8 +4082,23 @@ function chargerJSON() {
         });
 }
 
+// Fonction pour charger les données JSON existantes
+function chargerJSON_2() {
+    return fetch('motsJOSY_A_VALIDER.json')
+    .then(response => response.json())
+        .then(data => {
+            console.log('Données chargées depuis motsJOSY_A_VALIDER.json:', data);
+            mots = data;
+            return mots; // Retourne les données pour les utiliser plus tard
+        })
+        .catch(error => {
+            console.error('Erreur de chargement des données "A VALIDER":', error);
+            throw error; // Propage l'erreur pour la gérer en aval si nécessaire
+        });
+}
+
 function ajouterNouveauMot(nouveauMot) {
-    chargerJSON().then(data => {
+    chargerJSON_2().then(data => {
         // Ajouter le nouveau mot aux données
         data.push(nouveauMot);
 
