@@ -35,6 +35,7 @@ function chargerMots(fichier, listeId, motsArray) {
         });
 }
 
+
 // Affiche le contenu brut dans la liste en cas d'erreur JSON
 function afficherBrut(contenu, listeId) {
     const liste = document.getElementById(listeId);
@@ -117,6 +118,33 @@ function sauvegarderFichier_2(fichier, data) {
         .then(result => console.log(`Fichier ${fichier} mis à jour:`, result))
         .catch(error => console.error(`Erreur lors de la sauvegarde de ${fichier}:`, error));
 }
+
+// Fonction pour télécharger un fichier JSON
+function downloadFile(filename) {
+    fetch(filename)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erreur lors du chargement du fichier ${filename}: ${response.statusText}`);
+            }
+            return response.blob(); // Retourne le contenu du fichier sous forme de blob
+        })
+        .then(blob => {
+            // Crée une URL temporaire pour télécharger le fichier
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename; // Nom du fichier téléchargé
+            document.body.appendChild(a);
+            a.click(); // Déclenche le téléchargement
+            a.remove(); // Supprime l'élément <a> temporaire
+            URL.revokeObjectURL(url); // Libère l'URL temporaire
+        })
+        .catch(error => {
+            console.error("Erreur lors du téléchargement :", error);
+            alert(`Impossible de télécharger le fichier ${filename}.`);
+        });
+}
+
 
 // Ajouter les écouteurs pour les boutons
 document.getElementById('validerBtn').addEventListener('click', validerMot);
