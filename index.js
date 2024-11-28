@@ -26,10 +26,10 @@ app.post('/update-json', (req, res) => {
 
 // Endpoint pour mettre à jour le fichier JSON
 app.post('/update-json-2', (req, res) => {
-    const updatedData = req.body;
-    const filePath = path.join(__dirname, 'public_html', 'motsJOSY_A_VALIDER.json');
+    const updatedData_2 = req.body;
+    const filePath_2 = path.join(__dirname, 'public_html', 'motsJOSY_A_VALIDER.json');
 
-    fs.writeFile(filePath, JSON.stringify(updatedData, null, 2), (err) => {
+    fs.writeFile(filePath_2, JSON.stringify(updatedData_2, null, 2), (err) => {
         if (err) {
             console.error('Erreur lors de la mise à jour du fichier JSON:', err);
             return res.status(500).json({ error: 'Erreur lors de la mise à jour du fichier JSON' });
