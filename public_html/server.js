@@ -30,9 +30,9 @@ app.post('/update-json', (req, res) => {
 
 // Route pour mettre à jour le fichier JSON
 app.post('/update-json-2', (req, res) => {
-    const updatedData = req.body;
+    const updatedData_2 = req.body;
 
-    fs.writeFile('../motsJOSY_A_VALIDER.json', JSON.stringify(updatedData, null, 2), 'utf8', (err) => {
+    fs.writeFile('../motsJOSY_A_VALIDER.json', JSON.stringify(updatedData_2, null, 2), 'utf8', (err) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Erreur lors de la sauvegarde du fichier JSON');
