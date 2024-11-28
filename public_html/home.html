@@ -1666,11 +1666,11 @@ text {
     <script>
 
 
-   /* // Fonction pour convertir automatiquement le texte en minuscules
+    // Fonction pour convertir automatiquement le texte en minuscules
     function convertToLowercase(input) {
         input.value = input.value.toLowerCase();
     }
-*/
+
                    // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
                    window.addEventListener('scroll', function() {
                     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -4005,81 +4005,77 @@ function compterMot1() {
     ///FIN TEST 
    
 
-  // Fonction pour compter le mot saisi
+    // Fonction pour compter le mot saisi
 function compterMot() {
-    const motSaisi = document.getElementById("motInput").value.trim();
 
-    if (!motSaisi) {
-        document.getElementById("resultat").textContent = "Veuillez entrer un mot.";
-        return;
-    }
+     //   document.getElementById("textContainer").textContent = "3"
+        const motSaisi = document.getElementById("motInput").value.trim(); //.value.toLowerCase().trim();
 
-    chargerJSON('motsJOSY.json').then(mots => {
-        const motTrouve = mots.find(item => item.mot === motSaisi);
+        // Recherche du mot dans la liste
+    //    document.getElementById("textContainer").textContent = "4"
+        const motTrouve = mots.find(item => (item.mot) === (motSaisi));
+     //   document.getElementById("textContainer").textContent = "5"
 
         if (motTrouve) {
             motTrouve.nombre++; // Incrémentation du compteur
-            document.getElementById("resultat").textContent = `Vous êtes la ${motTrouve.nombre}ème personne à penser à JOSY${motSaisi}.`;
+            document.getElementById("resultat").textContent = `Vous êtes la ${motTrouve.nombre}ème personne à penser à  JOSY${motSaisi}.`;
 
-            // Mettre à jour le fichier JSON principal
-            mettreAJourJSON('motsJOSY.json', mots);
+            // Mettre à jour le fichier JSON avec la nouvelle valeur
+            mettreAJourJSON(motSaisi, motTrouve.nombre);
+
         } else {
-            // Ajouter ou mettre à jour dans motsJOSY_A_VALIDER.json
-            ajouterDansListeAValider(motSaisi);
+            document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} n'est pas dans la liste.`;
         }
 
         // Effacer le champ de saisie après comptage
         document.getElementById("motInput").value = "";
-    });
-}
+    }
 
-// Fonction pour charger un fichier JSON existant
-function chargerJSON(fileName) {
-    return fetch(fileName)
-        .then(response => response.json())
+
+// Fonction pour charger les données JSON existantes
+function chargerJSON() {
+    return fetch('motsJOSY.json')
+    .then(response => response.json())
+        .then(data => {
+            console.log('Données chargées depuis motsJOSY.json:', data);
+            mots = data;
+            return mots; // Retourne les données pour les utiliser plus tard
+        })
         .catch(error => {
-            console.error(`Erreur de chargement des données depuis ${fileName}:`, error);
-            return []; // Retourne un tableau vide en cas d'erreur
+            console.error('Erreur de chargement des données:', error);
+            throw error; // Propage l'erreur pour la gérer en aval si nécessaire
         });
 }
+        // Fonction pour mettre à jour le fichier JSON
+function mettreAJourJSON(updated_mot,updated_nb ) {
+chargerJSON().then(data => {
+        // Cherche la ligne où "mot" est "diot"
+        const ligne = data.find(item => item.mot === updated_mot);
+        if (ligne) {
+            // Met à jour la colonne "nombre" à 2
+            ligne.nombre = updated_nb;
 
-// Fonction pour mettre à jour un fichier JSON
-function mettreAJourJSON(fileName, data) {
-    return fetch(`/update-json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ fileName, data })
-    })
-    .then(response => response.json())
-    .then(response => {
-        console.log(`Mise à jour réussie pour ${fileName}:`, response.message);
-    })
-    .catch(error => {
-        console.error(`Erreur lors de la mise à jour de ${fileName}:`, error);
-    });
-}
-
-// Fonction pour ajouter ou mettre à jour un mot dans motsJOSY_A_VALIDER.json
-function ajouterDansListeAValider(motSaisi) {
-    chargerJSON('motsJOSY_A_VALIDER.json').then(listeAValider => {
-        const motExistant = listeAValider.find(item => item.mot === motSaisi);
-
-        if (motExistant) {
-            motExistant.nombre++; // Incrémenter le compteur
-            document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à valider. Compteur mis à jour : ${motExistant.nombre}.`;
+            console.log("Le mot ", updated_mot, " est valide.");
+            // Envoie les données mises à jour au serveur pour les sauvegarder
+            return fetch('/update-json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // Envoie les données JSON mises à jour
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la mise à jour du fichier JSON:', error);
+            });
         } else {
-            // Ajouter le mot avec un compteur initial de 1
-            listeAValider.push({ mot: motSaisi, nombre: 1 });
-            document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
+            console.log("Le mot ", updated_mot, " n'a pas été trouvé dans le fichier JSON.");
         }
-
-        // Mettre à jour le fichier motsJOSY_A_VALIDER.json
-        mettreAJourJSON('motsJOSY_A_VALIDER.json', listeAValider);
     });
 }
-
 
 
 // Fonction pour sauvegarder les données mises à jour localement
