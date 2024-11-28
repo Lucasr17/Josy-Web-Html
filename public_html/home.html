@@ -3891,11 +3891,38 @@ function chargerDonnees() {
         });
 }
 
+function chargerDonnees_2() {
+    return fetch('motsJOSY_A_VALIDER.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Données chargées depuis motsJOSY_A_AVLIDER.json:', data);
+            mots = data;
+            return mots; // Retourne les données pour les utiliser plus tard
+        })
+        .catch(error => {
+            console.error('Erreur de chargement des données motsJOSY_A_AVLIDER:', error);
+            throw error; // Propage l'erreur pour la gérer en aval si nécessaire
+        });
+}
+
 
 
 // Appel de chargerDonnees au chargement de la page
 chargerDonnees()
     .then(data => {
+        // Une fois les données chargées avec succès, vous pouvez continuer ici
+        console.log('Chargement des données terminé avec succès.');
+
+        // Définir les mots chargés dans une variable globale accessible
+        mots = data;
+    })
+    .catch(error => {
+        // Gérer l'erreur de chargement des données ici
+        console.error('Erreur lors du chargement des données:', error);
+    });
+
+chargerDonnees_2()
+.then(data => {
         // Une fois les données chargées avec succès, vous pouvez continuer ici
         console.log('Chargement des données terminé avec succès.');
 
