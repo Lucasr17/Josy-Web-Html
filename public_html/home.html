@@ -4024,7 +4024,8 @@ function compterMot() {
             mettreAJourJSON(motSaisi, motTrouve.nombre);
 
         } else {
-            document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} n'est pas dans la liste.`;
+            ajouterDansListeAValider(motSaisi);
+            //document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} n'est pas dans la liste.`;
         }
 
         // Effacer le champ de saisie après comptage
@@ -4045,6 +4046,27 @@ function chargerJSON() {
             console.error('Erreur de chargement des données:', error);
             throw error; // Propage l'erreur pour la gérer en aval si nécessaire
         });
+}
+
+// Fonction pour ajouter ou mettre à jour un mot dans motsJOSY_A_VALIDER.json
+function ajouterDansListeAValider(motSaisi) {
+    chargerJSON('motsJOSY_A_VALIDER.json').then(listeAValider => {
+        const motExistant = listeAValider.find(item => item.mot === motSaisi);
+
+        if (motExistant) {
+            motExistant.nombre++; // Incrémenter le compteur
+            
+        } else {
+            // Ajouter le mot avec un compteur initial de 1
+            listeAValider.push({ mot: motSaisi, nombre: 1 });
+        }
+
+
+        document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
+
+        // Mettre à jour le fichier motsJOSY_A_VALIDER.json
+        mettreAJourJSON('motsJOSY_A_VALIDER.json', listeAValider);
+    });
 }
         // Fonction pour mettre à jour le fichier JSON
 function mettreAJourJSON(updated_mot,updated_nb ) {
@@ -4076,6 +4098,7 @@ chargerJSON().then(data => {
         }
     });
 }
+
 
 
 // Fonction pour sauvegarder les données mises à jour localement
