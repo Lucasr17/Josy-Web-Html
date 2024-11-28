@@ -112,25 +112,15 @@ function validerMot() {
     chargerMots('motsJOSY.json', 'motsJOSYList', motsJOSY);
 }
 
-// Fonction pour supprimer un mot soit de motsJOSY_A_VALIDER.json, soit de motsJOSY.json
+// Supprimer un mot de motsJOSY_A_VALIDER.json
 function supprimerMot() {
     if (!selectedWord) return alert('Veuillez sélectionner un mot.');
+    motsAValider = motsAValider.filter(mot => mot !== selectedWord);
 
-    // Vérifier où le mot a été sélectionné (dans motsJOSY_A_VALIDER ou motsJOSY)
-    if (selectedWord.source === 'A_VALIDER') {
-        // Le mot vient de motsJOSY_A_VALIDER.json
-        motsAValider = motsAValider.filter(mot => mot.mot !== selectedWord.mot);
-        sauvegarderFichier_2('motsJOSY_A_VALIDER.json', motsAValider);
-    } else if (selectedWord.source === 'VALIDES') {
-        // Le mot vient de motsJOSY.json
-        motsValides = motsValides.filter(mot => mot.mot !== selectedWord.mot);
-        sauvegarderFichier('motsJOSY.json', selectedWord.mot);
-    }
+    sauvegarderFichier_2('motsJOSY_A_VALIDER.json', motsAValider);
 
     selectedWord = null;
-    // Recharger la liste après suppression
     chargerMots('motsJOSY_A_VALIDER.json', 'motsAValiderList', motsAValider);
-    chargerMots('motsJOSY.json', 'motsValidesList', motsValides); // Si vous avez cette liste à afficher
 }
 
 // Sauvegarder les données mises à jour dans un fichier JSON
