@@ -63,6 +63,9 @@ function chargerMots(fichier, listeId, motsArray) {
             console.error(`Erreur lors du chargement de ${fichier}:`, error);
             afficherErreur(`Impossible de charger ${fichier}: ${error.message}`, listeId);
         });
+
+         // Rafraîchir la page après ajout
+    location.reload();
 }
 
 
@@ -121,6 +124,9 @@ function supprimerMot() {
 
     selectedWord = null;
     chargerMots('motsJOSY_A_VALIDER.json', 'motsAValiderList', motsAValider);
+
+     // Rafraîchir la page après ajout
+     location.reload();
 }
 
 // Sauvegarder les données mises à jour dans un fichier JSON
