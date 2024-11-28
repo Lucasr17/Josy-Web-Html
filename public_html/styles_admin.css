@@ -1,0 +1,94 @@
+:root {
+    --Color_1: #202020;
+    --Color_2: #ffffff;
+    --Color_Green: #4CAF50;
+    --Color_Red: #FF0000;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--Color_1);
+    color: var(--Color_2);
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--Color_1);
+    color: var(--Color_2);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.box {
+    background-color: var(--Color_2);
+    color: var(--Color_1);
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.box h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid var(--Color_1);
+    cursor: pointer;
+}
+
+ul li.selected {
+    background-color: var(--Color_Green);
+    color: var(--Color_2);
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+button {
+    background-color: var(--Color_1);
+    color: var(--Color_2);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+button:hover {
+    background-color: var(--Color_2);
+    color: var(--Color_1);
+    border: 1px solid var(--Color_1);
+}
