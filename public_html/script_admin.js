@@ -9,6 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
     chargerMots('motsJOSY_A_VALIDER.json', 'motsAValiderList', motsAValider);
 });
 
+
+function chargerJSON() {
+    return fetch('motsJOSY.json')
+        .then(response => response.json()) // Convertir la réponse en JSON
+        .then(data => {
+            if (data && data.data) {
+                // Utiliser seulement la partie 'data' du fichier
+                console.log('Données chargées depuis motsJOSY.json:', data.data);
+                return data.data; // Retourne uniquement le tableau des mots
+            } else {
+                throw new Error('Le fichier JSON n\'est pas au format attendu.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des données:', error);
+            throw error; // Propage l'erreur pour la gérer en aval si nécessaire
+        });
+}
+
+
 // Fonction pour charger les mots depuis un fichier JSON et les afficher dans la liste correspondante
 function chargerMots(fichier, listeId, motsArray) {
     fetch(fichier)
@@ -21,9 +41,19 @@ function chargerMots(fichier, listeId, motsArray) {
         .then(data => {
             try {
                 const jsonData = JSON.parse(data); // Tente de parser le JSON
-                motsArray.length = 0; // Vide le tableau existant
-                motsArray.push(...jsonData); // Ajoute les nouveaux éléments
-                afficherMots(jsonData, listeId); // Affiche les mots si le parsing réussit
+
+                // Si la structure du fichier a une clé 'data', on l'extraie
+                if (jsonData.data) {
+                    // Si la clé 'data' existe, on utilise cette partie du JSON
+                    motsArray.length = 0; // Vide le tableau existant
+                    motsArray.push(...jsonData.data); // Ajoute les nouveaux éléments
+                } else {
+                    // Si le fichier est déjà un tableau, on le traite directement
+                    motsArray.length = 0;
+                    motsArray.push(...jsonData);
+                }
+
+                afficherMots(motsArray, listeId); // Affiche les mots si le parsing réussit
             } catch (err) {
                 console.error(`Erreur lors du parsing de ${fichier}:`, err);
                 afficherBrut(data, listeId); // Affiche le fichier en brut si le parsing échoue
@@ -34,6 +64,8 @@ function chargerMots(fichier, listeId, motsArray) {
             afficherErreur(`Impossible de charger ${fichier}: ${error.message}`, listeId);
         });
 }
+
+
 
 
 // Affiche le contenu brut dans la liste en cas d'erreur JSON
