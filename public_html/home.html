@@ -3857,6 +3857,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 let mots = [];
+let mots_2 = [];
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -3896,8 +3897,8 @@ function chargerDonnees_2() {
         .then(response => response.json())
         .then(data => {
             console.log('Données chargées depuis motsJOSY_A_AVLIDER.json:', data);
-            mots = data;
-            return mots; // Retourne les données pour les utiliser plus tard
+            mots_2 = data;
+            return mots_2; // Retourne les données pour les utiliser plus tard
         })
         .catch(error => {
             console.error('Erreur de chargement des données motsJOSY_A_AVLIDER:', error);
@@ -3924,14 +3925,13 @@ chargerDonnees()
 chargerDonnees_2()
 .then(data => {
         // Une fois les données chargées avec succès, vous pouvez continuer ici
-        console.log('Chargement des données terminé avec succès.');
+        console.log('Chargement des données terminé avec succès A VALIDER.');
 
-        // Définir les mots chargés dans une variable globale accessible
-        mots = data;
+        mots_2 = data;
     })
     .catch(error => {
         // Gérer l'erreur de chargement des données ici
-        console.error('Erreur lors du chargement des données:', error);
+        console.error('Erreur lors du chargement des données A VALIDER:', error);
     });
 
     // Fonction pour sélectionner aléatoirement des éléments
@@ -4053,7 +4053,7 @@ function compterMot() {
         } else {
                     // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
         const nouveauMot = {mot: motSaisi, nombre: 1, valide: "non" };
-        mots.push(nouveauMot); // Ajouter à la liste locale
+        mots_2.push(nouveauMot); // Ajouter à la liste locale
         document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
 
         // Mettre à jour le fichier JSON avec le nouveau mot
@@ -4097,7 +4097,7 @@ function ajouterNouveauMot(nouveauMot) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Mot ajouté avec succès:', data.message);
+            console.log('Mot ajouté avec succès dans "à valider":', data.message);
         })
         .catch(error => {
             console.error('Erreur lors de l\'ajout du mot au fichier JSON:', error);
