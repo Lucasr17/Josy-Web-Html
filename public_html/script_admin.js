@@ -64,8 +64,6 @@ function chargerMots(fichier, listeId, motsArray) {
             afficherErreur(`Impossible de charger ${fichier}: ${error.message}`, listeId);
         });
 
-         // Rafraîchir la page après ajout
-    location.reload();
 }
 
 
