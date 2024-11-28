@@ -25,7 +25,7 @@ app.post('/update-json', (req, res) => {
 });
 
 // Endpoint pour mettre à jour le fichier JSON
-app.post('/update-json', (req, res) => {
+app.post('/update-json-2', (req, res) => {
     const updatedData = req.body;
     const filePath = path.join(__dirname, 'public_html', 'motsJOSY_A_VALIDER.json');
 
