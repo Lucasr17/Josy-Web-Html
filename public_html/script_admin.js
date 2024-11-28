@@ -123,6 +123,7 @@ function supprimerMot() {
         sauvegarderFichier_2('motsJOSY_A_VALIDER.json', motsAValider);
     } else if (selectedWord.source === 'VALIDES') {
         // Le mot vient de motsJOSY.json
+        motsAValider = motsAValider.filter(mot => mot.mot !== selectedWord.mot);
         sauvegarderFichier('motsJOSY.json', selectedWord.mot);
     }
 
