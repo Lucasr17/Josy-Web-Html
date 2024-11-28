@@ -19,6 +19,21 @@ header {
     color: var(--Color_2);
 }
 
+button {
+    background-color: #ffffff;
+    color: #202020;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+
 h1 {
     margin: 0;
     font-size: 2rem;
