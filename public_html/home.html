@@ -4088,8 +4088,8 @@ function chargerJSON_2() {
     .then(response => response.json())
         .then(data => {
             console.log('Données chargées depuis motsJOSY_A_VALIDER.json:', data);
-            mots = data;
-            return mots; // Retourne les données pour les utiliser plus tard
+            mots_2 = data;
+            return mots_2; // Retourne les données pour les utiliser plus tard
         })
         .catch(error => {
             console.error('Erreur de chargement des données "A VALIDER":', error);
