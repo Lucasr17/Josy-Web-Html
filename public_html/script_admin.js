@@ -68,7 +68,7 @@ function validerMot() {
     if (!selectedWord) return alert('Veuillez sélectionner un mot.');
     motsAValider = motsAValider.filter(mot => mot !== selectedWord);
 
-    const nouveauMot = { mot: selectedWord.mot, nombre: 1, valide: "oui" };
+    const nouveauMot = { mot: selectedWord.mot, nombre: 1};
     motsJOSY.push(nouveauMot);
 
     sauvegarderFichier('motsJOSY.json', motsJOSY);
