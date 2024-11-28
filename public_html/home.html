@@ -4025,7 +4025,7 @@ function compterMot() {
 
         } else {
                     // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
-        const nouveauMot = { mot: motSaisi, nombre: 1, valide: "non" };
+        const nouveauMot = {mot: motSaisi, nombre: 1, valide: "non" };
         mots.push(nouveauMot); // Ajouter à la liste locale
         document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
 
@@ -4061,7 +4061,7 @@ function ajouterNouveauMot(nouveauMot) {
         data.push(nouveauMot);
 
         // Envoie les données mises à jour au serveur pour les sauvegarder
-        return fetch('/update-json', {
+        return fetch('/update-json-2', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
