@@ -4033,11 +4033,12 @@ function compterMot1() {
    
 
     // Fonction pour compter le mot saisi
-function compterMot() {
+    async function compterMot() {
+        try {
+        // Attendre le chargement des données JSON
+        const mots = await chargerJSON();
 
 
-    chargerJSON()
-    
      //   document.getElementById("textContainer").textContent = "3"
         const motSaisi = document.getElementById("motInput").value.trim(); //.value.toLowerCase().trim();
 
@@ -4067,7 +4068,13 @@ function compterMot() {
 
         // Effacer le champ de saisie après comptage
         document.getElementById("motInput").value = "";
+       
+     }catch (error) {
+        console.error('Erreur lors de la gestion du mot saisi:', error);
+        document.getElementById("resultat").textContent = "Une erreur est survenue. Veuillez réessayer.";
     }
+
+}
 
 
 // Fonction pour charger les données JSON existantes
