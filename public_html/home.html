@@ -4024,7 +4024,14 @@ function compterMot() {
             mettreAJourJSON(motSaisi, motTrouve.nombre);
 
         } else {
-            ajouterDansListeAValider(motSaisi);
+                    // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
+        const nouveauMot = { mot: motSaisi, nombre: 1, valide: "non" };
+        mots.push(nouveauMot); // Ajouter à la liste locale
+        document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
+
+        // Mettre à jour le fichier JSON avec le nouveau mot
+        ajouterNouveauMot(nouveauMot);
+   
             //document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} n'est pas dans la liste.`;
         }
 
@@ -4048,26 +4055,29 @@ function chargerJSON() {
         });
 }
 
-// Fonction pour ajouter ou mettre à jour un mot dans motsJOSY_A_VALIDER.json
-function ajouterDansListeAValider(motSaisi) {
-    chargerJSON('motsJOSY_A_VALIDER.json').then(listeAValider => {
-        const motExistant = listeAValider.find(item => item.mot === motSaisi);
+function ajouterNouveauMot(nouveauMot) {
+    chargerJSON().then(data => {
+        // Ajouter le nouveau mot aux données
+        data.push(nouveauMot);
 
-        if (motExistant) {
-            motExistant.nombre++; // Incrémenter le compteur
-            
-        } else {
-            // Ajouter le mot avec un compteur initial de 1
-            listeAValider.push({ mot: motSaisi, nombre: 1 });
-        }
-
-
-        document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
-
-        // Mettre à jour le fichier motsJOSY_A_VALIDER.json
-        mettreAJourJSON('motsJOSY_A_VALIDER.json', listeAValider);
+        // Envoie les données mises à jour au serveur pour les sauvegarder
+        return fetch('/update-json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) // Envoie les données JSON mises à jour
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Mot ajouté avec succès:', data.message);
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'ajout du mot au fichier JSON:', error);
+        });
     });
 }
+
         // Fonction pour mettre à jour le fichier JSON
 function mettreAJourJSON(updated_mot,updated_nb ) {
 chargerJSON().then(data => {
