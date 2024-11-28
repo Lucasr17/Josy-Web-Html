@@ -111,6 +111,9 @@ function validerMot() {
     selectedWord = null;
     chargerMots('motsJOSY_A_VALIDER.json', 'motsAValiderList', motsAValider);
     chargerMots('motsJOSY.json', 'motsJOSYList', motsJOSY);
+
+      // Rafraîchir la page après ajout
+      location.reload();
 }
 
 // Supprimer un mot de motsJOSY_A_VALIDER.json
