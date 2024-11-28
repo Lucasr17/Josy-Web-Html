@@ -22,9 +22,22 @@ app.post('/update-json', (req, res) => {
     fs.writeFile('../motsJOSY.json', JSON.stringify(updatedData, null, 2), 'utf8', (err) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('EErreur lors de la sauvegarde du fichier JSON');
+            return res.status(500).send('Erreur lors de la sauvegarde du fichier JSON');
         }
-        res.json({ message: 'FFichier JSON mis à jour avec succès' });
+        res.json({ message: 'Fichier JSON "valide" mis à jour avec succès' });
+    });
+});
+
+// Route pour mettre à jour le fichier JSON
+app.post('/update-json-2', (req, res) => {
+    const updatedData = req.body;
+
+    fs.writeFile('../motsJOSY_A_VALIDER.json', JSON.stringify(updatedData, null, 2), 'utf8', (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Erreur lors de la sauvegarde du fichier JSON');
+        }
+        res.json({ message: 'Fichier JSON "à valider" mis à jour avec succès' });
     });
 });
 
