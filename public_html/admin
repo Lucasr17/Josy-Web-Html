@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOSY Admin</title>
+    <link rel="stylesheet" href="styles_admin.css">
+</head>
+<body>
+    <header>
+        <h1>JOSY Admin</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="box" id="boxLeft">
+                <h2>Mots dans motsJOSY.json</h2>
+                <ul id="motsJOSYList"></ul>
+            </div>
+            <div class="box" id="boxRight">
+                <h2>Mots à valider</h2>
+                <ul id="motsAValiderList"></ul>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="validerBtn">Valider</button>
+            <button id="supprimerBtn">Supprimer</button>
+        </div>
+    </main>
+    <script src="script_admin.js"></script>
+</body>
+</html>
