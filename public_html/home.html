@@ -44,7 +44,7 @@ body {
   height: 100vh;
   background-color: var(--Color_1);
   display: flex;
-  z-index: 9999;
+  z-index: 11;
  /* cursor: pointer;*/
 }
 
@@ -68,13 +68,13 @@ p {
       transform: translateX(0%);
       top : 24.1vh;
       left : 35%;
-      z-index: 3000;
+      z-index: 12;
     }
 
     .tshirt {
       height: auto;
       width: 42vw;
-      opacity: 0.5;
+      opacity: 0;
       transition: transform 0.3s ease, opacity 0.3s ease;
       position: relative;
       margin-left: -8.5%; /* Chevauchement des t-shirts */
@@ -307,7 +307,7 @@ text {
   left: 60%;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 9998;
 }
 
 /* Style pour la bulle d'information */
@@ -576,6 +576,7 @@ text {
   font-weight: 300;
   position: relative;
 }
+
 
 .modal h2 {
   font-size: 25px;
@@ -922,7 +923,7 @@ text {
             position: relative;
             transform: translateX(100px); /* Initialement placé à droite du bouton principal */
             opacity: 0; /* Initialement invisible */
-            visibility: hidden; /* Cache les boutons initialement */
+            visibility: visible; /* Cache les boutons initialement */
         }
 
         .nav-buttons button:hover {
@@ -1318,8 +1319,8 @@ text {
 
 		.T_shirt_Josy_1 {
             position: fixed;
-            top: 27vh;
-            right: -4vw; /* Position initiale en dehors de l'écran à gauche */
+            top: 10.33vh;
+            right: -4.3vw; /* Position initiale en dehors de l'écran à gauche */
             width : 50vw; 
             opacity: 0; /* L'image est initialement invisible */
             transform: translateX(0) translateY(0); /*  transition: transform 1s ease-in-out;*/
@@ -1327,8 +1328,8 @@ text {
 
         .T_shirt_Josy_1_ {
             position: fixed;
-            top: 30vh;
-            right: 25vw;
+            top: 13.35vh;
+            right: 24.7vw;
             width : 50vw; 
             opacity: 0; /* L'image est initialement invisible */
             transform: translateX(-50) translateY(0); /*  transition: transform 1s ease-in-out;*/
@@ -1941,8 +1942,13 @@ A10,10 0 0 1 500,70 : Arc final courbé à y=70.
              <img src="https://static.wixstatic.com/media/091b9b_fec32b19ccf54130a2d3f1fef45d1e97~mv2.png" class="Pull_Josydole" alt="Image">
              <img src="https://static.wixstatic.com/media/091b9b_3bdbfd96343041d48d7562b22539de94~mv2.png" class="T_shirt_Josyimaginaire" alt="Image">
              <img src="https://static.wixstatic.com/media/091b9b_57b281e336cd450eb873f0aa2a6823c0~mv2.png" class="Casquette_1" alt="Image">
-             <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1" alt="Image">
-             <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1_" alt="Image">
+           <!--  <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1" alt="Image">
+             <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1_" alt="Image"> -->
+
+             <img src="https://static.wixstatic.com/media/091b9b_1c79e407629c4822a118d240d0b92e4d~mv2.png" class="T_shirt_Josy_1" alt="Image">
+             <img src="https://static.wixstatic.com/media/091b9b_1c79e407629c4822a118d240d0b92e4d~mv2.png" class="T_shirt_Josy_1_" alt="Image">
+
+             
 
                
 
@@ -2132,17 +2138,16 @@ opacitys = 0;
 
 //debut t shirt cintre
 
+
 gsap.fromTo("#T_shirt_1", {
     scale: 1,  // Réduit la largeur à zéro au début
     x: variables,//
     y: 0,
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-    opacity: 1
 }, {
     scale: 1,  // Agrandit la largeur à sa taille originale
     x: 0,
     y: 0,
-    opacity: 1,
     scrollTrigger: {
         trigger: document.body,
         start: "5000px",
@@ -2338,9 +2343,7 @@ gsap.fromTo("#T_shirt_1", {
     x: variables,// sreen_largeur * 0.40 + 60,
     y: 0,
    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-    opacity: 1
 }, {
-    opacity: 1,
     x: variables + 0.01,// sreen_largeur * 0.40 + 60,
     scrollTrigger: {
         trigger: document.body,
@@ -2513,6 +2516,18 @@ gsap.fromTo("#T_shirt_10", {
     }
 });
 
+gsap.fromTo("#T_shirt_1", {
+    opacity: 0
+}, {
+    opacity: 1,
+    scrollTrigger: {
+        trigger: document.body,
+        start: "4997px",
+        end: "4998px",
+        scrub: 0,
+        markers: false
+    }
+});
 //fin t shirt cintre
 
 
@@ -2736,6 +2751,8 @@ gsap.fromTo(".box_histoire_6", {
       
     }else{
 
+       // tshirt.style.pointer = "0";
+
         tshirts.forEach((tshirt, index) => {
                 tshirt.addEventListener("mouseover", () => {
                     tshirts.forEach((other, i) => {
@@ -2785,16 +2802,10 @@ gsap.fromTo(".box_histoire_6", {
             } else {
                 text1.style.opacity = "0";
             }
-
-            if (scrollTop >= 4898 && scrollTop <= 5300) {
-                carree3.style.zIndex = "9999";
-            } else {
-                carree3.style.zIndex = "3";
-            }
         
 
-            if (scrollTop >= 4909 && scrollTop <= 5600) {
-                T_shirt_1.style.zIndex = "3010";
+            if (scrollTop >= 4999 && scrollTop <= 5600) {
+              /*  T_shirt_1.style.zIndex = "3010";
                 T_shirt_2.style.zIndex = "3009";
                 T_shirt_3.style.zIndex = "3008";
                 T_shirt_4.style.zIndex = "3007";
@@ -2803,8 +2814,8 @@ gsap.fromTo(".box_histoire_6", {
                 T_shirt_7.style.zIndex = "3004";
                 T_shirt_8.style.zIndex = "3003";
                 T_shirt_9.style.zIndex = "3002";
-                T_shirt_10.style.zIndex = "3001";
-                T_shirt_1.style.opacity = "1"; // Permet les interactions
+                T_shirt_10.style.zIndex = "3001";*/
+                T_shirt_1.style.opacity = "1"; // Permet les interactions*/
                 T_shirt_2.style.opacity = "1";
                 T_shirt_3.style.opacity = "1";
                 T_shirt_4.style.opacity = "1";
@@ -2816,18 +2827,18 @@ gsap.fromTo(".box_histoire_6", {
                 T_shirt_10.style.opacity = "1";
             } else {
                // tshirt.style.pointerEvents = "none"; // Désactive les interactions
-               T_shirt_1.style.zIndex = "1";
-               T_shirt_2.style.zIndex = "0";
-               T_shirt_3.style.zIndex = "0";
-               T_shirt_4.style.zIndex = "0";
-               T_shirt_5.style.zIndex = "0";
-               T_shirt_6.style.zIndex = "0";
-               T_shirt_7.style.zIndex = "0";
-               T_shirt_8.style.zIndex = "0";
-               T_shirt_9.style.zIndex = "0";
-               T_shirt_10.style.zIndex = "0";
+               T_shirt_1.style.zIndex = "10";
+               T_shirt_2.style.zIndex = "9";
+               T_shirt_3.style.zIndex = "8";
+               T_shirt_4.style.zIndex = "7";
+               T_shirt_5.style.zIndex = "6";
+               T_shirt_6.style.zIndex = "5";
+               T_shirt_7.style.zIndex = "4";
+               T_shirt_8.style.zIndex = "3";
+               T_shirt_9.style.zIndex = "2";
+               T_shirt_10.style.zIndex = "1";
 
-               T_shirt_1.style.opacity = "0";
+              T_shirt_1.style.opacity = "0";
                T_shirt_2.style.opacity = "0";
                T_shirt_3.style.opacity = "0";
                T_shirt_4.style.opacity = "0";
@@ -2880,7 +2891,7 @@ tshirt.removeEventListener("mouseleave", handleMouseLeave);
                 descriptif_tshirt.style.opacity = "0";
             }
 
-            if (scrollTop >= 4450 && scrollTop <= 4910) {
+            if (scrollTop >= 4450 && scrollTop <= 4999) {
                 T_shirt_Josy_1_.style.opacity = "1";
             } else {
                 T_shirt_Josy_1_.style.opacity = "0";
@@ -2994,11 +3005,11 @@ if (scrollTop >= 4450 && scrollTop <= 4900) {
     gsap.fromTo(".T_shirt_Josy_1_", {
         x: sreen_largeur * 0.29,
         y: -22,
-        scale: 1 // Taille initiale
+        scale: 0.7 // Taille initiale
     }, {
         x: 0,
         y: 0, 
-        scale: 1.2, 
+        scale: 0.84, 
         scrollTrigger: {
             trigger: document.body, 
             start: "4500px",  
@@ -3184,6 +3195,7 @@ gsap.fromTo(".T_shirt_Josy_2", {
 });*/
 
 ScrollTrigger.refresh();
+
 //fin refresh 
     });
 
@@ -3316,7 +3328,7 @@ gsap.fromTo(".T_shirt_Josy_1", {
 gsap.fromTo(".T_shirt_Josy_1", {
     x: () => -sreen_largeur,
     y: 500,
-    scale: 1 // Taille initiale à 100%
+    scale: 0.7 // Taille initiale à 100%
 }, {
     x: 0, // Déplacement horizontal sur 80% de la largeur de la fenêtre
     y: 0, // Ajout de l'animation sur l'axe Y
@@ -3511,6 +3523,12 @@ window.addEventListener('scroll', function() {
 
             // Mettre à jour la hauteur de la barre de progression
             document.getElementById('scrollBar').style.height = reverseScrollPercentage + '%';
+
+          /* if (scrollTop > 500){
+
+                document.getElementById('scrollBar').style.height = 0.5 * reverseScrollPercentage + '%';
+
+            }*/
 
 
             // Mettre à jour l'opacité des points
