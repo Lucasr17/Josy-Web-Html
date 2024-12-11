@@ -2715,14 +2715,14 @@ gsap.fromTo(".box_histoire_6", {
 
         } else  if (scrollTop >= 4900 && scrollTop < 5300) {
 
-    function disableMouseOver() {
+/*    function disableMouseOver() {
     tshirts.forEach((tshirt) => {
         tshirt.removeEventListener("mouseover", handleMouseOver);
         tshirt.removeEventListener("mouseleave", handleMouseLeave);
     });
-}
+}*/
 
-            tshirts.forEach((tshirt, index) => {
+          /*  tshirts.forEach((tshirt, index) => {
                 tshirt.addEventListener("mouseover", () => {
                     tshirts.forEach((other, i) => {
                         if (i > index) {
@@ -2738,14 +2738,14 @@ gsap.fromTo(".box_histoire_6", {
                     });
                 });
 
-                tshirt.addEventListener("mouseleave", () => {
+               tshirt.addEventListener("mouseleave", () => {
                     tshirts.forEach((other) => {
                         other.style.transform = `translateX(0px)`;
                         other.style.opacity = "1";
                     });
                 });
 
-            });
+            });*/
             
 
       
@@ -2753,7 +2753,7 @@ gsap.fromTo(".box_histoire_6", {
 
        // tshirt.style.pointer = "0";
 
-        tshirts.forEach((tshirt, index) => {
+      /*  tshirts.forEach((tshirt, index) => {
                 tshirt.addEventListener("mouseover", () => {
                     tshirts.forEach((other, i) => {
                         if (i > index) {
@@ -2783,7 +2783,7 @@ gsap.fromTo(".box_histoire_6", {
         tshirt.removeEventListener("mouseover", handleMouseOver);
         tshirt.removeEventListener("mouseleave", handleMouseLeave);
     });
-}
+}*/
 
     }
     };
@@ -3911,6 +3911,8 @@ function chargerDonnees() {
 }
 
 function chargerDonnees_2() {
+    let mots_2 = [];
+
     return fetch('motsJOSY_A_VALIDER.json')
         .then(response => response.json())
         .then(data => {
@@ -4075,7 +4077,7 @@ function compterMot1() {
         } else {
                     // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
         const nouveauMot = {mot: motSaisi, nombre: 1, valide: "non" };
-        mots_2.push(nouveauMot); // Ajouter à la liste locale
+       // mots_2.push(nouveauMot); // Ajouter à la liste locale
         document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
 
         // Mettre à jour le fichier JSON avec le nouveau mot
