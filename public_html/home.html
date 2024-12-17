@@ -4064,9 +4064,16 @@ function compterMot1() {
      //   document.getElementById("textContainer").textContent = "3"
         const motSaisi = document.getElementById("motInput").value.trim(); //.value.toLowerCase().trim();
 
+
+            // Supprimer les accents
+    let motSansAccent = motSaisi.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    // Supprimer les caractères spéciaux et remplacer par une chaîne vide
+    let motNettoye = motSansAccent.replace(/[^a-zA-Z0-9\s]/g, "").trim();
+  
+
         // Recherche du mot dans la liste
     //    document.getElementById("textContainer").textContent = "4"
-        const motTrouve = mots.find(item => (item.mot) === (motSaisi));
+        const motTrouve = mots.find(item => (item.mot) === (motNettoye));
      //   document.getElementById("textContainer").textContent = "5"
 
         if (motTrouve) {
@@ -4074,7 +4081,7 @@ function compterMot1() {
             document.getElementById("resultat").textContent = `Vous êtes la ${motTrouve.nombre}ème personne à penser à  JOSY${motSaisi}.`;
 
             // Mettre à jour le fichier JSON avec la nouvelle valeur
-            mettreAJourJSON(motSaisi, motTrouve.nombre);
+            mettreAJourJSON(motNettoye, motTrouve.nombre);
 
         } else if (motSaisi == "") {
 
@@ -4083,7 +4090,7 @@ function compterMot1() {
 
         } else {
                     // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
-        const nouveauMot = {mot: motSaisi, nombre: 1, valide: "non" };
+        const nouveauMot = {mot: motNettoye, nombre: 1, valide: "non" };
        // mots_2.push(nouveauMot); // Ajouter à la liste locale
         document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
 
