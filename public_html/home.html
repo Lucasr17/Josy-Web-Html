@@ -4054,6 +4054,8 @@ function compterMot1() {
 
     // Fonction pour compter le mot saisi
     async function compterMot() {
+
+
         try {
         // Attendre le chargement des données JSON
         const mots = await chargerJSON();
@@ -4074,6 +4076,11 @@ function compterMot1() {
             // Mettre à jour le fichier JSON avec la nouvelle valeur
             mettreAJourJSON(motSaisi, motTrouve.nombre);
 
+        } else if (motSaisi == "") {
+
+            document.getElementById("resultat").textContent = `Veuillez saisir un mot`;
+
+
         } else {
                     // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
         const nouveauMot = {mot: motSaisi, nombre: 1, valide: "non" };
@@ -4093,6 +4100,7 @@ function compterMot1() {
         console.error('Erreur lors de la gestion du mot saisi:', error);
         document.getElementById("resultat").textContent = "Une erreur est survenue. Veuillez réessayer.";
     }
+    
 
 }
 
