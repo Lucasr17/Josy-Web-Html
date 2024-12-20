@@ -3816,61 +3816,113 @@ function ToBoutique() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
     // Sélectionner les éléments
     const overlay = document.getElementById('overlay');
-    const introImage = document.querySelector('.intro-image');
+    const introImage = document.querySelector('.photodrone');
     const verticalline = document.querySelector('.vertical-line');
-    
 
-    // Créer la timeline d'animation avec GSAP
-    const tl = gsap.timeline();
+    // Précharger l'image d'intro
+    const preloadImage = new Image();
+    preloadImage.src = introImage.src; // Assurez-vous que la source de l'image est bien définie dans votre HTML
 
-    tl.to(verticalline, { 
-        duration: 0.5, 
-        height: '40vh', // Largeur de l'image à 30% de la largeur de la vue
-        opacity: 1, 
-        ease: 'power2.inOut' 
-    });
-    // Animation pour montrer l'image
-    tl.to(introImage, { 
-        duration: 1.2, 
-        left: '33%',
-        ease: 'power2.inOut' 
-    });
+    // Lancer les animations après le chargement de l'image
+    preloadImage.onload = () => {
+        console.log("Image chargée !");
+        
+        // Créer la timeline d'animation avec GSAP
+        const tl = gsap.timeline();
 
-    // Pause pour que l'image soit visible
-    tl.to({}, { duration: 1 });
-
+        tl.to(verticalline, { 
+            duration: 0.5, 
+            height: '40vh', 
+            opacity: 1, 
+            ease: 'power2.inOut' 
+        });
 
         // Animation pour montrer l'image
         tl.to(introImage, { 
-        duration: 1.2, 
-        left: '-20%',
-        ease: 'power2.inOut' 
-    });
+            duration: 1.2, 
+            left: '33%',
+            ease: 'power2.inOut' 
+        });
 
-    tl.to({}, { duration: 0.05 });
+        // Pause pour que l'image soit visible
+        tl.to({}, { duration: 1 });
 
-    tl.to(verticalline, { 
-        duration: 0.5, 
-        height: '0vh', // Largeur de l'image à 30% de la largeur de la vue
-        opacity: 1, 
-        ease: 'power2.inOut' 
-    });
+        // Animation pour cacher l'image
+        tl.to(introImage, { 
+            duration: 1.2, 
+            left: '-20%',
+            ease: 'power2.inOut' 
+        });
 
-    // Diminuer progressivement l'opacité de l'overlay pour révéler le contenu
-    tl.to(overlay, { 
-        duration: 0.8, 
-        opacity: 0, 
-        onComplete: () => {
-            // Masquer complètement l'overlay
-            overlay.style.display = 'none';
-            // Permettre le défilement
-            document.body.style.overflow = 'auto';
-        }
-    });
+        tl.to({}, { duration: 0.05 });
 
+        // Réduire la hauteur de la ligne verticale
+        tl.to(verticalline, { 
+            duration: 0.5, 
+            height: '0vh', 
+            opacity: 1, 
+            ease: 'power2.inOut' 
+        });
+
+        // Diminuer progressivement l'opacité de l'overlay pour révéler le contenu
+        tl.to(overlay, { 
+            duration: 0.8, 
+            opacity: 0, 
+            onComplete: () => {
+                // Masquer complètement l'overlay
+                overlay.style.display = 'none';
+                // Permettre le défilement
+                document.body.style.overflow = 'auto';
+            }
+        });
+    };
+
+    preloadImage.onerror = () => {
+        console.error("Erreur lors du chargement de l'image.");
+        // Si le chargement échoue, on peut lancer les animations sans attendre l'image
+        const tl = gsap.timeline();
+
+        tl.to(verticalline, { 
+            duration: 0.5, 
+            height: '40vh', 
+            opacity: 1, 
+            ease: 'power2.inOut' 
+        });
+
+        tl.to(introImage, { 
+            duration: 1.2, 
+            left: '33%',
+            ease: 'power2.inOut' 
+        });
+
+        tl.to({}, { duration: 1 });
+
+        tl.to(introImage, { 
+            duration: 1.2, 
+            left: '-20%',
+            ease: 'power2.inOut' 
+        });
+
+        tl.to({}, { duration: 0.05 });
+
+        tl.to(verticalline, { 
+            duration: 0.5, 
+            height: '0vh', 
+            opacity: 1, 
+            ease: 'power2.inOut' 
+        });
+
+        tl.to(overlay, { 
+            duration: 0.8, 
+            opacity: 0, 
+            onComplete: () => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    };
 });
 
 
