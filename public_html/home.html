@@ -2939,11 +2939,6 @@ tshirt.removeEventListener("mouseleave", handleMouseLeave);
                 T_shirt_Josyimaginaire.style.opacity = "0";
             }*/
 
-            if (scrollTop >= 6850 && scrollTop <= 8000) {
-                contact_form.style.opacity = "1";
-            } else {
-                contact_form.style.opacity = "0";
-            }
             
 
         });
@@ -3407,19 +3402,6 @@ gsap.fromTo(".gallery2-container", {
             trigger: document.body, // Déclencher par rapport au body
             start: "6350px top", // Déclenche à 2680px du haut de la page
             end: "6500px top",   // Fin à 4350px du haut de la page
-            scrub: 0,  
-            markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
-        }
-    });
-
-gsap.fromTo(".contact_form", {
-        y : 1000
-    }, {
-        y : 0,
-        scrollTrigger: {
-            trigger: document.body, // Déclencher par rapport au body
-            start: "6820px top", // Déclenche à 2680px du haut de la page
-            end: "7000px top",   // Fin à 4350px du haut de la page
             scrub: 0,  
             markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
         }
