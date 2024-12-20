@@ -1051,7 +1051,7 @@ text {
 
     @font-face {
     font-family: 'Warsaw Gothic';
-    src: url('../fonts/WarsawGothic3D.woff2') format('woff2'),
+    src: /*url('../fonts/WarsawGothic3D.woff2') format('woff2'),*/
     url('../fonts/WarsawGothic3D.woff') format('woff'),
     url('../fonts/WarsawGothic3D.otf') format('opentype');
     font-weight: normal;
@@ -1284,7 +1284,7 @@ text {
             color: var(--Color_2);
             font-size: 25px;
        
-        }
+        }*/
 
         .photodrone {
             position: fixed; /* Position fixe pour l'image */
@@ -2939,11 +2939,11 @@ tshirt.removeEventListener("mouseleave", handleMouseLeave);
                 T_shirt_Josyimaginaire.style.opacity = "0";
             }*/
 
-            if (scrollTop >= 6850 && scrollTop <= 8000) {
+        /*    if (scrollTop >= 6850 && scrollTop <= 8000) {
                 contact_form.style.opacity = "1";
             } else {
                 contact_form.style.opacity = "0";
-            }
+            }*/
             
 
         });
@@ -3370,7 +3370,7 @@ gsap.fromTo(".photodrone", {
         }
     });
 
-gsap.fromTo("photodrone_text", {
+gsap.fromTo(".photodrone_text", {
         y : 1000
     }, {
         y : 0,
@@ -3538,7 +3538,7 @@ window.addEventListener('scroll', function() {
 
 
  // Initialiser la barre de progression et la visibilité des points au chargement de la page
-window.dispatchEvent(new Event('scroll'));
+//window.dispatchEvent(new Event('scroll'));
 
 function updatePointsVisibility(scrollTop) {
     // Tableau des points avec leurs positions en pixels
@@ -3567,7 +3567,7 @@ function updatePointsVisibility(scrollTop) {
         }
 
         // Initialiser la barre de progression au chargement de la page
-        window.dispatchEvent(new Event('scroll'));
+  //      window.dispatchEvent(new Event('scroll'));
 
         // JavaScript pour basculer le menu
         document.getElementById('menuToggle').addEventListener('click', function() {
@@ -4000,7 +4000,7 @@ chargerDonnees_2()
 
 
     // Appeler la fonction initiale au chargement de la page
-    updateRandomElements();
+    //updateRandomElements();
 
     // Actualiser les éléments toutes les 20 secondes
     setInterval(updateRandomElements, 20100); // 20 secondes en millisecondes (20 * 1000)
