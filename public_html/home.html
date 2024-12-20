@@ -1284,7 +1284,7 @@ text {
             color: var(--Color_2);
             font-size: 25px;
        
-        }*/
+        }
 
         .photodrone {
             position: fixed; /* Position fixe pour l'image */
@@ -3370,7 +3370,7 @@ gsap.fromTo(".photodrone", {
         }
     });
 
-gsap.fromTo(".photodrone_text", {
+gsap.fromTo("photodrone_text", {
         y : 1000
     }, {
         y : 0,
@@ -3817,7 +3817,7 @@ function ToBoutique() {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    console.log("chargement en cours ...");
+    console.log("chargement en cours .... !");
 
     // Sélectionner les éléments
     const overlay = document.getElementById('overlay');
