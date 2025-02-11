@@ -2081,7 +2081,7 @@ container.appendChild(p);
 // Initialiser les données et mettre à jour les éléments
 fetchData().then(() => {
 updateRandomElements();
-setInterval(updateRandomElements, 20000); // Actualiser toutes les 20 secondes
+setInterval(updateRandomElements, 40000); // Actualiser toutes les 20 secondes
 });
 
 });
@@ -2091,7 +2091,7 @@ setInterval(updateRandomElements, 20000); // Actualiser toutes les 20 secondes
 updateRandomElements();
 
 // Actualiser les éléments toutes les 20 secondes
-setInterval(updateRandomElements, 20100); // 20 secondes en millisecondes (20 * 1000)
+setInterval(updateRandomElements, 40100); // 20 secondes en millisecondes (20 * 1000)
 
 
 
