@@ -262,7 +262,7 @@ opacity: 0;
                                display: flex; 
                                justify-content: center; 
                                align-items: center; 
-                               z-index: 9999; 
+                               z-index: 99999; 
                                opacity: 1; 
                                transition: opacity 1s ease-out;
                              }
@@ -314,16 +314,514 @@ opacity: 0;
             animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
          }
          
-         #modal-container_carte.four + .content {
-             z-index: 1; 
-             animation: blowUpContent .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards; }
-             #modal-container_carte.out .modal-background_carte .modal_carte { animation: blowUpModalTwo .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards; }
-             #modal-container_carte.out + .content { animation: blowUpContentTwo .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards; } 
-             .modal-background_carte { display: table-cell; background: rgba(0, 0, 0, .8); width: 100vw;  /* Largeur du modal en fonction de la taille de la fenêtre */ height: 100vh;  /* Hauteur du modal en fonction de la taille de la fenêtre */ text-align: center; vertical-align: middle; }
-             .modal_carte { background: var(--Color_2); padding: 10px; top: 0vh; left: 15vw; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 3px; font-weight: 300; position: fixed; max-width: 90%;  /* Augmente la largeur maximale */ width: 70vw;  /* Largeur du modal en fonction de la taille de la fenêtre */ height: 85vh;  /* Hauteur du modal en fonction de la taille de la fenêtre */ min-height: 85vh; } .close-button { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #333; padding: 0; line-height: 1; transition: color 0.2s; } .close-button:hover { color: #ff0000; } .modal-image { max-width: 100%; max-height: 100%; margin: auto; display: block; } @keyframes blowUpContent { 0% {  transform: scale(1);  opacity: 1; }  99.9% {  transform: scale(2);  opacity: 0; }  100% {  transform: scale(0); } } @keyframes blowUpContentTwo { 0% {  transform: scale(2);  opacity: 0; }  100% {  transform: scale(1);  opacity: 1; } } @keyframes blowUpModal { 0% {  transform: scale(0); }  100% {  transform: scale(1); } } @keyframes blowUpModalTwo { 0% {  transform: scale(1);  opacity: 1; }  100% {  transform: scale(0);  opacity: 0; } } /* tttttt */#modal-container { position: fixed; display: table; height: 100%; width: 100%; top: 0; left: 0; transform: scale(0); z-index: 9999; }
+#modal-container_carte.four + .content {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+}
+
+#modal-container_carte.out .modal-background_carte .modal_carte {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+}
+
+#modal-container_carte.out + .content {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+}
+
+.modal-background_carte {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal_carte {
+    background: var(--Color_2);
+    padding: 10px;
+    top: 0vh;
+    left: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-weight: 300;
+    position: fixed;
+    max-width: 90%;
+    width: 70vw;
+    height: 85vh;
+    min-height: 85vh;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #ff0000;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+}
+
+@keyframes blowUpContent {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    99.9% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes blowUpContentTwo {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes blowUpModal {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes blowUpModalTwo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+#modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 9999;
+}
+
+#modal-container.one {
+    transform: scaleY(0.01) scaleX(0);
+    animation: unfoldIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.one .modal-background .modal {
+    transform: scale(0);
+    animation: zoomIn 0.3s 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.one .modal-background .modal p {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typeWriter 2s steps(40) forwards;
+}
+
+#modal-container.out {
+    transform: scale(1);
+    animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal {
+    background: var(--Color_2);
+    bottom: 3vh;
+    left: 0vw;
+    padding: 20px;
+    height: 35vh;
+    width: 50vw;
+    display: inline-block;
+    border-radius: 10px;
+    font-weight: 300;
+    position: relative;
+}
+
+.modal h2 {
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+
+.modal p {
+    margin-top: 7px;
+    font-size: 18px;
+    line-height: 22px;
+    font-style: italic;
+}
+
+.modal .buttone {
+    display: inline-block;
+    text-align: center;
+    padding: 6px 20px;
+    margin: 10px;
+    font-size: 18px;
+    background-color: var(--Color_1);
+    color: var(--Color_2);
+    border: 2px solid var(--Color_2);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 3000;
+}
+
+.modal .buttone:hover {
+    background-color: var(--Color_3);
+    color: var(--Color_2);
+}
+
+.modal input[type="text"], .modal button {
+    margin-top: 20px;
+    z-index: 99000;
+    position: relative;
+}
+
+.modal button {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    background-color: #6a5acd;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 99000;
+    position: relative;
+}
+
+.modal button:hover {
+    background-color: #8a2be2;
+}
+
+#button-open-game {
+    position: absolute;
+    right: 40px;
+    bottom: 2px;
+    color: var(--Color_1);
+    padding: 3px 3px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 99000;
+}
+
+#button-open-game:hover {
+    color: var(--Color_3);
+}
+
+.modal .modal-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+
+
+.modal_jeu_2 {
+    background: var(--Color_2);
+    bottom: -1vh;
+    padding: 20px;
+    height: 56vh;
+    width: 80vw;
+    display: inline-block;
+    border-radius: 10px;
+    font-weight: 300;
+    position: relative;
+}
+
+@keyframes typeWriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+
+.button_carte {
+    position: fixed;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 10px;
+    margin: 10px;
+    top: 85%;
+    left: 50%;
+    font-size: 18px;
+    background-color: var(--Color_1);
+    color: rgb(79, 199, 255);
+    border: 2px solid var(--Color_1);
+    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.button_carte:hover {
+    text-decoration: underline;
+}
+
+@keyframes unfoldIn {
+    0% { transform: scaleY(.005) scaleX(0); }
+    50% { transform: scaleY(.005) scaleX(1); }
+    100% { transform: scaleY(1) scaleX(1); }
+}
+
+@keyframes unfoldOut {
+    0% { transform: scaleY(1) scaleX(1); }
+    50% { transform: scaleY(.005) scaleX(1); }
+    100% { transform: scaleY(.005) scaleX(0); }
+}
+
+@keyframes zoomIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes zoomOut {
+    0% { transform: scale(1); }
+    100% { transform: scale(0); }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+            
+.scroll-bar-container {
+    position: fixed;
+    right: 10px;
+    top: 90px;  /* Marge en haut */
+    bottom: 60px;  /* Marge en bas */
+    width: 5px;  /* Largeur de la barre de défilement */
+    background-color: var(--Color_3);  /* Couleur violette */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 10px;  /* Arrondir toute la barre de défilement */
+    z-index: 9998;
+  }
+  
+  .scroll-bar {
+    width: 100%;  /* Largeur maximale pour la barre de progression */
+    height: 0%;  /* Hauteur initiale de la barre de progression */
+    background-color: #ddd;  /* Couleur de fond gris */
+    transition: height 0.2s;  /* Transition pour la progression */
+    border-radius: 10px 10px 10px 10px;  /* Arrondir le haut et le bas de la barre de progression */
+  }
+  
+  .scroll-point {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f2d3ff;  /* Couleur des points (tomate) */
+    opacity: 0;  /* Points initialement invisibles */
+    transition: opacity 0.2s;  /* Transition pour l'opacité */
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    display: none;
+    position: absolute;
+    right: 19px;  /* Positionnement à droite des points */
+    background-color: #333;
+    color: var(--Color_2);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  
+  .scroll-point:hover .tooltip {
+    display: block;
+  }
+  
+  #scroll-position {
+    opacity: 100%;
+    position: fixed;
+    font-family: 'Poppins';
+    transform: translate(-50%, -50%);  /* Centrer l'image horizontalement et verticalement */
+    top: 10px;
+    right: 50%;
+    background-color: rgba(205, 255, 255, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 9998;
+  }
+  
+  .carree {
+    position: fixed;
+    opacity: 100%;
+    top: 16px;
+    right: 0px;
+    width: 40px;
+    height: 35px;
+    background-color: var(--Color_1);
+    display: flex;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  .menu-toggle {
+    position: fixed;
+    opacity: 100%;
+    top: 16px;
+    right: 10px;
+    width: 25px;
+    height: 35px;
+    background-color: var(--Color_1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1002;
+  }
+  
+  .menu-toggle div {
+    width: 20px;
+    height: 2px;
+    background-color: var(--Color_2);
+    margin: 3px 0;
+    transition: 0.4s;
+    z-index: 1002;
+  }
+  
+  /* Style pour la navigation */
+  .nav-buttons {
+    display: flex;
+    position: fixed;
+    top: 20px;
+    right: 50px;
+    flex-direction: row-reverse;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .nav-buttons button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: var(--Color_1);
+    border: none;
+    border-radius: 5px;
+    color: var(--Color_2);
+    cursor: pointer;
+    transition: transform 1.0s, opacity 0.8s;
+    position: relative;
+    transform: translateX(100px);  /* Initialement placé à droite du bouton principal */
+    opacity: 0;  /* Initialement invisible */
+    visibility: visible;  /* Cache les boutons initialement */
+  }
+  
+  .nav-buttons button:hover {
+    background-color: var(--Color_3);
+  }
+  
+  /* Quand le menu est affiché */
+  .show-menu .nav-buttons button {
+    transform: translateX(0);  /* Déplacement vers la position finale */
+    opacity: 1;  /* Devenir visible */
+    visibility: visible;  /* Rend les boutons visibles */
+  }
+  
+  /* Ajout des délais de transition */
+  .show-menu .nav-buttons button:nth-child(1) {
+    transition-delay: 0.15s;
+  }
+  
+  .show-menu .nav-buttons button:nth-child(2) {
+    transition-delay: 0.25s;
+  }
+  
+  .show-menu .nav-buttons button:nth-child(3) {
+    transition-delay: 0.35s;
+  }
+  
+  .show-menu .nav-buttons button:nth-child(4) {
+    transition-delay: 0.45s;
+  }
+  
+  .show-menu .nav-buttons button:nth-child(5) {
+    transition-delay: 0.55s;
+  }
+  
+  /* Disparition avec des délais inversés */
+  .hide-menu .nav-buttons button:nth-child(1) {
+    transition-delay: 0.55s;
+  }
+  
+  .hide-menu .nav-buttons button:nth-child(2) {
+    transition-delay: 0.45s;
+  }
+  
+  .hide-menu .nav-buttons button:nth-child(3) {
+    transition-delay: 0.35s;
+  }
+  
+  .hide-menu .nav-buttons button:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+  
+  .hide-menu .nav-buttons button:nth-child(5) {
+    transition-delay: 0.15s;
+  }
+  
+            /* Media query pour mobile */
              
-             #modal-container.one { transform: scaleY(0.01) scaleX(0); animation: unfoldIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;  .modal-background .modal {  transform: scale(0);  animation: zoomIn 0.3s 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;   p {   overflow: hidden;   white-space: nowrap;   width: 0;   animation: typeWriter 2s steps(40) forwards; } } } #modal-container.out { transform: scale(1); animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;  .modal-background .modal {  animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; } } .modal-background { display: table-cell; background: rgba(0, 0, 0, 0.8); text-align: center; vertical-align: middle; } .modal { background: var(--Color_2); padding: 35px; height: 300px; width: 550px; min-width: 550px; display: inline-block; border-radius: 10px; font-weight: 300; position: relative; } .modal h2 { font-size: 25px; line-height: 25px; margin-bottom: 35px; } .modal p { margin-top: 7px; font-size: 18px; line-height: 22px; font-style: italic;  /* Ajoute cette ligne pour rendre le texte en italique */ } .modal .buttone { display: inline-block; text-align: center; padding: 6px 20px; margin: 10px; font-size: 18px; background-color: var(--Color_1); color: var(--Color_2); border: 2px solid var(--Color_2); border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, .3); cursor: pointer; transition: background-color 0.3s, color 0.3s; z-index: 3000; opacity: 1;  &:hover {  background-color: var(--Color_3);  color: var(--Color_2); } } .modal input[type="text"], .modal button { margin-top: 20px;  /* Augmenté pour espacement */ z-index: 99000;  /* Index élevé pour assurer la visibilité */ position: relative;  /* Pour gérer le z-index */ } .modal button { margin-top: 30px; margin-bottom: 10px; background-color: #6a5acd;  /* Violet */ color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; z-index: 99000;  /* Index élevé pour assurer la visibilité */ position: relative;  /* Pour gérer le z-index */ } .modal button:hover { background-color: #8a2be2;  /* Violet plus foncé au survol */ } #button-open-game { position: absolute;  /* Pour gérer le z-index */ right: 40px; bottom: 2px; color: var(--Color_1); padding: 3px 3px; border: none; border-radius: 5px; cursor: pointer; transition: color 0.3s ease; z-index: 99000;  /* Index élevé pour assurer la visibilité */ } #button-open-game:hover { color: var(--Color_3);  /* Violet plus foncé au survol */ } .modal .modal-svg { position: absolute; top: 0; left: 0; height: 100%; width: 100%; border-radius: 3px; } @keyframes typeWriter { from {  width: 0; }  to {  width: 100%; } } .button_carte { position: fixed;  /* Position fixe pour l'image */ display: inline-block; text-align: center; padding: 6px 10px; margin: 10px; top: 85%;  /* Placer l'image à 180px du haut */ left: 50%;  /* Centrer l'image horizontalement */ font-size: 18px; background-color: var(--Color_1);  /* Couleur de fond noire */ color: rgb(79, 199, 255);  /* Couleur du texte blanc */ border: 2px solid var(--Color_1);  /* Contour blanc de 2 pixels */ border-radius: 8px; transform: translate(-50%, -50%); z-index: 2000; opacity: 0; cursor: pointer;  &:hover {  /* color:var(--Color_3); */  text-decoration: underline; } } @keyframes unfoldIn { 0% {  transform: scaleY(.005) scaleX(0); }  50% {  transform: scaleY(.005) scaleX(1); }  100% {  transform: scaleY(1) scaleX(1); } } @keyframes unfoldOut { 0% {  transform: scaleY(1) scaleX(1); }  50% {  transform: scaleY(.005) scaleX(1); }  100% {  transform: scaleY(.005) scaleX(0); } } @keyframes zoomIn { 0% {  transform: scale(0); }  100% {  transform: scale(1); } } @keyframes zoomOut { 0% {  transform: scale(1); }  100% {  transform: scale(0); } } /* FINNNNN *//* barre de défilement supprimé */::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background-color: #888; border-radius: 5px; } /* fin barre de défilement supprimé *//* Styles pour la barre de défilement personnalisée */.scroll-bar-container { position: fixed; right: 10px; top: 90px;  /* Marge en haut */ bottom: 60px;  /* Marge en bas */ width: 5px;  /* Largeur de la barre de défilement */ background-color: var(--Color_3);  /* Couleur violette */ display: flex; flex-direction: column; justify-content: flex-end; align-items: center; border-radius: 10px;  /* Arrondir toute la barre de défilement */ z-index: 9998; } .scroll-bar { width: 100%;  /* Largeur maximale pour la barre de progression */ height: 0%;  /* Hauteur initiale de la barre de progression */ background-color: #ddd;  /* Couleur de fond gris */ transition: height 0.2s;  /* Transition pour la progression */ border-radius: 10px 10px 10px 10px;  /* Arrondir le haut et le bas de la barre de progression */ } .scroll-point { position: absolute; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background-color: #f2d3ff;  /* Couleur des points (tomate) */ opacity: 0;  /* Points initialement invisibles */ transition: opacity 0.2s;  /* Transition pour l'opacité */ cursor: pointer; } .tooltip { display: none; position: absolute; right: 19px;  /* Positionnement à droite des points */ background-color: #333; color: var(--Color_2); padding: 5px 10px; border-radius: 5px; white-space: nowrap; z-index: 10; } .scroll-point:hover .tooltip { display: block; } #scroll-position { opacity: 100%; position: fixed; font-family: 'Poppins'; transform: translate(-50%, -50%);  /* Centrer l'image horizontalement et verticalement */ top: 10px; right: 50%; background-color: rgba(205, 255, 255, 0.5); padding: 5px 10px; border-radius: 5px; font-size: 14px; z-index: 9998; } .carree { position: fixed; opacity: 100%; top: 16px; right: 0px; width: 40px; height: 35px; background-color: var(--Color_1); display: flex; cursor: pointer; z-index: 1001; } .menu-toggle { position: fixed; opacity: 100%; top: 16px; right: 10px; width: 25px; height: 35px; background-color: var(--Color_1); display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; z-index: 1002; } .menu-toggle div { width: 20px; height: 2px; background-color: var(--Color_2); margin: 3px 0; transition: 0.4s; z-index: 1002; } /* Style pour la navigation */.nav-buttons { display: flex; position: fixed; top: 20px; right: 50px; flex-direction: row-reverse; align-items: center; z-index: 1000; } .nav-buttons button { margin: 0 5px; padding: 5px 10px; background-color: var(--Color_1); border: none; border-radius: 5px; color: var(--Color_2); cursor: pointer; transition: transform 1.0s, opacity 0.8s; position: relative; transform: translateX(100px);  /* Initialement placé à droite du bouton principal */ opacity: 0;  /* Initialement invisible */ visibility: visible;  /* Cache les boutons initialement */ } .nav-buttons button:hover { background-color: var(--Color_3); } /* Quand le menu est affiché */.show-menu .nav-buttons button { transform: translateX(0);  /* Déplacement vers la position finale */ opacity: 1;  /* Devenir visible */ visibility: visible;  /* Rend les boutons visibles */ } /* Ajout des délais de transition */.show-menu .nav-buttons button:nth-child(1) { transition-delay: 0.15s; } .show-menu .nav-buttons button:nth-child(2) { transition-delay: 0.25s; } .show-menu .nav-buttons button:nth-child(3) { transition-delay: 0.35s; } .show-menu .nav-buttons button:nth-child(4) { transition-delay: 0.45s; } .show-menu .nav-buttons button:nth-child(5) { transition-delay: 0.55s; } /* Disparition avec des délais inversés */.hide-menu .nav-buttons button:nth-child(1) { transition-delay: 0.55s; } .hide-menu .nav-buttons button:nth-child(2) { transition-delay: 0.45s; } .hide-menu .nav-buttons button:nth-child(3) { transition-delay: 0.35s; } .hide-menu .nav-buttons button:nth-child(4) { transition-delay: 0.25s; } .hide-menu .nav-buttons button:nth-child(5) { transition-delay: 0.15s; } 
-             /* Media query pour mobile */@media (max-width: 600px) { 
+             @media (max-width: 600px) { 
              .nav-buttons {  flex-direction: column;   /* Les boutons seront empilés verticalement */  right: 20px;   /* Ajuste la position à droite */  top: 50px;   /* Ajuste la position en haut */ }  
              .nav-buttons button {  margin: 5px 0;   /* Plus d'espace entre les boutons verticalement */  transform: translateY(100px);   /* Initialement placé en dessous du bouton principal */ }
              .show-menu .nav-buttons button {  transform: translateY(0);   /* Déplacement vers la position finale verticale */ } } /* Section Instagram */
@@ -473,7 +971,7 @@ body2 {
 }
 
 /* Style des boutons */
-.button_one {
+.button {
     position: fixed; /* Position fixe pour le bouton */
     display: inline-block;
     text-align: center;
@@ -488,17 +986,24 @@ body2 {
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     transform: translate(-50%, -50%);
-    z-index: 9998;
+    z-index: 9999;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
 /* Effet au survol du bouton */
-.button_one:hover {
+.button:hover {
     color: var(--Color_2);
     background: var(--Color_3);
 }
+
+.bouton_participer_jeux {
+    opacity: 1;
+    pointer-events: auto;
+     transition: opacity 0.3s ease;  /* Désactive cette ligne */
+}
+
     }
 
     .pc-section {  
@@ -607,7 +1112,7 @@ body2 {
 }
 
 /* Style des boutons */
-.button_one {
+.button {
     position: fixed;
     display: inline-block;
     text-align: center;
@@ -623,16 +1128,26 @@ body2 {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     transform: translate(-50%, -50%);
     z-index: 9998;
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.3s ease;
+   /* cursor: pointer;
+  /*  opacity: 1;
+    transition: opacity 0.3s ease;*/
 }
 
 /* Effet au survol du bouton */
-.button_one:hover {
+.button:hover {
     color: var(--Color_2);
     background: var(--Color_3);
 }
+
+/* Style de base */
+.bouton_participer_jeux {
+    opacity: 1;
+    pointer-events: auto;
+     transition: opacity 0.3s ease;  /* Désactive cette ligne */
+}
+
+
+
 
 /* Style des images */
 .image {
@@ -669,8 +1184,8 @@ body2 {
 }
 
 .T_shirt_Josy_1_ {
-    top: 13.35vh;
-    right: 24.7vw;
+    top: 24.0vh;
+    right: 28.7vw;
     width: 50vw;
 }
 
@@ -787,7 +1302,9 @@ body2 {
     box-sizing: border-box;
 }
 
-.form-group textarea { resize: vertical; min-height: 100px; } .form-group button { width: 100%; padding: 10px; background-color: #007bff; border: none; color: var(--Color_2); font-size: 16px; cursor: pointer; border-radius: 4px; transition: background-color 0.3s ease; } .form-group button:hover { background-color: #0056b3; } 
+.form-group textarea { resize: vertical; min-height: 100px; } 
+.form-group button_one { width: 100%; padding: 10px; background-color: #007bff; border: none; color: var(--Color_2); font-size: 16px; cursor: pointer; border-radius: 4px; transition: background-color 0.3s ease; } 
+.form-group button_one:hover { background-color: #0056b3; } 
 .error { color: red; margin-top: 10px; } /* Styles pour le pop-up */
 .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; } 
 .popup { background: var(--Color_2); padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); position: relative; text-align: center; } 
