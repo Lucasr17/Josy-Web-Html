@@ -2319,7 +2319,11 @@ throw error; // Propage l'erreur pour la gérer en aval si nécessaire
 function ajouterNouveauMot(nouveauMot) {
 chargerJSON_2().then(data => {
 // Ajouter le nouveau mot aux données
+try{
 data.push(nouveauMot);
+}catch{
+    
+}
 
 // Envoie les données mises à jour au serveur pour les sauvegarder
 return fetch('/update-json-2', {
