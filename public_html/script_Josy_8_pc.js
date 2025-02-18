@@ -2322,7 +2322,7 @@ chargerJSON_2().then(data => {
 try{
 data.push(nouveauMot);
 }catch{
-    
+    console.error('Erreur lors de l\'ajout du mot au date :', error);   
 }
 
 // Envoie les données mises à jour au serveur pour les sauvegarder
