@@ -933,7 +933,7 @@ window.addEventListener("scroll", function () {
 //};
 
 // Écouter l'événement de scroll
-window.addEventListener("scroll", handleScroll);
+//window.addEventListener("scroll", handleScroll);
 });
 
 
