@@ -35,16 +35,22 @@
                 <div id="modal-container">
                     <div class="modal-background">
                         <div class="modal">
-                            <h2>Le Josy Jeu</h2>
+                            <h2>Trouvez un Josy mot</h2>
                             <p><span id="textContainer"></span></p>
                             <label for="motInput">Entrez un mot : JOSY</label>
                             <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)"/><br>
                             <button onclick="compterMot()">Valider</button><br>
                             <p id="resultat"></p>
-                            <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br>
-                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                               <!--  <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br> -->
+                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="50%" preserveAspectRatio="none">
                                 <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
                             </svg>
+                        </div>
+
+                        <div class="modal_jeu_2">
+                            <h2 style="margin-bottom: 10px;">Cherchez Josy</h2>
+                            <p id="countdown-text" style="font-size: 20px; color: rgb(0, 0, 0);"></p>
+                            <iframe id="iframe-jeu" width="100%" height="90%" style="border-radius: 10px; display:none;"></iframe>
                         </div>
                     </div>
                 </div>
@@ -124,7 +130,7 @@
                     <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
                     <div class="buttons">
                         <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
-                        <button onclick="startTyping()" id="one" class="button">Participer aux jeux</button>
+                        <button onclick="startTyping()" id="one" class="button bouton_participer_jeux">Participer aux jeux</button>
                     </div>
                     <!-- Modal Container 
 
@@ -159,7 +165,7 @@
                 <div class="brick">
                      <!--  <div class="buttons">
                         <button onclick="startTyping()" id="one" class="button"></button> -->
-                        <button onclick="startTyping()" id="one" class="button_one">Participer aux jeux</button>
+                        <button onclick="startTyping()" id="one" class="button bouton_participer_jeux">Participer aux jeux</button>
                     <!--   </div>-->
                     <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
                     <div class="circle" data-tooltip="Pull en coton"></div>
