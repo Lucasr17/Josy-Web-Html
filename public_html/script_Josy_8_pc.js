@@ -3,7 +3,7 @@
 /*T shirt cintre Debut*/
 
 document.addEventListener("DOMContentLoaded", function () {
-    var button = document.querySelector('.bouton_participer_jeux');
+    var button = document.querySelector('.bouton_jeu_pc');
 
     var text1 = document.getElementById('text1');
 
@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
        // console.log("Scroll détecté, position :", scrollTop);
 
         if (scrollTop <= 31) {
-          //  console.log("✅ Bouton visible !");
+            console.log("✅ Bouton visible !");
             button.style.opacity = "1";  // Rend le bouton visible
             button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
             button.style.visibility = "visible"; // S'assure qu'il est visible
         } else {
-          //  console.log("❌ Bouton caché !");
+            console.log("❌ Bouton caché !");
             button.style.opacity = "0";  // Cache le bouton
             button.style.pointerEvents = "none"; // Empêche les interactions
             button.style.visibility = "hidden"; // Cache le bouton
@@ -121,7 +121,7 @@ function updateGSAPAnimation() {
     let variables = sreen_largeur * 0.30; 
     let variables_2 = sreen_largeur * 0.063;
 
-    console.log(`🔄 Mise à jour : variables = ${variables}, variables_2 = ${variables_2}`);
+   // console.log(`🔄 Mise à jour : variables = ${variables}, variables_2 = ${variables_2}`);
 
     // Supprime l'animation précédente
     gsap.killTweensOf("#T_shirt_1"); // Permet d'éviter les conflits avec l'ancienne animation
@@ -852,7 +852,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 var tshirt = document.querySelector('.tshirtss');
 
-var rack = document.querySelector('.rackss');
+var rack = document.querySelector('.rack');
 
     
 //const tshirts = document.querySelectorAll(".tshirtss");
@@ -1150,8 +1150,10 @@ markers: false
 
 }
 
+/*
+if (rack.style.opacity = 1) {
 rack.style.left = sreen_largeur * 0.29;
-
+}*/
 
 if (scrollTop >= 4900 && scrollTop <= 5300) {
 /*    
@@ -1660,7 +1662,6 @@ updatePointsVisibility(scrollTop);
 });
 
 
-
 // Initialiser la barre de progression et la visibilité des points au chargement de la page
 window.dispatchEvent(new Event('scroll'));
 
@@ -2162,10 +2163,10 @@ setInterval(updateRandomElements, 40000); // Actualiser toutes les 20 secondes
 
 
 // Appeler la fonction initiale au chargement de la page
-updateRandomElements();
+//updateRandomElements();
 
 // Actualiser les éléments toutes les 20 secondes
-setInterval(updateRandomElements, 40100); // 20 secondes en millisecondes (20 * 1000)
+//setInterval(updateRandomElements, 40100); // 20 secondes en millisecondes (20 * 1000)
 
 
 
