@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const randomAngle = getRandomValue(-40, 40);
                         const randomScale = getRandomValue(0.6, 1.15);
 
-                        span.style.transform = translate('${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale}');
+                        span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
                         wordContainer.appendChild(span);
 
                         if (!isOverlapping(span, placedElements)) {
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                     if (!placed) {
-                        console.warn('Could not place word: ${word}');
+                        console.warn(`Could not place word: ${word}`);
                     }
                 });
             }
