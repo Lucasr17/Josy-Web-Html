@@ -2,6 +2,49 @@
 
 /*T shirt cintre Debut*/
 
+document.addEventListener("DOMContentLoaded", function () {
+    var button = document.querySelector('.bouton_participer_jeux');
+
+    var text1 = document.getElementById('text1');
+
+    if (!button) {
+        console.error("❌ Bouton non trouvé !");
+        return;
+    }
+
+    window.addEventListener("scroll", function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+       // console.log("Scroll détecté, position :", scrollTop);
+
+        if (scrollTop <= 31) {
+          //  console.log("✅ Bouton visible !");
+            button.style.opacity = "1";  // Rend le bouton visible
+            button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
+            button.style.visibility = "visible"; // S'assure qu'il est visible
+        } else {
+          //  console.log("❌ Bouton caché !");
+            button.style.opacity = "0";  // Cache le bouton
+            button.style.pointerEvents = "none"; // Empêche les interactions
+            button.style.visibility = "hidden"; // Cache le bouton
+        }
+
+        //Début
+if (scrollTop <= 30) {
+    text1.style.opacity = "1";
+} else {
+    text1.style.opacity = "0";
+}
+
+        
+
+        // Vérifier les styles appliqués
+   //     console.log("🔍 Opacity appliquée :", getComputedStyle(button).opacity);
+    });
+
+
+
+});
+
 
 /*T Shrit cintre fin */
 
@@ -71,193 +114,211 @@ markers: false
 }
 });
 
-//fin chemin 
 
-variables =  sreen_largeur * 0.30 + 0;//433;
-variables_2 = sreen_largeur * 0.063 + 0;//90.7;
-opacitys = 0;
+// Fonction pour recalculer et mettre à jour GSAP
+function updateGSAPAnimation() {
+    let sreen_largeur = window.innerWidth; // Récupère la largeur actuelle de l'écran
+    let variables = sreen_largeur * 0.30; 
+    let variables_2 = sreen_largeur * 0.063;
+
+    console.log(`🔄 Mise à jour : variables = ${variables}, variables_2 = ${variables_2}`);
+
+    // Supprime l'animation précédente
+    gsap.killTweensOf("#T_shirt_1"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_2"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_3"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_4"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_5"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_6"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_7"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_8"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_9"); // Permet d'éviter les conflits avec l'ancienne animation
+    gsap.killTweensOf("#T_shirt_10"); // Permet d'éviter les conflits avec l'ancienne animation
+
+    // Recrée l'animation GSAP avec les nouvelles valeurs
+
 
 //retour t shirt cintre
 
-    gsap.fromTo("#T_shirt_1", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_1", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_2", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_2", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_3", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*2,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_3", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*2,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_4", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*3,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_4", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*3,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_5", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*4,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_5", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*4,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_6", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*5,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_6", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*5,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_7", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*6,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_7", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*6,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_8", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*7,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_8", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*7,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_9", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*8,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_9", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*8,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
-    gsap.fromTo("#T_shirt_10", {
-        scale: 1,  // Réduit la largeur à zéro au début
-        x: 0,//
-        y: 0,
-        // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-        }, {
-        scale: 1,  // Agrandit la largeur à sa taille originale
-        x: variables - variables_2*9,
-        y: 0,
-        scrollTrigger: {
-        trigger: document.body,
-        start: "5400px",
-        end: "5700px",
-        scrub: 0,
-        markers: false
-        }
-        });
+gsap.fromTo("#T_shirt_10", {
+    scale: 1,  // Réduit la largeur à zéro au début
+    x: 0,//
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    scale: 1,  // Agrandit la largeur à sa taille originale
+    x: variables - variables_2*9,
+    y: 0,
+    scrollTrigger: {
+    trigger: document.body,
+    start: "5400px",
+    end: "5700px",
+    scrub: 0,
+    markers: false
+    }
+    });
 
 
 //debut t shirt cintre
@@ -285,12 +346,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -305,12 +364,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -325,12 +382,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -345,12 +400,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -365,12 +418,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -385,12 +436,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -405,12 +454,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -425,12 +472,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -445,12 +490,10 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
 scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
-opacity: opacitys,
 scrollTrigger: {
 trigger: document.body,
 start: "5000px",
@@ -482,9 +525,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -500,9 +541,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*2,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -518,9 +557,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*3,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -536,9 +573,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*4,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -554,9 +589,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*5,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -572,9 +605,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*6,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -590,9 +621,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*7,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -608,9 +637,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*8,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -626,9 +653,7 @@ scale: 1,  // Réduit la largeur à zéro au début
 x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
 y: 0,
 // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: opacitys
 }, {
-opacity: opacitys,
 x: variables - variables_2*9,// sreen_largeur * 0.40 + 60,
 scrollTrigger: {
 trigger: document.body,
@@ -651,7 +676,27 @@ scrub: 0,
 markers: false
 }
 });
+
 //fin t shirt cintre
+
+    //fion code 
+}
+
+// Exécuter la fonction au chargement
+updateGSAPAnimation();
+
+// Mettre à jour lors du redimensionnement de la fenêtre
+window.addEventListener("resize", updateGSAPAnimation);
+
+
+//fin chemin 
+
+variables =  sreen_largeur * 0.30 + 0;//433;
+variables_2 = sreen_largeur * 0.063 + 0;//90.7;
+
+opacitys = 0;
+
+
 
 
 //hisotire
@@ -766,12 +811,18 @@ markers: false
 
 
 
+
+
+
+
+
+
+
 //fin histoire
 
     // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
 window.addEventListener('scroll', function() {
 var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-var text1 = document.getElementById('text1');
 var text2 = document.getElementById('text2');
 var txt_josy_histoire_amis = document.getElementById('txt_josy_histoire_amis');
 var txt_les_variantes = document.getElementById('txt_les_variantes');
@@ -791,10 +842,6 @@ var T_shirt_Josy_1 = document.querySelector('.Casquette_1');*/
 var T_shirt_Josyimaginaire = document.querySelector('.T_shirt_Josyimaginaire');
 
 var photodrone = document.querySelector('.photodrone');
-
-var button_one = document.querySelector('.button_one');
-
-
             
 
 gsap.registerPlugin(ScrollTrigger);
@@ -803,8 +850,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
 var tshirt = document.querySelector('.tshirtss');
+
+var rack = document.querySelector('.rackss');
+
     
 //const tshirts = document.querySelectorAll(".tshirtss");
 
@@ -891,25 +940,9 @@ window.addEventListener("scroll", handleScroll);
 
 
 
-//Début
-if (scrollTop <= 30) {
-    text1.style.opacity = "1";
-} else {
-    text1.style.opacity = "0";
-}
 
 
 if (scrollTop >= 4999 && scrollTop <= 5705) {
-  /*  T_shirt_1.style.zIndex = "3010";
-    T_shirt_2.style.zIndex = "3009";
-    T_shirt_3.style.zIndex = "3008";
-    T_shirt_4.style.zIndex = "3007";
-    T_shirt_5.style.zIndex = "3006";
-    T_shirt_6.style.zIndex = "3005";
-    T_shirt_7.style.zIndex = "3004";
-    T_shirt_8.style.zIndex = "3003";
-    T_shirt_9.style.zIndex = "3002";
-    T_shirt_10.style.zIndex = "3001";*/
     T_shirt_1.style.opacity = "1"; // Permet les interactions*/
     T_shirt_2.style.opacity = "1";
     T_shirt_3.style.opacity = "1";
@@ -959,12 +992,6 @@ tshirt.removeEventListener("mouseleave", handleMouseLeave);
 }
 }
 
-
-if (scrollTop <= 31) {
-    button_one.style.opacity = '1';
-} else {
-    button_one.style.opacity = '0';
-}
 
 
 //galerie histoire josy
@@ -1080,6 +1107,7 @@ markers: false          // Pour voir les repères de démarrage et de fin (pour 
 
 // Fonction pour recalculer la position du T-shirt
 function updateTshirtPosition() {
+
 var sreen_largeur = window.innerWidth;
 var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -1104,13 +1132,13 @@ markers: false
 if (scrollTop >= 4450 && scrollTop <= 4900) {
 
 gsap.fromTo(".T_shirt_Josy_1_", {
-x: sreen_largeur * 0.29,
-y: -22,
-scale: 0.7 // Taille initiale
+x: sreen_largeur * 0.19,
+y: 50,
+width: "30vw",
 }, {
 x: 0,
 y: 0, 
-scale: 0.84, 
+width: "42vw",
 scrollTrigger: {
 trigger: document.body, 
 start: "4500px",  
@@ -1121,6 +1149,9 @@ markers: false
 });
 
 }
+
+rack.style.left = sreen_largeur * 0.29;
+
 
 if (scrollTop >= 4900 && scrollTop <= 5300) {
 /*    
@@ -1618,6 +1649,11 @@ document.getElementById('scrollBar').style.height = reverseScrollPercentage + '%
 
 }*/
 
+variables =  sreen_largeur * 0.30 + 0;//433;
+variables_2 = sreen_largeur * 0.063 + 0;//90.7;
+opacitys = 0;
+
+
 
 // Mettre à jour l'opacité des points
 updatePointsVisibility(scrollTop);
@@ -1850,7 +1886,43 @@ function ToBoutique() {
 window.location.href = 'https://josyte.wixstudio.io/josys/category/all-products';
 }
 
+
 function startTyping() {
+
+    const iframe = document.getElementById("iframe-jeu");
+    const modal = document.getElementById("modal-jeu");
+    const countdownText = document.getElementById("countdown-text");
+
+    // Masquer l'iframe au départ pour éviter qu'il garde l'ancienne URL
+    try {
+
+    countdownText.style.display = "block";
+    iframe.style.display = "none";
+    iframe.src = ""; 
+
+    // Afficher la modal immédiatement
+    modal.style.display = "block";
+    }catch{
+
+    }
+
+    let countdown = 2; // Durée du compte à rebours
+
+        // Mettre à jour le compte à rebours chaque seconde
+        countdownText.textContent = `Jeu dans ${countdown}...`;
+        let interval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownText.textContent = `Jeu dans ${countdown}...`;
+            } else {
+                clearInterval(interval);
+                countdownText.style.display = "none"; // Cacher le compte à rebours
+                iframe.src = "https://josy2.fly.dev/Josy_Jeu"; 
+                iframe.style.display = "block";
+            }
+        }, 1000);
+
+
 try {
 console.log("Lancement de la fonction startTyping.");
 
@@ -1897,6 +1969,8 @@ typeWriter(text, 0);
 console.error("Erreur dans startTyping :", error.message);
 throw error; // Facultatif : pour arrêter le script si nécessaire
 }
+
+
 }
 
 
@@ -2316,6 +2390,8 @@ window.addEventListener('popstate', function(event) {
 // Lorsque l'utilisateur appuie sur le bouton retour du navigateur
 document.querySelector("#page-container").innerHTML = "<!-- contenu initial ici -->";
 });
+
+
 
 
 
