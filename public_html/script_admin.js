@@ -137,7 +137,8 @@ function sauvegarderFichier(fichier, data) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fichier, data }),
+      //  body: JSON.stringify({ fichier, data }),
+        body: JSON.stringify(data) // Envoie les données JSON mises à jour
     })
         .then(response => response.json())
         .then(result => console.log(`Fichier ${fichier} mis à jour:`, result))
@@ -151,7 +152,8 @@ function sauvegarderFichier_2(fichier, data) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fichier, data }),
+       // body: JSON.stringify({ fichier, data }),
+        body: JSON.stringify(data) // Envoie les données JSON mises à jour
     })
         .then(response => response.json())
         .then(result => console.log(`Fichier ${fichier} mis à jour:`, result))
