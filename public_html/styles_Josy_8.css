@@ -469,7 +469,7 @@ opacity: 0;
     bottom: 3vh;
     left: 0vw;
     padding: 20px;
-    height: 35vh;
+    height: 260px;
     width: 50vw;
     display: inline-block;
     border-radius: 10px;
@@ -998,7 +998,7 @@ body2 {
     background: var(--Color_3);
 }
 
-.bouton_participer_jeux {
+.bouton_jeu_tel {
     opacity: 1;
     pointer-events: auto;
      transition: opacity 0.3s ease;  /* Désactive cette ligne */
@@ -1140,7 +1140,7 @@ body2 {
 }
 
 /* Style de base */
-.bouton_participer_jeux {
+.bouton_jeu_pc {
     opacity: 1;
     pointer-events: auto;
      transition: opacity 0.3s ease;  /* Désactive cette ligne */
