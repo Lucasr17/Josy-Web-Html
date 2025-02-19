@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
        // console.log("Scroll détecté, position :", scrollTop);
 
         if (scrollTop <= 31) {
-            console.log("✅ Bouton visible !");
+       //     console.log("✅ Bouton visible !");
             button.style.opacity = "1";  // Rend le bouton visible
             button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
             button.style.visibility = "visible"; // S'assure qu'il est visible
         } else {
-            console.log("❌ Bouton caché !");
+       //    console.log("❌ Bouton caché !");
             button.style.opacity = "0";  // Cache le bouton
             button.style.pointerEvents = "none"; // Empêche les interactions
             button.style.visibility = "hidden"; // Cache le bouton
