@@ -852,7 +852,7 @@ opacity: 0;
  @font-face { 
     font-family: 'Warsaw Gothic'; 
     src: 
-    url('../fonts/WarsawGothic3D.woff2') format('woff2'),
+   /* url('../fonts/WarsawGothic3D.woff2') format('woff2'),*/
     url('../fonts/WarsawGothic3D.woff') format('woff'),
     url('../fonts/WarsawGothic3D.otf') format('opentype'); 
     font-weight: normal; 
