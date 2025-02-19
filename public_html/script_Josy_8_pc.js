@@ -1504,6 +1504,7 @@ markers: false          // Pour voir les repères de démarrage et de fin (pour 
 }
 });
 
+/*
 gsap.fromTo(".photodrone_text", {
 y : 1000
 }, {
@@ -1515,7 +1516,7 @@ end: "6200px top",   // Fin à 4350px du haut de la page
 scrub: 0,  
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
-});
+});*/
 
 ;
 
