@@ -57,7 +57,7 @@
                 <div class="instagram-section"><a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank"> <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram"> </a>
                 </div>
 
-           <div class="navbar_background"></div>>
+           <div class="navbar_background"> </div>>
            
                 <div class="navbar">
                     <div class="navbar-left">
@@ -87,7 +87,7 @@
                     <button onclick="alert('Bouton 5 cliqué')">Nous découvrir</button>
                 </div>
                 <!-- Barre de défilement personnalisée -->
-                <div class="scroll-bar-container">
+                <div class="scroll_bar_container">
                     <div class="scroll-bar" id="scrollBar"></div>
                     <!-- Points avec info-bulles -->
                     <div class="scroll-point" onclick="scrollToPosition_1()" id="point100" style="top: calc(2% - 5px);" data-tooltip="Point à 100%">
@@ -169,8 +169,20 @@
                      <!--  <div class="buttons">
                           <button onclick="startTyping()" id="one" class="button"></button> -->
                         <button onclick="startTyping()" id="one" class="button bouton_jeu_pc">Participer aux jeux</button>
-                    <!--   </div>-->
+                    <!--   </div>
                     <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
+
+                -->
+                    <div class="carouselcontainer">
+                        <div class="carousel">
+                            <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
+                            <img src="https://static.wixstatic.com/media/091b9b_92386b8b37ef4166a21796b88381a74a~mv2.jpg" alt="Image 2">
+                            <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
+                        </div>
+                        <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
+                    </div>
+
                     <div class="circle" data-tooltip="Pull en coton"></div>
                     <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: auto;">
                         <!-- <path class="line01 line" d="M 10 200  600 200"></path>
