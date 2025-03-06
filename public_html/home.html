@@ -121,7 +121,7 @@
                         <div class="tooltip">1000 pixels de défilement</div>
                     </div>
                 </div>
-                <div id="scroll-position"></div>
+              <!--   <div id="scroll-position"></div> -->
 
 <script src="script_Josy_8_common.js"></script>
                 
@@ -130,11 +130,23 @@
             <!-- Téléphone -->
             <div class="tel-section">
                 <div class="brick">
-                    <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
+                   <!-- <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image"> -->
                     <div class="buttons">
                         <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
                         <button onclick="startTyping()" id="one" class="button bouton_jeu_tel">Participer aux jeux</button>
                     </div>
+
+
+                    <div class="carouselcontainer">
+                        <div class="carousel">
+                            <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
+                            <img src="https://static.wixstatic.com/media/091b9b_92386b8b37ef4166a21796b88381a74a~mv2.jpg" alt="Image 2">
+                            <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
+                        </div>
+                        <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
+                    </div> 
+
                     <!-- Modal Container 
 
 <div id="modal-container">
