@@ -53,7 +53,9 @@ let sreen_largeur = window.innerWidth;
 
 window.addEventListener('scroll', function() {
     let scrollPosition = window.scrollY;
-    document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+    //document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+
+     console.log(`❎Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`);
 });
 
 
@@ -64,7 +66,9 @@ sreen_largeur = window.innerWidth;
 
 let scrollPosition = window.scrollY;
 
-    document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+    //document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+
+    console.log(`❎Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`);
 
 // Recharger la page
 // location.reload();
