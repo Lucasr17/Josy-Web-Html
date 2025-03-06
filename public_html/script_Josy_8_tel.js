@@ -1,4 +1,27 @@
 
+let currentIndex_tel = 0;
+const images_tel = document.querySelectorAll('.carousel img');
+
+function changeImage(direction) {
+    images_tel[currentIndex_tel].classList.remove('active');
+    images_tel[currentIndex_tel].style.left = direction === 1 ? "-100%" : "100%";
+    images_tel[currentIndex_tel].style.opacity = "0";
+    
+    currentIndex_tel = (currentIndex_tel + direction + images_tel.length) % images_tel.length;
+    
+    images_tel[currentIndex_tel].style.transition = "none";
+    images_tel[currentIndex_tel].style.left = direction === 1 ? "100%" : "-100%";
+    images_tel[currentIndex_tel].style.opacity = "0";
+    
+    setTimeout(() => {
+        images_tel[currentIndex_tel].style.transition = "left 0.5s ease-in-out, opacity 0.5s ease-in-out";
+        images_tel[currentIndex_tel].classList.add('active');
+        images_tel[currentIndex_tel].style.left = "0";
+        images_tel[currentIndex_tel].style.opacity = "1";
+    }, 50);
+}
+
+
 window.addEventListener('scroll', function() {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
