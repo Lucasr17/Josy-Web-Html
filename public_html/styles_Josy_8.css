@@ -968,6 +968,7 @@ body2 {
     
     .tel-section {  
 
+
         .text { 
 
         opacity: 1;    /* Le texte est initialement visible */   
@@ -991,6 +992,63 @@ body2 {
     cursor: pointer;
     border-radius: 30px;
     z-index: 1;
+}
+
+.carouselcontainer {
+    position: relative;
+    width: 100vw;
+    height: 60vh;
+    opacity: 1;
+    z-index: 9996;
+}
+
+.carousel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel img {
+    width: 100vw;
+    height: 60vh;
+    z-index: 1;
+    object-fit: cover;
+    position: absolute;
+    top: -10%;
+    left: 100%;
+    opacity: 0;
+    transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.carousel img.active {
+    left: 0;
+    opacity: 1;
+}
+.carousel img.prev {
+    left: -100%;
+}
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 9997;
+    transition: background 0.3s;
+}
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+.prev {
+    left: 20px;
+}
+.next {
+    right: 20px;
 }
 
 /* Conteneur des boutons */
