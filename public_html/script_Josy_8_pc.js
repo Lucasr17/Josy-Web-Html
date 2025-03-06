@@ -1,4 +1,24 @@
+let currentIndex = 0;
+const images = document.querySelectorAll('.carousel img');
 
+function changeImage(direction) {
+    images[currentIndex].classList.remove('active');
+    images[currentIndex].style.left = direction === 1 ? "-100%" : "100%";
+    images[currentIndex].style.opacity = "0";
+    
+    currentIndex = (currentIndex + direction + images.length) % images.length;
+    
+    images[currentIndex].style.transition = "none";
+    images[currentIndex].style.left = direction === 1 ? "100%" : "-100%";
+    images[currentIndex].style.opacity = "0";
+    
+    setTimeout(() => {
+        images[currentIndex].style.transition = "left 0.5s ease-in-out, opacity 0.5s ease-in-out";
+        images[currentIndex].classList.add('active');
+        images[currentIndex].style.left = "0";
+        images[currentIndex].style.opacity = "1";
+    }, 50);
+}
 
 /*T shirt cintre Debut*/
 
@@ -841,7 +861,10 @@ var T_shirt_Josy_2 = document.querySelector('.T_shirt_Josy_2');
 var T_shirt_Josy_1 = document.querySelector('.Casquette_1');*/
 var T_shirt_Josyimaginaire = document.querySelector('.T_shirt_Josyimaginaire');
 
-var photodrone = document.querySelector('.photodrone');
+//var photodrone = document.querySelector('.photodrone');
+var carouselcontainer = document.getElementById('.carouselcontainer');
+var scroll_bar_container = document.getElementById('.scroll_bar_container');
+
             
 
 gsap.registerPlugin(ScrollTrigger);
@@ -1058,11 +1081,20 @@ if (scrollTop >= 4880 && scrollTop <= 4950) {
 }
 
 if (scrollTop >= 6000 && scrollTop <= 6390) {
-    photodrone_text.style.opacity = "1";
+    photodrone_text.style.opacity = "0";
     
 } else {
     photodrone_text.style.opacity = "0";
 }
+
+/*
+if (scrollTop >= 10 && scrollTop <= 150) {
+    carouselcontainer.style.opacity = "1";
+    
+} else {
+    carouselcontainer.style.opacity = "0";
+}*/
+
 
 /* if (scrollTop >= 4900 && scrollTop <= 6300) {
     T_shirt_Josy_2.style.opacity = "1";
@@ -1488,21 +1520,40 @@ markers: false          // Pour voir les repères de démarrage et de fin (pour 
 }
 });
 
+//photodrone
+gsap.fromTo(".carouselcontainer", 
+  {
+    opacity: 1
+  }, 
+  {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: document.body, // Déclencheur sur le carrousel
+      start: "0px top", // Déclenche quand le haut de la page atteint 0px
+      end: "150px top", // Fin de l'animation quand on atteint 150px
+      scrub: 0, // Animation fluide au scroll
+      markers: false // Pour voir les marqueurs (à enlever en prod)
+    }
+  }
+);
 
-gsap.fromTo(".photodrone", {
-y : 0,
-opacity : 1,
-}, {
-y : -120,
-opacity : 0,
-scrollTrigger: {
-trigger: document.body, // Déclencher par rapport au body
-start: "0px top", // Déclenche à 2680px du haut de la page
-end: "150px top",   // Fin à 4350px du haut de la page
-scrub: 0,  
-markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
-}
-});
+gsap.fromTo(".scroll_bar_container", 
+    {
+      opacity: 0
+    }, 
+    {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: document.body, // Déclencheur sur le carrousel
+        start: "60px top", // Déclenche quand le haut de la page atteint 0px
+        end: "150px top", // Fin de l'animation quand on atteint 150px
+        scrub: 0, // Animation fluide au scroll
+        markers: false // Pour voir les marqueurs (à enlever en prod)
+      }
+    }
+  );
+
+
 
 /*
 gsap.fromTo(".photodrone_text", {
