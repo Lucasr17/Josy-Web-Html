@@ -66,7 +66,10 @@ sreen_largeur = window.innerWidth;
 
 let scrollPosition = window.scrollY;
 
-    //document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+    //document.getElementById('
+    // 
+    // 
+    //').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
 
     console.log(`❎Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`);
 
