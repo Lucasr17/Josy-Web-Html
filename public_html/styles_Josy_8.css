@@ -11,6 +11,55 @@
         overflow-x: hidden; 
 } 
 
+.bouton_jeu_pc {
+    position: fixed;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 1vw;
+    margin: 1vw;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--Color_2);
+    border: 0px solid var(--Color_2);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    top: 26px;
+    right: 10vw;
+    pointer-events: auto;
+    font-size: calc(1.15vw + 7px);
+    transition: all 0.6s ease-in-out;
+    z-index: 1001;
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    overflow: hidden;
+
+    min-width: 50px; /* Largeur initiale minimale */
+    width: 50px; /* Largeur de base */
+    padding-left: 15px; /* Améliore la détection du survol */
+    padding-right: 15px;
+}
+
+/* Contenu initial 🎁 */
+.bouton_jeu_pc::before {
+    content: "🎁";
+    display: inline-block;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Effet de survol */
+.bouton_jeu_pc:hover {
+    width: 220px; /* Taille finale fluide */
+    min-width: 220px;
+    padding: 6px 2vw; /* Évite le bug de disparition immédiate */
+    border-radius: 20px;
+}
+
+/* Modification du texte lors du survol */
+.bouton_jeu_pc:hover::before {
+    content: "🎁 À toi de jouer !";
+}
+
+
 .carree3 { 
  
  position: fixed;
@@ -150,20 +199,86 @@ opacity: 0;
 } /* .box_histoire_6 {
 
 
-*/#phrase-container { 
-    position: absolute; 
-    transform: translate(50%, -50%); 
-    font-size: 2rem; 
+
+
+*/
+
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 200vh; /* Donne de la hauteur pour tester le scroll */
+}
+
+.box {
+    position: absolute;
+    width: 300px;
+    padding: 20px;
+    background: transparent/*white*/;
+    border-radius: 15px;
+   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);*/
+    font-size: 18px;
+    color: white; /* Définit le texte en blanc */
+    font-family: 'Poppins', sans-serif; 
+    opacity: 0;
+    transform: translateY(50px) scale(0.95) rotate(-2deg);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+        /* Style spécifique pour chaque boîte */
+        .box1 { left: 15vw; top: -260vh; }
+        .box2 { left: 60vw; transform: translateX(-50%); top: -230vh; }
+        .box3 { right: 45vw; top: -214vh; }
+        .box4 { left: 16vw; top: -183vh; }
+        .box5 { left: 60vw; transform: translateX(-50%); top: -174vh; }
+
+
+.box.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+}
+
+.box.hidden {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95) rotate(2deg);
+}
+
+/* Style pour BOUM ! Josy */
+.zoom-text {
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff5733;
+    transform: scale(1);
+    transition: transform 0.5s ease-out;
+}
+
+/* Effet de zoom au début */
+.zoom-text.zoom-in {
+    transform: scale(1.3);
+}
+
+
+#text-effect { 
+    position: relative; 
+    transform: translate(0%, 0%); 
+    font-size: 2.5rem; 
     color: var(--Color_2); 
-    top: 262vh; 
+    top: 154vh; 
     display: flex; 
     flex-wrap: wrap; 
     justify-content: center; 
     gap: 0.1rem; 
     font-size: 22px; 
-    opacity: 1;  /* Caché par défaut */
+    opacity: 1; 
+    z-index: 1000; /* Caché par défaut */
  } /* fin histoire *//* Premier SVG : positionné en haut avec un décalage */
-    
+   
+.text-effect span {
+    display: inline-block;
+    transition: transform 0.3s ease-out;
+}
+
     #svg_histoire { 
         max-width: 95%;  /* Limite la largeur maximale du SVG à celle de la fenêtre */ 
         margin-top: 15vh; 
@@ -221,9 +336,18 @@ opacity: 0;
                      border-radius: 50%; 
                      cursor: pointer;
                       z-index: 9998; 
+                    Transition: opacity 0.5s ease-out, transform 0.5s ease-out;
                     } /* Style pour la bulle d'information */
+
+                    .circle:hover { 
+                        Transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+                        opacity: 0.9; 
+                        scale: 1.2;
+                        visibility: visible; 
+                    }
                     
-                    .circle::after { 
+                .circle::after { 
+                    Transition: opacity 0.5s ease-out, transform 0.5s ease-out;
                         content: attr(data-tooltip); 
                         position: absolute; 
                         top: -140%;  /* Position au-dessus du rond */ 
@@ -464,18 +588,34 @@ opacity: 0;
     vertical-align: middle;
 }
 
-.modal {
+.modal_jeu_2 {
     background: var(--Color_2);
-    bottom: 3vh;
-    left: 0vw;
+    bottom: -29vh;
+    left: 47vh;
     padding: 20px;
-    height: 260px;
-    width: 50vw;
+    height: 90vh;
+    width: 45vw;
     display: inline-block;
     border-radius: 10px;
     font-weight: 300;
     position: relative;
+    transform: translate(-50%, -50%);
 }
+
+.modal {
+    background: var(--Color_2);
+    bottom: -5vh;
+    left: -2vw;
+    padding: 20px;
+    height: 90vh;
+    width: 45vw;
+    display: inline-block;
+    border-radius: 10px;
+    font-weight: 300;
+    position: relative;
+    transform: translate(-50%, -50%);
+}
+
 
 .modal h2 {
     font-size: 25px;
@@ -559,19 +699,6 @@ opacity: 0;
     height: 100%;
     width: 100%;
     border-radius: 3px;
-}
-
-
-.modal_jeu_2 {
-    background: var(--Color_2);
-    bottom: -1vh;
-    padding: 20px;
-    height: 56vh;
-    width: 80vw;
-    display: inline-block;
-    border-radius: 10px;
-    font-weight: 300;
-    position: relative;
 }
 
 @keyframes typeWriter {
@@ -719,8 +846,8 @@ opacity: 0;
   .menu-toggle {
     position: fixed;
     opacity: 100%;
-    top: 16px;
-    right: 10px;
+    top: 20px;
+    right: 14px;
     width: 25px;
     height: 35px;
     background-color: var(--Color_1);
@@ -729,7 +856,7 @@ opacity: 0;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    z-index: 1002;
+    z-index: 1003;
   }
   
   .menu-toggle div {
@@ -738,44 +865,51 @@ opacity: 0;
     background-color: var(--Color_2);
     margin: 3px 0;
     transition: 0.4s;
-    z-index: 1002;
+    z-index: 1003;
   }
   
   /* Style pour la navigation */
   .nav-buttons {
     display: flex;
     position: fixed;
-    top: 20px;
+    top: 24px;
     right: 50px;
     flex-direction: row-reverse;
     align-items: center;
-    z-index: 1000;
+    z-index: 1002;
   }
   
   .nav-buttons button {
-    margin: 0 5px;
+    margin: 0 10px;
     padding: 5px 10px;
     background-color: var(--Color_1);
-    border: none;
-    border-radius: 5px;
     color: var(--Color_2);
     cursor: pointer;
-    transition: transform 1.0s, opacity 0.8s;
+    transition: transform 1.0s, opacity 0.8s, border-radius 0.3s ease-in-out;
     position: relative;
-    transform: translateX(100px);  /* Initialement placé à droite du bouton principal */
+    transform: translateX(100px);  /* Initialement placé à droite */
     opacity: 0;  /* Initialement invisible */
-    visibility: visible;  /* Cache les boutons initialement */
-  }
-  
-  .nav-buttons button:hover {
+    visibility: visible;
+    z-index: 1002;
+    
+    /* Suppression de `border`, remplacé par `box-shadow` */
+    border: none;
+    box-shadow: 0 0 0 20px var(--Color_1); /* Simule un contour */
+    border-radius: 10px; /* Initialement sans arrondi */
+}
+
+.nav-buttons button:hover {
     background-color: var(--Color_3);
-  }
+
+}
+
   
   /* Quand le menu est affiché */
   .show-menu .nav-buttons button {
     transform: translateX(0);  /* Déplacement vers la position finale */
     opacity: 1;  /* Devenir visible */
     visibility: visible;  /* Rend les boutons visibles */
+    z-index: 1002;
   }
   
   /* Ajout des délais de transition */
@@ -1051,6 +1185,7 @@ body2 {
     right: 20px;
 }
 
+
 /* Conteneur des boutons */
 .buttons {
     max-width: 800px;
@@ -1069,7 +1204,8 @@ body2 {
     top: 45vw;
     left: 21%;
     font-size: 2.5vw;
-    background-color: var(--Color_1);
+   /* background-color: var(--Color_1);*/
+    background: rgba(0, 0, 0, 0.3);
     color: var(--Color_2);
     border: 2px solid var(--Color_2);
     border-radius: 8px;
@@ -1084,7 +1220,8 @@ body2 {
 /* Effet au survol du bouton */
 .button:hover {
     color: var(--Color_2);
-    background: var(--Color_3);
+   /* background: var(--Color_3);*/
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .bouton_jeu_tel {
@@ -1118,13 +1255,19 @@ body2 {
 /* Style du texte principal */
 #text1 {
     position: fixed;
-    top: 22vw;
-    left: 20%;
+    top: 13vw;
+    left: 11vw;
     color: var(--Color_2);
-    font-size: 1.8vw;
-    transform: translate(-50%, -50%);
+    font-size: 6.4vw;
+    /*transform: translate(-50%, -50%);*/
     z-index: 9997;
+    transition: opacity 0.3s ease;
 }
+
+.josy_text1 {
+    font-size: 9.4vw;
+  }
+  
 
 /* Style du texte JOSY */
 #JOSY_touch {
@@ -1163,9 +1306,13 @@ body2 {
     position: fixed;
     top: 250px;
     opacity: 0;
-    left: 400px;
+    left: 20vw;
     color: var(--Color_2);
-    font-size: 20px;
+    font-size: 21px;
+}
+
+.small-text {
+    font-size: 18px;/*0.9em; /* Ajuste la taille, 0.9em est légèrement plus petit que la normale */
 }
 
 #photodrone_text {
@@ -1226,6 +1373,28 @@ body2 {
 .carousel img.prev {
     left: -100%;
 }
+
+.carousel video {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    object-fit: cover; /* Ajuste la vidéo à l'écran */
+    position: absolute;
+    top: 0;
+    left: 100%;
+    opacity: 0;
+    transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.carousel video.active {
+    left: 0;
+    opacity: 1;
+}
+
+.carousel video.prev {
+    left: -100%;
+}
+
 .carousel-button {
     position: absolute;
     top: 50%;
@@ -1264,13 +1433,12 @@ body2 {
     text-align: center;
     padding: 6px 1vw;
     margin: 1vw;
-    top: 25vw;
-    left: 19.1%;
-    font-size: 1.5vw;
-    background-color: var(--Color_1);
+   /* font-size: calc(1.15vw + 8px);
+   /* background-color: var(--Color_1);*/
+    background: rgba(0, 0, 0, 0.3);
     color: var(--Color_2);
-    border: 2px solid var(--Color_2);
-    border-radius: 8px;
+    border: 0px solid var(--Color_2);
+    border-radius: 16px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     transform: translate(-50%, -50%);
     z-index: 9998;
@@ -1282,14 +1450,20 @@ body2 {
 /* Effet au survol du bouton */
 .button:hover {
     color: var(--Color_2);
-    background: var(--Color_3);
+  /*  background: var(--Color_3);*/
+    background: rgba(0, 0, 0, 0.6);
 }
 
 /* Style de base */
-.bouton_jeu_pc {
+
+.bouton_boutique_pc {
     opacity: 1;
+    top: 47vh;
+    left: 23%;
     pointer-events: auto;
+    font-size: calc(1.15vw + 18px);
      transition: opacity 0.3s ease;  /* Désactive cette ligne */
+     z-index: 9997;
 }
 
 
@@ -1457,4 +1631,117 @@ body2 {
 .popup .close-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 16px; cursor: pointer; }
 
 
- 
+
+.popup_Jeu {
+    position: absolute;
+    visibility: hidden; 
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 99999;
+    opacity: 0;
+
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 16px;
+    width: 90vw;
+    height: 80vh;
+    position: relative;
+    transition: all 0.5s ease;
+  }
+
+  .grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    padding: 16px;
+  }
+
+    /* Texte avec dégradé */
+    .text-gradient {
+        font-size: 2rem; /* Taille initiale */
+        font-weight: bold;
+     /*   display: inline-block;*/
+        color: rgb(255, 255, 255);
+       /* background: linear-gradient(135deg, #6a4cff, #ff4e7d); /* Dégradé initial */
+      /*  -webkit-background-clip: text;
+        background-clip: text;*/
+       /* transition: font-size 0.5s ease, color 0.5s ease;*/
+        position: relative; /* Pour positionner par rapport au conteneur */
+      }
+  
+
+  /* Ciblage spécifique pour le grid-item 0 
+  .grid-item[data-index="0"] {
+    width: 50vw;
+    height: 40vh;
+  }*/
+
+  .grid-item[data-index="0"] {
+  /*  transform: translate(0%, 0%);*/
+  }
+
+  .grid-item[data-index="1"] {
+   /*transform: translate(100%, 100%);*/
+  }
+
+  .grid-item.active {
+   /* background: linear-gradient(135deg, #6a4cff, #ff4e7d);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    z-index: 20;*/
+  }
+
+  .grid-item.inactive {
+   /* opacity: 0.3;*/
+  }
+
+  .grid-item:hover {
+    /*transform: scale(1.1);*/
+  }
+/*
+  .grid-item.tab {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+  }
+
+  .grid-item.tab.left {
+    left: 0;
+  }
+
+  .grid-item.tab.right {
+    right: 0;
+  }*/
+
+  .close-button_Jeu {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: white;
+  }
+
+  .close-button_Jeu:hover {
+    color: rgb(255, 0, 0);
+    transform: scale(1.1);
+  }
