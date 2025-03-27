@@ -42,18 +42,48 @@
                             <button onclick="compterMot()">Valider</button><br>
                             <p id="resultat"></p>
                                <!--  <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br> -->
-                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="50%" preserveAspectRatio="none">
-                                <rect x="0" y="0" fill="none" width="500" height="250" rx="3" ry="3"></rect>
+                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100%" preserveAspectRatio="none">
+                                <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect>
                             </svg>
                         </div>
 
                         <div class="modal_jeu_2">
                             <h2 style="margin-bottom: 10px;">Cherchez Josy</h2>
                             <p id="countdown-text" style="font-size: 20px; color: rgb(0, 0, 0);"></p>
-                            <iframe id="iframe-jeu" width="100%" height="90%" style="border-radius: 10px; display:none;"></iframe>
+                            <iframe id="iframe-jeu" width="100%" height="85%" style="border-radius: 10px; display:none;"></iframe>
                         </div>
                     </div>
                 </div>
+
+                <div id="popup_Jeu" class="popup_Jeu hidden">
+                    <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
+              
+                    <div id="grid" class="grid-container">
+                      <div class="grid-item" data-index="0">
+                        <div class="text-gradient" id="text_0">Trouvez un JOSYmot</div>
+                      </div>
+                      <div class="grid-item" data-index="1">
+                        <div class="text-gradient"id="text_1">Voyez vous le JOSYmot</div>
+                      </div>
+                     <!-- <div class="grid-item" data-index="2">
+                        <p class="text-white text-xl">Zone 3</p>
+                      </div>
+                      <div class="grid-item" data-index="3">
+                        <p class="text-white text-xl">Zone 4</p>
+                      </div>-->
+                    </div>
+              
+                    <!--  <div class="control-buttons">
+                      <div id="control-0" class="control-button">1</div>
+                      <div id="control-1" class="control-button">2</div>
+                     <div id="control-2" class="control-button">3</div>
+                      <div id="control-3" class="control-button">4</div> 
+                    </div>-->
+                  </div>
+
+                  
+                </div>
+
                 <div class="instagram-section"><a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank"> <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram"> </a>
                 </div>
 
@@ -71,6 +101,10 @@
                         </body2>
                     </div>
                 </div>
+
+
+                <button onclick="startTyping()" class="button bouton_jeu_pc"></button>
+
                 <!-- Bouton pour le menu -->
                 <div class="menu-toggle" id="menuToggle">
                     <div></div>
@@ -140,7 +174,7 @@
                     <div class="carouselcontainer">
                         <div class="carousel">
                             <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
-                            <img src="https://static.wixstatic.com/media/091b9b_92386b8b37ef4166a21796b88381a74a~mv2.jpg" alt="Image 2">
+                            <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
                             <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
                         </div>
                         <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
@@ -180,20 +214,34 @@
                 <div class="brick">
                      <!--  <div class="buttons">
                           <button onclick="startTyping()" id="one" class="button"></button> -->
-                        <button onclick="startTyping()" id="one" class="button bouton_jeu_pc">Participer aux jeux</button>
+                        <button onclick="ToBoutique()" class="button bouton_boutique_pc">Boutique</button>
                     <!--   </div>
                     <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
 
-                -->
+                
                     <div class="carouselcontainer">
                         <div class="carousel">
                             <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
-                            <img src="https://static.wixstatic.com/media/091b9b_92386b8b37ef4166a21796b88381a74a~mv2.jpg" alt="Image 2">
+                            <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
                             <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
+                        </div>; -->
+                        <div class="carouselcontainer">
+                            <div class="carousel">
+                                <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
+                                <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
+                                <video src="https://video.wixstatic.com/video/091b9b_663dfbc9a88e4dda8055577abaebf7a8/1080p/mp4/file.mp4" muted autoplay loop playsinline></video>
+     
+                            <!--   <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
+                            --> </div>
                         </div>
+                        
                         <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
                         <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
                     </div>
+
+                    <p class="text-effect" id="text-effect">
+                        Josy - La mode qui fait sourire, parce que la vie est trop courte!
+                    </p>
 
                     <div class="circle" data-tooltip="Pull en coton"></div>
                     <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: auto;">
@@ -236,7 +284,7 @@ A10,10 0 0 1 500,70 : Arc final courbé à y=70.
                         <circle class="ball_ ball03" r="5"></circle>
                         <circle class="ball_ ball04" r="5"></circle>
                     </svg>
-                    <div class="box_histoire_1">
+               <!--     <div class="box_histoire_1">
                         Il était une fois, dans un monde où la mode était sérieuse et les vêtements manquaient de fantaisie, trois amis décidèrent de changer la donne. Ils étaient animés par une idée simple mais puissante : faire rire les gens tout en les habillant avec style.
 </div>
                     <div class="box_histoire_2">
@@ -250,71 +298,36 @@ A10,10 0 0 1 500,70 : Arc final courbé à y=70.
 </div>
                     <div class="box_histoire_5">
                         Porter Josy, c'est plus qu'une déclaration de style, c'est un état d'esprit. Rejoignez-nous dans cette aventure où le rire est la tenue parfaite, où chaque vêtement est une punchline, et où la mode devient une fête.
+</div> -->
+
+
+<div class="container">
+    <div class="box box1">📖 Il était une fois, dans un monde où la mode était <strong>trop sérieuse</strong>, trois amis décidèrent de tout changer. Leur mission ? Apporter du <span class="highlight">fun</span> et du <span class="highlight">style</span> à la mode ! 😄</div>
+
+    <div class="box box2">
+        🎭 <span class="zoom-text">BOUM !  Josy</span> était né ! Une marque <strong>décalée</strong>, remplie de jeux de mots et de créativité. 👕💡
+    </div>
+
+    <div class="box box3">🧵 Chaque vêtement <span class="highlight">Josy</span> raconte une <strong>histoire</strong>. De <span class="highlight">Josydole</span> à <span class="highlight">Josyrlande</span>, chaque pièce est un <strong>clin d'œil</strong> à l'humour et au style. 😂🔥</div>
+
+    <div class="box box4">🚀 <span class="highlight">Josy</span>, c’est pour <strong>ceux qui veulent du style sans se prendre au sérieux</strong>. Tu veux être <span class="highlight">unique</span> et <span class="highlight">marrer en même temps</span> ? Tu es au bon endroit ! 🤩</div>
+
+    <div class="box box5">🎉 Enfile <span class="highlight">Josy</span> et deviens l’<strong>âme de la fête</strong>. Ici, chaque <strong>vêtement est une punchline</strong> et chaque jour une <strong>aventure</strong> ! Prêt(e) à nous rejoindre ? 😉</div>
 </div>
-                    <div id="phrase-container"><span>J</span>
-                        <span>o</span>
-                        <span>s</span>
-                        <span>y</span><span>&nbsp;</span><span>-</span><span>&nbsp;</span><span>L</span>
-                        <span>a</span>
-                        <span>&nbsp;</span><span>m</span>
-                        <span>o</span>
-                        <span>d</span>
-                        <span>e</span>
-                        <span>&nbsp;</span><span>q</span>
-                        <span>u</span>
-                        <span>i</span>
-                        <span>&nbsp;</span><span>f</span>
-                        <span>a</span>
-                        <span>i</span>
-                        <span>t</span>
-                        <span>&nbsp;</span><span>s</span>
-                        <span>o</span>
-                        <span>u</span>
-                        <span>r</span>
-                        <span>i</span>
-                        <span>r</span>
-                        <span>e</span>
-                        <span>,</span>
-                        <span>&nbsp;</span><span>p</span>
-                        <span>a</span>
-                        <span>r</span>
-                        <span>c</span>
-                        <span>e</span>
-                        <span>&nbsp;</span><span>q</span>
-                        <span>u</span>
-                        <span>e</span>
-                        <span>&nbsp;</span><span>l</span>
-                        <span>a</span>
-                        <span>&nbsp;</span><span>v</span>
-                        <span>i</span>
-                        <span>e</span>
-                        <span>&nbsp;</span><span>e</span>
-                        <span>s</span>
-                        <span>t</span>
-                        <span>&nbsp;</span><span>t</span>
-                        <span>r</span>
-                        <span>o</span>
-                        <span>p</span>
-                        <span>&nbsp;</span><span>c</span>
-                        <span>o</span>
-                        <span>u</span>
-                        <span>r</span>
-                        <span>t</span>
-                        <span>e</span>
-                        <span>!</span>
-                    </div>
+
+
                     <div class="carree2" id="carree2"></div>
-                    <div class="text" id="text1">Des jeux pour tous</div>
+                    <div class="text" id="text1"><strong><span class="josy_text1">JOSY</span></strong> À TOUT PRIX</div>
                     <div class="text" id="txt_josy_histoire_amis">JOSY... une histoire d'amis</div>
                     <div class="text" id="txt_les_variantes">Les variantes JOSY</div>
                     <div class="text" id="JOSY_touch">La JOSY touch !</div>
                     <div class="text" id="text3">Dernier texte</div>
                     <div class="text" id="descriptif_tshirt">
-                        <p>descriptif tshirt</p>
-                        <p>...</p>
-                        <p>2</p>
-                        <p>3</p>
-                        <p>4</p>
+                        <p><strong>T-shirt Josy – Fun & Élégance Réunis</strong></p>
+                        <p class="small-text">Affirme ton style avec notre t-shirt signature Josy.</p>
+                        <p class="small-text">Confortable, tendance et minimaliste, il allie simplicité et sophistication.</p>
+                        <p class="small-text">Parfait pour une tenue décontractée avec une touche de classe.</p>
+                        <p> </p>
                     </div>
                     <div class="text" id="photodrone_text">
                         <p>bilan t-shirt........ ............... ............... ..................... .............. .............. ....... ................ .......... .............</p>
