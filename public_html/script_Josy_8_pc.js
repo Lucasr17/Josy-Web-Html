@@ -1,24 +1,236 @@
-let currentIndex = 0;
-const images = document.querySelectorAll('.carousel img');
+var scrollPosition = window.scrollY;
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    const textEffect = document.querySelector(".text-effect");
+    const textContent = textEffect.textContent;
+
+    // Remplace chaque lettre ET espace par un <span>
+    textEffect.innerHTML = textContent
+        .split("")
+        .map(letter => 
+            letter === " " ? `<span class="space">&nbsp;</span>` : `<span>${letter}</span>`
+        )
+        .join("");
+
+    const letters = textEffect.querySelectorAll("span");
+
+
+
+
+    window.addEventListener('scroll', function() {
+    //document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
+    scrollPosition = window.scrollY;
+    
+     console.log(`❎Pos: ${scrollPosition}px`);
+
+
+    if (scrollPosition >= 311) {
+
+    textEffect.addEventListener("mousemove", (e) => {
+        const rect = textEffect.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left; // Position X relative au texte
+        let closestIndex = 0;
+        let minDistance = Infinity;
+
+        letters.forEach((letter, index) => {
+            const letterRect = letter.getBoundingClientRect();
+            const letterCenter = letterRect.left + letterRect.width / 2;
+            const distance = Math.abs(mouseX - letterCenter);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        letters.forEach((letter, index) => {
+            const distanceFromHovered = Math.abs(index - closestIndex);
+
+            if (distanceFromHovered === 0) {
+                letter.style.transform = "scale(1.45) translateY(-10px)";
+            } else if (distanceFromHovered === 1) {
+                letter.style.transform = "scale(1.25) translateY(-5px)";
+            } else {
+                letter.style.transform = "scale(1)";
+            }
+        });
+    });
+
+    // Réinitialisation quand la souris quitte le texte
+    textEffect.addEventListener("mouseleave", () => {
+        letters.forEach(letter => {
+            letter.style.transform = "scale(1)";
+        });
+    });
+
+}
+});
+
+
+/*
+    const textEffect = document.querySelector(".text-effect");
+    const textContent = textEffect.textContent.trim(); // Évite les espaces parasites
+
+    // Transforme chaque lettre en <span>
+    textEffect.innerHTML = textContent
+        .split("")
+        .map(letter => 
+            letter === " " ? `<span class="space">&nbsp;</span>` : `<span>${letter}</span>`
+        )
+        .join("");
+
+    const letters = textEffect.querySelectorAll("span");*/
+
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const startScroll = 1420;
+        const endScroll = 1788;
+        const scrollRange = endScroll - startScroll;
+
+        if (scrollY < startScroll) {
+            // Réinitialisation si on est avant 50px
+            letters.forEach(letter => {
+                letter.style.transform = "scale(1) translateY(0px)";
+            });
+            return;
+        }
+
+        // Calcul de la progression entre 0 et 1
+        let progress = Math.min(Math.max((scrollY - startScroll) / scrollRange, 0), 1);
+
+        // Déterminer l'index de la lettre actuellement affectée
+        let affectedIndex = Math.floor(progress * letters.length);
+
+        letters.forEach((letter, index) => {
+            // Lettre principale qui grossit
+            if (index === letters.length - affectedIndex - 1) {
+                letter.style.transform = "scale(1.55) translateY(-14px)";
+            } 
+            // Lettres voisines à gauche et à droite
+            else if (index === letters.length - affectedIndex && index - 1 >= 0) {
+                letters[index - 1].style.transform = "scale(1.35) translateY(-8px)";
+            }
+            else if (index === letters.length - affectedIndex - 2 && index + 1 < letters.length) {
+                letters[index + 1].style.transform = "scale(1.35) translateY(-8px)";
+            } 
+            // Lettres voisines des voisines (à deux indices de distance)
+            else if (index === letters.length - affectedIndex - 3 && index + 2 < letters.length) {
+                letters[index + 2].style.transform = "scale(1.25) translateY(-5px)";
+            } 
+            else if (index === letters.length - affectedIndex + 3 && index - 2 >= 0) {
+                letters[index - 2].style.transform = "scale(1.25) translateY(-5px)";
+            }
+            // Toutes les autres reviennent à la normale
+            else {
+                letter.style.transform = "scale(1) translateY(0px)";
+            }
+        });
+    });
+
+
+
+
+});
+
+
+
+
+const boxes = document.querySelectorAll('.box');
+
+// Définit les déclencheurs spécifiques par boîte
+const triggerValues = {
+    box1: 0.50, // 60% de la hauteur de l'écran
+    box2: 0.55,
+    box3: 0.50,
+    box4: 0.55,
+    box5: 0.44,
+};
+
+function checkBoxes() {
+    const windowHeight = window.innerHeight;
+
+    boxes.forEach(box => {
+        const boxTop = box.getBoundingClientRect().top;
+        const boxBottom = box.getBoundingClientRect().bottom;
+
+        // Récupère la valeur de déclenchement spécifique à cette boîte
+        const triggerBottom = windowHeight * (triggerValues[box.classList[1]] || 0.85);
+        const triggerTop = windowHeight * 0.45; // Disparition vers le haut
+
+        if (boxTop < triggerBottom && boxBottom > triggerTop) {
+            box.classList.add('visible');
+            box.classList.remove('hidden');
+
+            // Effet de zoom uniquement pour "BOUM ! Josy"
+            const zoomText = box.querySelector('.zoom-text');
+            if (zoomText) {
+                zoomText.classList.add('zoom-in');
+                setTimeout(() => {
+                    zoomText.classList.remove('zoom-in');
+                }, 1000);
+            }
+
+        } else {
+            box.classList.remove('visible');
+            box.classList.add('hidden');
+        }
+    });
+}
+
+window.addEventListener('scroll', checkBoxes);
+checkBoxes(); // Pour afficher les boîtes déjà visibles au chargement
+
+
+let nb_img_caroussel = 3; // Nombre total d'éléments du carrousel (y compris la vidéo)
+let currentIndex = nb_img_caroussel; // Position actuelle
+
+const elements = document.querySelectorAll('.carousel img, .carousel video'); // Sélectionne les images et vidéos
+
+text_fond_josy = document.getElementById('text1');
 
 function changeImage(direction) {
-    images[currentIndex].classList.remove('active');
-    images[currentIndex].style.left = direction === 1 ? "-100%" : "100%";
-    images[currentIndex].style.opacity = "0";
-    
-    currentIndex = (currentIndex + direction + images.length) % images.length;
-    
-    images[currentIndex].style.transition = "none";
-    images[currentIndex].style.left = direction === 1 ? "100%" : "-100%";
-    images[currentIndex].style.opacity = "0";
-    
+    const currentElement = elements[currentIndex]; // Élément actuel
+    currentElement.classList.remove('active');
+    currentElement.style.left = direction === 1 ? "-100%" : "100%";
+    currentElement.style.opacity = "0";
+
+    text_fond_josy.style.opacity = "0"; 
+
+    // Si l'élément actuel est une vidéo, on la met en pause
+    if (currentElement.tagName === "VIDEO") {
+        currentElement.pause();
+    }
+
+    // Correction du calcul du nouvel index
+    currentIndex += direction;
+    if (currentIndex >= elements.length) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = elements.length - 1;
+    }
+
+    const nextElement = elements[currentIndex]; // Élément suivant
+    nextElement.style.transition = "none";
+    nextElement.style.left = direction === 1 ? "100%" : "-100%";
+    nextElement.style.opacity = "0";
+
     setTimeout(() => {
-        images[currentIndex].style.transition = "left 0.5s ease-in-out, opacity 0.5s ease-in-out";
-        images[currentIndex].classList.add('active');
-        images[currentIndex].style.left = "0";
-        images[currentIndex].style.opacity = "1";
+        nextElement.style.transition = "left 0.5s ease-in-out, opacity 0.5s ease-in-out";
+        nextElement.classList.add('active');
+        nextElement.style.left = "0";
+        nextElement.style.opacity = "1";
+
+        // Si l'élément suivant est une vidéo, on la lance automatiquement
+        if (nextElement.tagName === "VIDEO") {
+            nextElement.play();
+        }
     }, 50);
 }
+
 
 /*T shirt cintre Debut*/
 
@@ -38,14 +250,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (scrollTop <= 31) {
        //     console.log("✅ Bouton visible !");
-            button.style.opacity = "1";  // Rend le bouton visible
+        //    button.style.opacity = "1";  // Rend le bouton visible
             button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
-            button.style.visibility = "visible"; // S'assure qu'il est visible
+          //  button.style.visibility = "visible"; // S'assure qu'il est visible
         } else {
        //    console.log("❌ Bouton caché !");
-            button.style.opacity = "0";  // Cache le bouton
+         //   button.style.opacity = "0";  // Cache le bouton
             button.style.pointerEvents = "none"; // Empêche les interactions
-            button.style.visibility = "hidden"; // Cache le bouton
+         //  button.style.visibility = "hidden"; // Cache le bouton
         }
 
         //Début
@@ -70,6 +282,23 @@ if (scrollTop <= 30) {
 
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+var button = document.querySelector('.bouton_jeu_pc');
+
+
+
+gsap.fromTo(".button", {
+    opacity : 1,  // Cache le bouton
+    }, {
+    opacity : 0,  // Cache le bouton
+    scrollTrigger: {
+    trigger: document.body,
+    start: "0px top",
+    end: "90px top",
+    scrub: 0,
+    markers: false
+    }
+    });
 
 // Initialiser les balles à leur position initiale sur le chemin
 gsap.set(".ball", { opacity:  1});
@@ -1074,7 +1303,7 @@ if (scrollTop >= 6500 && scrollTop <= 6800) {
 
 
 if (scrollTop >= 4880 && scrollTop <= 4950) {
-    circle.style.opacity = "0.8";
+    circle.style.opacity = "0.7";
     
 } else {
     circle.style.opacity = "0";
@@ -1478,18 +1707,6 @@ markers: false // Pour désactiver les repères de démarrage et de fin
 });
 
 */
-gsap.fromTo(".T_shirt_Josy_1", {
-opacity : 0
-}, {
-opacity : 1,
-scrollTrigger: {
-trigger: document.body, // Déclencher par rapport au body
-start: "2100px top", // Déclenche à 2680px du haut de la page
-end: "3300px top",   // Fin à 4350px du haut de la page
-scrub: 0,  
-markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
-}
-});
 
 gsap.fromTo(".T_shirt_Josy_1", {
 x: () => -sreen_largeur,
@@ -1519,6 +1736,19 @@ scrub: 0,
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
 });
+
+gsap.fromTo(".T_shirt_Josy_1", {
+    opacity : 0
+    }, {
+    opacity : 1,
+    scrollTrigger: {
+    trigger: document.body, // Déclencher par rapport au body
+    start: "2100px top", // Déclenche à 2680px du haut de la page
+    end: "3300px top",   // Fin à 4350px du haut de la page
+    scrub: 0,  
+    markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
+    }
+    });
 
 //photodrone
 gsap.fromTo(".carouselcontainer", 
@@ -1939,8 +2169,297 @@ function ToBoutique() {
 window.location.href = 'https://josyte.wixstudio.io/josys/category/all-products';
 }
 
+const openPopupButton = document.getElementById("open-popup_Jeu");
+const popup = document.getElementById("popup_Jeu");
+const closePopupButton = document.getElementById("close-popup_Jeu");
+const gridItems = document.querySelectorAll(".grid-item");
+
+let activeIndex = null;
+
+    // Toggle the active state of grid items
+    gridItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+          const index = parseInt(e.currentTarget.getAttribute("data-index"));
+          
+          if (activeIndex === index) {
+            activeIndex = null;
+          } else {
+            activeIndex = index;
+          }
+  
+          updateGrid();
+        });
+      });
+
+
+// Update the grid styles based on active index
+function updateGrid() {
+    
+
+  // Lancer les animations immédiatement
+  gridItems.forEach(item => {
+    const index = parseInt(item.getAttribute("data-index"));
+    item.classList.remove("active", "inactive", "tab");
+
+    const t0 = gsap.timeline();
+
+    if (index === activeIndex) {
+      item.classList.add("active");
+
+    if(index === 0){
+
+      t0.to('[data-index="0"]', { 
+        duration: 2, 
+       /* backgroundImage: "linear-gradient(135deg, #6a4cff, #ff4e7d)", 
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",*/
+        width: '80vw', 
+        opacity: 1, 
+        background: "linear-gradient(135deg, #6a4cff, #ff4e7d)",  // Change de dégradé*/
+        boxshadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
+        ease: 'power2.inOut' ,
+      })
+      t0.to("#text_0", {
+        duration: 2,
+        fontSize: '4rem',  // Agrandir la taille du texte
+        color: "rgb(255, 255, 255)",  // Change de dégradé
+        y: '-35vh',  // Déplace le texte vers le haut
+        ease: 'power2.inOut'
+      }, "<") 
+
+      t0.to('[data-index="1"]', { 
+        duration: 2, /*
+        backgroundImage: "none",  // Supprime le dégradé
+        boxShadow: "none",          // Supprime l'ombre*/
+        width: '10vw', 
+        opacity: 1, 
+        ease: 'power2.inOut',
+        transformOrigin: "center center",
+        backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+        boxshadow: "0 0px 0px rgba(0, 0, 0, 0)",
+      },"<")      
+      t0.to("#text_1", {
+        duration: 2,
+        fontSize: '0.6rem',  // Agrandir la taille du texte
+     /*   color: transparent,  // Change de dégradé
+        background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+        y: '0vh',  // Déplace le texte vers le haut
+        ease: 'power2.inOut'
+      }, "<");
+
+    }else if(index === 1){
+
+        t0.to('[data-index="1"]', { 
+            duration: 2, 
+            width: '80vw', 
+            opacity: 1, 
+            ease: 'power2.inOut',
+            background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+            boxshadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
+            transformOrigin: "left center",
+          })    
+        t0.to("#text_1", {
+            duration: 2,
+            fontSize: '3rem',  // Agrandir la taille du texte
+            color: "rgb(255, 255, 255)",  // Change de dégradé
+            y: '-35vh',  // Déplace le texte vers le haut
+            ease: 'power2.inOut'
+         /*   color: transparent,  // Change de dégradé
+            background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+          }, "<")        
+
+          t0.to('[data-index="0"]', { 
+            duration: 2, 
+            width: '10vw', 
+            opacity: 1, 
+            ease: 'power2.inOut',
+            backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+            boxshadow: "0 0px 0px rgba(0, 0, 0, 0)",
+            /*backgroundImage: "none",  // Supprime le dégradé
+            boxShadow: "none",*/
+          }, "<")      
+          t0.to("#text_0", {
+            duration: 2,
+            fontSize: '0.6rem',  // Agrandir la taille du texte
+         /*   color: transparent,  // Change de dégradé
+            background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+            y: '0vh',  // Déplace le texte vers le haut
+            ease: 'power2.inOut'
+          }, "<");
+           // "<" permet de lancer cette animation en même temps que la précédente
+      }
+
+    } else if (activeIndex !== null) {
+      item.classList.add("inactive");
+      if (index < activeIndex) {
+        item.classList.add("tab", "left");
+      } else {
+        item.classList.add("tab", "right");
+      }
+    }
+  });
+
+  controlButtons.forEach(button => {
+    const index = parseInt(button.id.split('-')[1]);
+    if (index === activeIndex) {
+      button.style.transform = 'scale(1.2)';
+    } else {
+      button.style.transform = 'scale(1)';
+    }
+  });
+}
+
+function Close_Jeu() {
+const closePopupButton = document.getElementById('close-popup_Jeu');
+const popup = document.getElementById('popup_Jeu');
+// Close the popup
+
+gsap.to(popup, { 
+  opacity: 0, 
+  //rotateX: 0, 
+  transformOrigin: "center center", 
+  //scaleY: 0, 
+  duration: 0.4, 
+  ease: "power2.in",
+  onComplete: () => {
+    popup.style.visibility = "hidden";
+   // popup.classList.add("hidden");
+  }
+});
+     ////  GridContainer.style.visibility = "hidden";
+
+    /* const t0 = gsap.timeline();
+
+     t0.to('[data-index="0"]', { 
+        duration: 0, 
+        width: '45vw', 
+        opacity: 1,
+        ease: 'power2.inOut',
+        backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+        boxShadow: "none",       // Supprime l'ombre
+        onStart: () => {
+            document.querySelector('[data-index="0"]').classList.remove("inactive");
+            document.querySelector('[data-index="0"]').classList.remove("active");
+          }
+      });
+
+      t0.to('[data-index="1"]', { 
+        duration: 0, 
+        width: '45vw', 
+        opacity: 1, 
+        ease: 'power2.inOut',
+        backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+        boxShadow: "none",        // Supprime l'ombre
+        onStart: () => {
+          document.querySelector('[data-index="1"]').classList.remove("inactive");
+          document.querySelector('[data-index="1"]').classList.remove("active");
+        }
+      });
+
+      t0.to("#text_1", {
+        duration: 0,
+        fontSize: '2rem',  // Agrandir la taille du texte
+        color: "rgb(255, 255, 255)",  // Change de dégradé
+        y: '0vh',  // Déplace le texte vers le haut
+        ease: 'power2.inOut'
+      }, "<")  
+      
+      t0.to("#text_0", {
+        duration: 0,
+        fontSize: '2rem',  // Agrandir la taille du texte
+        color: "rgb(255, 255, 255)",  // Change de dégradé
+        y: '0vh',  // Déplace le texte vers le haut
+        ease: 'power2.inOut'
+      }, "<")  
+
+    activeIndex = null;*/
+
+    document.body.style.overflow = ""; // Empêche le scroll
+
+      
+    
+}
 
 function startTyping() {
+
+
+    const t0 = gsap.timeline();
+
+    t0.to('[data-index="0"]', { 
+       duration: 0, 
+       width: '45vw', 
+       opacity: 1,
+       ease: 'power2.inOut',
+       backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+       boxShadow: "none",       // Supprime l'ombre
+       onStart: () => {
+           document.querySelector('[data-index="0"]').classList.remove("inactive");
+           document.querySelector('[data-index="0"]').classList.remove("active");
+         }
+     });
+
+     t0.to('[data-index="1"]', { 
+       duration: 0, 
+       width: '45vw', 
+       opacity: 1, 
+       ease: 'power2.inOut',
+       backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))",
+       boxShadow: "none",        // Supprime l'ombre
+       onStart: () => {
+         document.querySelector('[data-index="1"]').classList.remove("inactive");
+         document.querySelector('[data-index="1"]').classList.remove("active");
+       }
+     });
+
+     t0.to("#text_1", {
+       duration: 0,
+       fontSize: '2rem',  // Agrandir la taille du texte
+       color: "rgb(255, 255, 255)",  // Change de dégradé
+       y: '0vh',  // Déplace le texte vers le haut
+       ease: 'power2.inOut'
+    /*   color: transparent,  // Change de dégradé
+       background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+     }, "<")  
+     
+     t0.to("#text_0", {
+       duration: 0,
+       fontSize: '2rem',  // Agrandir la taille du texte
+       color: "rgb(255, 255, 255)",  // Change de dégradé
+       y: '0vh',  // Déplace le texte vers le haut
+       ease: 'power2.inOut'
+    /*   color: transparent,  // Change de dégradé
+       background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
+     }, "<")  
+
+   activeIndex = null;
+
+
+document.body.style.overflow = "hidden"; // Empêche le scroll
+
+
+var button = document.querySelector('.bouton_jeu_pc');
+
+const popup = document.getElementById('popup_Jeu');
+//const GridContainer = document.getElementById('grid-container');
+const gridItems = document.querySelectorAll('.grid-item');
+
+
+//popup.classList.remove("hidden");
+popup.style.visibility = "visible";
+
+gsap.fromTo(popup, 
+  { opacity: 0, /*rotateX: 0, transformOrigin: "center center", scaleY: 0 */}, 
+  { opacity: 1,/* rotateX: 0, scale: 1,*/ duration: 2, ease: "power2.out" }
+);
+
+// Open the popup
+button.addEventListener("click", () => {
+//  popup.classList.remove("hidden");
+  popup.style.visibility = "visible";
+  popup.style.opacity = 1;
+ // GridContainer.style.visibility = "visible";
+});
+
+
 
     const iframe = document.getElementById("iframe-jeu");
     const modal = document.getElementById("modal-jeu");
@@ -1963,13 +2482,16 @@ function startTyping() {
 
         // Mettre à jour le compte à rebours chaque seconde
         countdownText.textContent = `Jeu dans ${countdown}...`;
+        countdownText.style.opacity = 1;
         let interval = setInterval(() => {
             countdown--;
             if (countdown > 0) {
                 countdownText.textContent = `Jeu dans ${countdown}...`;
             } else {
                 clearInterval(interval);
-                countdownText.style.display = "none"; // Cacher le compte à rebours
+                countdownText.textContent = `.`;
+                countdownText.style.opacity = 0;
+              //  countdownText.style.display = "none"; // Cacher le compte à rebours
                 iframe.src = "https://josy2.fly.dev/Josy_Jeu"; 
                 iframe.style.display = "block";
             }
