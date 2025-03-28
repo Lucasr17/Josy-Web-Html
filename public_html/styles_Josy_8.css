@@ -1048,7 +1048,7 @@ body2 {
 .slider-container2 {
     max-width: 400px;
     height: 145px;
-    margin-top: -62px; /* Monter/descendre tout le scroll */
+    margin-top: -56px; /* Monter/descendre tout le scroll */
     overflow: hidden;
     border: none;
     background: transparent;
