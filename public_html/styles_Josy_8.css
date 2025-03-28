@@ -63,99 +63,6 @@ z-index: 12;
     pointer-events: none; }
 /* fin t shirt cintre *//* histoire josy */
 
-.box_histoire_1 { 
-position: absolute; 
-width: 450px; 
-height: 125px; 
-top: 90vh; 
-left: 12vw; 
-background-color: transparent; 
-padding: 5px;  /* Ajoute une marge intérieure */ 
-color: var(--Color_2);  /* border: 4px solid violet; */ 
-overflow-x: hidden;  /* transform: translate(-50%, -50%); */ 
-text-align: justify;  /* Justifie le texte */ 
-font-size: 20px; 
-border-radius: 20px; 
-transform-origin: bottom left;  /* Origine de transformation en bas à gauche */ 
-transform: scale(0);  /* Réduit la taille à zéro au début */ 
-opacity: 0; 
-} 
-
-.box_histoire_2 { 
- position: absolute; 
- width: 400px; 
- height: 200px; 
- top: 125vh; 
- left: 53vw; 
- background-color: transparent; 
- padding: 20px;  /* Ajoute une marge intérieure */ 
- color: var(--Color_2);  /* border: 4px solid var(--Color_3); */ /* transform: translate(-50%, -50%); */ 
- text-align: justify;  /* Justifie le texte */ 
- font-size: 19px; 
- border-radius: 20px; 
- transform-origin: bottom right;  /* Origine de transformation en bas à gauche */ 
- transform: scale(0);  /* Réduit la taille à zéro au début */ 
- opacity: 0;
- }
- 
- .box_histoire_3 { 
-     position: absolute; 
-     width: 240px; 
-     height: 295px; 
-     top: 160vh; 
-     left: 20vw; 
-     background-color: transparent; 
-     padding: 20px;  /* Ajoute une marge intérieure */ 
-     color: var(--Color_2);  /* border: 4px solid var(--Color_3);
-/* transform: translate(-50%, -50%); */ 
-text-align: justify;  /* Justifie le texte */ 
-font-size: 19px; 
-border-radius: 20px; 
-transform-origin: top left;  /* Origine de transformation en bas à gauche */ 
-transform: scale(0);  /* Réduit la taille à zéro au début */
- opacity: 0; 
-}
- 
- .box_histoire_4 { 
-    position: absolute; 
-    width: 240px; 
-    height: 300px; 
-    top: 162vh; 
-    left: 75vw; 
-    background-color: transparent; 
-    padding: 20px;  /* Ajoute une marge intérieure */ 
-    color: var(--Color_2);  /* border: 4px solid var(--Color_3);
-/* transform: translate(-50%, -50%); */ 
-text-align: justify;  /* Justifie le texte */ 
-font-size: 19px; 
-border-radius: 20px; 
-transform-origin: bottom right;  /* Origine de transformation en bas à gauche */ 
-transform: scale(0);  /* Réduit la taille à zéro au début */ 
-opacity: 0; 
-}
-
-.box_histoire_5 { 
-    position: absolute; 
-    width: 240px; 
-    height: 260px; 
-    top: 216vh; 
-    left: 68vw; 
-    background-color: transparent; 
-    padding: 20px;  /* Ajoute une marge intérieure */ 
-    color: var(--Color_2);  /* border: 4px solid var(--Color_3);
-/* transform: translate(-50%, -50%); */ 
-text-align: justify;  /* Justifie le texte */ 
-font-size: 19px; 
-border-radius: 20px; 
-transform-origin: bottom right;  /* Origine de transformation en bas à gauche */ 
-transform: scale(0);  /* Réduit la taille à zéro au début */ 
-opacity: 0; 
-} /* .box_histoire_6 {
-
-
-
-
-*/
 
 
 .container {
@@ -1048,7 +955,7 @@ body2 {
 .slider-container2 {
     max-width: 400px;
     height: 145px;
-    margin-top: -56px; /* Monter/descendre tout le scroll */
+    margin-top: -55px; /* Monter/descendre tout le scroll */
     overflow: hidden;
     border: none;
     background: transparent;
