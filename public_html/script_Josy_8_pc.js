@@ -2755,7 +2755,6 @@ const container = document.getElementById('x');
 
 if (!container) {
     console.error("❌ Erreur : L'élément avec l'ID 'x' n'existe pas.");
-    return; // Arrête la fonction si l'élément n'est pas trouvé
 }
 
 container.innerHTML = ''; // Effacer le contenu précédent
