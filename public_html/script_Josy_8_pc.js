@@ -1974,7 +1974,6 @@ points.forEach(point => {
 }
 
 //window.dispatchEvent(new Event('scroll'));
-
 let boutonJeu = document.getElementById('bouton_jeu_pc');
 
 if (!boutonJeu) {
@@ -2751,7 +2750,7 @@ return shuffled.slice(0, count);
 // Fonction pour actualiser les éléments toutes les 20 secondes
 function updateRandomElements() {
 const selectedData = pickRandomElements(allData, 10);
-const container = document.getElementById('x');
+const container = document.getElementById('randomElements');
 container.innerHTML = ''; // Effacer le contenu précédent
 
 selectedData.forEach(item => {
