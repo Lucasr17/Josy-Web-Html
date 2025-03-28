@@ -1973,21 +1973,54 @@ points.forEach(point => {
 });
 }
 
-// Initialiser la barre de progression au chargement de la page
 window.dispatchEvent(new Event('scroll'));
+let boutonJeu = document.getElementById('bouton_jeu_pc');
+
+if (!boutonJeu) {
+    console.error("❌ EErreur : L'élément #bouton_jeu_pc n'existe pas dans le DOM.");
+} else {
+    console.log("✅ Élément #bouton_jeu_pc trouvé :", boutonJeu);
+}
+
+let buttonsss = document.querySelectorAll("#nav-buttons button:nth-child(-n+5)");
 
 // JavaScript pour basculer le menu
 document.getElementById('menuToggle').addEventListener('click', function() {
 if (document.body.classList.contains('show-menu')) {
+
+//
+buttonsss.forEach(button_ => {
+    button.style.display = "none"; // Cacher complètement les boutons
+    button_.style.visibility = "hidden"; // Cache visuellement*/
+    button_.style.pointerEvents = "none"; // Empêche les clics
+});
+
 // Si le menu est visible, on enlève la classe show-menu et on ajoute hide-menu
+
 document.body.classList.remove('show-menu');
 document.body.classList.add('hide-menu');
+
+setTimeout(() => {
+    if (document.body.classList.contains('hide-menu')) {
+    boutonJeu.style.zIndex = "1006";
+    }
+}, 900); // Un peu plus tard que la réduction
+
 } else {
 // Si le menu est caché, on enlève hide-menu et on ajoute show-menu
+boutonJeu.style.zIndex = "1002";
 document.body.classList.remove('hide-menu');
 document.body.classList.add('show-menu');
+
+buttonsss.forEach(button_ => {
+    button_.style.visibility = "visible"; // Rend visible
+    button_.style.pointerEvents = "auto"; // Réactive les clics
+});
+
+
 }
 });
+
 
 
 // Sélectionne tous les boutons avec la classe 'button'
