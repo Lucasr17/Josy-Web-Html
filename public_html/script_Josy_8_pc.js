@@ -949,7 +949,7 @@ opacitys = 0;
 
 
 //hisotire
-
+/*
 gsap.fromTo(".box_histoire_1", {
 scaleX: 0,  // Réduit la largeur à zéro au début
 scaleY: 0,  // Réduit la hauteur à zéro au début
@@ -1945,7 +1945,7 @@ updatePointsVisibility(scrollTop);
 
 
 // Initialiser la barre de progression et la visibilité des points au chargement de la page
-window.dispatchEvent(new Event('scroll'));
+//window.dispatchEvent(new Event('scroll'));
 
 function updatePointsVisibility(scrollTop) {
 // Tableau des points avec leurs positions en pixels
@@ -1973,7 +1973,8 @@ points.forEach(point => {
 });
 }
 
-window.dispatchEvent(new Event('scroll'));
+//window.dispatchEvent(new Event('scroll'));
+
 let boutonJeu = document.getElementById('bouton_jeu_pc');
 
 if (!boutonJeu) {
@@ -2750,7 +2751,13 @@ return shuffled.slice(0, count);
 // Fonction pour actualiser les éléments toutes les 20 secondes
 function updateRandomElements() {
 const selectedData = pickRandomElements(allData, 10);
-const container = document.getElementById('randomElements');
+const container = document.getElementById('x');
+
+if (!container) {
+    console.error("❌ Erreur : L'élément avec l'ID 'x' n'existe pas.");
+    return; // Arrête la fonction si l'élément n'est pas trouvé
+}
+
 container.innerHTML = ''; // Effacer le contenu précédent
 
 selectedData.forEach(item => {
@@ -2762,7 +2769,7 @@ container.appendChild(p);
 
 // Initialiser les données et mettre à jour les éléments
 fetchData().then(() => {
-updateRandomElements();
+        updateRandomElements();
 setInterval(updateRandomElements, 40000); // Actualiser toutes les 20 secondes
 });
 
