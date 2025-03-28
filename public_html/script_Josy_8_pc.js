@@ -2752,11 +2752,6 @@ return shuffled.slice(0, count);
 function updateRandomElements() {
 const selectedData = pickRandomElements(allData, 10);
 const container = document.getElementById('x');
-
-if (!container) {
-    console.error("❌ Erreur : L'élément avec l'ID 'x' n'existe pas.");
-}
-
 container.innerHTML = ''; // Effacer le contenu précédent
 
 selectedData.forEach(item => {
@@ -2768,7 +2763,7 @@ container.appendChild(p);
 
 // Initialiser les données et mettre à jour les éléments
 fetchData().then(() => {
-        updateRandomElements();
+updateRandomElements();
 setInterval(updateRandomElements, 40000); // Actualiser toutes les 20 secondes
 });
 
