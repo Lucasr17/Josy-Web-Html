@@ -11,53 +11,7 @@
         overflow-x: hidden; 
 } 
 
-.bouton_jeu_pc {
-    position: fixed;
-    display: inline-block;
-    text-align: center;
-    padding: 6px 1vw;
-    margin: 1vw;
-    background: rgba(0, 0, 0, 0.3);
-    color: var(--Color_2);
-    border: 0px solid var(--Color_2);
-    border-radius: 16px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    top: 26px;
-    right: 10vw;
-    pointer-events: auto;
-    font-size: calc(1.15vw + 7px);
-    transition: all 0.6s ease-in-out;
-    z-index: 1001;
-    white-space: nowrap; /* Empêche le retour à la ligne */
-    overflow: hidden;
 
-    min-width: 50px; /* Largeur initiale minimale */
-    width: 50px; /* Largeur de base */
-    padding-left: 15px; /* Améliore la détection du survol */
-    padding-right: 15px;
-}
-
-/* Contenu initial 🎁 */
-.bouton_jeu_pc::before {
-    content: "🎁";
-    display: inline-block;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Effet de survol */
-.bouton_jeu_pc:hover {
-    width: 220px; /* Taille finale fluide */
-    min-width: 220px;
-    padding: 6px 2vw; /* Évite le bug de disparition immédiate */
-    border-radius: 20px;
-}
-
-/* Modification du texte lors du survol */
-.bouton_jeu_pc:hover::before {
-    content: "🎁 À toi de jouer !";
-}
 
 
 .carree3 { 
@@ -842,6 +796,54 @@ opacity: 0;
     cursor: pointer;
     z-index: 1001;
   }
+
+  .bouton_jeu_pc {
+    z-index: 1006;
+    position: fixed;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 1vw;
+    margin: 1vw;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--Color_2);
+    border: 0px solid var(--Color_2);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transform: translate(0%, 0%);
+    opacity: 1;
+    top: 5px;
+    right: 10vw;
+    pointer-events: auto;
+    cursor: pointer;
+    font-size: calc(1.15vw + 7px);
+    transition: all 0.6s ease-in-out;
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    overflow: hidden;
+    min-width: 34.5px; /* Largeur initiale minimale */
+    width: 34.5px; /* Largeur de base */
+    padding-left: 9px; /* Améliore la détection du survol */
+    padding-right: 8.5px;
+}
+
+/* Contenu initial 🎁 */
+.bouton_jeu_pc::before {
+    content: "🎁  À toi de jouer !";
+    display: inline-block;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Effet de survol */
+.bouton_jeu_pc:hover {
+    width: 220px; /* Taille finale fluide */
+    min-width: 220px;
+    padding: 6px 2vw; /* Évite le bug de disparition immédiate */
+    border-radius: 20px;
+}
+
+/* Modification du texte lors du survol */
+.bouton_jeu_pc:hover::before {
+    content: "🎁  À toi de jouer !";
+}
   
   .menu-toggle {
     position: fixed;
@@ -884,7 +886,7 @@ opacity: 0;
     padding: 5px 10px;
     background-color: var(--Color_1);
     color: var(--Color_2);
-    cursor: pointer;
+    cursor: auto;
     transition: transform 1.0s, opacity 0.8s, border-radius 0.3s ease-in-out;
     position: relative;
     transform: translateX(100px);  /* Initialement placé à droite */
@@ -896,6 +898,7 @@ opacity: 0;
     border: none;
     box-shadow: 0 0 0 20px var(--Color_1); /* Simule un contour */
     border-radius: 10px; /* Initialement sans arrondi */
+    pointer-events: none; /* Empêche les clics et autres interactions avec l'élément */
 }
 
 .nav-buttons button:hover {
@@ -910,6 +913,8 @@ opacity: 0;
     opacity: 1;  /* Devenir visible */
     visibility: visible;  /* Rend les boutons visibles */
     z-index: 1002;
+    cursor: pointer;
+    pointer-events: auto; /* Empêche les clics et autres interactions avec l'élément */
   }
   
   /* Ajout des délais de transition */
@@ -932,6 +937,7 @@ opacity: 0;
   .show-menu .nav-buttons button:nth-child(5) {
     transition-delay: 0.55s;
   }
+
   
   /* Disparition avec des délais inversés */
   .hide-menu .nav-buttons button:nth-child(1) {
@@ -1076,7 +1082,7 @@ body2 {
 /* Style de l'image */
 .image2 {
     position: fixed; /* Position fixe pour l'image */
-    top: -24px;
+    top: -15px;
     width: 108px; /* Taille de l'image */
     opacity: 100;
     transition: opacity 0.5s ease; /* Transition d'opacité */
@@ -1255,7 +1261,7 @@ body2 {
 /* Style du texte principal */
 #text1 {
     position: fixed;
-    top: 13vw;
+    top: calc(0vw + 155px);
     left: 11vw;
     color: var(--Color_2);
     font-size: 6.4vw;
@@ -1461,7 +1467,7 @@ body2 {
     top: 47vh;
     left: 23%;
     pointer-events: auto;
-    font-size: calc(1.15vw + 18px);
+    font-size: calc(1.15vw + 10px);
      transition: opacity 0.3s ease;  /* Désactive cette ligne */
      z-index: 9997;
 }
