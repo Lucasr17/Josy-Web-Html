@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("scroll", () => {
         const scrollY = window.scrollY;
-        const startScroll = 1420;
-        const endScroll = 1788;
+        const startScroll = 1220;
+        const endScroll = 1800;
         const scrollRange = endScroll - startScroll;
 
         if (scrollY < startScroll) {
@@ -143,11 +143,11 @@ const boxes = document.querySelectorAll('.box');
 
 // Définit les déclencheurs spécifiques par boîte
 const triggerValues = {
-    box1: 0.50, // 60% de la hauteur de l'écran
+    box1: 0.32, // 60% de la hauteur de l'écran
     box2: 0.55,
-    box3: 0.50,
-    box4: 0.55,
-    box5: 0.44,
+    box3: 0.4,
+    box4: 0.50,
+    box5: 0.45,
 };
 
 function checkBoxes() {
@@ -209,9 +209,18 @@ function changeImage(direction) {
     currentIndex += direction;
     if (currentIndex >= elements.length) {
         currentIndex = 0;
-    } else if (currentIndex < 0) {
+    } else if (currentIndex < 3) {
         currentIndex = elements.length - 1;
     }
+
+    setTimeout(() => {
+if (currentIndex === 4) {
+    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> <span style='font-size: 60px;'>entre apéro et tendance</span>";
+}else if (currentIndex === 3){
+    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> À TOUT PRIX</div>";  
+}
+text_fond_josy.style.opacity = "1"; 
+}, 400);
 
     const nextElement = elements[currentIndex]; // Élément suivant
     nextElement.style.transition = "none";
@@ -232,12 +241,23 @@ function changeImage(direction) {
 }
 
 
+var text1 = document.getElementById('text1');
+
+var scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+if (scrollTop <= 30) {
+    text1.style.opacity = "1";
+} else {
+    text1.style.opacity = "0";
+}
+
+
 /*T shirt cintre Debut*/
 
 document.addEventListener("DOMContentLoaded", function () {
     var button = document.querySelector('.bouton_jeu_pc');
 
-    var text1 = document.getElementById('text1');
+    var text1 = document.getElementById('.text1');
 
     if (!button) {
         console.error("❌ Bouton non trouvé !");
@@ -317,25 +337,28 @@ strokeDasharray: pathLength,
 strokeDashoffset: pathLength
 });
 
-
 const pulses = gsap.timeline({
-defaults: {
-scale: 2,
-autoAlpha: 1,
-transformOrigin: 'center', 
-ease: "elastic(2.5, 1)"
-}
-})
-.to(".ball02, .text01", {}, 0.04) 
-.to(".ball03, .text02", {}, 0.62)
-.to(".ball04, .text03", {}, 0.70);
+    defaults: {
+        scale: 2,
+        autoAlpha: 1, /* Rend visible + opacité */
+        transformOrigin: 'center', 
+        ease: "elastic(1.5, 0.6)"
+    }
+});
+
+// Anime les emojis avec un léger décalage dans le temps
+pulses.to(".emoji01", {}, 0.04)    
+      .to(".emoji02", {}, 0.6) 
+      .to(".emoji03", {}, 1)
+      .to(".emoji04", {}, 1.51)
+      .to(".emoji05", {}, 1.98);
 
 const main = gsap.timeline({
 scrollTrigger: {
     trigger: "#svg_histoire",
     scrub: true,
-    start: "top 75%", // Adapter pour mieux synchroniser
-    end: "bottom 100%"
+    start: "top 500px", // Adapter pour mieux synchroniser
+    end: "top -1200px"
 }
 })
 .to(".ball01", {autoAlpha: 1, duration: 0.05})
