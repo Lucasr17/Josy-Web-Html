@@ -66,10 +66,24 @@ z-index: 12;
 
 
 .container {
-    position: relative;
-    width: 100%;
-    height: 200vh; /* Donne de la hauteur pour tester le scroll */
+    position: absolute;
+    top: 600px;
+    width: 100vw;
+    height: 1000px; /* Donne de la hauteur pour tester le scroll */
 }
+
+.emoji {
+    position: absolute;
+    font-size: 20px;
+    transform: translate(-50%, -50%); /* Centre l'emoji */
+    opacity: 0;
+}
+
+.emoji01 { left: 13vw; top: 880px; }
+.emoji02 { left: 90vw; top: calc(700px + 25vw); }
+.emoji03 { left: 30vw; top: calc(842px + 25vw); }
+.emoji04 { left: 45vw; top: calc(825px + 50vw); }
+.emoji05 { left: 90.6vw; top: calc(900px + 50vw); }
 
 .box {
     position: absolute;
@@ -87,11 +101,11 @@ z-index: 12;
 }
 
         /* Style spécifique pour chaque boîte */
-        .box1 { left: 15vw; top: -260vh; }
-        .box2 { left: 60vw; transform: translateX(-50%); top: -230vh; }
-        .box3 { right: 45vw; top: -214vh; }
-        .box4 { left: 16vw; top: -183vh; }
-        .box5 { left: 60vw; transform: translateX(-50%); top: -174vh; }
+        .box1 { left: 13vw; top: 34px; }
+        .box2 { right: 10vw; transform-origin: right center ;top: calc(50px + 25vw); }
+        .box3 { left: 11vw; top: calc(64px + 25vw); }
+        .box4 { left: 32vw; top: calc(30px + 50vw); }
+        .box5 { right: 10vw; transform-origin: right center ; top: calc(250px + 50vw); }
 
 
 .box.visible {
@@ -125,7 +139,7 @@ z-index: 12;
     transform: translate(0%, 0%); 
     font-size: 2.5rem; 
     color: var(--Color_2); 
-    top: 154vh; 
+    top: 152vh; 
     display: flex; 
     flex-wrap: wrap; 
     justify-content: center; 
@@ -142,10 +156,11 @@ z-index: 12;
 
     #svg_histoire { 
         max-width: 95%;  /* Limite la largeur maximale du SVG à celle de la fenêtre */ 
-        margin-top: 15vh; 
-        height: 100vw; 
-        width: 95%; 
+        margin-top: 0; 
+        width: 95vw !important;
+        height: 2000px !important;
         left: 0px; 
+        top : 100px;
         overflow-x: hidden; 
         opacity: 1; 
     } /* Balles et lignes du SVG */
@@ -1079,18 +1094,22 @@ body2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3); /* Fond initial */
     color: white;
     border: none;
     padding: 15px;
     cursor: pointer;
     font-size: 18px;
     z-index: 9997;
-    transition: background 0.3s;
+    transition: background 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
+
 .carousel-button:hover {
     background: rgba(0, 0, 0, 0.6);
 }
+
+
+
 .prev {
     left: 20px;
 }
@@ -1172,6 +1191,7 @@ body2 {
     left: 11vw;
     color: var(--Color_2);
     font-size: 6.4vw;
+    opacity: 0;
     /*transform: translate(-50%, -50%);*/
     z-index: 9997;
     transition: opacity 0.3s ease;
@@ -1319,6 +1339,7 @@ body2 {
     cursor: pointer;
     font-size: 18px;
     z-index: 9997;
+    opacity: 1;
     transition: background 0.3s;
 }
 .carousel-button:hover {
