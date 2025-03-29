@@ -102,7 +102,6 @@
                     </div>
                 </div>
 
-
                 <button id="bouton_jeu_pc" onclick="startTyping()" class="button bouton_jeu_pc"></button>
                 
 
@@ -233,10 +232,10 @@
                                 <video src="https://video.wixstatic.com/video/091b9b_663dfbc9a88e4dda8055577abaebf7a8/1080p/mp4/file.mp4" muted autoplay loop playsinline></video>
      
                             <!--   <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
-                            --> </div>
+                            </div>--> 
                         </div>
                         
-                        <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="carousel-button prev"  onclick="changeImage(-1)">&#10094;</button>
                         <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
                     </div>
 
@@ -245,46 +244,33 @@
                     </p>
 
                     <div class="circle" data-tooltip="Pull en coton"></div>
-                    <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: auto;">
-                        <!-- <path class="line01 line" d="M 10 200  600 200"></path>
-                 <path class="line02 line" d="M 10 400  600 400"></path>
-                 <path class="line03 line" d="M 10 600  600 600"></path>
-                 <path class="line04 line" d="M 10 800  600 800"></path>
-                 <text class="text01" x="30" y="190">2018</text>
-                 <text class="text02" x="30" y="390">2019</text>
-                 <text class="text03" x="30" y="590">2020</text>
-                 
-                 
-                  d="M -5,0
-                    Q 10 30 350 70 
-                    T 350 330
-                    Q -220 340 340 430
-                    T 200 550"-->
-                        <!--Commande modifiée
-d="M10,10 H500 A10,10 0 0 1 510,30 H150 A20,10 0 0 0 150,50 H510 A10,10 0 0 1 520,70 H10"
-Changements apportés
-Augmenter la largeur après les virages :
-H500 devient H510 et H100 devient H150, ce qui augmente les segments horizontaux.
-Adapter les courbes :
-Les coordonnées des courbes après chaque segment horizontal ont été ajustées légèrement pour s'adapter à la nouvelle position.
-Explication des commandes dans d
-M10,10 : Déplacement initial du stylet à la position (10,10).
-H500 : Ligne horizontale jusqu'à x=500.
-A10,10 0 0 1 500,30 : Arc courbé de rayon 10 avec un virage à y=30.
-H100 : Ligne horizontale jusqu'à x=100.
-A20,10 0 0 0 100,50 : Arc courbé de rayon 20.
-H500 : Ligne horizontale jusqu'à x=500.
-A10,10 0 0 1 500,70 : Arc final courbé à y=70.
--->
+                <!--    <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: 100%;">
+                -->  
+                    
+                <svg id="svg_histoire" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 600 800" 
+    width="600" height="800" 
+    preserveAspectRatio="xMinYMin meet">
+
+
                         <path id="theLine" class="theLine" d="M20,20 H500 A20,20 0 0 1 500, 
                  160 H150 A20,20 0 0 0 150,
                  310 H510 A20,20 0 0 1 510,
-                 460 H280" fill="none" stroke="var(--Color_2)" stroke-width="4px" stroke-linejoin="round"/>
+                 460 H100" fill="none" stroke="var(--Color_2)" stroke-width="4px" stroke-linejoin="round"/>
                         <circle class="ball ball01" r="8"></circle>
-                        <circle class="ball_ ball02" r="5"></circle>
+                  <!--      <circle class="ball_ ball02" r="5"></circle>
                         <circle class="ball_ ball03" r="5"></circle>
-                        <circle class="ball_ ball04" r="5"></circle>
+                        <circle class="ball_ ball04" r="5"></circle> -->
+
                     </svg>
+                    
+<div class="emoji emoji01">🎉</div>
+<div class="emoji emoji02">🤯</div>
+<div class="emoji emoji03">🔥</div>
+<div class="emoji emoji04">💡</div>
+<div class="emoji emoji05">🧵</div>
+
                <!--     <div class="box_histoire_1">
                         Il était une fois, dans un monde où la mode était sérieuse et les vêtements manquaient de fantaisie, trois amis décidèrent de changer la donne. Ils étaient animés par une idée simple mais puissante : faire rire les gens tout en les habillant avec style.
 </div>
@@ -313,7 +299,7 @@ A10,10 0 0 1 500,70 : Arc final courbé à y=70.
 
     <div class="box box4">🚀 <span class="highlight">Josy</span>, c’est pour <strong>ceux qui veulent du style sans se prendre au sérieux</strong>. Tu veux être <span class="highlight">unique</span> et <span class="highlight">marrer en même temps</span> ? Tu es au bon endroit ! 🤩</div>
 
-    <div class="box box5">🎉 Enfile <span class="highlight">Josy</span> et deviens l’<strong>âme de la fête</strong>. Ici, chaque <strong>vêtement est une punchline</strong> et chaque jour une <strong>aventure</strong> ! Prêt(e) à nous rejoindre ? 😉</div>
+    <div class="box box5">🎉 Enfile <span class="highlight">Josy</span> et deviens l’<strong>âme de la fête</strong>. Ici, chaque <strong>vêtement est une punchline</strong> et chaque jour une <strong>aventure</strong> ! Prêt(e) à nous rejoindre ?</div>
 </div>
 
 
