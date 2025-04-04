@@ -2,6 +2,7 @@ var scrollPosition = window.scrollY;
 
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -18,17 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const letters = textEffect.querySelectorAll("span");
 
-
-
+    let initialDocumentHeight = document.documentElement.scrollHeight;
 
     window.addEventListener('scroll', function() {
     //document.getElementById('scroll-position').textContent = `Pos: ${scrollPosition}px - Larg: ${sreen_largeur}`;
-    scrollPosition = window.scrollY;
-    
-     console.log(`❎Pos: ${scrollPosition}px`);
+    let scrollPosition = window.scrollY;
+ //   console.log(`❎ Position du scroll : ${scrollPosition}px`);
 
 
-    if (scrollPosition >= 311) {
+
+
+    if (scrollPosition >= 1411) {
 
     textEffect.addEventListener("mousemove", (e) => {
         const rect = textEffect.getBoundingClientRect();
@@ -86,50 +87,77 @@ document.addEventListener("DOMContentLoaded", () => {
     const letters = textEffect.querySelectorAll("span");*/
 
     window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const startScroll = 1220;
-        const endScroll = 1800;
-        const scrollRange = endScroll - startScroll;
-
-        if (scrollY < startScroll) {
-            // Réinitialisation si on est avant 50px
+        let ball = document.querySelector(".ball01");
+        let rect = ball.getBoundingClientRect(); // Position relative à la fenêtre
+    
+        let ballX = rect.left + window.scrollX; // Position absolue sur la page
+        //console.log("⚽️ Pos X absolue :", ballX, " | ScrollY :", window.scrollY);
+    
+        const startX = 906;  // Début de l'effet
+        const endX = 231;    // Fin de l'effet
+        let letters = document.querySelectorAll(".text-effect span");
+    
+        if (letters.length === 0) return;
+    
+        if (ballX > startX) {
+          //  console.log("🛑 Avant le début de l'effet");
             letters.forEach(letter => {
                 letter.style.transform = "scale(1) translateY(0px)";
             });
             return;
         }
+    
+        if (ballX < endX) {
+          //  console.log("🏁 Après la fin de l'effet");
+            letters.forEach((letter, index) => {
+                if (index === 0) {
+                    letter.style.transform = "scale(1.60) translateY(14px)";
+                } else {
+                    letter.style.transform = "scale(1) translateY(0px)";
+                }
+            });
+            return;
+        }
+    
+        // Progression entre 0 et 1
+        let progress = Math.min(Math.max((startX - ballX) / (startX - endX), 0), 1);
 
-        // Calcul de la progression entre 0 et 1
-        let progress = Math.min(Math.max((scrollY - startScroll) / scrollRange, 0), 1);
-
+     //   console.log("📊 Progression :", progress);
+    
         // Déterminer l'index de la lettre actuellement affectée
-        let affectedIndex = Math.floor(progress * letters.length);
+        let affectedIndex = Math.min(
+            Math.floor(progress * letters.length), 
+            letters.length - 1 // ✅ S'assure qu'on ne dépasse pas
+        );
 
+
+      //  console.log("✏️ Lettre affectée :", affectedIndex);
+    
         letters.forEach((letter, index) => {
-            // Lettre principale qui grossit
-            if (index === letters.length - affectedIndex - 1) {
-                letter.style.transform = "scale(1.55) translateY(-14px)";
+            if ((index) === letters.length - affectedIndex - 1) {
+       //         console.log("✏️✏️ effet : ", index, "letter lenght : ",letters.length);
+                letter.style.transform = "scale(1.60) translateY(14px)";
             } 
-            // Lettres voisines à gauche et à droite
             else if (index === letters.length - affectedIndex && index - 1 >= 0) {
-                letters[index - 1].style.transform = "scale(1.35) translateY(-8px)";
+                letters[index - 1].style.transform = "scale(1.40) translateY(8px)";
             }
             else if (index === letters.length - affectedIndex - 2 && index + 1 < letters.length) {
-                letters[index + 1].style.transform = "scale(1.35) translateY(-8px)";
+                letters[index + 1].style.transform = "scale(1.40) translateY(8px)";
             } 
-            // Lettres voisines des voisines (à deux indices de distance)
             else if (index === letters.length - affectedIndex - 3 && index + 2 < letters.length) {
-                letters[index + 2].style.transform = "scale(1.25) translateY(-5px)";
+                letters[index + 2].style.transform = "scale(1.27) translateY(5px)";
             } 
             else if (index === letters.length - affectedIndex + 3 && index - 2 >= 0) {
-                letters[index - 2].style.transform = "scale(1.25) translateY(-5px)";
+                letters[index - 2].style.transform = "scale(1.27) translateY(5px)";
             }
-            // Toutes les autres reviennent à la normale
             else {
                 letter.style.transform = "scale(1) translateY(0px)";
             }
         });
     });
+    
+    
+    
 
 
 
@@ -141,14 +169,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const boxes = document.querySelectorAll('.box');
 
+function calculateBox4() {
+    let width = window.innerWidth;
+    
+    // Exemple : Plus l'écran est large, plus la valeur est basse (arrive plus tôt)
+    let box4Value = 0.20 + (width * 0.001); // Ajuste le facteur selon ton besoin
+
+    // Limites (évite des valeurs extrêmes)
+    box4Value = Math.max(0.30, Math.min(0.80, box4Value));
+
+    return box4Value;
+}
+
 // Définit les déclencheurs spécifiques par boîte
 const triggerValues = {
-    box1: 0.32, // 60% de la hauteur de l'écran
-    box2: 0.55,
-    box3: 0.4,
-    box4: 0.50,
-    box5: 0.45,
+    box1: 0.40, // 60% de la hauteur de l'écran
+    box2: 0.60,
+    box3: 0.37,
+    box4: 0.40,
+    box5: 0.38,
 };
+/*
+window.addEventListener("resize", function () {
+    triggerValues.box4 = calculateBox4();
+    //console.log("Nouvelle valeur de box4 :", triggerValues.box4);
+});*/
 
 function checkBoxes() {
     const windowHeight = window.innerHeight;
@@ -208,7 +253,7 @@ function changeImage(direction) {
     // Correction du calcul du nouvel index
     currentIndex += direction;
     if (currentIndex >= elements.length) {
-        currentIndex = 0;
+        currentIndex = 3;
     } else if (currentIndex < 3) {
         currentIndex = elements.length - 1;
     }
@@ -218,6 +263,8 @@ if (currentIndex === 4) {
     text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> <span style='font-size: 60px;'>entre apéro et tendance</span>";
 }else if (currentIndex === 3){
     text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> À TOUT PRIX</div>";  
+}else if (currentIndex === 5){
+    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong></div>";  
 }
 text_fond_josy.style.opacity = "1"; 
 }, 400);
@@ -271,20 +318,20 @@ document.addEventListener("DOMContentLoaded", function () {
         if (scrollTop <= 31) {
        //     console.log("✅ Bouton visible !");
         //    button.style.opacity = "1";  // Rend le bouton visible
-            button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
+         //   button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
           //  button.style.visibility = "visible"; // S'assure qu'il est visible
         } else {
        //    console.log("❌ Bouton caché !");
          //   button.style.opacity = "0";  // Cache le bouton
-            button.style.pointerEvents = "none"; // Empêche les interactions
+         //   button.style.pointerEvents = "none"; // Empêche les interactions
          //  button.style.visibility = "hidden"; // Cache le bouton
         }
 
         //Début
 if (scrollTop <= 30) {
-    text1.style.opacity = "1";
+  //  text1.style.opacity = "1";
 } else {
-    text1.style.opacity = "0";
+  //  text1.style.opacity = "0";
 }
 
         
@@ -303,11 +350,8 @@ if (scrollTop <= 30) {
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-var button = document.querySelector('.bouton_jeu_pc');
 
-
-
-gsap.fromTo(".button", {
+gsap.fromTo(".bouton_boutique_pc", {
     opacity : 1,  // Cache le bouton
     }, {
     opacity : 0,  // Cache le bouton
@@ -323,12 +367,8 @@ gsap.fromTo(".button", {
 // Initialiser les balles à leur position initiale sur le chemin
 gsap.set(".ball", { opacity:  1});
 
-gsap.set(".ball02", {x:75, y:20});
-gsap.set(".ball03", {x:530, y:154});
-gsap.set(".ball04", {x:120, y:160});
-
 // Fonction pour imiter le dessin du chemin
-const path = document.querySelector("#theLine");
+const path = document.querySelector("#dynamicPath");
 const pathLength = path.getTotalLength();
 
 // Appliquer strokeDasharray et strokeDashoffset pour le chemin
@@ -345,33 +385,253 @@ const pulses = gsap.timeline({
         ease: "elastic(1.5, 0.6)"
     }
 });
+/*
+function calculateEmoji2() {
+    let width = window.innerWidth;
+    
+    // Exemple : Plus l'écran est large, plus la valeur est basse (arrive plus tôt)
+    let emoji2Value = 0 + ((width * 0.78) / 1900); // Ajuste le facteur selon ton besoin
+
+    console.log("Nouvelle valeur de emoji 02 :",  emoji2Value);
+
+    // Limites (évite des valeurs extrêmes)
+    emoji2Value = Math.max(0.30, Math.min(0.80, emoji2Value));
+
+    return emoji2Value;
+
+}
+
+function updateTriggers3() {
+    triggerValues2.emoji02 = calculateEmoji2();
+
+    // Supprime uniquement les ScrollTriggers liés aux emojis
+    ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger && trigger.trigger.classList.contains("emoji")) {
+            trigger.kill();
+        }
+    });
+    
+
+      // **Réinitialiser l’emoji02 à opacity 0**
+      gsap.set(".emoji01", { opacity: 0, scale: 1 });
+      gsap.set(".emoji02", { opacity: 0, scale: 1 });
+      gsap.set(".emoji03", { opacity: 0, scale: 1 });
+      gsap.set(".emoji04", { opacity: 0, scale: 1 });
+      gsap.set(".emoji04", { opacity: 0, scale: 1 });
+
+    // Recréer l’animation GSAP pour .emoji02
+    Object.keys(triggerValues2).forEach((emoji) => {
+        gsap.to(`.${emoji}`, {
+            opacity: 1,  // Apparition progressive
+            scale: 2,    // Agrandissement
+            rotation: 0, 
+            duration: 0.8, // Animation en 0.8s
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: `.${emoji}`, 
+                start: `top ${triggerValues2[emoji] * 100}%`, // Déclenchement dynamique
+                toggleActions: "play none none reset", // Apparition smooth, disparition instantanée
+            }
+        });
+    });
+
+    // Rafraîchir ScrollTrigger pour recalculer les positions
+    ScrollTrigger.refresh();
+}
+*/
+// Définition des déclencheurs
+// Fonction pour calculer la position de scroll en fonction de la largeur
+function getScrollPosition(baseSmall, baseLarge) {
+    // Récupère la largeur actuelle de la page
+    const width = window.innerWidth;
+    return baseSmall + ((baseLarge - baseSmall) * (width - 916) / (1626 - 916));
+}
+
+
+
+// Objet avec les bases spécifiques à chaque emoji
+const triggerValues2 = {
+    emoji01: getScrollPosition(630, 633),
+    emoji02: getScrollPosition(681, 730),
+    emoji03: getScrollPosition(615, 620),
+    emoji04: getScrollPosition(722, 810),
+    emoji05: getScrollPosition(648, 670),
+};
+
+// Recréer l’animation GSAP pour .emoji02
+Object.keys(triggerValues2).forEach((emoji) => {
+    gsap.to(`.${emoji}`, {
+        opacity: 1,  // Apparition progressive
+        scale: 2,    // Agrandissement
+        rotation: 0, 
+        duration: 0.8, // Animation en 0.8s
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: `.${emoji}`,
+            start: `top ${triggerValues2[emoji]}px`, // Utilise la valeur en pixels
+            toggleActions: "play none none reset", // Apparition smooth, disparition instantanée
+        }
+    });
+});
+
+// Déclenche l'événement lors du scroll
+//window.addEventListener('scroll', checkEmojiPosition);
+
+// Créer les animations au chargement de la page
+//updateTriggers3();
+getScrollPosition();
+
+window.addEventListener("resize", function () {
+
+    document.querySelector(".resizeOverlay").classList.remove("hide");
+    document.querySelector(".resizeOverlay").classList.add("show");
+
+    console.log("🔄 Redimensionnement détecté !");
+
+    // Met à jour la position de scroll quand la fenêtre est redimensionnée
+    triggerValues2.emoji02 = getScrollPosition();
+    // Recrée l'animation avec la nouvelle position
+    Object.keys(triggerValues2).forEach((emoji) => {
+        gsap.to(`.${emoji}`, {
+            scrollTrigger: {
+                trigger: `.${emoji}`,
+                start: `top ${triggerValues2[emoji]}px`, // Mise à jour du start
+            }
+        });
+    });
+
+    ScrollTrigger.refresh(); // Force le rafraîchissement des animations ScrollTrigger
+
+});
+
+
+
+// 🔹 Créer dynamiquement le carré noir s'il n'existe pas déjà
+let resizeOverlay = document.createElement("div");
+resizeOverlay.id = "resizeOverlay";
+document.body.appendChild(resizeOverlay);
+resizeOverlay.style.display = "none"; // Caché par défaut
+
+// 🔹 Fonction qui affiche le carré noir pendant le resize
+let resizeTimeout;
+window.addEventListener("resize", function () {
+   // clearTimeout(resizeTimeout);
+
+    // Affiche le carré noir
+  //  resizeOverlay.style.display = "block";
+
+    // Sauvegarde la position du scroll et marque le reload comme venant d'un resize
+    sessionStorage.setItem("fromResize", "true");
+    sessionStorage.setItem("scrollPosition", window.scrollY);
+
+    // Recharge après un petit délai pour éviter de trop recharger en continu
+    resizeTimeout = setTimeout(() => {
+       // location.reload();
+        document.querySelector(".resizeOverlay").classList.add("hide");
+        document.querySelector(".resizeOverlay").classList.remove("show");
+    }, 500); // Recharge après 500ms sans nouvelle modification de la taille
+});
+
+// 🔹 Cacher le carré noir après le chargement
+window.addEventListener("load", function () {
+    const savedScrollPosition = sessionStorage.getItem("scrollPosition");
+
+    // Restaure la position du scroll après le rechargement
+    if (savedScrollPosition) {
+        window.scrollTo(0, parseInt(savedScrollPosition, 10));
+        sessionStorage.removeItem("scrollPosition");
+    }
+
+    // Vérifie si c'était un reload à cause du resize
+    const fromResize = sessionStorage.getItem("fromResize");
+    if (fromResize) {
+        sessionStorage.removeItem("fromResize"); // Supprime le flag
+    }
+
+    // 🔥 Effet fondu pour masquer le carré noir après chargement
+    resizeOverlay.style.opacity = "0";
+    setTimeout(() => {
+        resizeOverlay.style.display = "none";
+    }, 500); // Attendre la fin de l'animation avant de le masquer
+});
+
+
+
+
 
 // Anime les emojis avec un léger décalage dans le temps
+/*
 pulses.to(".emoji01", {}, 0.04)    
       .to(".emoji02", {}, 0.6) 
       .to(".emoji03", {}, 1)
       .to(".emoji04", {}, 1.51)
       .to(".emoji05", {}, 1.98);
+*/
 
-const main = gsap.timeline({
-scrollTrigger: {
-    trigger: "#svg_histoire",
-    scrub: true,
-    start: "top 500px", // Adapter pour mieux synchroniser
-    end: "top -1200px"
-}
-})
-.to(".ball01", {autoAlpha: 1, duration: 0.05})
-.to(".theLine", { strokeDashoffset: 0, duration: 4 }, 0) // Simule le dessin de la ligne
-.to(".ball01", {
-motionPath: {
-path: ".theLine",
-align: ".theLine",
-alignOrigin: [0.5, 0.5]
-}, 
-duration: 4
-}, 0)
-.add(pulses, 0);
+      var nb_dur = 1;
+      const width = window.innerWidth;
+      var scrollAtLarge_svg = -1450; // à 1626px de large
+      var scrollAtSmall_svg = -453; // à 903px de large
+      var speedFactor = (window.innerWidth * (3.5) * nb_dur) / 1800;
+      var scrollPosition_svg = scrollAtSmall_svg + ((scrollAtLarge_svg - scrollAtSmall_svg) * (width - 903) / (1626 - 903));
+      
+      function updateSpeedFactor() {
+
+    // Récupère la largeur actuelle de la page
+    const width = window.innerWidth;
+
+    // Définition des points pour les largeurs spécifiées
+     scrollAtLarge_svg = -1050; // à 1626px de large
+     scrollAtSmall_svg = -383; // à 903px de large
+
+    // Calcul du décalage en fonction de la largeur
+     scrollPosition_svg = scrollAtSmall_svg + ((scrollAtLarge_svg - scrollAtSmall_svg) * (width - 903) / (1626 - 903));
+
+
+          speedFactor = (window.innerWidth * (3.5) * nb_dur) / 1800;
+         // console.log("Nouvelle vitesse :", (speedFactor/nb_dur));
+      //   console.log("Nouvelle end :", (scrollPosition_svg));
+      
+          // Mettre à jour la durée des animations dans la timeline
+          main.getChildren().forEach(tween => {
+              if (tween.vars.duration) {
+                  tween.duration(speedFactor / nb_dur);
+              }
+          });
+      
+          // Rafraîchir ScrollTrigger pour éviter les sauts
+          ScrollTrigger.refresh();
+      }
+      
+      // Création de l'animation GSAP avec ScrollTrigger
+      var main = gsap.timeline({
+          scrollTrigger: {
+              trigger: "#svg_histoire",
+              scrub: true,
+              start: "top 630px",
+            //  end: "top -800px", //"top " & scrollPosition_svg & "px"
+              end: `top ${scrollPosition_svg}}px`,
+             markers: false,
+          }
+      })
+      .to(".ball01", { autoAlpha: 1, duration: 0.05 })
+      .to(".theLine", { strokeDashoffset: 0, duration: (speedFactor / nb_dur) }, 0)
+      .to(".ball01", {
+          motionPath: {
+              path: ".theLine",
+              align: ".theLine",
+              alignOrigin: [0.5, 0.5]
+          }, 
+          duration: (speedFactor / nb_dur)
+      }, 0)
+      .add(pulses, 0);
+
+      updateSpeedFactor();
+      
+      // Mettre à jour le speedFactor et ScrollTrigger à chaque resize
+      window.addEventListener("resize", updateSpeedFactor);
+      
+      
 
 gsap.fromTo("#svg_histoire", {
 opacity: 0
@@ -379,8 +639,8 @@ opacity: 0
 opacity: 1,
 scrollTrigger: {
 trigger: document.body,
-start: "210px",
-end: "220px",
+start: "top 210px",
+end: "top 220px",
 scrub: 0,
 markers: false
 }
@@ -1091,9 +1351,17 @@ markers: false
 
 
 //fin histoire
+function updateBallPosition() {
+    let ball = document.querySelector(".ball01");
+    let rect = ball.getBoundingClientRect(); // Récupère la position de l'élément
+   // console.log("⚽️ Pos X :", rect.left, "Pos Y :", rect.top);
+}
 
     // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
 window.addEventListener('scroll', function() {
+
+updateBallPosition()
+
 var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 var text2 = document.getElementById('text2');
 var txt_josy_histoire_amis = document.getElementById('txt_josy_histoire_amis');
@@ -1193,6 +1461,9 @@ tshirts.forEach((tshirt) => {
 
 // Détection du scroll et activation/désactivation des interactions
 window.addEventListener("scroll", function () {
+
+
+
     let scrollTop = window.scrollY;
    // console.log(`📜 Scroll actuel: ${scrollTop}px`);
 
@@ -1416,9 +1687,9 @@ markers: false
 if (scrollTop >= 4450 && scrollTop <= 4900) {
 
 gsap.fromTo(".T_shirt_Josy_1_", {
-x: sreen_largeur * 0.19,
-y: 50,
-width: "30vw",
+x: sreen_largeur * 0.255,
+y: 15,
+width: "35vw",
 }, {
 x: 0,
 y: 0, 
@@ -1535,6 +1806,33 @@ window.addEventListener('scroll', updateTshirtPosition);
 
 
 window.addEventListener('resize', () => {
+
+/*
+    function updatePath() {
+        let width = window.innerWidth;
+        let scaleFactor = Math.max(1, 40 - width / 50); // Ajuste le rayon dynamiquement
+
+        console.log("✅✅ update line :", scaleFactor*2);
+    
+        let newPath = `M20,20 H500 A${scaleFactor},${scaleFactor} 0 0 1 500, 
+                       160 H150 A${scaleFactor},${scaleFactor} 0 0 0 150,
+                       310 H510 A${scaleFactor},${scaleFactor} 0 0 1 510,
+                       460 H100`;
+    
+    let pathElement = document.getElementById("dynamicPath");
+    if (pathElement) {
+        pathElement.setAttribute("d", newPath);
+    } else {
+        console.error("Le path avec l'ID dynamicPath n'a pas été trouvé !");
+    }
+    }
+    
+    // Met à jour au chargement et au redimensionnement
+    window.addEventListener("load", updatePath);
+    window.addEventListener("resize", updatePath);
+    */
+
+    
 // Recalcule la largeur et met à jour la position x
 sreen_largeur = window.innerWidth;
 
@@ -1593,7 +1891,7 @@ markers: false
 }
 });
 
-gsap.fromTo(".T_shirt_Josy_2", {
+gsap.fromTo(".T_shirt_Jo
 x: - sreen_largeur * 0.10 - 66,
 y: -42,
 scale: 0.7,
@@ -1996,13 +2294,15 @@ points.forEach(point => {
 });
 }
 
+
+
 //window.dispatchEvent(new Event('scroll'));
 let boutonJeu = document.getElementById('bouton_jeu_pc');
 
 if (!boutonJeu) {
-    console.error("❌ EErreur : L'élément #bouton_jeu_pc n'existe pas dans le DOM.");
+  //  console.error("❌ EErreur : L'élément #bouton_jeu_pc n'existe pas dans le DOM.");
 } else {
-    console.log("✅ Élément #bouton_jeu_pc trouvé :", boutonJeu);
+ //   console.log("✅ Élément #bouton_jeu_pc trouvé :", boutonJeu);
 }
 
 let buttonsss = document.querySelectorAll("#nav-buttons button:nth-child(-n+5)");
@@ -2230,6 +2530,8 @@ const popup = document.getElementById("popup_Jeu");
 const closePopupButton = document.getElementById("close-popup_Jeu");
 const gridItems = document.querySelectorAll(".grid-item");
 
+
+
 let activeIndex = null;
 
     // Toggle the active state of grid items
@@ -2278,7 +2580,7 @@ function updateGrid() {
         duration: 2,
         fontSize: '4rem',  // Agrandir la taille du texte
         color: "rgb(255, 255, 255)",  // Change de dégradé
-        y: '-35vh',  // Déplace le texte vers le haut
+        y: '-40vh',  // Déplace le texte vers le haut
         ease: 'power2.inOut'
       }, "<") 
 
@@ -2295,7 +2597,7 @@ function updateGrid() {
       },"<")      
       t0.to("#text_1", {
         duration: 2,
-        fontSize: '0.6rem',  // Agrandir la taille du texte
+        fontSize: '0.0rem',  // Agrandir la taille du texte
      /*   color: transparent,  // Change de dégradé
         background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
         y: '0vh',  // Déplace le texte vers le haut
@@ -2317,7 +2619,7 @@ function updateGrid() {
             duration: 2,
             fontSize: '3rem',  // Agrandir la taille du texte
             color: "rgb(255, 255, 255)",  // Change de dégradé
-            y: '-35vh',  // Déplace le texte vers le haut
+            y: '-40vh',  // Déplace le texte vers le haut
             ease: 'power2.inOut'
          /*   color: transparent,  // Change de dégradé
             background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
@@ -2335,7 +2637,7 @@ function updateGrid() {
           }, "<")      
           t0.to("#text_0", {
             duration: 2,
-            fontSize: '0.6rem',  // Agrandir la taille du texte
+            fontSize: '0.0rem',  // Agrandir la taille du texte
          /*   color: transparent,  // Change de dégradé
             background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
             y: '0vh',  // Déplace le texte vers le haut
@@ -2344,29 +2646,175 @@ function updateGrid() {
            // "<" permet de lancer cette animation en même temps que la précédente
       }
 
+      
+
     } else if (activeIndex !== null) {
       item.classList.add("inactive");
       if (index < activeIndex) {
+
+        var iframe = document.querySelector(".iframe-jeu");
+
+        setTimeout(() => {
+            var emoji_0 = document.getElementById("emoji_0");
+            emoji_0.style.opacity = 1;
+        }, 1100);
+
+        var emoji_1 = document.getElementById("emoji_1");
+      
+
+        iframe.style.display = "flex"; 
+        setTimeout(() => {
+            iframe.style.opacity = "1";   // Rend visible avec transition
+            iframe.style.zIndex = "9999";  // S'assure qu'il est au-dessus
+            iframe.style.pointerEvents = "auto";
+           // iframe.src="http://127.0.0.1:5500/Josy_jeu.html";
+            iframe.src="https://josy2.fly.dev/Josy_Jeu";
+           
+
+            
+        }, 1200);
+
+        emoji_1.style.opacity = 0;
+        
+        var textContainer = document.getElementById('textContainer');
+        textContainer.textContent = "";
+        // 
+        textContainer.style.opacity = 0;
+        var gridItems = document.querySelectorAll('.spaced-element');  // Sélectionne tous les éléments avec cette classe
+        gridItems.forEach(function(gridItem) {
+            gridItem.style.opacity = 0;
+            gridItem.style.display = 'none';
+        }); 
+        
         item.classList.add("tab", "left");
+
+
+//iframe
+
+
+
+//const countdownText = document.getElementById("countdown-text");
+
+//et countdown = 2; // Durée du compte à rebours
+
+    // Mettre à jour le compte à rebours chaque seconde
+   // countdownText.textContent = `Jeu dans ${countdown}...`;
+  //  countdownText.style.opacity = 1;
+   // let interval = setInterval(() => {
+     //   countdown--;
+       // if (countdown > 0) {
+         //   countdownText.textContent = `Jeu dans ${countdown}...`;
+       // } else {
+       //     clearInterval(interval);
+         //   countdownText.textContent = `.`;
+        //    countdownText.style.opacity = 0;
+          //  countdownText.style.display = "none"; // Cacher le compte à rebours
+          //  iframe.style.display = "flex";
+
+     //   }
+  //  }, 1000);
+
+          
+
+  
+ 
+
+//fin iframe
+
+
       } else {
+
+        var emoji_0 = document.getElementById("emoji_0");
+        emoji_0.style.opacity = 0;
+
+        var iframe = document.querySelector(".iframe-jeu");
+        var emoji_1 = document.getElementById("emoji_1");
+  
+        iframe.style.opacity = "0";  // Commence la transition de disparition
+        //iframe.style.zIndex = "-1";  // Place en arrière-plan
+        setTimeout(() => {
+        iframe.src="";
+        iframe.style.display = "none"; // Cache après la transition
+        iframe.bottom = "-30%";  // Affiche l'iframe
+       
+        setTimeout(() => {
+        emoji_1.style.opacity = 1;
+    }, 700);
+
+    }, 500);
+
+
         item.classList.add("tab", "right");
+        ecriture_text();
+
+        setTimeout(() => {
+          
+        var textContainer = document.getElementById('textContainer');
+        textContainer.style.opacity = 1;
+        
+        //🔍  
+        var gridItems = document.querySelectorAll('.spaced-element');  // Sélectionne tous les éléments avec cette classe
+
+
+        gridItems.forEach(function(gridItem) {
+            gridItem.style.display = 'inline'; // ou 'flex', 'inline', etc. selon ton besoin
+           gridItem.style.opacity = 1;
+            console.log("Spaced element 2 OK");
+        });  
+        }, 1000);
+
       }
     }
   });
 
-  controlButtons.forEach(button => {
+/*  controlButtons.forEach(button => {
     const index = parseInt(button.id.split('-')[1]);
     if (index === activeIndex) {
       button.style.transform = 'scale(1.2)';
     } else {
       button.style.transform = 'scale(1)';
     }
-  });
+  });*/
 }
 
 function Close_Jeu() {
+
 const closePopupButton = document.getElementById('close-popup_Jeu');
 const popup = document.getElementById('popup_Jeu');
+
+var iframe = document.querySelector(".iframe-jeu");
+  
+
+iframe.style.opacity = "0";  // Commence la transition de disparition
+iframe.style.display = "none"; // Cache après la transition
+iframe.bottom = "-30%";  // Affiche l'iframe
+iframe.src="";
+
+var textContainer = document.getElementById('textContainer');
+textContainer.style.opacity = 0;
+textContainer.textContent = "";
+
+var gridItems = document.querySelectorAll('.spaced-element');  // Sélectionne tous les éléments avec cette classe
+
+gridItems.forEach(function(gridItem) {
+    gridItem.style.display = 'none'; // ou 'flex', 'inline', etc. selon ton besoin
+    gridItem.style.opacity = 0;
+   
+});  
+
+var grid_Items = document.querySelectorAll(".grid-item");
+grid_Items.forEach(function(gridItem) {
+    gridItem.style.backgroundImage = "linear-gradient(135deg, rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.2))";
+});  
+
+document.querySelector('[data-index="0"]').classList.remove("active");
+document.querySelector('[data-index="1"]').classList.remove("active");
+
+document.querySelector('[data-index="0"]').classList.add("inactive");
+document.querySelector('[data-index="1"]').classList.add("inactive");
+
+
+
 // Close the popup
 
 gsap.to(popup, { 
@@ -2515,92 +2963,56 @@ button.addEventListener("click", () => {
  // GridContainer.style.visibility = "visible";
 });
 
+}
 
+function ecriture_text() {
 
-    const iframe = document.getElementById("iframe-jeu");
-    const modal = document.getElementById("modal-jeu");
-    const countdownText = document.getElementById("countdown-text");
-
-    // Masquer l'iframe au départ pour éviter qu'il garde l'ancienne URL
     try {
-
-    countdownText.style.display = "block";
-    iframe.style.display = "none";
-    iframe.src = ""; 
-
-    // Afficher la modal immédiatement
-    modal.style.display = "block";
-    }catch{
-
-    }
-
-    let countdown = 2; // Durée du compte à rebours
-
-        // Mettre à jour le compte à rebours chaque seconde
-        countdownText.textContent = `Jeu dans ${countdown}...`;
-        countdownText.style.opacity = 1;
-        let interval = setInterval(() => {
-            countdown--;
-            if (countdown > 0) {
-                countdownText.textContent = `Jeu dans ${countdown}...`;
-            } else {
-                clearInterval(interval);
-                countdownText.textContent = `.`;
-                countdownText.style.opacity = 0;
-              //  countdownText.style.display = "none"; // Cacher le compte à rebours
-                iframe.src = "https://josy2.fly.dev/Josy_Jeu"; 
-                iframe.style.display = "block";
-            }
+        console.log("Lancement de la fonction startTyping.");
+        
+        // Texte à afficher progressivement
+        var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
+        
+        // Sélection du conteneur où le texte sera affiché
+        var textContainer = document.getElementById('textContainer');
+        if (!textContainer) {
+        throw new Error("Élément avec l'ID 'textContainer' introuvable.");
+        }
+        
+        // Fonction pour afficher le texte progressivement
+        function typeWriter(text, i) {
+        if (i < text.length) {
+            textContainer.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(function () {
+                typeWriter(text, i);
+            }, 60); // Délai entre chaque caractère (en millisecondes)
+        } else {
+            console.log("Texte affiché avec succès.");
+        }
+        }
+        
+        // Efface le contenu précédent du conteneur de texte
+        textContainer.innerHTML = '';
+        console.log("Contenu précédent effacé.");
+        
+        // Calcule la largeur totale du texte final
+        textContainer.innerHTML = text; // Place temporairement tout le texte pour mesurer
+        const textWidth = textContainer.offsetWidth;
+        textContainer.innerHTML = ''; // Vide après la mesure
+        
+        // Centrer à 50 % de la largeur finale
+        textContainer.style.left = `calc(50% - ${textWidth / 2}px)`;
+        textContainer.style.transform = 'translateX(0)'; // Annule le translate si ajustement précis
+        
+        // Délai initial avant de commencer à écrire
+        setTimeout(function () {
+        typeWriter(text, 0);
         }, 1000);
-
-
-try {
-console.log("Lancement de la fonction startTyping.");
-
-// Texte à afficher progressivement
-var text = "Soyez dans le top 5 des JOSYmots et gagner un bon de réduction";
-
-// Sélection du conteneur où le texte sera affiché
-var textContainer = document.getElementById('textContainer');
-if (!textContainer) {
-throw new Error("Élément avec l'ID 'textContainer' introuvable.");
-}
-
-// Fonction pour afficher le texte progressivement
-function typeWriter(text, i) {
-if (i < text.length) {
-    textContainer.innerHTML += text.charAt(i);
-    i++;
-    setTimeout(function () {
-        typeWriter(text, i);
-    }, 60); // Délai entre chaque caractère (en millisecondes)
-} else {
-    console.log("Texte affiché avec succès.");
-}
-}
-
-// Efface le contenu précédent du conteneur de texte
-textContainer.innerHTML = '';
-console.log("Contenu précédent effacé.");
-
-// Calcule la largeur totale du texte final
-textContainer.innerHTML = text; // Place temporairement tout le texte pour mesurer
-const textWidth = textContainer.offsetWidth;
-textContainer.innerHTML = ''; // Vide après la mesure
-
-// Centrer à 50 % de la largeur finale
-textContainer.style.left = `calc(50% - ${textWidth / 2}px)`;
-textContainer.style.transform = 'translateX(0)'; // Annule le translate si ajustement précis
-
-// Délai initial avant de commencer à écrire
-setTimeout(function () {
-typeWriter(text, 0);
-}, 1000);
-} catch (error) {
-console.error("Erreur dans startTyping :", error.message);
-throw error; // Facultatif : pour arrêter le script si nécessaire
-}
-
+        } catch (error) {
+        console.error("Erreur dans startTyping :", error.message);
+        throw error; // Facultatif : pour arrêter le script si nécessaire
+        }
 
 }
 
@@ -2612,6 +3024,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 console.log("chargement en cours .... !");
 
+    // Vérifie si la page a été rechargée suite à un resize
+    const fromResize = sessionStorage.getItem("fromResize");
+
+    if (fromResize) {
+        console.log("Rechargement suite à un resize, pas d'animation.");
+        sessionStorage.removeItem("fromResize"); // Supprime le flag après le rechargement
+        document.getElementById('overlay').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        return; // On stoppe ici pour éviter de lancer l'animation
+    }
+
 // Sélectionner les éléments
 const overlay = document.getElementById('overlay');
 const introImage = document.querySelector('.intro-image'); // Correspond à votre image
@@ -2622,10 +3045,10 @@ const preloadImage = new Image();
 preloadImage.src = '../Image/Josy - St barth 5.webp'; // Source de votre image
 
 preloadImage.onload = () => {
-console.log("Image chargée en arrière-plan !");
+//console.log("Image chargée en arrière-plan !");
 };
 preloadImage.onerror = () => {
-console.error("Erreur lors du chargement de l'image.");
+//console.error("Erreur lors du chargement de l'image.");
 };
 
 // Lancer les animations immédiatement
@@ -2859,6 +3282,8 @@ document.getElementById("resultat").textContent = 'Erreur de connexion avec le s
 
 // Fonction pour compter le mot saisi
 async function compterMot() {
+
+    console.log('Compter Mot ...');
 
 
 try {
