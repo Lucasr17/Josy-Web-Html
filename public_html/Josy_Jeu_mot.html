@@ -6,9 +6,17 @@
     <title>Les JOSYmots</title>
     <style>
 
+@font-face { 
+    font-family: 'Poppins'; 
+    src: 
+    url('../fonts/Poppins-Medium.woff2') format('woff2'),
+    url('../fonts/Poppins-Medium.woff') format('woff'),
+    url('../fonts/Poppins-Medium.otf') format('opentype'); font-weight: normal; font-style: normal; } 
+
+
 :root {
   --width: 40vw;
-  --height: 10vh;
+  --height: 6vh;
   --stroke: 4px;
   --border: calc(var(--stroke)) solid #276A88; /* Couleur légèrement foncée */
   --transition-duration: 10s; /* Durée totale de l'animation */
@@ -29,6 +37,7 @@
 }
 
         body {
+            font-family: 'Poppins';
             background-color: black;
             margin: 0;
             overflow: hidden;
@@ -50,22 +59,25 @@
 
 
 .box {
+ font-family: 'Poppins';
   width: var(--width);
   height: var(--height);
   background: var(--primary-color);
   margin: auto;
-  border: var(--border);
+  border: none;/*var(--border);*/
   text-align: center;
   color: #fff;
   position: relative;
   border-radius: 15px;
   top: 20px;
   cursor: pointer;
+  z-index: 9999;
   
 }
 
 .box::before,
 .box::after,
+/*
 .box-inner::after,
 .box-inner::before {
   position: absolute;
@@ -73,6 +85,8 @@
   content: '';
   transition: none;
 }
+
+*/
 
 .box::before {
   width: 0;
@@ -94,7 +108,7 @@ transition-delay: 0s;
   transition: 1.25s linear;
   transition-delay: 3.75s;
 }
-
+/*
 .box-inner::after {
   width: 0;
   height: var(--stroke);
@@ -111,7 +125,7 @@ transition-delay: 0s;
   left: calc(-1 * var(--stroke));
   transition: 1.25s linear;
   transition-delay: 8.75s;
-}
+}*/
 
 /* Classe pour activer l'animation */
 .box.animated:hover,
@@ -165,6 +179,7 @@ transition-delay: 0s;
         }*/
 
         .word-container {
+            font-family: 'Poppins';
             position: absolute;
             width: 100%;
             height: 100%;
@@ -183,13 +198,62 @@ transition-delay: 0s;
             align-items: center;
             z-index: 20;
         }
+        
         .congratulations {
+            font-family: 'Poppins';
             color: white;
             font-size: 32px;
             text-align: center;
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 8px;
+        }
+
+
+        /* Style du bouton Replay */
+        #replay-button {
+            display: none;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            color: black;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+                /* Style du compte à rebours */
+        #countdown {
+            font-family: 'Poppins';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgb(255, 123, 123);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Style de l'écran de préparation */
+        #ready-screen {
+            font-family: 'Poppins';
+            position: fixed;
+            top: 0vh;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: bold;
+            z-index: 100;
+            transition: transform 0.3s ease, opacity 0.8s ease; /* Transition pour opacité */
         }
 
         /* Animation du serpent lumineux */
@@ -219,13 +283,14 @@ transition-delay: 0s;
 </head>
 <body>
 
-
+    <div id="countdown">10s</div>
+    <div id="ready-screen">Êtes-vous prêt ?</div>
 
     <div class="word-container" id="word-container"></div>
 
     <div class="box">
         <div class="box-inner">
-            <h2 class="h2" id="instruction-text">Trouvez le mot <span id="random-word"></span> en moins de 10s</h2>
+            <h2 class="h2" id="instruction-text">Trouvez le mot JOSY<span id="random-word"></span> en moins de 10s</h2>
           <!--  <h2 class="h2">  Trouvez le mot en moins de 10s</h2>
             <div class="random-word" id="random-word"></div> -->
         </div>
@@ -233,17 +298,24 @@ transition-delay: 0s;
 
     <div class="overlay" id="overlay">
         <div class="congratulations" id="congratulations-message">Félicitations ! Vous avez trouvé le mot !</div>
+        <button id="replay-button">Rejouer</button>
     </div>
 
     
 
     <script>
 
+let timeLeft = 10;
+let countdownInterval;
+
+/*
 document.addEventListener("DOMContentLoaded", function () {
+
+
     setTimeout(function () {
       document.querySelector('.box').classList.add('animated');
     }, 100); // Délai de 100 ms
-  });
+  });*/
 
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
@@ -254,11 +326,24 @@ document.addEventListener("DOMContentLoaded", function () {
             let timer;
 
             // Fonction pour récupérer les données depuis le fichier JSON
-            function fetchData() {
+          /*  function fetchData() {
                 return fetch('data2.json')
                     .then(response => response.json())
                     .catch(error => console.error('Erreur lors de la récupération des données:', error));
-            }
+            }*/
+
+            function fetchData() {
+            return fetch('motsJOSY.json')
+                .then(response => response.json())
+                .then(data => {
+                    const words = data.map(item => item.mot);
+                    placeWords(words);
+                    const randomWord = words[Math.floor(Math.random() * words.length)];
+                    document.getElementById("random-word").textContent = randomWord;
+                })
+                .catch(error => console.error('Erreur chargement mots:', error));
+        }
+
 
             // Fonction pour obtenir une valeur aléatoire dans une plage donnée
             function getRandomValue(min, max) {
@@ -283,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // Fonction pour placer les mots de manière aléatoire
-            function placeWords(words) {
+        /*    function placeWords(words) {
                 const wordContainer = document.getElementById('word-container');
                 const bodyWidth = window.innerWidth;
                 const bodyHeight = window.innerHeight;
@@ -333,8 +418,62 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
+*/
+          
+            // Fonction pour placer les mots de manière aléatoire
+            function placeWords(words) {
+                const wordContainer = document.getElementById('word-container');
+                const bodyWidth = window.innerWidth;
+                const bodyHeight = window.innerHeight;
+                const placedElements = [];
 
-            // Fonction pour afficher le message de félicitations
+                words.forEach(word => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = 'JOSY' + word;
+
+                    let attempts = 0;
+                    let placed = false;
+
+                    while (attempts < maxAttempts && !placed) {
+                        const wordWidth = span.offsetWidth;
+                        const wordHeight = span.offsetHeight;
+
+                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
+                        const randomY = getRandomValue(margin + 80, bodyHeight - wordHeight - margin - 50);
+                        const randomAngle = getRandomValue(-40, 40);
+                        const randomScale = getRandomValue(0.6, 1.15);
+
+                        span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
+                        wordContainer.appendChild(span);
+
+                        if (!isOverlapping(span, placedElements)) {
+                            placedElements.push(span);
+                            
+                            // Ajouter un gestionnaire d'événements pour le clic
+                            span.addEventListener('click', () => {
+                                if (span.textContent === randomWordElement.textContent) {
+                                    span.classList.add('green');
+                                    showCongratulations();
+                                }
+                            });
+
+                            placed = true;
+                        } else {
+                            wordContainer.removeChild(span);
+                        }
+
+                        attempts++;
+                    }
+
+                    if (!placed) {
+                        console.warn(`Could not place word: ${word}`);
+                    }
+                });
+            }
+
+
+// Fonction pour afficher le message de félicitations
             function showCongratulations() {
                 overlay.style.display = 'flex';
                 clearTimeout(timer); // Arrêter le chronomètre
@@ -343,18 +482,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function highlightMatchingWords() {
     const randomWord = randomWordElement.textContent; // Mot du bouton
 
-    placedElements.forEach(span => {
+  /*  placedElements.forEach(span => {
         if (span.textContent === randomWord) {
             span.classList.add('red'); // Ajoute la classe pour changer la couleur en rouge
         } else {
             span.classList.remove('red'); // Retire la classe si le mot ne correspond pas
         }
-    });
+    });*/
 }
 
 
-            // Initialiser les données et placer les mots
-            fetchData().then(words => {
+    // Initialiser les données et placer les mots
+    fetchData().then(words => {
                 placeWords(words);
 
                 // Choisir un mot aléatoire pour l'afficher dans le bouton
@@ -362,15 +501,66 @@ document.addEventListener("DOMContentLoaded", function () {
                 randomWordElement.textContent = randomWord;
 
                 // Démarrer le chronomètre de 10 secondes
-                timer = setTimeout(() => {
+                /*timer = setTimeout(() => {
                     overlay.style.display = 'flex'; // Afficher l'overlay si le temps expire
                     document.getElementById("congratulations-message").textContent = "Temps écoulé !"; // Message de temps écoulé
                    
-                    highlightMatchingWords();
+                  //  highlightMatchingWords();
 
-                }, timeLimit * 1000);
+                }, timeLimit * 1000);*/
             });
+
         });
+        
+        function startGame() {
+        document.getElementById("ready-screen").style.opacity = 0; // Rendre l'écran de préparation transparent
+        setTimeout(() => {
+            document.getElementById("ready-screen").style.display = "none"; // Masquer l'écran de préparation
+        }, 800); // Délai pour la transition d'opacité
+            countdownInterval = setInterval(updateCountdown, 1000);
+           // fetchWords();
+
+        }
+
+
+        function updateCountdown() {
+
+
+            if (timeLeft > 0) {
+                document.getElementById("countdown").textContent = timeLeft + 's';
+                timeLeft--;
+                console.log("temps :", timeLeft);
+            } else {
+                clearInterval(countdownInterval);
+                document.getElementById("overlay").style.display = "flex";
+                document.getElementById("congratulations-message").textContent = "Temps écoulé !";
+                document.getElementById("replay-button").style.display = "block";
+            }
+        }
+
+        document.getElementById("replay-button").addEventListener("click", function () {
+            location.reload();
+        });
+
+        function showReadyCountdown() {
+            let count = 3;
+            const readyScreen = document.getElementById("ready-screen");
+            readyScreen.textContent = "Êtes-vous prêt ?";
+            setTimeout(() => {
+                const countdownInterval = setInterval(() => {
+                    readyScreen.textContent = count;
+                    count--;
+                    if (count < 0) {
+                        clearInterval(countdownInterval);
+                        startGame();
+                    }
+                }, 1000);
+            }, 2000);
+        }
+
+
+            showReadyCountdown();
+
     </script>
 </body>
 </html>
