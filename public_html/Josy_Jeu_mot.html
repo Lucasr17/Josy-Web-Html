@@ -15,7 +15,7 @@
 
 
 :root {
-  --width: 40vw;
+  --width: 80vw;
   --height: 6vh;
   --stroke: 4px;
   --border: calc(var(--stroke)) solid #276A88; /* Couleur légèrement foncée */
@@ -452,9 +452,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             
                             // Ajouter un gestionnaire d'événements pour le clic
                             span.addEventListener('click', () => {
-                                if (span.textContent === randomWordElement.textContent) {
-                                    span.classList.add('green');
+                                console.log("click :", span, 'chercher : ',('JOSY' + randomWordElement.textContent));
+                                if (span.textContent === ('JOSY' + randomWordElement.textContent)) {
+                                    clearInterval(countdownInterval);
                                     showCongratulations();
+                                    span.classList.add('green');
                                 }
                             });
 
@@ -476,13 +478,15 @@ document.addEventListener("DOMContentLoaded", function () {
 // Fonction pour afficher le message de félicitations
             function showCongratulations() {
                 overlay.style.display = 'flex';
+                document.getElementById("replay-button").style.display = "block";
                 clearTimeout(timer); // Arrêter le chronomètre
+                clearInterval(timer);
             }
 
     function highlightMatchingWords() {
     const randomWord = randomWordElement.textContent; // Mot du bouton
-
-  /*  placedElements.forEach(span => {
+/*
+    placedElements.forEach(span => {
         if (span.textContent === randomWord) {
             span.classList.add('red'); // Ajoute la classe pour changer la couleur en rouge
         } else {
@@ -491,24 +495,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });*/
 }
 
-
-    // Initialiser les données et placer les mots
-    fetchData().then(words => {
+fetchData().then(words => {
                 placeWords(words);
 
                 // Choisir un mot aléatoire pour l'afficher dans le bouton
                 const randomWord = words[Math.floor(Math.random() * words.length)];
                 randomWordElement.textContent = randomWord;
 
+                highlightMatchingWords();
+
+
+
+
                 // Démarrer le chronomètre de 10 secondes
                 /*timer = setTimeout(() => {
                     overlay.style.display = 'flex'; // Afficher l'overlay si le temps expire
                     document.getElementById("congratulations-message").textContent = "Temps écoulé !"; // Message de temps écoulé
                    
-                  //  highlightMatchingWords();
+                 
 
                 }, timeLimit * 1000);*/
             });
+
 
         });
         
@@ -517,10 +525,12 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             document.getElementById("ready-screen").style.display = "none"; // Masquer l'écran de préparation
         }, 800); // Délai pour la transition d'opacité
-            countdownInterval = setInterval(updateCountdown, 1000);
+            countdownInterval = setInterval(updateCountdown, 1200);
            // fetchWords();
+              // Initialiser les données et placer les mots
 
         }
+
 
 
         function updateCountdown() {
@@ -550,6 +560,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 const countdownInterval = setInterval(() => {
                     readyScreen.textContent = count;
                     count--;
+                    const span = document.createElement("span");
+                    span.addEventListener("click", () => {
+                        console.log("Click OK");
+                    if (word === randomWordElement) {
+                        clearInterval(timer);
+                        showOverlay("Félicitations ! Vous avez trouvé le mot !");
+                    }
+                });
                     if (count < 0) {
                         clearInterval(countdownInterval);
                         startGame();
