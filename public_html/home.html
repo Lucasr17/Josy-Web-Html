@@ -18,8 +18,13 @@
         
 <!-- CODE HTML -->
 
+
         <div id="page-container">
+            
             <!-- Page noire par-dessus le contenu principal -->
+
+            <div class="resizeOverlay"></div>
+
             <div class="overlay" id="overlay">
                 <img src="images/Josy.png" alt="Image d'introduction" class="intro-image">
                 <div class="vertical-noir"></div>
@@ -27,6 +32,9 @@
             </div>
             <div class="common-section">
                 <div class="brick">
+
+                    
+
                     <!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
 <img src= '../Image/Josy - St barth 5.webp' class="photodrone" alt="Image"> -->
                 </div>
@@ -36,13 +44,13 @@
                     <div class="modal-background">
                         <div class="modal">
                             <h2>Trouvez un Josy mot</h2>
-                            <p><span id="textContainer"></span></p>
+                            <p><span id="textContainer1">...</span></p>
                             <label for="motInput">Entrez un mot : JOSY</label>
                             <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)"/><br>
                             <button onclick="compterMot()">Valider</button><br>
                             <p id="resultat"></p>
                                <!--  <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br> -->
-                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100%" preserveAspectRatio="none">
+                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
                                 <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect>
                             </svg>
                         </div>
@@ -57,34 +65,61 @@
 
                 <div id="popup_Jeu" class="popup_Jeu hidden">
                     <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
-              
                     <div id="grid" class="grid-container">
-                      <div class="grid-item" data-index="0">
-                        <div class="text-gradient" id="text_0">Trouvez un JOSYmot</div>
-                      </div>
-                      <div class="grid-item" data-index="1">
-                        <div class="text-gradient"id="text_1">Voyez vous le JOSYmot</div>
-                      </div>
-                     <!-- <div class="grid-item" data-index="2">
-                        <p class="text-white text-xl">Zone 3</p>
-                      </div>
-                      <div class="grid-item" data-index="3">
-                        <p class="text-white text-xl">Zone 4</p>
-                      </div>-->
+                        <div class="grid-item" data-index="0">
+                            <div class="game-container">
+                                <!-- Titre au-dessus -->
+                                <div class="text-gradient title" id="text_0"style="text-align: center; margin-bottom: 10px;"> Trouvez un JOSYmot</div>
+
+                                <div class="text-gradient" id="emoji_0" style="opacity: 0; text-align: center; top: 41vh;  transition: transform 0.3s ease, opacity 0.5s ease;">
+                                    🖊️
+                                </div>
+                                
+                                <!-- Contenu en dessous -->
+                                <div class="content">
+
+                                    <p id="space-above"></p>
+                                    <div class="container23" style="position: relative; width: 100%;">
+                                        <p><span id="textContainer">...</span></p>
+                                    </div>
+                                    <p id="space-below"></p>
+                                    
+                                    <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
+                                    <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element"/><br>
+                                    <button onclick="compterMot()" class="spaced-element">Valider</button><br>
+                                    <p id="resultat" class="spaced-element"></p>
+                    
+                                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
+                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="grid-item" data-index="1" style="display: inline; flex-direction: column; align-items: center; width: 100%;">
+                            <!-- Titre centré -->
+                            <div class="text-gradient" id="text_1" style="text-align: center; margin-bottom: 10px;"> Voyez-vous le JOSYmot </div>
+
+                            <div class="text-gradient" id="emoji_1" style="opacity: 0; text-align: center; top: 47%; transition: transform 0.3s ease, opacity 0.5s ease;">
+                                🔍
+                            </div>
+                    
+                            <!-- Conteneur de l'iframe -->
+                            <iframe id="iframe-jeu" class="iframe-jeu" scr="https://josy2.fly.dev/Josy_Jeu"></iframe>
+
+                        </div>
                     </div>
-              
-                    <!--  <div class="control-buttons">
-                      <div id="control-0" class="control-button">1</div>
-                      <div id="control-1" class="control-button">2</div>
-                     <div id="control-2" class="control-button">3</div>
-                      <div id="control-3" class="control-button">4</div> 
-                    </div>-->
-                  </div>
+                    
+                </div>
+                
 
                   
                 </div>
 
                 <div class="instagram-section"><a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank"> <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram"> </a>
+                   
+               
+                
                 </div>
 
            <div class="navbar_background"> </div>>
@@ -214,7 +249,7 @@
                 <div class="brick">
                      <!--  <div class="buttons">
                           <button onclick="startTyping()" id="one" class="button"></button> -->
-                        <button onclick="ToBoutique()" class="button bouton_boutique_pc">Boutique</button>
+                        <button onclick="ToBoutique()" class="bouton_boutique_pc" id="bouton_boutique_pc">Boutique</button>
                     <!--   </div>
                     <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image">
 
@@ -247,14 +282,10 @@
                 <!--    <svg id="svg_histoire" xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 800" style="width: 100%; height: 100%;">
                 -->  
                     
-                <svg id="svg_histoire" 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 600 800" 
-    width="600" height="800" 
-    preserveAspectRatio="xMinYMin meet">
+                <svg id="svg_histoire"  xmlns="http://www.w3.org/2000/svg" viewBox="10 0 600 300" width="100vw" height="1600px" preserveAspectRatio="xMinYMin meet">
 
 
-                        <path id="theLine" class="theLine" d="M20,20 H500 A20,20 0 0 1 500, 
+                        <path id="dynamicPath" class="theLine" d="M20,20 H500 A20,20 0 0 1 500, 
                  160 H150 A20,20 0 0 0 150,
                  310 H510 A20,20 0 0 1 510,
                  460 H100" fill="none" stroke="var(--Color_2)" stroke-width="4px" stroke-linejoin="round"/>
