@@ -308,6 +308,8 @@ transition-delay: 0s;
 let timeLeft = 10;
 let countdownInterval;
 
+var randomWord;
+
 /*
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -319,11 +321,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.addEventListener("DOMContentLoaded", function() {
             const margin = 20;
-            const maxAttempts = 500;
+            const maxAttempts = 5000;
             const overlay = document.getElementById('overlay');
             const randomWordElement = document.getElementById("random-word");
             let timeLimit = 10; // Durée en secondes
             let timer;
+            var placedElements = [];
 
             // Fonction pour récupérer les données depuis le fichier JSON
           /*  function fetchData() {
@@ -337,9 +340,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     const words = data.map(item => item.mot);
+                    setTimeout(() => {
+                       
+                   
                     placeWords(words);
-                    const randomWord = words[Math.floor(Math.random() * words.length)];
-                    document.getElementById("random-word").textContent = randomWord;
+                  //  const randomWord = words[Math.floor(Math.random() * words.length)];
+
+if (placedElements.length > 0) {
+    const randomElement_ = placedElements[Math.floor(Math.random() * placedElements.length)];
+    const randomWord_ = randomElement_.textContent.replace('JOSY', ''); // Retire "JOSY" si nécessaire
+    console.log("Mot aléatoire parmi les placés :", randomWord_);
+    document.getElementById("random-word").textContent = randomWord_;
+    randomWord = randomWord_;
+} else {
+   // console.log("Aucun élément placé encore.");
+}
+
+}, 900); // Délai de 100 ms
+                   // document.getElementById("random-word").textContent = randomWord;
                 })
                 .catch(error => console.error('Erreur chargement mots:', error));
         }
@@ -425,53 +443,69 @@ document.addEventListener("DOMContentLoaded", function () {
                 const wordContainer = document.getElementById('word-container');
                 const bodyWidth = window.innerWidth;
                 const bodyHeight = window.innerHeight;
-                const placedElements = [];
+                placedElements = [];
 
-                words.forEach(word => {
-                    const span = document.createElement('span');
-                    span.className = 'word';
-                    span.textContent = 'JOSY' + word;
+                let failed = false; // Variable pour contrôler l'état d'échec
 
-                    let attempts = 0;
-                    let placed = false;
+words.forEach(word => {
+    if (failed) return; // Si l'échec a été signalé, on quitte la fonction
 
-                    while (attempts < maxAttempts && !placed) {
-                        const wordWidth = span.offsetWidth;
-                        const wordHeight = span.offsetHeight;
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.textContent = 'JOSY' + word;
 
-                        const randomX = getRandomValue(margin, bodyWidth - wordWidth - margin - 200);
-                        const randomY = getRandomValue(margin + 80, bodyHeight - wordHeight - margin - 50);
-                        const randomAngle = getRandomValue(-40, 40);
-                        const randomScale = getRandomValue(0.6, 1.15);
+    let attempts = 0;
+    let placed = false;
 
-                        span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
-                        wordContainer.appendChild(span);
+    while (attempts < maxAttempts && !placed) {
+        const wordWidth = span.offsetWidth;
+        const wordHeight = span.offsetHeight;
 
-                        if (!isOverlapping(span, placedElements)) {
-                            placedElements.push(span);
-                            
-                            // Ajouter un gestionnaire d'événements pour le clic
-                            span.addEventListener('click', () => {
-                                console.log("click :", span, 'chercher : ',('JOSY' + randomWordElement.textContent));
-                                if (span.textContent === ('JOSY' + randomWordElement.textContent)) {
-                                    clearInterval(countdownInterval);
-                                    showCongratulations();
-                                    span.classList.add('green');
-                                }
-                            });
+        const randomX = getRandomValue(margin - 15, bodyWidth - wordWidth - margin - 68);
+        const randomY = getRandomValue(margin + 80, bodyHeight - wordHeight - margin - 50);
+        const randomAngle = getRandomValue(-50, 50);
+        const randomScale = getRandomValue(0.41, 1.05);
 
-                            placed = true;
-                        } else {
-                            wordContainer.removeChild(span);
+        span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomAngle}deg) scale(${randomScale})`;
+        wordContainer.appendChild(span);
+
+        if (!isOverlapping(span, placedElements)) {
+            placedElements.push(span);
+
+            span.addEventListener('click', () => {
+                console.log("click :", span, 'chercher : ', ('JOSY' + randomWordElement.textContent));
+                if (span.textContent === ('JOSY' + randomWordElement.textContent)) {
+                    clearInterval(countdownInterval);
+                    showCongratulations();
+
+                    document.querySelectorAll('span').forEach(span => {
+                        if (span.textContent === ('JOSY' + randomWordElement.textContent)) {
+                            span.style.color = "green";
                         }
+                    });
+                }
+            });
 
-                        attempts++;
-                    }
+            placed = true;
+        } else {
+            wordContainer.removeChild(span);
+        }
 
-                    if (!placed) {
-                        console.warn(`Could not place word: ${word}`);
-                    }
-                });
+        attempts++;
+    }
+
+    if (!placed) {
+        console.warn(`Impossible de placer le mot: ${word}. Tentative d'arrêt avec délai.`);
+        failed = true;
+
+        // Utilisation de setTimeout pour éviter un blocage de l'interface
+        setTimeout(() => {
+            console.warn("Arrêt propre après délai.");
+            // Ici, on peut arrêter l'animation, faire une autre action si nécessaire
+        }, 10); // Attendre un délai pour ne pas bloquer l'interface
+    }
+});
+
             }
 
 
@@ -482,6 +516,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 clearTimeout(timer); // Arrêter le chronomètre
                 clearInterval(timer);
             }
+
+
+
 
     function highlightMatchingWords() {
     const randomWord = randomWordElement.textContent; // Mot du bouton
@@ -517,45 +554,51 @@ fetchData().then(words => {
                 }, timeLimit * 1000);*/
             });
 
-
-        });
-        
-        function startGame() {
+            function startGame() {
         document.getElementById("ready-screen").style.opacity = 0; // Rendre l'écran de préparation transparent
         setTimeout(() => {
             document.getElementById("ready-screen").style.display = "none"; // Masquer l'écran de préparation
         }, 800); // Délai pour la transition d'opacité
-            countdownInterval = setInterval(updateCountdown, 1200);
+            countdownInterval = setInterval(updateCountdown, 1100);
            // fetchWords();
               // Initialiser les données et placer les mots
 
         }
 
 
-
         function updateCountdown() {
 
 
-            if (timeLeft > 0) {
-                document.getElementById("countdown").textContent = timeLeft + 's';
-                timeLeft--;
-                console.log("temps :", timeLeft);
-            } else {
-                clearInterval(countdownInterval);
-                document.getElementById("overlay").style.display = "flex";
-                document.getElementById("congratulations-message").textContent = "Temps écoulé !";
-                document.getElementById("replay-button").style.display = "block";
-            }
-        }
+if (timeLeft > 0) {
+    document.getElementById("countdown").textContent = timeLeft + 's';
+    timeLeft--;
+    console.log("temps :", timeLeft);
+} else {
+    clearInterval(countdownInterval);
+    setTimeout(() => {
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("congratulations-message").textContent = "Temps écoulé !";
+    document.getElementById("replay-button").style.display = "block";
+    }, 900); // Afficher "0s" après 1 seconde
+    
+    
+    document.querySelectorAll('span').forEach(span => {
+if (span.textContent === ('JOSY' + randomWordElement.textContent)) {
+span.style.color = "green"; // Change la couleur en vert
+}
+});
 
-        document.getElementById("replay-button").addEventListener("click", function () {
+}
+}
+
+document.getElementById("replay-button").addEventListener("click", function () {
             location.reload();
         });
 
         function showReadyCountdown() {
             let count = 3;
             const readyScreen = document.getElementById("ready-screen");
-            readyScreen.textContent = "Êtes-vous prêt ?";
+            readyScreen.textContent = "Es-tu prêt ?";
             setTimeout(() => {
                 const countdownInterval = setInterval(() => {
                     readyScreen.textContent = count;
@@ -564,20 +607,32 @@ fetchData().then(words => {
                     span.addEventListener("click", () => {
                         console.log("Click OK");
                     if (word === randomWordElement) {
+    
                         clearInterval(timer);
                         showOverlay("Félicitations ! Vous avez trouvé le mot !");
                     }
                 });
                     if (count < 0) {
+                        
                         clearInterval(countdownInterval);
                         startGame();
                     }
                 }, 1000);
-            }, 2000);
+            }, 300);
         }
 
 
-            showReadyCountdown();
+        showReadyCountdown();
+
+
+        });
+        
+
+
+
+
+  
+
 
     </script>
 </body>
