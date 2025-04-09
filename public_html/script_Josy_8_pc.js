@@ -483,6 +483,10 @@ getScrollPosition();
 
 window.addEventListener("resize", function () {
 
+    var iframe = document.querySelector(".iframe-jeu");
+
+    iframe.contentWindow.location.reload();
+
     document.querySelector(".resizeOverlay").classList.remove("hide");
     document.querySelector(".resizeOverlay").classList.add("show");
 
@@ -2667,7 +2671,7 @@ function updateGrid() {
             iframe.style.opacity = "1";   // Rend visible avec transition
             iframe.style.zIndex = "9999";  // S'assure qu'il est au-dessus
             iframe.style.pointerEvents = "auto";
-           // iframe.src="http://127.0.0.1:5500/Josy_jeu.html";
+            //iframe.src="http://127.0.0.1:5500/Josy_jeu.html";
             iframe.src="https://josy2.fly.dev/Josy_Jeu";
            
 
