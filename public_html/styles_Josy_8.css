@@ -90,17 +90,20 @@ input.spaced-element {
 
 p.spaced-element {
     position: absolute; 
-    top:59vh;
+    transform: translate(-50%, -50%);
+    top:68vh;
+    left:45%;
    opacity: 1;
    font-family: 'Poppins', sans-serif;
-    font-size: 1.0rem;
+    font-size: 1.3rem;
     color: var(--Color_2);
    z-index: 99999;
 }
 
 
 button.spaced-element {
-    left: 25vw;
+    left:45%;
+    top:3vh;
     padding: 6px 1vw;
     margin: 1vw;
    /* font-size: calc(1.15vw + 8px);
@@ -109,6 +112,8 @@ button.spaced-element {
     color: var(--Color_2);
     border: 0px solid var(--Color_2);
     border-radius: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.0rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     transform: translate(-50%, -50%);
     z-index: 99999;
@@ -118,7 +123,7 @@ button.spaced-element {
 
 
 /* Effet au survol du bouton */
-.button.spaced-element:hover {
+button.spaced-element:hover {
     color: var(--Color_2);
   /*  background: var(--Color_3);*/
     background: rgba(0, 0, 0, 0.6);
