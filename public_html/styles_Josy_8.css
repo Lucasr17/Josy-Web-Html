@@ -88,6 +88,16 @@ input.spaced-element {
     pointer-events: auto;
 }
 
+p.spaced-element {
+    position: absolute; 
+    top:59vh;
+   opacity: 1;
+   font-family: 'Poppins', sans-serif;
+    font-size: 1.0rem;
+    color: var(--Color_2);
+   z-index: 99999;
+}
+
 
 button.spaced-element {
     left: 25vw;
