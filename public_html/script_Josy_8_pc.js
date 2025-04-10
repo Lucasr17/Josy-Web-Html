@@ -2654,6 +2654,7 @@ function updateGrid() {
 
     } else if (activeIndex !== null) {
       item.classList.add("inactive");
+
       if (index < activeIndex) {
 
         var iframe = document.querySelector(".iframe-jeu");
@@ -2693,46 +2694,21 @@ function updateGrid() {
         item.classList.add("tab", "left");
 
 
-//iframe
-
-
-
-//const countdownText = document.getElementById("countdown-text");
-
-//et countdown = 2; // Durée du compte à rebours
-
-    // Mettre à jour le compte à rebours chaque seconde
-   // countdownText.textContent = `Jeu dans ${countdown}...`;
-  //  countdownText.style.opacity = 1;
-   // let interval = setInterval(() => {
-     //   countdown--;
-       // if (countdown > 0) {
-         //   countdownText.textContent = `Jeu dans ${countdown}...`;
-       // } else {
-       //     clearInterval(interval);
-         //   countdownText.textContent = `.`;
-        //    countdownText.style.opacity = 0;
-          //  countdownText.style.display = "none"; // Cacher le compte à rebours
-          //  iframe.style.display = "flex";
-
-     //   }
-  //  }, 1000);
-
-          
-
-  
- 
-
-//fin iframe
-
-
       } else {
+
+        var emoji_0 = document.getElementById("emoji_0");
+        var emoji_1 = document.getElementById("emoji_1");
+
+        if (emoji_0.style.opacity == 1 || (emoji_0.style.opacity == 0 && emoji_1.style.opacity == 0)) {
+
+        
+            // Si l'index est 0, on le cache
+        
 
         var emoji_0 = document.getElementById("emoji_0");
         emoji_0.style.opacity = 0;
 
         var iframe = document.querySelector(".iframe-jeu");
-        var emoji_1 = document.getElementById("emoji_1");
   
         iframe.style.opacity = "0";  // Commence la transition de disparition
         //iframe.style.zIndex = "-1";  // Place en arrière-plan
@@ -2768,6 +2744,9 @@ function updateGrid() {
         }, 1000);
 
       }
+
+    }
+
     }
   });
 
@@ -3296,7 +3275,7 @@ const mots = await chargerJSON();
 
 
 //   document.getElementById("textContainer").textContent = "3"
-const motSaisi = document.getElementById("motInput").value.trim(); //.value.toLowerCase().trim();
+const motSaisi = document.getElementById("motInput_").value.trim(); //.value.toLowerCase().trim();
 
 
 // Supprimer les accents
@@ -3309,6 +3288,9 @@ let motNettoye = motSansAccent.replace(/[^a-zA-Z0-9\s]/g, "").trim();
 //    document.getElementById("textContainer").textContent = "4"
 const motTrouve = mots.find(item => (item.mot) === (motNettoye));
 //   document.getElementById("textContainer").textContent = "5"
+
+//console.log(`Compter Mot trouve : ${motSaisi}`);
+
 
 if (motTrouve) {
 motTrouve.nombre++; // Incrémentation du compteur
