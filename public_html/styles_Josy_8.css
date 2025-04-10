@@ -83,6 +83,12 @@
     transition: transform 0.3s ease, opacity 0.3s ease; 
 }
 
+input.spaced-element {
+    cursor:text;
+    pointer-events: auto;
+}
+
+
 button.spaced-element {
     left: 25vw;
     padding: 6px 1vw;
@@ -1636,7 +1642,7 @@ body2 {
 
 
 .popup_Jeu {
-    position: absolute;
+    position: fixed;
     visibility: hidden; 
     inset: 0;
     display: flex;
