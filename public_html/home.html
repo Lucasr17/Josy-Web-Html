@@ -49,7 +49,7 @@
                             <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)"/><br>
                             <button onclick="compterMot()">Valider</button><br>
                             <p id="resultat"></p>
-                               <!--  <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br> -->
+                             <button2 onclick="Button_open_game()" id="button-open-game">Autre Josy jeu...</button2><br> 
                             <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
                                 <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect>
                             </svg>
@@ -61,7 +61,7 @@
                             <iframe id="iframe-jeu" width="100%" height="85%" style="border-radius: 10px; display:none;"></iframe>
                         </div>
                     </div>
-                </div>
+                </div> 
 
                 <div id="popup_Jeu" class="popup_Jeu hidden">
                     <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
@@ -85,12 +85,12 @@
                                     <p id="space-below"></p>
                                     
                                     <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
-                                    <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element"/><br>
+                                    <input id="motInput_" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element" zindex="99999"/><br>
                                     <button onclick="compterMot()" class="spaced-element">Valider</button><br>
                                     <p id="resultat" class="spaced-element"></p>
                     
                                     <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
-                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect>
+                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect> 
                                     </svg>
                                 </div>
                             </div>
@@ -456,5 +456,4 @@
 
 </body>
 </html>
-
 
