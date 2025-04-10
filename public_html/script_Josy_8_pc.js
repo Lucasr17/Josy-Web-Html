@@ -3293,22 +3293,25 @@ const motTrouve = mots.find(item => (item.mot) === (motNettoye));
 
 
 if (motTrouve) {
+
 motTrouve.nombre++; // Incrémentation du compteur
-document.getElementById("resultat").textContent = `Vous êtes la ${motTrouve.nombre}ème personne à penser à  JOSY${motSaisi}.`;
+document.querySelector("p.spaced-element").textContent = `Vous êtes la ${motTrouve.nombre}ème personne à penser à JOSY${motSaisi}.`;
+
+console.log(`Compter Mot trouve : ${motSaisi}`);
 
 // Mettre à jour le fichier JSON avec la nouvelle valeur
 mettreAJourJSON(motNettoye, motTrouve.nombre);
 
 } else if (motSaisi == "") {
 
-document.getElementById("resultat").textContent = `Veuillez saisir un mot`;
+    document.querySelector("p.spaced-element").textContent = `Veuillez saisir un mot`;
 
 
 } else {
         // Si le mot n'existe pas, ajouter avec "valide": "non" et nombre = 1
 const nouveauMot = {mot: motNettoye, nombre: 1, valide: "non" };
 // mots_2.push(nouveauMot); // Ajouter à la liste locale
-document.getElementById("resultat").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
+document.querySelector("p.spaced-element").textContent = `Le mot JOSY${motSaisi} a été ajouté à la liste à valider.`;
 
 // Mettre à jour le fichier JSON avec le nouveau mot
 ajouterNouveauMot(nouveauMot);
@@ -3317,11 +3320,11 @@ ajouterNouveauMot(nouveauMot);
 }
 
 // Effacer le champ de saisie après comptage
-document.getElementById("motInput").value = "";
+document.getElementById("motInput_").value = "";
 
 }catch (error) {
 console.error('Erreur lors de la gestion du mot saisi:', error);
-document.getElementById("resultat").textContent = "Une erreur est survenue. Veuillez réessayer.";
+document.querySelector("p.spaced-element").textContent = "Une erreur est survenue. Veuillez réessayer.";
 }
 
 
