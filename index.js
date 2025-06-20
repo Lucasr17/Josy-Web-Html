@@ -62,6 +62,9 @@ app.get('/:subdomain', (req, res) => {
         case 'admin__2024':
             res.sendFile(path.join(__dirname, 'public_html', 'admin.html')); // Assurez-vous que le fichier existe
             break;
+        case 'dev':
+            res.sendFile(path.join(__dirname, 'public_html', 'Josy 9.html')); // Assurez-vous que le fichier existe
+            break;
         case 'Home':
         default:
             res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
