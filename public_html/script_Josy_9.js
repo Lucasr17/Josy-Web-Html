@@ -134,4 +134,28 @@ if (scrollTop <= 30) {
     });
   });
 
+
+document.querySelectorAll(".section_histoire .content_section").forEach(content => {
+  gsap.fromTo(content, {
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    transformOrigin: "center center"
+  }, {
+    scaleX: 0,
+    scaleY: 0,
+    opacity: 0,
+    ease: "power4.in",  // Aspiration forte et rapide
+    scrollTrigger: {
+      trigger: content,
+      start: "top 300px",
+      end: "top 120px",
+      scrub: true,
+      markers: false // Retire en prod
+    }
+  });
+});
+
+
+
 /*FIN section histoire JOSY*/
