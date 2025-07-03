@@ -1198,18 +1198,20 @@ body2 {
     left: -100%;
 }
 .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3); /* Fond initial */
-    color: white;
-    border: none;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 18px;
-    z-index: 9997;
-    transition: background 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 9997;
+  transition: background 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  border-radius: 12px; /* Ajout ici */
 }
+
 
 .carousel-button:hover {
     background: rgba(0, 0, 0, 0.6);
@@ -1517,6 +1519,7 @@ body2 {
     z-index: 9998;
     opacity: 1;
     transition: background 0.3s;
+    border-radius: 12px; /* Ajout ici */
 }
 .carousel-button:hover {
     background: rgba(0, 0, 0, 0.6);
