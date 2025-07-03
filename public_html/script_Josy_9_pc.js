@@ -1275,7 +1275,6 @@ function handleMouseMove(e) {
   } else {
     img.style.cursor = "default";
     img.classList.remove("hover-visible");
-    disableHoverEffect();
   }
 }
 
