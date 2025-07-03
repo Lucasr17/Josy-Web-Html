@@ -1245,7 +1245,6 @@ function disableHoverEffect() {
 function handleMouseMove(e) {
   const img = e.currentTarget;
 
-  // Cache le canvas associé si déjà prêt
   if (!imageCanvases.has(img)) {
     const tempCanvas = document.createElement("canvas");
     const tempCtx = tempCanvas.getContext("2d");
@@ -1258,7 +1257,6 @@ function handleMouseMove(e) {
   }
 
   const { canvas, ctx } = imageCanvases.get(img);
-
   const rect = img.getBoundingClientRect();
   const scaleX = img.naturalWidth / rect.width;
   const scaleY = img.naturalHeight / rect.height;
@@ -1270,13 +1268,14 @@ function handleMouseMove(e) {
   const alpha = pixel[3];
 
   if (alpha > 10) {
+    img.style.pointerEvents = "auto"; // Zone visible → bloque les événements sous-jacents
     img.style.cursor = "pointer";
-    img.classList.add("hover-visible");
   } else {
+    img.style.pointerEvents = "none"; // Zone transparente → laisse passer les events dessous
     img.style.cursor = "default";
-    img.classList.remove("hover-visible");
   }
 }
+
 
 
 // Effet au survol
