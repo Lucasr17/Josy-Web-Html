@@ -72,162 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/*
-    const textEffect = document.querySelector(".text-effect");
-    const textContent = textEffect.textContent.trim(); // Évite les espaces parasites
-
-    // Transforme chaque lettre en <span>
-    textEffect.innerHTML = textContent
-        .split("")
-        .map(letter => 
-            letter === " " ? `<span class="space">&nbsp;</span>` : `<span>${letter}</span>`
-        )
-        .join("");
-
-    const letters = textEffect.querySelectorAll("span");*/
-
-    window.addEventListener("scroll", () => {
-        let ball = document.querySelector(".ball01");
-        let rect = ball.getBoundingClientRect(); // Position relative à la fenêtre
-    
-        let ballX = rect.left + window.scrollX; // Position absolue sur la page
-        //console.log("⚽️ Pos X absolue :", ballX, " | ScrollY :", window.scrollY);
-    
-        const startX = 906;  // Début de l'effet
-        const endX = 231;    // Fin de l'effet
-        let letters = document.querySelectorAll(".text-effect span");
-    
-        if (letters.length === 0) return;
-    
-        if (ballX > startX) {
-          //  console.log("🛑 Avant le début de l'effet");
-            letters.forEach(letter => {
-                letter.style.transform = "scale(1) translateY(0px)";
-            });
-            return;
-        }
-    
-        if (ballX < endX) {
-          //  console.log("🏁 Après la fin de l'effet");
-            letters.forEach((letter, index) => {
-                if (index === 0) {
-                    letter.style.transform = "scale(1.60) translateY(14px)";
-                } else {
-                    letter.style.transform = "scale(1) translateY(0px)";
-                }
-            });
-            return;
-        }
-    
-        // Progression entre 0 et 1
-        let progress = Math.min(Math.max((startX - ballX) / (startX - endX), 0), 1);
-
-     //   console.log("📊 Progression :", progress);
-    
-        // Déterminer l'index de la lettre actuellement affectée
-        let affectedIndex = Math.min(
-            Math.floor(progress * letters.length), 
-            letters.length - 1 // ✅ S'assure qu'on ne dépasse pas
-        );
-
-
-      //  console.log("✏️ Lettre affectée :", affectedIndex);
-    
-        letters.forEach((letter, index) => {
-            if ((index) === letters.length - affectedIndex - 1) {
-       //         console.log("✏️✏️ effet : ", index, "letter lenght : ",letters.length);
-                letter.style.transform = "scale(1.60) translateY(14px)";
-            } 
-            else if (index === letters.length - affectedIndex && index - 1 >= 0) {
-                letters[index - 1].style.transform = "scale(1.40) translateY(8px)";
-            }
-            else if (index === letters.length - affectedIndex - 2 && index + 1 < letters.length) {
-                letters[index + 1].style.transform = "scale(1.40) translateY(8px)";
-            } 
-            else if (index === letters.length - affectedIndex - 3 && index + 2 < letters.length) {
-                letters[index + 2].style.transform = "scale(1.27) translateY(5px)";
-            } 
-            else if (index === letters.length - affectedIndex + 3 && index - 2 >= 0) {
-                letters[index - 2].style.transform = "scale(1.27) translateY(5px)";
-            }
-            else {
-                letter.style.transform = "scale(1) translateY(0px)";
-            }
-        });
-    });
-    
-    
-    
-
-
-
-
 });
 
 
-
-
-const boxes = document.querySelectorAll('.box');
-
-function calculateBox4() {
-    let width = window.innerWidth;
-    
-    // Exemple : Plus l'écran est large, plus la valeur est basse (arrive plus tôt)
-    let box4Value = 0.20 + (width * 0.001); // Ajuste le facteur selon ton besoin
-
-    // Limites (évite des valeurs extrêmes)
-    box4Value = Math.max(0.30, Math.min(0.80, box4Value));
-
-    return box4Value;
-}
-
-// Définit les déclencheurs spécifiques par boîte
-const triggerValues = {
-    box1: 0.40, // 60% de la hauteur de l'écran
-    box2: 0.60,
-    box3: 0.37,
-    box4: 0.40,
-    box5: 0.38,
-};
-/*
-window.addEventListener("resize", function () {
-    triggerValues.box4 = calculateBox4();
-    //console.log("Nouvelle valeur de box4 :", triggerValues.box4);
-});*/
-
-function checkBoxes() {
-    const windowHeight = window.innerHeight;
-
-    boxes.forEach(box => {
-        const boxTop = box.getBoundingClientRect().top;
-        const boxBottom = box.getBoundingClientRect().bottom;
-
-        // Récupère la valeur de déclenchement spécifique à cette boîte
-        const triggerBottom = windowHeight * (triggerValues[box.classList[1]] || 0.85);
-        const triggerTop = windowHeight * 0.45; // Disparition vers le haut
-
-        if (boxTop < triggerBottom && boxBottom > triggerTop) {
-            box.classList.add('visible');
-            box.classList.remove('hidden');
-
-            // Effet de zoom uniquement pour "BOUM ! Josy"
-            const zoomText = box.querySelector('.zoom-text');
-            if (zoomText) {
-                zoomText.classList.add('zoom-in');
-                setTimeout(() => {
-                    zoomText.classList.remove('zoom-in');
-                }, 1000);
-            }
-
-        } else {
-            box.classList.remove('visible');
-            box.classList.add('hidden');
-        }
-    });
-}
-
-window.addEventListener('scroll', checkBoxes);
-checkBoxes(); // Pour afficher les boîtes déjà visibles au chargement
 
 
 let nb_img_caroussel = 3; // Nombre total d'éléments du carrousel (y compris la vidéo)
@@ -291,13 +138,6 @@ text_fond_josy.style.opacity = "1";
 var text1 = document.getElementById('text1');
 
 var scrollTop = window.scrollY || document.documentElement.scrollTop;
-/*
-if (scrollTop <= 30) {
-    text1.style.opacity = "1";
-} else {
-    text1.style.opacity = "0";
-}*/
-
 
 /*T shirt cintre Debut*/
 
@@ -311,38 +151,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    window.addEventListener("scroll", function () {
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-       // console.log("Scroll détecté, position :", scrollTop);
-
-        if (scrollTop <= 31) {
-       //     console.log("✅ Bouton visible !");
-        //    button.style.opacity = "1";  // Rend le bouton visible
-         //   button.style.pointerEvents = "auto"; // Permet les interactions avec le bouton
-          //  button.style.visibility = "visible"; // S'assure qu'il est visible
-        } else {
-       //    console.log("❌ Bouton caché !");
-         //   button.style.opacity = "0";  // Cache le bouton
-         //   button.style.pointerEvents = "none"; // Empêche les interactions
-         //  button.style.visibility = "hidden"; // Cache le bouton
-        }
-
-
-
-        
-
-        // Vérifier les styles appliqués
-   //     console.log("🔍 Opacity appliquée :", getComputedStyle(button).opacity);
-    });
-
 
 
 });
 
 
 /*T Shrit cintre fin */
-
-
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -406,103 +220,11 @@ window.addEventListener("resize", function () {
 
 
 
-// 🔹 Créer dynamiquement le carré noir s'il n'existe pas déjà
-let resizeOverlay = document.createElement("div");
-resizeOverlay.id = "resizeOverlay";
-document.body.appendChild(resizeOverlay);
-resizeOverlay.style.display = "none"; // Caché par défaut
-
-// 🔹 Fonction qui affiche le carré noir pendant le resize
-let resizeTimeout;
-window.addEventListener("resize", function () {
-   // clearTimeout(resizeTimeout);
-
-    // Affiche le carré noir
-  //  resizeOverlay.style.display = "block";
-
-    // Sauvegarde la position du scroll et marque le reload comme venant d'un resize
-    sessionStorage.setItem("fromResize", "true");
-    sessionStorage.setItem("scrollPosition", window.scrollY);
-
-    // Recharge après un petit délai pour éviter de trop recharger en continu
-    resizeTimeout = setTimeout(() => {
-       // location.reload();
-       // document.querySelector(".resizeOverlay").classList.add("hide");
-      //  document.querySelector(".resizeOverlay").classList.remove("show");
-    }, 500); // Recharge après 500ms sans nouvelle modification de la taille
-});
-
-// 🔹 Cacher le carré noir après le chargement
-window.addEventListener("load", function () {
-    const savedScrollPosition = sessionStorage.getItem("scrollPosition");
-
-    // Restaure la position du scroll après le rechargement
-    if (savedScrollPosition) {
-        window.scrollTo(0, parseInt(savedScrollPosition, 10));
-        sessionStorage.removeItem("scrollPosition");
-    }
-
-    // Vérifie si c'était un reload à cause du resize
-    const fromResize = sessionStorage.getItem("fromResize");
-    if (fromResize) {
-        sessionStorage.removeItem("fromResize"); // Supprime le flag
-    }
-
-    // 🔥 Effet fondu pour masquer le carré noir après chargement
-    resizeOverlay.style.opacity = "0";
-    setTimeout(() => {
-        resizeOverlay.style.display = "none";
-    }, 500); // Attendre la fin de l'animation avant de le masquer
-});
-
 
 
 
 
 // Anime les emojis avec un léger décalage dans le temps
-/*
-pulses.to(".emoji01", {}, 0.04)    
-      .to(".emoji02", {}, 0.6) 
-      .to(".emoji03", {}, 1)
-      .to(".emoji04", {}, 1.51)
-      .to(".emoji05", {}, 1.98);
-*/
-
-      var nb_dur = 1;
-      const width = window.innerWidth;
-      var scrollAtLarge_svg = -1450; // à 1626px de large
-      var scrollAtSmall_svg = -453; // à 903px de large
-      var speedFactor = (window.innerWidth * (3.5) * nb_dur) / 1800;
-      var scrollPosition_svg = scrollAtSmall_svg + ((scrollAtLarge_svg - scrollAtSmall_svg) * (width - 903) / (1626 - 903));
-      
-      function updateSpeedFactor() {
-
-    // Récupère la largeur actuelle de la page
-    const width = window.innerWidth;
-
-    // Définition des points pour les largeurs spécifiées
-     scrollAtLarge_svg = -1050; // à 1626px de large
-     scrollAtSmall_svg = -383; // à 903px de large
-
-    // Calcul du décalage en fonction de la largeur
-     scrollPosition_svg = scrollAtSmall_svg + ((scrollAtLarge_svg - scrollAtSmall_svg) * (width - 903) / (1626 - 903));
-
-
-          speedFactor = (window.innerWidth * (3.5) * nb_dur) / 1800;
-         // console.log("Nouvelle vitesse :", (speedFactor/nb_dur));
-      //   console.log("Nouvelle end :", (scrollPosition_svg));
-      
-          // Mettre à jour la durée des animations dans la timeline
-          main.getChildren().forEach(tween => {
-              if (tween.vars.duration) {
-                  tween.duration(speedFactor / nb_dur);
-              }
-          });
-      
-          // Rafraîchir ScrollTrigger pour éviter les sauts
-          ScrollTrigger.refresh();
-      }
-      
       
 
 
@@ -530,6 +252,23 @@ function updateGSAPAnimation() {
     // Recrée l'animation GSAP avec les nouvelles valeurs
 
 
+//sortie t shirt cintre
+
+gsap.fromTo("#T_shirt_1", {
+    y: 0,
+    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
+    }, {
+    y: -1500,
+    scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=820px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=950px top", // Quand le bas de la section 3 touche le haut du viewport 
+    scrub: 0,
+    markers: false
+    }
+    });
+
 //retour t shirt cintre
 
 gsap.fromTo("#T_shirt_1", {
@@ -542,9 +281,10 @@ gsap.fromTo("#T_shirt_1", {
     x: variables,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -560,9 +300,10 @@ gsap.fromTo("#T_shirt_2", {
     x: variables - variables_2,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -578,9 +319,10 @@ gsap.fromTo("#T_shirt_3", {
     x: variables - variables_2*2,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -596,9 +338,10 @@ gsap.fromTo("#T_shirt_4", {
     x: variables - variables_2*3,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -614,9 +357,10 @@ gsap.fromTo("#T_shirt_5", {
     x: variables - variables_2*4,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -632,9 +376,10 @@ gsap.fromTo("#T_shirt_6", {
     x: variables - variables_2*5,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -650,9 +395,10 @@ gsap.fromTo("#T_shirt_7", {
     x: variables - variables_2*6,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -668,9 +414,10 @@ gsap.fromTo("#T_shirt_8", {
     x: variables - variables_2*7,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -686,9 +433,10 @@ gsap.fromTo("#T_shirt_9", {
     x: variables - variables_2*8,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -704,9 +452,10 @@ gsap.fromTo("#T_shirt_10", {
     x: variables - variables_2*9,
     y: 0,
     scrollTrigger: {
-    trigger: document.body,
-    start: "5400px",
-    end: "5700px",
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
     scrub: 0,
     markers: false
     }
@@ -1267,7 +1016,7 @@ function handleMouseMove(e) {
   const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
   const alpha = pixel[3];
 
-  if (alpha > 10) {
+  if (alpha > 1) {
     img.style.pointerEvents = "auto"; // Zone visible → bloque les événements sous-jacents
     img.style.cursor = "pointer";
   } else {
@@ -1362,132 +1111,6 @@ opacitys = 0;
 
 
 
-//hisotire
-/*
-gsap.fromTo(".box_histoire_1", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "256px",
-end: "266px",
-scrub: 0,
-markers: false
-}
-});
-
-gsap.fromTo(".box_histoire_2", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-transformOrigin: "bottom right", // Origine de transformation en bas à gauche
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "468px",
-end: "494px",
-scrub: 0,
-markers: false
-}
-});
-
-gsap.fromTo(".box_histoire_3", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-transformOrigin: "top left", // Origine de transformation en bas à gauche
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "712px",
-end: "730px",
-scrub: 0,
-markers: false
-}
-});
-
-gsap.fromTo(".box_histoire_4", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-transformOrigin: "bottom right", // Origine de transformation en bas à gauche
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "646px",
-end: "656px",
-scrub: 0,
-markers: false
-}
-});
-
-gsap.fromTo(".box_histoire_5", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-transformOrigin: "bottom right", // Origine de transformation en bas à gauche
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "810px",
-end: "820px",
-scrub: 0,
-markers: false
-}
-});
-
-/*
-gsap.fromTo(".box_histoire_6", {
-scaleX: 0,  // Réduit la largeur à zéro au début
-scaleY: 0,  // Réduit la hauteur à zéro au début
-opacity: 0
-}, {
-scaleX: 1,  // Agrandit la largeur à sa taille originale
-scaleY: 1,  // Agrandit la hauteur à sa taille originale
-opacity: 1,
-scrollTrigger: {
-trigger: document.body,
-start: "1300px",
-end: "1320px",
-scrub: 0,
-markers: false
-}
-});*/
-
-
-
-
-
-
-
-
-
-
-//fin histoire
-function updateBallPosition() {
-    let ball = document.querySelector(".ball01");
-    let rect = ball.getBoundingClientRect(); // Récupère la position de l'élément
-   // console.log("⚽️ Pos X :", rect.left, "Pos Y :", rect.top);
-}
-
     // Ajoutez un gestionnaire d'événements pour réinitialiser l'opacité lorsque la page est au sommet du scroll
 window.addEventListener('scroll', function() {
 
@@ -1552,10 +1175,7 @@ const scrollTop = window.scrollY; // Obtenir la position actuelle du scroll
 
 
 
-//};
 
-// Écouter l'événement de scroll
-//window.addEventListener("scroll", handleScroll);
 });
 
 
@@ -1570,10 +1190,18 @@ let trigger = ScrollTrigger.create({
   onUpdate: self => {
     let scrollTop = window.scrollY || window.pageYOffset;
 
-    if (scrollTop >= self.start && scrollTop <= self.end) {
+    const start = self.start;
+    const end = self.end;
+    const endPlus = end + 50;
+
+
+    if (scrollTop >= start && scrollTop <= end) {
 
     txt_les_variantes.style.opacity = "1";
+    support_titre.style.zIndex = "10";
+    txt_les_variantes.style.zIndex = "11";
 
+    if (T_shirt_2.style.opacity === "0"){
       T_shirt_1.style.opacity = "1";
       T_shirt_2.style.opacity = "1";
       T_shirt_3.style.opacity = "1";
@@ -1584,12 +1212,15 @@ let trigger = ScrollTrigger.create({
       T_shirt_8.style.opacity = "1";
       T_shirt_9.style.opacity = "1";
       T_shirt_10.style.opacity = "1";
-
+    }
 
     }else{
 
+       if (scrollTop >= start && scrollTop <= endPlus) {
+       }else{
     txt_les_variantes.style.opacity = "0";
 
+       }
        
         T_shirt_2.style.opacity = "0";
         T_shirt_3.style.opacity = "0";
@@ -1600,10 +1231,10 @@ let trigger = ScrollTrigger.create({
         T_shirt_8.style.opacity = "0";
         T_shirt_9.style.opacity = "0";
         T_shirt_10.style.opacity = "0";
-        T_shirt_1.style.opacity = "0"; 
+      //  T_shirt_1.style.opacity = "0"; 
 
 // Affiche T_shirt_1 immédiatement
-T_shirt_1.style.zIndex = "1000000000";
+T_shirt_1.style.zIndex = "1000000";
 
 // Affiche les autres 100 ms plus tard
 //setTimeout(() => {
@@ -1617,7 +1248,7 @@ T_shirt_1.style.zIndex = "1000000000";
   T_shirt_9.style.zIndex = "20 000";
   T_shirt_10.style.zIndex = "10 000";
 
-   console.log("🔄 ok ajustement");
+//   console.log("🔄 ok ajustement");
 //}, 10);
 
 
@@ -1640,15 +1271,26 @@ tshirt.removeEventListener("mouseleave", handleMouseLeave);
 }
 }
 
-
-
-//galerie histoire josy
-
-if (scrollTop >= 180 && scrollTop <= 1600) {
-  txt_josy_histoire_amis.style.opacity = "1";
-} else {
-  txt_josy_histoire_amis.style.opacity = "0";
-}
+//txt_josy_histoire_amis
+ScrollTrigger.create({
+  trigger: document.body,
+  start: "150px",
+  endTrigger: ".section_histoire:nth-child(5)",
+  end: "bottom+=90px top",
+  onEnter: () => {
+    txt_josy_histoire_amis.style.opacity = "1"; // Devient visible quand on entre dans la zone
+  },
+  onLeave: () => {
+    txt_josy_histoire_amis.style.opacity = "0"; // Devient invisible quand on quitte la zone vers le bas
+  },
+  onEnterBack: () => {
+    txt_josy_histoire_amis.style.opacity = "1"; // Quand on remonte et rentre à nouveau dans la zone
+  },
+  onLeaveBack: () => {
+    txt_josy_histoire_amis.style.opacity = "0"; // Quand on sort vers le haut
+  },
+  markers: false
+});
 
 
 
@@ -1661,32 +1303,53 @@ if (scrollTop >= 180 && scrollTop <= 1600) {
     text3.style.opacity = "0";
 }
 
-if (scrollTop >= 6480 && scrollTop <= 6800) {
-    vous_josy.style.opacity = "1";
-} else {
-    vous_josy.style.opacity = "0";
-}
+//vous_josy
+ScrollTrigger.create({
+  trigger: ".section_histoire:nth-child(5)",
+  start: "bottom+=900px top",
+  end: "bottom+=1000px top",
+  onEnter: () => {
+    vous_josy.style.opacity = "1"; // Devient visible quand on entre dans la zone
+  },
+  onLeave: () => {
+    vous_josy.style.opacity = "0"; // Devient invisible quand on quitte la zone vers le bas
+  },
+  onEnterBack: () => {
+    vous_josy.style.opacity = "1"; // Quand on remonte et rentre à nouveau dans la zone
+  },
+  onLeaveBack: () => {
+    vous_josy.style.opacity = "0"; // Quand on sort vers le haut
+  },
+  markers: false
+});
 
 
-if (scrollTop >= 6490 && scrollTop <= 6800) {
-    vous_josy_2.style.opacity = "1";
-} else {
-    vous_josy_2.style.opacity = "0";
-}
+//vous_josy_2
+ScrollTrigger.create({
+  trigger: ".section_histoire:nth-child(5)",
+  start: "bottom+=920px top",
+  end: "bottom+=1000px top",
+  onEnter: () => {
+    vous_josy_2.style.opacity = "1"; // Devient visible quand on entre dans la zone
+  },
+  onLeave: () => {
+    vous_josy_2.style.opacity = "0"; // Devient invisible quand on quitte la zone vers le bas
+  },
+  onEnterBack: () => {
+    vous_josy_2.style.opacity = "1"; // Quand on remonte et rentre à nouveau dans la zone
+  },
+  onLeaveBack: () => {
+    vous_josy_2.style.opacity = "0"; // Quand on sort vers le haut
+  },
+  markers: false
+});
+
 
 if (scrollTop >= 6500 && scrollTop <= 6800) {
-    four.style.opacity = "1";
+   // four.style.opacity = "1";
 } else {
     four.style.opacity = "0";
 }
-
-/*
-if (scrollTop >= 4880 && scrollTop <= 4950) {
-    circle.style.opacity = "0.7";
-    
-} else {
-    circle.style.opacity = "0";
-}*/
 
 if (scrollTop >= 6000 && scrollTop <= 6390) {
     photodrone_text.style.opacity = "0";
@@ -1694,24 +1357,6 @@ if (scrollTop >= 6000 && scrollTop <= 6390) {
 } else {
     photodrone_text.style.opacity = "0";
 }
-
-/*
-if (scrollTop >= 10 && scrollTop <= 150) {
-    carouselcontainer.style.opacity = "1";
-    
-} else {
-    carouselcontainer.style.opacity = "0";
-}*/
-
-
-/* if (scrollTop >= 4900 && scrollTop <= 6300) {
-    T_shirt_Josy_2.style.opacity = "1";
-    T_shirt_Josyimaginaire.style.opacity = "1";
-} else {
-    T_shirt_Josy_2.style.opacity = "0";
-    T_shirt_Josyimaginaire.style.opacity = "0";
-}*/
-
 
 });
 
@@ -1793,10 +1438,25 @@ gsap.fromTo(".T_shirt_Josy_1_", {
   }
 });
 
+gsap.fromTo(".T_shirt_Josy_1_", {
+}, {
+ opacity: 0,
+  scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=401px top", // Quand le bas de la section 3 touche le haut du viewport
+    scrub: 0,
+    markers: false
+  }
+});
+
+
 gsap.fromTo(".T_shirt_Josy_1", {
   x: () => -sreen_largeur,
   y: 500,
-  scale: 0.7
+  scale: 0.7,
+  opacity: 0.5,
 }, {
   x: 0,
   y: 0,
@@ -1980,9 +1640,9 @@ opacity : 1
 }, {
 opacity : 0,
 scrollTrigger: {
-trigger: document.body, // Déclencher par rapport au body
-start: "6795 top", // Déclenche à 2680px du haut de la page
-end: "6820 top",   // Fin à 4350px du haut de la page
+  trigger: ".section_histoire:nth-child(5)",
+  start: "bottom+=1000px top",
+  end: "bottom+=1001px top",
 scrub: 0,  
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
@@ -1994,9 +1654,9 @@ y : 1000
 }, {
 y : 0,
 scrollTrigger: {
-trigger: document.body, // Déclencher par rapport au body
-start: "6350px top", // Déclenche à 2680px du haut de la page
-end: "6500px top",   // Fin à 4350px du haut de la page
+  trigger: ".section_histoire:nth-child(5)",
+  start: "bottom+=900px top",
+  end: "bottom+=915px top",
 scrub: 0,  
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
