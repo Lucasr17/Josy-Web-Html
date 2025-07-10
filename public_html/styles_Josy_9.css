@@ -11,6 +11,74 @@
         overflow-x: hidden; 
 } 
 
+
+/*Boutique */
+.custom-btn {
+  width: 140px;
+  height: 45px;
+  top: 47vh;
+  left: 23%;
+  color: #fff;
+  border-radius: 20px;
+  padding: 0px 0px;
+  font-family: 'Poppins', sans-serif;
+ font-size: 1.2rem;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+  z-index: 9999;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 11 */
+.btn-11 {
+  border: none;
+  background: rgb(186, 33, 251);
+    background: linear-gradient(0deg, rgb(186, 33, 251) 0%, rgb(186, 76, 234) 100%);
+    color: #fff;
+    overflow: hidden;
+    opacity: 0.7;
+}
+.btn-11:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.btn-11:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: -180px;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+.btn-11:hover {
+  opacity: 1 !important;
+}
+
+
+.btn-11:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+
+@-webkit-keyframes shiny-btn1 {
+    0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+    80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+    81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+    100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
 /* Section histoire JOSY */
 
 .section_histoire {
@@ -35,6 +103,7 @@
 
 
     .emoji {
+    font-family: 'Poppins', sans-serif;
       font-size: 3.2rem;
       margin-bottom: 20px;
       filter: grayscale(1) brightness(1.5) sepia(1) hue-rotate(250deg) saturate(2);
@@ -43,6 +112,7 @@
     }
 
     .content_section {
+        font-family: 'Poppins', sans-serif;
       font-size: 1.5rem;
       line-height: 1.6;
       max-width: 700px;
@@ -92,10 +162,12 @@ svg {
 
     @media (max-width: 768px) {
       .content_section {
+        font-family: 'Poppins', sans-serif;
         font-size: 1.2rem;
       }
 
       .emoji {
+        font-family: 'Poppins', sans-serif;
         font-size: 2.5rem;
       }
     }
@@ -264,43 +336,10 @@ z-index: 12;
     height: 1000px; /* Donne de la hauteur pour tester le scroll */
 }
 
-.box {
-    position: absolute;
-    width: 300px;
-    padding: 20px;
-    background: transparent/*white*/;
-    border-radius: 15px;
-   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);*/
-    font-size: 18px;
-    color: white; /* Définit le texte en blanc */
-    font-family: 'Poppins', sans-serif; 
-    opacity: 0;
-    transform: translateY(50px) scale(0.95) rotate(-2deg);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    z-index: 1999;
-}
-
-        /* Style spécifique pour chaque boîte */
-        .box1 { left: 13vw; top: calc(200px + 3vw); }
-        .box2 { right: 9vw; transform-origin: right center ;top: calc(250px + 25vw); }
-        .box3 { left: 23vw; top: calc(234px + 25vw); }
-        .box4 { left: 32vw; top: calc(230px + 50vw); }
-        .box5 { right: 10vw; transform-origin: right center ; top: calc(450px + 50vw); }
-
-
-.box.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0);
-}
-
-.box.hidden {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.95) rotate(2deg);
-}
-
 /* Style pour BOUM ! Josy */
 .zoom-text {
     display: inline-block;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.2em;
     font-weight: bold;
     color: #ff5733;
@@ -317,6 +356,7 @@ z-index: 12;
 #text-effect { 
     position: relative; 
     transform: translate(0%, 0%); 
+    font-family: 'Poppins', sans-serif;
     font-size: 2.5rem; 
     color: var(--Color_2); 
     top: calc(950px + 80vw); 
@@ -428,6 +468,7 @@ z-index: 12;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     position: fixed;
     max-width: 90%;
@@ -442,6 +483,7 @@ z-index: 12;
     right: 10px;
     background: none;
     border: none;
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     cursor: pointer;
     color: #333;
@@ -555,6 +597,7 @@ z-index: 12;
     width: 45vw;
     display: inline-block;
     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     position: relative;
     transform: translate(-50%, -50%);
@@ -569,6 +612,7 @@ z-index: 12;
     width: 45vw;
     display: inline-block;
     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     position: relative;
     transform: translate(-50%, -50%);
@@ -589,6 +633,7 @@ z-index: 12;
 }
 
 .modal h2 {
+    font-family: 'Poppins', sans-serif;
     font-size: 25px;
     line-height: 25px;
     margin-bottom: 25px;
@@ -596,6 +641,7 @@ z-index: 12;
 
 .modal p {
     margin-top: 7px;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     line-height: 22px;
     font-style: italic;
@@ -606,6 +652,7 @@ z-index: 12;
     text-align: center;
     padding: 6px 20px;
     margin: 10px;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     background-color: var(--Color_1);
     color: var(--Color_2);
@@ -686,6 +733,7 @@ z-index: 12;
     margin: 10px;
     top: 85%;
     left: 50%;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     background-color: var(--Color_1);
     color: rgb(79, 199, 255);
@@ -844,6 +892,7 @@ z-index: 12;
     right: 100px;
     pointer-events: auto;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
     font-size: calc(20px);
     transition: all 0.6s ease-in-out;
     white-space: nowrap; /* Empêche le retour à la ligne */
@@ -878,7 +927,7 @@ z-index: 12;
     position: fixed;
     opacity: 100%;
     top: 20px;
-    right: 14px;
+    right: 24px;
     width: 25px;
     height: 35px;
     background-color: var(--Color_1);
@@ -904,7 +953,7 @@ z-index: 12;
     display: flex;
     position: fixed;
     top: 24px;
-    right: 50px;
+    right: 60px;
     flex-direction: row-reverse;
     align-items: center;
     z-index: 1002;
@@ -992,9 +1041,19 @@ z-index: 12;
             /* Media query pour mobile */
              
              @media (max-width: 600px) { 
-             .nav-buttons {  flex-direction: column;   /* Les boutons seront empilés verticalement */  right: 20px;   /* Ajuste la position à droite */  top: 50px;   /* Ajuste la position en haut */ }  
-             .nav-buttons button {  margin: 5px 0;   /* Plus d'espace entre les boutons verticalement */  transform: translateY(100px);   /* Initialement placé en dessous du bouton principal */ }
-             .show-menu .nav-buttons button {  transform: translateY(0);   /* Déplacement vers la position finale verticale */ } } /* Section Instagram */
+             .nav-buttons {  
+                flex-direction: column;   /* Les boutons seront empilés verticalement */  
+                right: 20px;   /* Ajuste la position à droite */  
+                top: 50px;   /* Ajuste la position en haut */ 
+            }  
+             .nav-buttons button {  
+                margin: 5px 0;   /* Plus d'espace entre les boutons verticalement */  
+                transform: translateY(100px);   /* Initialement placé en dessous du bouton principal */ 
+            }
+             .show-menu .nav-buttons button {  
+                transform: translateY(0);   /* Déplacement vers la position finale verticale */ 
+            } 
+        } /* Section Instagram */
              .instagram-section { 
                 position: fixed; 
                 bottom: 10px; 
@@ -1035,6 +1094,7 @@ z-index: 12;
              .navbar a { 
                 color: var(--Color_2); 
                 text-decoration: none; 
+                font-family: 'Poppins', sans-serif;
                 font-size: 18px; 
                 margin-right: 20px; 
             } /* .navbar-right {
@@ -1095,6 +1155,7 @@ body2 {
     padding: 62.5px 0; /* Écart entre les textes */
     width: 100%;
     text-align: left;
+    font-family: 'Poppins', sans-serif;
     font-size: 45px;
     color: #f1f1f1;
     margin-left: 107px; /* Décaler le texte de 107px vers la droite */
@@ -1299,6 +1360,7 @@ body2 {
     top: calc(0vw + 155px);
     left: 11vw;
     color: var(--Color_2);
+    font-family: 'Poppins', sans-serif;
     font-size: 6.4vw;
     opacity: 0;
     /*transform: translate(-50%, -50%);*/
@@ -1307,6 +1369,7 @@ body2 {
 }
 
 .josy_text1 {
+    font-family: 'Poppins', sans-serif;
     font-size: 9.4vw;
   }
   
@@ -1334,6 +1397,7 @@ body2 {
 
 #vous_josy_2 {
     top: 70%;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
 }
 
@@ -1351,11 +1415,13 @@ body2 {
     left: 13vw;
     width: 50vw;
     color: var(--Color_2);
+    font-family: 'Poppins', sans-serif;
     font-size: 21px;
      opacity: 0;
 }
 
 .small-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;/*0.9em; /* Ajuste la taille, 0.9em est légèrement plus petit que la normale */
 }
 
@@ -1365,6 +1431,7 @@ body2 {
     left: 3%;
     width: 45vw;
     color: var(--Color_2);
+    font-family: 'Poppins', sans-serif;
     font-size: 25px;
 }
 
@@ -1392,6 +1459,7 @@ body2 {
     background: #f0f0f0;
     padding: 6px 10px;
     border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #333;
     white-space: nowrap;
@@ -1515,6 +1583,7 @@ body2 {
     border: none;
     padding: 15px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     z-index: 9998;
     opacity: 1;
@@ -1569,37 +1638,196 @@ body2 {
 
 /* Style de base */
 
-.bouton_boutique_pc {
-    opacity: 1;
-    top: 47vh;
-    left: 23%;
-    pointer-events: auto;
-    cursor: pointer;
-    font-size: calc(1.15vw + 10px);
-     transition: opacity 0.3s ease;  /* Désactive cette ligne */
-     z-index: 9999;
+/*.bouton_boutique_pc {
+  position: fixed;
+  top: 47vh;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  padding: 6px 1vw;
+  margin: 1vw;
+  background: linear-gradient(
+    110deg,
+    rgba(234, 234, 234, 0.05) 0%,
+    var(--Color_3) 50%,
+    rgba(234, 234, 234, 0.05) 100%,
+    var(--Color_3) 150%,
+    rgba(234, 234, 234, 0.05) 200%
+  );
+  background-size: 300% 100%;
+  color: var(--Color_2);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(1.15vw + 10px);
+  z-index: 9999;
+  cursor: pointer;
+  pointer-events: auto;
+  text-align: center;
 
-     position: fixed;
-     /*display: inline-block;*/
-     text-align: center;
-     padding: 6px 1vw;
-     margin: 1vw;
-    /* font-size: calc(1.15vw + 8px);
-    /* background-color: var(--Color_1);*/
-     background: rgba(0, 0, 0, 0.3);
-     color: var(--Color_2);
-     border: 0px solid var(--Color_2);
-     border-radius: 16px;
-     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-     transform: translate(-50%, -50%);
-     opacity: 1;
+
+}*/
+
+
+.main-box_boutique {
+    
+  height: 100vh;
+  display: flex;
+  margin: auto;
 }
 
+.button-box_boutique {
+  height: 500px;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  display: grid;
+  
+}
+
+/* Button 1 - ,Boutique */ 
+/*
+.button_boutique {
+  position: fixed;
+  top: 47vh;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  height: 50px;
+  width: 250px;
+  display: flex;
+  border-radius: 2.5rem;
+  transition: 0.5s;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(1.15vw + 10px);
+  color: white;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  overflow: hidden; /* pour éviter que le fond dépasse 
+}
+
+.button_boutique::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2.5rem;
+  background-image: linear-gradient(
+    to right,
+    #8081cf,
+    #847dc9,
+    #8778c3,
+    #8a74bd,
+    #8d70b7,
+    #8f6db2,
+    #9169ac,
+    #9266a7,
+    #9362a1,
+    #935e9a,
+    #935b93,
+    #93578d
+  );
+  transition: opacity 0.5s ease;
+  z-index: -1; 
+}
+
+.button_boutique:hover::before {
+  opacity: 1; 
+}
+
+
+.img_boutique {
+  margin-left: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: transform 0.5s ease;
+  transform: translateX(0);
+}
+
+
+@keyframes blurr {
+  0%,
+  100% {
+    box-shadow: 0 0 10px var(--handshake);
+  }
+
+  50% {
+    box-shadow: 0 0 36px var(--handshake);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+
+.title_boutique {
+  font-weight: bold;
+  transform: translate(50%, 7%);
+  margin-top: 0rem;
+  transition: 0.5s;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.button_boutique:hover .title_boutique {
+  transform: translateX(-140px);
+  animation: fade 0.5s;
+  opacity: 0%;
+}
+
+.button_boutique:hover .img_boutique {
+  transform: translateX(-14vw);
+}
+
+.description_boutique {
+  position: absolute;
+  margin-top: 1rem;
+  font-weight: bold;
+  line-height: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(1.25vw);
+  font-style: italic;
+  transition: 0.5s;
+  opacity: 0%;
+  margin-left: 2.6rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.button_boutique:hover .description_boutique {
+  transform: translateX(0vw);
+  opacity: 100%;
+}
+*/
+
+
+
+
+/*
 .bouton_boutique_pc:hover {
-    color: var(--Color_2);
-  /*  background: var(--Color_3);*/
-    background: rgba(0, 0, 0, 0.6);
+     color: var(--Color_2);
+  background: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}*/
+
+/*Button 11 - Boutique */
+
+
+/*.frame {
+  width: 90%;
+  margin: 40px auto;
+  text-align: center;
 }
+.button_boutique {
+  margin: 20px;
+}*/
+
 
 
 
@@ -1698,6 +1926,7 @@ body2 {
     background: var(--Color_1);
     color: #fff;
     border: none;
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     padding: 10px;
     cursor: pointer;
@@ -1738,6 +1967,7 @@ body2 {
 
 .contact_form h2 {
     margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
     font-size: 24px;
     text-align: center;
 }
@@ -1760,12 +1990,12 @@ body2 {
 }
 
 .form-group textarea { resize: vertical; min-height: 100px; } 
-.form-group button_one { width: 100%; padding: 10px; background-color: #007bff; border: none; color: var(--Color_2); font-size: 16px; cursor: pointer; border-radius: 4px; transition: background-color 0.3s ease; } 
+.form-group button_one { width: 100%; padding: 10px; background-color: #007bff; border: none; color: var(--Color_2); font-family: 'Poppins', sans-serif; font-size: 16px; cursor: pointer; border-radius: 4px; transition: background-color 0.3s ease; } 
 .form-group button_one:hover { background-color: #0056b3; } 
 .error { color: red; margin-top: 10px; } /* Styles pour le pop-up */
 .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; } 
 .popup { background: var(--Color_2); padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); position: relative; text-align: center; } 
-.popup .close-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 16px; cursor: pointer; }
+.popup .close-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 16px; font-family: 'Poppins', sans-serif; cursor: pointer; }
 
 
 
