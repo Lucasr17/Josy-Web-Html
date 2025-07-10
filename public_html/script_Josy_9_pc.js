@@ -1,3 +1,5 @@
+
+
 var scrollPosition = window.scrollY;
 
 
@@ -184,12 +186,12 @@ const tl = gsap.fromTo("#text1",
 );
 
 
-gsap.fromTo(".bouton_boutique_pc", {
-    opacity : 1,  // Cache le bouton
-     cursor: "pointer",
+gsap.fromTo(".btn-11", {
+    opacity : 0.7,  
+    cursor: "pointer",
     }, {
     opacity : 0,  // Cache le bouton
-     cursor: "none",
+    cursor: "none",
     scrollTrigger: {
     trigger: document.body,
     start: "0px top",
@@ -197,7 +199,21 @@ gsap.fromTo(".bouton_boutique_pc", {
     scrub: 0,
     markers: false
     }
-    });
+});
+/*
+gsap.to(".bouton_boutique_pc", {
+  scale: 1.03,
+  boxShadow: "0 0 15px rgba(255, 255, 255, 0.4)",
+  repeat: -1,
+  yoyo: true,
+  duration: 1.2,
+  ease: "power1.inOut"
+});*/
+
+
+
+
+
 
 
 
@@ -1735,39 +1751,30 @@ let reverseScrollPercentage = 100 - scrollPercentage;
 // Mettre à jour la hauteur de la barre de progression
 document.getElementById('scrollBar').style.height = reverseScrollPercentage + '%';
 
-/* if (scrollTop > 500){
-
-    document.getElementById('scrollBar').style.height = 0.5 * reverseScrollPercentage + '%';
-
-}*/
-
 variables =  sreen_largeur * 0.30 + 0;//433;
 variables_2 = sreen_largeur * 0.063 + 0;//90.7;
 opacitys = 0;
-
-
 
 // Mettre à jour l'opacité des points
 updatePointsVisibility(scrollTop);
 });
 
-
-// Initialiser la barre de progression et la visibilité des points au chargement de la page
-//window.dispatchEvent(new Event('scroll'));
-
 function updatePointsVisibility(scrollTop) {
 // Tableau des points avec leurs positions en pixels
 const points = [
 { id: 'point100', position: 200 },
-{ id: 'point200', position: 2150 },
+//
+// 
+// 
+// { id: 'point200', position: 2150 },
 { id: 'point300', position: 4200 },
 { id: 'point400', position: 4880 },
 { id: 'point500', position: 5300 },
-{ id: 'point600', position: 6200 },
-{ id: 'point700', position: 6500 },
+{ id: 'point600', position: 6200 }
+/*{ id: 'point700', position: 6500 },
 { id: 'point800', position: 7000 },
 { id: 'point900', position: 9999 },
-{ id: 'point1000', position: 9999 }
+{ id: 'point1000', position: 9999 }*/
 ];
 
 // Mettre à jour l'opacité de chaque point en fonction du pourcentage de défilement
