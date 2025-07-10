@@ -1,3 +1,13 @@
+const shiny = document.querySelector('.btn-11 .shiny');
+
+setInterval(() => {
+   console.log(`❎ Anime...`);
+  shiny.classList.remove('animate');      // reset animation
+  void shiny.offsetWidth;                 // force reflow (relance l'animation)
+  shiny.classList.add('animate');
+   console.log(`❎ Anime OK`);
+}, 3000);
+
 
 
 // Fonction pour convertir automatiquement le texte en minuscules
