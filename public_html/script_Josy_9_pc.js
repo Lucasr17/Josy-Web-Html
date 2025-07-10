@@ -109,11 +109,17 @@ function changeImage(direction) {
 
     setTimeout(() => {
 if (currentIndex === 4) {
-    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> <span style='font-size: 60px;'>entre apéro et tendance</span>";
+    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> <span style='font-size:  clamp(50px, 4.5vw, 80px);;'>entre apéro et tendance</span>";
+
 }else if (currentIndex === 3){
     text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> À TOUT PRIX</div>";  
 }else if (currentIndex === 5){
-    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong></div>";  
+
+        if (window.innerWidth >= 768) {
+        text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong></div>"; 
+    } else{
+      text_fond_josy.innerHTML = "<strong><span class='josy_text1'></span></strong></div>"; 
+    }
 }
 text_fond_josy.style.opacity = "1"; 
 }, 400);
@@ -187,10 +193,12 @@ const tl = gsap.fromTo("#text1",
 
 
 gsap.fromTo(".btn-11", {
-    opacity : 0.7,  
+    opacity: 0.7,
+    pointerEvents: "auto", // Autorise le hover
     cursor: "pointer",
-    }, {
-    opacity : 0,  // Cache le bouton
+}, {
+    opacity: 0,
+    pointerEvents: "none", // Désactive le hover
     cursor: "none",
     scrollTrigger: {
     trigger: document.body,
