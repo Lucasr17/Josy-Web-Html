@@ -16,7 +16,7 @@
 .custom-btn {
   width: 140px;
   height: 45px;
-  top: 47vh;
+  top: 40vh;
   left: 23%;
   color: #fff;
   border-radius: 20px;
@@ -33,6 +33,15 @@
    7px 7px 20px 0px rgba(0,0,0,.1),
    4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
+}
+
+@media (max-width: 600px) {
+
+    .custom-btn {
+        top: 40vh;
+        left: 18%;
+    }
+
 }
 
 /* 11 */
@@ -155,7 +164,6 @@ svg {
       stroke-dashoffset: 1000;
     }
 
-
     .section_histoire:nth-child(even) .emoji {
       transform: rotate(-8deg) scale(0.5);
     }
@@ -170,6 +178,18 @@ svg {
         font-family: 'Poppins', sans-serif;
         font-size: 2.5rem;
       }
+      .line_section {
+      stroke-width: 7;
+    }
+
+
+  .section_histoire:nth-child(even) svg {
+    top: 25%; /* Si tu veux aussi ajuster la ligne des sections paires */
+  }
+
+  .section_histoire:nth-child(5) svg {
+    top: 15%; /* ajuste selon besoin : remonte la ligne plus haut sur cette section spécifique */
+  }
     }
 
 /* Fin Section histoire JOSY */
@@ -1047,8 +1067,10 @@ z-index: 12;
                 top: 50px;   /* Ajuste la position en haut */ 
             }  
              .nav-buttons button {  
-                margin: 5px 0;   /* Plus d'espace entre les boutons verticalement */  
+                margin: 8px 0;   /* Plus d'espace entre les boutons verticalement */  
                 transform: translateY(100px);   /* Initialement placé en dessous du bouton principal */ 
+                padding: 8px 8px;
+                box-shadow: 0 0 0 0px var(--Color_1); /* Simule un contour */
             }
              .show-menu .nav-buttons button {  
                 transform: translateY(0);   /* Déplacement vers la position finale verticale */ 
@@ -1370,9 +1392,9 @@ body2 {
 
 .josy_text1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 9.4vw;
-  }
-  
+    font-size: clamp(50px, 9.4vw, 80px);
+}
+
 
 /* Style du texte JOSY */
 #JOSY_touch {
@@ -1540,8 +1562,6 @@ body2 {
     z-index: 1;
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: 100%;
     opacity: 0;
     transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
@@ -1552,18 +1572,38 @@ body2 {
 .carousel img.prev {
     left: -100%;
 }
+@media (min-width: 768px) { /* tel section */
+.carousel img:nth-child(2) {
+    object-position: center calc(100% + 40vh);
+}
+}
+
+@media (max-width: 768px) {
+    .carousel img:nth-child(1) {
+        object-position: calc(62% - 22vw) center;
+    }
+}
+
 
 .carousel video {
-    width: 100vw;
-    height: 100vh;
+    width: 110vw;
+    height: 110vh;
     z-index: 1;
-    object-fit: cover; /* Ajuste la vidéo à l'écran */
+     object-fit: cover; /* Ajuste la vidéo à l'écran */
     position: absolute;
-    top: 0;
-    left: 100%;
     opacity: 0;
     transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
+
 }
+
+@media (max-width: 768px) { /* tel section */
+    .carousel video {
+        object-fit: cover; 
+        object-position: calc(100% + 400px) center; /* Décale la vidéo vers la gauche */
+    }
+}
+
 
 .carousel video.active {
     left: 0;
