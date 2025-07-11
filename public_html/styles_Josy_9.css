@@ -930,7 +930,11 @@ z-index: 12;
     transition: opacity 0.3s ease-in-out;
 }
 
-/* Effet de survol */
+
+
+/* Modification du texte lors du survol */
+@media (min-width: 768px) {
+    /* Effet de survol */
 .bouton_jeu_pc:hover {
     width: 220px; /* Taille finale fluide */
     min-width: 220px;
@@ -938,10 +942,11 @@ z-index: 12;
     border-radius: 20px;
 }
 
-/* Modification du texte lors du survol */
-.bouton_jeu_pc:hover::before {
+  .bouton_jeu_pc:hover::before {
     content: "🎁  À toi de jouer !";
+  }
 }
+
   
   .menu-toggle {
     position: fixed;
@@ -976,7 +981,7 @@ z-index: 12;
     right: 60px;
     flex-direction: row-reverse;
     align-items: center;
-    z-index: 1002;
+    z-index: 10002;
   }
   
   .nav-buttons button {
@@ -990,7 +995,7 @@ z-index: 12;
     transform: translateX(100px);  /* Initialement placé à droite */
     opacity: 0;  /* Initialement invisible */
     visibility: visible;
-    z-index: 1002;
+    z-index: 10002;
     
     /* Suppression de `border`, remplacé par `box-shadow` */
     border: none;
@@ -1010,7 +1015,7 @@ z-index: 12;
     transform: translateX(0);  /* Déplacement vers la position finale */
     opacity: 1;  /* Devenir visible */
     visibility: visible;  /* Rend les boutons visibles */
-    z-index: 1002;
+    z-index: 10002;
     cursor: pointer;
     pointer-events: auto; /* Empêche les clics et autres interactions avec l'élément */
   }
@@ -1092,7 +1097,7 @@ z-index: 12;
     top: -5vh; 
     left: 0; 
     width: 100%; 
-    height : 8vh;
+    height : 3vw;
     opacity: 1;  /* Devenir visible */ 
     background-color: var(--Color_1);  /* rgba(0, 0, 0, 0); /* Fond transparent avec 50% d'opacité */
     display: flex;  
@@ -1110,7 +1115,7 @@ z-index: 12;
                 display: flex; 
                 justify-content: space-between; 
                 align-items: center; 
-                z-index: 9997; 
+                z-index: 99970; 
             } 
 
              .navbar a { 
@@ -1158,8 +1163,8 @@ body2 {
 /* Conteneur du slider */
 .slider-container2 {
     max-width: 400px;
-    height: 145px;
-    margin-top: -53px; /* Monter/descendre tout le scroll */
+    height: clamp(100px, 10vw, 125px);/*145px*/;
+     margin-top: calc(-17px + (-25 - -17) * ((100vw - 413px) / (875 - 413)));/*33px; /* Monter/descendre tout le scroll */
     overflow: hidden;
     border: none;
     background: transparent;
@@ -1174,13 +1179,13 @@ body2 {
 /* Style des paragraphes à l'intérieur du slider */
 .slider2 p {
     flex-shrink: 0;
-    padding: 62.5px 0; /* Écart entre les textes */
+    padding: clamp(40px, 4.17vw, 53px) 0; /* Écart entre les textes */
     width: 100%;
     text-align: left;
     font-family: 'Poppins', sans-serif;
-    font-size: 45px;
+    font-size: clamp(20px, 4vw, 40px);
     color: #f1f1f1;
-    margin-left: 107px; /* Décaler le texte de 107px vers la droite */
+    margin-left:  clamp(63px, calc(7vw + 10px), 200px); /* Décaler le texte de 107px vers la droite */
     letter-spacing: 2px; /* Ajout de l'espace entre les lettres */
 }
 
@@ -1194,8 +1199,9 @@ body2 {
 /* Style de l'image */
 .image2 {
     position: fixed; /* Position fixe pour l'image */
-    top: -15px;
-    width: 108px; /* Taille de l'image */
+    top: calc(-1vw + 10px);
+   /*  max-width: 108px; /* Taille de l'image */
+     width: clamp(60px, (7vw + 8px), 120px);
     opacity: 100;
     transition: opacity 0.5s ease; /* Transition d'opacité */
 }
@@ -1394,6 +1400,8 @@ body2 {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(50px, 9.4vw, 80px);
 }
+
+
 
 
 /* Style du texte JOSY */
@@ -1603,6 +1611,7 @@ body2 {
         object-position: calc(100% + 400px) center; /* Décale la vidéo vers la gauche */
     }
 }
+
 
 
 .carousel video.active {
