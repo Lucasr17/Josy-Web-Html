@@ -981,7 +981,7 @@ z-index: 12;
     right: 60px;
     flex-direction: row-reverse;
     align-items: center;
-    z-index: 10002;
+    z-index: 1002;
   }
   
   .nav-buttons button {
@@ -995,7 +995,7 @@ z-index: 12;
     transform: translateX(100px);  /* Initialement placé à droite */
     opacity: 0;  /* Initialement invisible */
     visibility: visible;
-    z-index: 10002;
+    z-index: 1002;
     
     /* Suppression de `border`, remplacé par `box-shadow` */
     border: none;
@@ -1015,7 +1015,7 @@ z-index: 12;
     transform: translateX(0);  /* Déplacement vers la position finale */
     opacity: 1;  /* Devenir visible */
     visibility: visible;  /* Rend les boutons visibles */
-    z-index: 10002;
+    z-index: 1002;
     cursor: pointer;
     pointer-events: auto; /* Empêche les clics et autres interactions avec l'élément */
   }
