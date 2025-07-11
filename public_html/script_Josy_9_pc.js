@@ -86,6 +86,25 @@ const elements = document.querySelectorAll('.carousel img, .carousel video'); //
 
 text_fond_josy = document.getElementById('text1');
 
+function updateJosyText() {
+  if (currentIndex === 5) {
+    if (window.innerWidth >= 500) {
+      text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong>";
+    } else {
+      text_fond_josy.innerHTML = ""; // Vide
+    }
+  }
+}
+
+// Quand tu changes de slide :
+if (currentIndex === 5) {
+  updateJosyText();
+}
+
+// Quand la taille de la fenêtre change :
+window.addEventListener('resize', updateJosyText);
+
+
 function changeImage(direction) {
     const currentElement = elements[currentIndex]; // Élément actuel
     currentElement.classList.remove('active');
@@ -109,10 +128,31 @@ function changeImage(direction) {
 
     setTimeout(() => {
 if (currentIndex === 4) {
-    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> <span style='font-size:  clamp(50px, 4.5vw, 80px);;'>entre apéro et tendance</span>";
+
+
+if (window.innerWidth >= 768) {
+text_fond_josy.innerHTML = `
+  <strong><span class="josy_text1">JOSY</span></strong>
+  <span style="font-size: clamp(30px, 3vw, 70px);">
+    entre apéro et tendance
+  </span>
+`;
+    } else{
+text_fond_josy.innerHTML = `
+  <strong><span class="josy_text1">JOSY</span></strong><br>
+  <span style="font-size: clamp(25px, 3vw, 60px); display: inline-block; margin-left: 20px;">
+    entre apéro et tendance
+  </span>
+`;
+    }
 
 }else if (currentIndex === 3){
-    text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong> À TOUT PRIX</div>";  
+    text_fond_josy.innerHTML = `
+  <strong><span class="josy_text1">JOSY</span></strong>
+  <span style="font-size: clamp(30px, 4vw, 90px);">
+    À TOUT PRIX
+  </span>
+  `;
 }else if (currentIndex === 5){
 
         if (window.innerWidth >= 768) {
@@ -1626,22 +1666,6 @@ gsap.fromTo(".carouselcontainer",
     }
   }
 );
-
-gsap.fromTo(".photodrone_sup", 
-    {
-      opacity: 1
-    }, 
-    {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: document.body, // Déclencheur sur le carrousel
-        start: "20px top", // Déclenche quand le haut de la page atteint 0px
-        end: "160px top", // Fin de l'animation quand on atteint 150px
-        scrub: 0, // Animation fluide au scroll
-        markers: false // Pour voir les marqueurs (à enlever en prod)
-      }
-    }
-  );
 
 gsap.fromTo(".scroll_bar_container", 
     {
