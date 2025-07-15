@@ -1,16 +1,16 @@
 :root { 
     --Color_1: #202020; 
     --Color_2: #EAEAEA; 
-    --Color_3: #9400D3; } 
+    --Color_3: #9400D3;
+ } 
     
     body { 
         margin: 0; 
         height: 5000px; 
-        overflow-y: auto;  
+       /* overflow-y: auto;  */
         background: var(--Color_1); 
-        overflow-x: hidden; 
+        overflow-x: hidden ! important;
 } 
-
 
 /*Boutique */
 .custom-btn {
@@ -236,6 +236,7 @@ svg {
  var(--Color_1); 
  display: flex; 
  z-index: 11;  
+ overflow-x: hidden; 
  /* cursor: pointer; */ 
 
 } 
@@ -887,7 +888,7 @@ z-index: 12;
     opacity: 100%;
     top: 50px;
     right: 0px;
-    width: 102vw;
+    width: 80vw;
     height: 100px;
     background-color:  var(--Color_1);
     cursor: none;
