@@ -1425,6 +1425,12 @@ body2 {
     z-index: 2000;
 }
 
+.txt_josy_histoire_amis {
+  white-space: nowrap;
+}
+
+
+
 #vous_josy_2 {
     top: 70%;
     font-family: 'Poppins', sans-serif;
