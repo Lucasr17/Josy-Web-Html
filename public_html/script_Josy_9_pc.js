@@ -102,7 +102,7 @@ document.getElementById("txt_josy_histoire_amis").innerHTML = `
   <strong>
     <span class='txt_josy_histoire_amis'>JOSY...</span>
   </strong>
-  <span style='font-size: clamp(12px, 2vw, 50px);'>
+  <span style='font-size: clamp(12px, 1.9vw, 50px);'>
     une histoire d'amis
   </span>
 `;
