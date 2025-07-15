@@ -1439,13 +1439,6 @@ if (scrollTop >= 6500 && scrollTop <= 6800) {
     four.style.opacity = "0";
 }
 
-if (scrollTop >= 6000 && scrollTop <= 6390) {
-    photodrone_text.style.opacity = "0";
-    
-} else {
-    photodrone_text.style.opacity = "0";
-}
-
 });
 
 
@@ -1470,6 +1463,9 @@ const tshirt = document.querySelector(".T_shirt_Josy_1");
 const rect = tshirt.getBoundingClientRect();
 const yStart = rect.top; //+ rect.height;
 
+
+if (window.innerWidth >= 768) {
+
 gsap.fromTo(".T_shirt_Josy_1_", {
 x: sreen_largeur * 0.332,
 y: yStart - window.innerHeight * 0.24,
@@ -1489,6 +1485,28 @@ markers: false
 }
 });
 
+}else{
+
+gsap.fromTo(".T_shirt_Josy_1_", {
+x: sreen_largeur * 0.332,
+y: yStart - window.innerHeight * 0.24,
+width: "70vw",
+}, {
+x: 80,
+y: 0, 
+width: "90vw",
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=265px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=350px top", // Quand le bas de la section 3 touche le haut du viewport 
+
+scrub: 0,  
+markers: false
+}
+});
+
+  }
 
 }
 
