@@ -95,12 +95,24 @@ function updateJosyText() {
     }
   }
 
-      txt_josy_histoire_amis.innerHTML = "<strong><span class='txt_josy_histoire_amis'>JOSY...</span></strong><span style='font-size: clamp(12px, 2vw, 50px);'>  une histoire d'amis</span></div>";
+      txt_josy_histoire_amis.innerHTML = `
+  <strong>
+  <span class='txt_josy_histoire_amis' style='font-size: clamp(16px, 2.5vw, 60px);'>
+    JOSY...
+  </span>
+  </strong>
+  <span style='font-size: clamp(12px, 1.9vw, 50px);'>
+    une histoire d'amis
+  </span>
+`;
+
 }
 
 document.getElementById("txt_josy_histoire_amis").innerHTML = `
   <strong>
-    <span class='txt_josy_histoire_amis'>JOSY...</span>
+  <span class='txt_josy_histoire_amis' style='font-size: clamp(16px, 2.5vw, 60px);'>
+    JOSY...
+  </span>
   </strong>
   <span style='font-size: clamp(12px, 1.9vw, 50px);'>
     une histoire d'amis
