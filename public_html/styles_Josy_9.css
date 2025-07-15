@@ -1415,7 +1415,7 @@ body2 {
 }
 
 /* Autres styles de texte */
-#txt_josy_histoire_amis,#txt_les_variantes, #vous_josy, #vous_josy_2 {
+#txt_josy_histoire_amis, #txt_les_variantes, #vous_josy, #vous_josy_2 {
     position: fixed;
     left: 50%;
     top: 140px;
@@ -1423,10 +1423,6 @@ body2 {
     color: var(--Color_2);
     opacity: 0;
     z-index: 2000;
-}
-
-.txt_josy_histoire_amis {
-  white-space: nowrap;
 }
 
 
