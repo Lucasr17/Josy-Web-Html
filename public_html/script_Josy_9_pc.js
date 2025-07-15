@@ -94,7 +94,19 @@ function updateJosyText() {
       text_fond_josy.innerHTML = ""; // Vide
     }
   }
+
+      txt_josy_histoire_amis.innerHTML = "<strong><span class='txt_josy_histoire_amis'>JOSY...</span></strong><span style='font-size: clamp(12px, 2vw, 50px);'>  une histoire d'amis</span></div>";
 }
+
+document.getElementById("txt_josy_histoire_amis").innerHTML = `
+  <strong>
+    <span class='txt_josy_histoire_amis'>JOSY...</span>
+  </strong>
+  <span style='font-size: clamp(12px, 2vw, 50px);'>
+    une histoire d'amis
+  </span>
+`;
+
 
 // Quand tu changes de slide :
 if (currentIndex === 5) {
