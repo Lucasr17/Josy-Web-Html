@@ -6,7 +6,7 @@
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 
@@ -19,9 +19,9 @@ body {
        overflow-x: hidden; /* ! important;*/
 } 
 
-/** {
+* {
   outline: 1px solid red;
-}*/
+}
 
 /*Boutique */
 .custom-btn {
