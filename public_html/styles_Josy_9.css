@@ -5,7 +5,8 @@
  } 
 
 html, body {
-  /*overflow-x: hidden;*/
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 
@@ -148,7 +149,17 @@ body {
       left: 0;
       pointer-events: none;
       z-index: 1002;
+      overflow-x: hidden;
     }
+
+.line-wrapper svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
 
 svg {
   position: absolute;
@@ -347,6 +358,8 @@ left: 35%;
 z-index: 12; 
 } 
 
+
+
 .tshirtss { 
     height: auto; 
     width: 42vw; 
@@ -355,7 +368,8 @@ z-index: 12;
     position: relative; margin-left: -8.5%;  /* Chevauchement des t-shirts */ 
     z-index: calc(5 - var(--order));  /* Inverser l'empilement */ 
     cursor: pointer;  /* pointer-events: none; /* Par défaut, désactive le survol */ 
-    pointer-events: none; }
+    pointer-events: none; 
+  }
 /* fin t shirt cintre *//* histoire josy */
 
 
