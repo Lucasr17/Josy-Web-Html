@@ -1,4 +1,32 @@
 
+function debugScrollOverflow() {
+  const all = document.querySelectorAll('*');
+
+  all.forEach(el => {
+    // Forcer visibilité
+    el.style.opacity = '1';
+    el.style.visibility = 'visible';
+    el.style.pointerEvents = 'auto';
+    el.style.outline = '';
+
+    // Ajoute une couleur aléatoire pour mieux visualiser
+    const r = Math.floor(Math.random() * 150 + 50);
+    const g = Math.floor(Math.random() * 150 + 50);
+    const b = Math.floor(Math.random() * 150 + 50);
+    el.style.backgroundColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+
+    // Test de dépassement du viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.right > window.innerWidth || rect.left < 0) {
+      el.style.outline = '2px solid red';
+      console.warn('❗ Dépassement horizontal :', el);
+    }
+  });
+
+  console.log("✅ Tous les éléments sont maintenant visibles et les dépassements sont encadrés en rouge.");
+}
+
+
 
 var scrollPosition = window.scrollY;
 
@@ -9,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const textEffect = document.querySelector(".text-effect");
-    const textContent = textEffect.textContent;
+   // const textContent = textEffect.textContent;
 
     // Remplace chaque lettre ET espace par un <span>
     textEffect.innerHTML = textContent
