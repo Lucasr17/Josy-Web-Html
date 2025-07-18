@@ -5,12 +5,9 @@
  } 
 
 html, body {
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
-img, video, svg, .rectangle, .rack, .intro-image {
-  max-width: 100%;
-}
 
 
 body { 
@@ -21,9 +18,9 @@ body {
        overflow-x: hidden; /* ! important;*/
 } 
 
-* {
+/** {
   outline: 1px solid red;
-}
+}*/
 
 /*Boutique */
 .custom-btn {
