@@ -53,7 +53,7 @@
         }
         .random-word {
             font-size: 24px;
-            color: white;
+            color: rgb(248, 89, 89);
             text-decoration: underline;
         }
 
@@ -284,13 +284,19 @@ transition-delay: 0s;
 <body>
 
     <div id="countdown">10s</div>
+
     <div id="ready-screen">Êtes-vous prêt ?</div>
 
     <div class="word-container" id="word-container"></div>
 
     <div class="box">
         <div class="box-inner">
-            <h2 class="h2" id="instruction-text">Trouvez le mot JOSY<span id="random-word"></span> en moins de 10s</h2>
+<h2 class="h2" id="instruction-text">
+  Trouvez le mot JOSY
+  <span id="random-word" style="color: rgb(248, 89, 89);"></span>
+  en moins de 10s
+</h2>
+
           <!--  <h2 class="h2">  Trouvez le mot en moins de 10s</h2>
             <div class="random-word" id="random-word"></div> -->
         </div>
