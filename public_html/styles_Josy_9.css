@@ -19,9 +19,9 @@ body {
        overflow-x: hidden; /* ! important;*/
 } 
 
-* {
+/** {
   outline: 1px solid red;
-}
+}*/
 
 /*Boutique */
 .custom-btn {
@@ -103,7 +103,7 @@ body {
 
 .section_histoire {
       position: relative;
-    top: 100vh; 
+      top: 100vh; 
       min-height: 60vh;
       padding: 60px 60px;
       display: flex;
@@ -149,15 +149,7 @@ body {
       left: 0;
       pointer-events: none;
       z-index: 1002;
-      overflow-x: hidden;
     }
-
-.line-wrapper svg {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
 
 
 
@@ -596,7 +588,7 @@ z-index: 12;
 #modal-container {
     position: fixed;
     display: table;
-    overflow-x: hidden;
+    overflow: hidden;
     height: 100%;
     width: 100%;
     top: 0;
@@ -604,6 +596,11 @@ z-index: 12;
     transform: scale(0);
     z-index: 9999;
 }
+
+#modal-container.closed {
+    display: none !important;
+}
+
 
 #modal-container.one {
     transform: scaleY(0.01) scaleX(0);
@@ -913,7 +910,7 @@ z-index: 12;
     opacity: 100%;
     top: 50px;
     right: 10px;
-    width: 80vw;
+    width: 70vw;
     height: 100px;
     background-color:  var(--Color_1);
     cursor: none;
@@ -1263,20 +1260,7 @@ body2 {
 
         }   
 
-       /* Style de l'image du drone */
-.photodrone {
-    position: fixed; /* Position fixe pour l'image */
-    overflow-x: hidden;
-    top: 75px; /* Placer l'image à 75px du haut */
-    right: 0vw;
-    transform: translate(0%, 0%);
-    width: 140vw; /* Taille de l'image */
-    opacity: 1;
-    transition: opacity 0.5s ease; /* Transition d'opacité */
-    cursor: pointer;
-    border-radius: 30px;
-    z-index: 1;
-}
+
 
 .carouselcontainer {
     position: absolute;
@@ -1459,13 +1443,13 @@ body2 {
     font-size: 18px;
 }
 
-#text3 {
+/*#text3 {
     position: absolute;
     top: 1300px;
     opacity: 0;
     left: 400px;
     color: var(--Color_2);
-}
+}*/
 
 #descriptif_tshirt {
     position: fixed;
