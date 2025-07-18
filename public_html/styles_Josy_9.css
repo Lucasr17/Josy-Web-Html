@@ -3,14 +3,27 @@
     --Color_2: #EAEAEA; 
     --Color_3: #9400D3;
  } 
-    
-    body { 
+
+html, body {
+  overflow-x: hidden;
+}
+
+img, video, svg, .rectangle, .rack, .intro-image {
+  max-width: 100%;
+}
+
+
+body { 
         margin: 0; 
         height: 5000px; 
        /* overflow-y: auto;  */
         background: var(--Color_1); 
-        overflow-x: hidden ! important;
+       overflow-x: hidden; /* ! important;*/
 } 
+
+* {
+  outline: 1px solid red;
+}
 
 /*Boutique */
 .custom-btn {
@@ -572,6 +585,7 @@ z-index: 12;
 #modal-container {
     position: fixed;
     display: table;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
     top: 0;
@@ -887,7 +901,7 @@ z-index: 12;
     position: fixed;
     opacity: 100%;
     top: 50px;
-    right: 0px;
+    right: 10px;
     width: 80vw;
     height: 100px;
     background-color:  var(--Color_1);
