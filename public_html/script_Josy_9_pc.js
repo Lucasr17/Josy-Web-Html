@@ -3251,23 +3251,23 @@ class Carousel {
 
 let carousel = new Carousel();
 
-//carousel.hideImage(0);
-//carousel.hideImage(1);
+document.addEventListener('touchstart', (event) => {
+  const touch = event.touches[0];
+  const y = touch.clientY;
+  const x = touch.clientX;
+  const screenWidth = window.innerWidth;
 
+  // Ignore touches dans la zone haute (ex: Tab bar)
+  if (y < 100) return;
 
-// Left click
-document.addEventListener('mousedown', (event) => {
-	switch (event.which) {
-			//case 1: carousel.next('/dev/images/img' + Math.floor(Math.random() * 7) + '.png'); break;
-		case 1: carousel.showImage(5); carousel.next(); break;
-		case 2: carousel.reset(); break;
-			//case 3: carousel.previous('/dev/images/img' + Math.floor(Math.random() * 7) + '.png'); break;
-		case 3: carousel.previous(); break;		
-	}
-	event.preventDefault();
-})
+  if (x < screenWidth / 2) {
+    // Touche côté gauche
+    carousel.previous();
+  } else {
+    // Touche côté droit
+    carousel.showImage(5); // si tu veux toujours afficher celle-ci
+    carousel.next();
+  }
 
-// Right click
-document.addEventListener('contextmenu', (event) => {
-	event.preventDefault();
-})
+  event.preventDefault(); // évite les comportements par défaut (scroll, etc.)
+});
