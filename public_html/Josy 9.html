@@ -63,54 +63,7 @@
                     </div>
                 </div> 
 
-                <div id="popup_Jeu" class="popup_Jeu hidden">
-                    <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
-                    <div id="grid" class="grid-container">
-                        <div class="grid-item" data-index="0">
-                            <div class="game-container">
-                                <!-- Titre au-dessus -->
-                                <div class="text-gradient title" id="text_0"style="text-align: center; margin-bottom: 10px;"> Trouvez un JOSYmot</div>
-
-                                <div class="text-gradient" id="emoji_0" style="opacity: 0; text-align: center; top: 41vh;  transition: transform 0.3s ease, opacity 0.5s ease;">
-                                    🖊️
-                                </div>
-                                
-                                <!-- Contenu en dessous -->
-                                <div class="content">
-
-                                    <p id="space-above"></p>
-                                    <div class="container23" style="position: relative; width: 100%;">
-                                        <p><span id="textContainer">...</span></p>
-                                    </div>
-                                    <p id="space-below"></p>
-                                    
-                                    <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
-                                    <input id="motInput_" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element" zindex="99999"/><br>
-                                    <button onclick="compterMot()" class="spaced-element">Valider</button><br>
-                                    <p id="resultat" class="spaced-element"></p>
-                    
-                                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
-                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect> 
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="grid-item" data-index="1" style="display: inline; flex-direction: column; align-items: center; width: 100%;">
-                            <!-- Titre centré -->
-                            <div class="text-gradient" id="text_1" style="text-align: center; margin-bottom: 10px;"> Voyez-vous le JOSYmot </div>
-
-                            <div class="text-gradient" id="emoji_1" style="opacity: 0; text-align: center; top: 47%; transition: transform 0.3s ease, opacity 0.5s ease;">
-                                🔍
-                            </div>
-                    
-                            <!-- Conteneur de l'iframe -->
-                            <iframe id="iframe-jeu" class="iframe-jeu" scr="https://josy2.fly.dev/Josy_Jeu"></iframe>
-
-                        </div>
-                    </div>
-                    
-                </div>
+          
                 
 
                   
@@ -207,6 +160,44 @@
                         <button onclick="startTyping()" id="one" class="button bouton_jeu_tel">Participer aux jeux</button>
                     </div>
 
+                <div id="popup_Jeu" class="popup_Jeu hidden">
+                    <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
+                    <div id="grid" class="grid-container">
+                        <div class="grid-item" data-index="0">
+                            <div class="game-container">
+                                <!-- Titre au-dessus -->
+                                <div class="text-gradient title" id="text_0"style="text-align: center; margin-bottom: 10px;"> Trouvez un JOSYmot</div>
+
+                                <div class="text-gradient" id="emoji_0" style="opacity: 0; text-align: center; top: 41vh;  transition: transform 0.3s ease, opacity 0.5s ease;">
+                                    🖊️
+                                </div>
+                                
+                                <!-- Contenu en dessous -->
+                                <div class="content">
+
+                                    <p id="space-above"></p>
+                                    <div class="container23" style="position: relative; width: 100%;">
+                                        <p><span id="textContainer">...</span></p>
+                                    </div>
+                                    <p id="space-below"></p>
+                                    
+                                    <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
+                                    <input id="motInput_" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element" zindex="99999"/><br>
+                                    <button onclick="compterMot()" class="spaced-element">Valider</button><br>
+                                    <p id="resultat" class="spaced-element"></p>
+                    
+                                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
+                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect> 
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+        
+
 
                     <div class="carouselcontainer">
                         <div class="carousel">
@@ -282,13 +273,6 @@ alt="Party Popper"
                         <p class="small-text">Confortable, tendance et minimaliste, il allie simplicité et sophistication.</p>
                         <p class="small-text">Parfait pour une tenue décontractée avec une touche de classe.</p>
                         <p> </p>
-                    </div>
-                    <div class="text" id="photodrone_text">
-                        <p>bilan t-shirt........ ............... ............... ..................... .............. .............. ....... ................ .......... .............</p>
-                        <p>ils sont trop bien</p>
-                        <p>2</p>
-                        <p>3</p>
-                        <p>4</p>
                     </div>
                     <div class="text" id="vous_josy">Vous aussi, faites partie de la team JOSY</div>
                     <div class="text" id="vous_josy_2">JOSY ce n'est pas qu'une histoire de vêtements. C'est aussi une communauté, un partage, des rencontres.</div>
@@ -368,7 +352,6 @@ alt="Party Popper"
                     </div>
                 </div>
 
-
 <!--   Section histoire JOSY-->
 
   <!-- SECTION 1 -->
@@ -442,6 +425,16 @@ alt="Party Popper"
                     <img src="../Image/T_shirts/T_shirt_9.png" id="T_shirt_9" class="tshirtss" style="--order: 9;" alt="T-shirt 9">
                     <img src="../Image/T_shirts/T_shirt_10.png" id="T_shirt_10" class="tshirtss" style="--order: 10;" alt="T-shirt 10">
                 </div>
+
+
+<div id="carousel_tshirt_tel">
+    <img src="../Image/T_shirts/T_shirt_3.png" id="carousel-image-0" class="carousel-image">
+    <img src="../Image/T_shirts/T_shirt_2.png" id="carousel-image-1" class="carousel-image">
+    <img src="../Image/T_shirts/T_shirt_1.png" id="carousel-image-2" class="carousel-image">
+    <img src="../Image/T_shirts/T_shirt_4.png" id="carousel-image-3" class="carousel-image">
+    <img src="../Image/T_shirts/T_shirt_5.png" id="carousel-image-4" class="carousel-image">
+    <img src="../Image/T_shirts/T_shirt_6.png" id="carousel-image-5" class="carousel-image">
+</div>
 
 <script src="script_Josy_9_pc.js"></script>
             </div>
