@@ -1103,7 +1103,10 @@ z-index: 12;
              .show-menu .nav-buttons button {  
                 transform: translateY(0);   /* Déplacement vers la position finale verticale */ 
             } 
-        } /* Section Instagram */
+        }
+        
+/*--------------début  insta--------------*/    
+/*
              .instagram-section { 
                 position: fixed; 
                 bottom: 10px; 
@@ -1114,6 +1117,82 @@ z-index: 12;
                 width: 40px; 
                 height: 40px; 
                 cursor: pointer; } /* Barre de navigation */
+
+
+
+:root {
+  --btn-size: 43px;
+  --insta-color: #7232BD;
+  --logo-color-default: var(--insta-color);
+  --logo-color-hover: #000;
+}
+
+.social-btns {
+  height: var(--btn-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.btn_insta {
+  position: fixed; 
+  bottom: 10px; 
+  left: 20px; 
+  z-index: 1000; 
+
+  width: var(--btn-size);
+  height: var(--btn-size);
+  background: #000;
+  border-radius: 28%;
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.btn_insta svg {
+  width: 60px;
+  height: 60px;
+  fill: var(--logo-color-default);
+  transform: scale(0.8);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.3s ease-in-out;
+  z-index: 1;
+  position: relative;
+  top: -20%;
+  left: -20%;
+}
+
+.btn_insta:hover svg,
+.btn_insta:focus svg {
+  fill: var(--logo-color-hover);    /* passe en noir */
+  transform: scale(1.1);              /* rebond */
+}
+
+.btn_insta::before {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: 90%;
+  left: -110%;
+  background-color: var(--insta-color); /* vague violette */
+  transform: rotate(45deg);
+  transition: all 0.35s cubic-bezier(0.310, -0.105, 0.430, 1.590);
+  z-index: 0;
+}
+
+.btn_insta:hover::before,
+.btn_insta:focus::before {
+  top: -10%;
+  left: -10%;
+}
+ 
+/*--------------fin insta--------------*/
 
 .navbar_background {
     position: fixed; 
