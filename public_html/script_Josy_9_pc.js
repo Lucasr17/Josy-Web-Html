@@ -1559,7 +1559,7 @@ markers: false
 
 gsap.fromTo(".T_shirt_Josy_1_", {
 /*x: () => window.innerWidth * 0.236,*/
-x: () => window.innerWidth * (-0.036),
+x: () => window.innerWidth * (0.336),
 y: () => yStart - window.innerHeight * 0.24,
 width: "65vw",
 }, {
