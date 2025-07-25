@@ -1,3 +1,27 @@
+@media (max-width: 768px) {
+
+@media (orientation: landscape) {
+  body > * {
+    display: none;  /* cacher tout */
+  }
+  body::before {
+    content: "Veuillez tourner votre téléphone en mode portrait.";
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    color: black;
+    z-index: 9999;
+  }
+}
+
+}
+
 :root { 
     --Color_1: #202020; 
     --Color_2: #EAEAEA; 
