@@ -1558,8 +1558,8 @@ markers: false
 });
 
 gsap.fromTo(".T_shirt_Josy_1_", {
-x: sreen_largeur * 0.236,
-y: yStart - window.innerHeight * 0.24,
+x: () => window.innerWidth * 0.236,
+y: () => yStart - window.innerHeight * 0.24,
 width: "65vw",
 }, {
 x: 0,
