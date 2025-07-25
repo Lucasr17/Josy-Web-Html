@@ -1960,9 +1960,9 @@ body2 {
 .T_shirt_Josy_1_ {
     top: 24.0vh;
     /*right: 28.7vw;*/
-    left : 48%;
+    left : 5vw;
     width: 50vw;
-     transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .Pull_Josydole {
