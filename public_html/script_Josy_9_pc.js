@@ -1,3 +1,7 @@
+//Variable dimension tel 
+var dim_tel = 768;
+
+
 
 function debugScrollOverflow() {
   const all = document.querySelectorAll('*');
@@ -182,7 +186,7 @@ function changeImage(direction) {
 if (currentIndex === 4) {
 
 
-if (window.innerWidth >= 768) {
+if (window.innerWidth >= dim_tel) {
 text_fond_josy.innerHTML = `
   <strong><span class="josy_text1">JOSY</span></strong>
   <span style="font-size: clamp(30px, 3vw, 70px);">
@@ -207,7 +211,7 @@ text_fond_josy.innerHTML = `
   `;
 }else if (currentIndex === 5){
 
-        if (window.innerWidth >= 768) {
+        if (window.innerWidth >= dim_tel) {
         text_fond_josy.innerHTML = "<strong><span class='josy_text1'>JOSY</span></strong></div>"; 
     } else{
       text_fond_josy.innerHTML = "<strong><span class='josy_text1'></span></strong></div>"; 
@@ -367,6 +371,7 @@ function updateGSAPAnimation() {
 
     // Recrée l'animation GSAP avec les nouvelles valeurs
 
+    if (window.innerWidth > dim_tel) {
 
 //sortie t shirt cintre
 
@@ -1071,9 +1076,13 @@ markers: false
 }
 });
 
+
+
 //fin t shirt cintre
 
     //fion code 
+}
+
 }
 
 let tshirts = document.querySelectorAll(".tshirtss");
@@ -1246,6 +1255,7 @@ var carree3 = document.querySelector('.carree3');
 
 var T_shirt_Josy_1 = document.querySelector('.T_shirt_Josy_1');
 var T_shirt_Josy_1_ = document.querySelector('.T_shirt_Josy_1_');
+var carousel_tshirt_tel = document.querySelector('#carousel_tshirt_tel');
 var T_shirt_Josy_2 = document.querySelector('.T_shirt_Josy_2');
 var T_shirt_Josyimaginaire = document.querySelector('.T_shirt_Josyimaginaire');
 
@@ -1311,6 +1321,8 @@ let trigger = ScrollTrigger.create({
     const endPlus = end + 50;
 
 
+    if (window.innerWidth > dim_tel) {
+
     if (scrollTop >= start && scrollTop <= end) {
 
     txt_les_variantes.style.opacity = "1";
@@ -1364,10 +1376,22 @@ T_shirt_1.style.zIndex = "1000000";
   T_shirt_9.style.zIndex = "20 000";
   T_shirt_10.style.zIndex = "10 000";
 
+    }
 //   console.log("🔄 ok ajustement");
 //}, 10);
 
 
+    }else{
+       T_shirt_1.style.opacity = "0";
+        T_shirt_2.style.opacity = "0";
+        T_shirt_3.style.opacity = "0";
+        T_shirt_4.style.opacity = "0";
+        T_shirt_5.style.opacity = "0";
+        T_shirt_6.style.opacity = "0";
+        T_shirt_7.style.opacity = "0";
+        T_shirt_8.style.opacity = "0";
+        T_shirt_9.style.opacity = "0";
+        T_shirt_10.style.opacity = "0";
     }
   }
 });
@@ -1375,15 +1399,19 @@ T_shirt_1.style.zIndex = "1000000";
 
 if (scrollTop >= 0 && scrollTop <= 5000) {
 
+  
 T_shirt_1.style.transformx = variables ;
 T_shirt_2.style.transformx = variables - variables_2;
 T_shirt_3.style.transformx = variables - variables_2*2;
 
 function disableMouseOver() {
+
+    if (window.innerWidth > dim_tel) {
 tshirts.forEach((tshirt) => {
 tshirt.removeEventListener("mouseover", handleMouseOver);
 tshirt.removeEventListener("mouseleave", handleMouseLeave);
 });
+}
 }
 }
 
@@ -1492,7 +1520,7 @@ const rect = tshirt.getBoundingClientRect();
 const yStart = rect.top; //+ rect.height;
 
 
-if (window.innerWidth >= 768) {
+if (window.innerWidth >= dim_tel) {
 
 gsap.fromTo(".T_shirt_Josy_1_", {
 x: sreen_largeur * 0.332,
@@ -1516,13 +1544,27 @@ markers: false
 }else{
 
 gsap.fromTo(".T_shirt_Josy_1_", {
-x: sreen_largeur * 0.332,
-y: yStart - window.innerHeight * 0.24,
-width: "70vw",
 }, {
-x: 80,
+opacity: 0,
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=406px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=407px top", // Quand le bas de la section 3 touche le haut du viewport 
+
+scrub: 0,  
+markers: false
+}
+});
+
+gsap.fromTo(".T_shirt_Josy_1_", {
+x: sreen_largeur * 0.236,
+y: yStart - window.innerHeight * 0.24,
+width: "65vw",
+}, {
+x: 0,
 y: 0, 
-width: "90vw",
+width: "85vw",
 scrollTrigger: {
     trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
     start: "bottom+=265px top", // Quand le haut de la section 1 touche le bas du viewport
@@ -1533,6 +1575,24 @@ scrub: 0,
 markers: false
 }
 });
+
+
+
+gsap.fromTo("#carousel_tshirt_tel", {
+opacity: 0,
+}, {
+opacity: 1,
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=405px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=406px top", // Quand le bas de la section 3 touche le haut du viewport 
+
+scrub: 0,  
+markers: false
+}
+});
+
 
   }
 
@@ -1572,6 +1632,9 @@ gsap.fromTo(".T_shirt_Josy_1_", {
   }
 });
 
+if (window.innerWidth >= dim_tel) {
+
+
 gsap.fromTo(".T_shirt_Josy_1_", {
 }, {
  opacity: 0,
@@ -1584,7 +1647,6 @@ gsap.fromTo(".T_shirt_Josy_1_", {
     markers: false
   }
 });
-
 
 gsap.fromTo(".T_shirt_Josy_1", {
   x: () => -sreen_largeur,
@@ -1604,6 +1666,33 @@ gsap.fromTo(".T_shirt_Josy_1", {
     markers: false
   }
 });
+
+
+} else {
+
+
+gsap.fromTo(".T_shirt_Josy_1", {
+  x: () => -sreen_largeur,
+  y: 500,
+  width: "55vw",
+  opacity: 0.5,
+}, {
+  x: 0,
+  y: 0,
+  width: "65vw",
+  scrollTrigger: {
+    trigger: ".section_histoire:nth-child(1)", // Déclenche quand la section 1 arrive
+    start: "top+=1000px bottom", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=200px top", // Quand le bas de la section 3 touche le haut du viewport
+    scrub: 0,
+    markers: false
+  }
+});
+
+}
+
+
 
 gsap.fromTo(".T_shirt_Josy_1", {
   opacity: 0.5,
@@ -1632,6 +1721,8 @@ gsap.fromTo(".T_shirt_Josy_1", {
     markers: false
   }
 });
+
+
 
 gsap.fromTo("#descriptif_tshirt", {
     opacity : 0,
@@ -3036,4 +3127,146 @@ document.querySelector("#page-container").innerHTML = "<!-- contenu initial ici 
 
 
 
+//carousel_tshirt_tel début ---------------------------------------------------------------------------------------------------
 
+
+
+// Class that manage the carousel
+class Carousel {
+
+    // Constructor, initialise the carousel
+    constructor() {
+
+
+
+        // Get image elements
+        this.img = [];
+        this.img[0] = document.getElementById("carousel-image-0");
+        this.img[1] = document.getElementById("carousel-image-1");
+        this.img[2] = document.getElementById("carousel-image-2");
+        this.img[3] = document.getElementById("carousel-image-3");
+        this.img[4] = document.getElementById("carousel-image-4");
+        this.img[5] = document.getElementById("carousel-image-5");
+
+        // Set animation key frames forward and backward
+        this.animForward  = ['mv0to5', 'mv1to0', 'mv2to1', 'mv3to2', 'mv4to3', 'mv5to4'];
+        this.animBackward = ['mv0to1', 'mv1to2', 'mv2to3', 'mv3to4', 'mv4to5', 'mv5to0'];
+
+        // Reset carousel 
+        this.reset();
+    }
+
+
+
+    // Set a new image (src) to image at given position (pos)
+    // 0 first image on the left
+    // 2 middle image
+    // 4 last image
+    // 5 hidden image
+    setImage(pos, src) {
+        this.img[(pos+this.currentImage+4)%6].src = src;
+    }
+
+    // Hide an image at given position (pos)
+    // 0 first image on the left
+    // 2 middle image
+    // 4 last image
+    // 5 hidden image
+    hideImage(pos) {
+        this.img[(pos+this.currentImage+4)%6].style.visibility = 'hidden';
+    }
+
+    // Show an image at given position (pos)
+    // 0 first image on the left
+    // 2 middle image
+    // 4 last image
+    // 5 hidden image    
+    showImage(pos) {
+        this.img[(pos+this.currentImage+4)%6].style.visibility = 'visible';
+    }
+
+    // Reset carousel, set image 2 in the middle
+    reset() {
+        // Remove animations
+        this.img.forEach((image) => {
+            this.animForward.forEach((animation) => {
+                image.classList.remove( animation );            
+            })
+            this.animBackward.forEach((animation) => {
+                image.classList.remove( animation );            
+            })
+        })
+        this.currentImage=2;
+    }
+
+    // Animate one image forward
+    // If nextImage is defined, replace the hidden image (at position 5) with the new image
+    next(nextImage) {
+        
+        // Set new image if requested
+        if (nextImage !== undefined) this.setImage( 5 , nextImage );
+
+        //  Animate    
+        this.img.forEach((image, i) => {    
+            
+            // Remove animation
+            this.animForward.forEach((animation) => { image.classList.remove( animation ); });
+            this.animBackward.forEach((animation) => { image.classList.remove( animation ); });
+
+            // Animate to next image
+            image.classList.add( this.animForward[(-this.currentImage+i+8)%6] );
+        })
+
+        // Increase index to next image
+        this.currentImage = (this.currentImage+1)%6;
+    }
+
+
+    // Animate one image backward
+    // If previousImage is defined, replace the hidden image (at position 5) with the new image
+    previous(previousImage) {
+        
+        // Set new image if requested
+        if (previousImage !== undefined) this.setImage( 5, previousImage );
+
+        //  Animate
+        this.img.forEach((image, i) => {    
+        //for (let i=0 ; i<=5 ; i++) {
+            
+            // Remove animations
+            this.animForward.forEach((animation) => { image.classList.remove( animation ); });
+            this.animBackward.forEach((animation) => { image.classList.remove( animation ); });
+            
+            // Animate to previous image
+            image.classList.add( this.animBackward[(-this.currentImage+i+8)%6] );
+        })
+
+        // Decrease index to previous image
+        this.currentImage = (this.currentImage+5)%6;
+    }
+}
+// End of class
+
+
+let carousel = new Carousel();
+
+//carousel.hideImage(0);
+//carousel.hideImage(1);
+
+
+// Left click
+document.addEventListener('mousedown', (event) => {
+	switch (event.which) {
+			//case 1: carousel.next('/dev/images/img' + Math.floor(Math.random() * 7) + '.png'); break;
+		case 1: carousel.showImage(5); carousel.next(); break;
+		case 2: carousel.reset(); break;
+			//case 3: carousel.previous('/dev/images/img' + Math.floor(Math.random() * 7) + '.png'); break;
+		case 3: carousel.previous(); break;		
+	}
+	event.preventDefault();
+})
+
+// Right click
+document.addEventListener('contextmenu', (event) => {
+	event.preventDefault();
+})
