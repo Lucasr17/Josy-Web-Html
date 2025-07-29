@@ -2060,6 +2060,8 @@ body2 {
     width: 40vw;
 }
 
+    @media (max-width: 768px) {
+
 .T_shirt_Josy_1_ {
     top: 24.0vh;
     /*right: 28.7vw;*/
@@ -2067,6 +2069,17 @@ body2 {
     width: 50vw;
     transform: translateX(-50%);
 }
+
+    }
+
+    @media (min-width: 768px) {
+      .T_shirt_Josy_1_ {
+    top: 24.0vh;
+    right: 28.7vw;
+    width: 50vw;
+    transform: translateX(0%);
+      }
+    }
 
 .Pull_Josydole {
     top: 20%;
@@ -2331,7 +2344,7 @@ body2 {
     left : -2.2%;
     transform: translateY(-50%);
     overflow: hidden;
-   /* z-index: 999999;*/
+ /*   z-index: 9998;*/
     opacity: 0;
 }
 
