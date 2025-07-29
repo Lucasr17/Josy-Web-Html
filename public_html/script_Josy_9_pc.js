@@ -1545,6 +1545,36 @@ markers: false
 }
 });
 
+gsap.fromTo("#carousel_tshirt_tel", {
+opacity: 0,
+}, {
+opacity: 0,
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=455px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=456px top", // Quand le bas de la section 3 touche le haut du viewport 
+
+scrub: 0,  
+markers: false
+}
+});
+
+gsap.fromTo("#carousel_tshirt_tel", {
+opacity: 0,
+}, {
+opacity: 0,
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=405px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=406px top", // Quand le bas de la section 3 touche le haut du viewport 
+
+scrub: 0,  
+markers: false
+}
+});
+
 }else{
 
 gsap.fromTo(".T_shirt_Josy_1_", {
