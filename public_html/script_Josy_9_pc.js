@@ -3,6 +3,7 @@ var dim_tel = 768;
 
 
 
+
 function debugScrollOverflow() {
   const all = document.querySelectorAll('*');
 
@@ -36,11 +37,12 @@ var scrollPosition = window.scrollY;
 
 
 
-
+/*- ----------- vague texte survol -----------------
+/*
 document.addEventListener("DOMContentLoaded", () => {
 
 
-    const textEffect = document.querySelector(".text-effect");
+    var textEffect = document.querySelector(".text-effect");
    // const textContent = textEffect.textContent;
 
     // Remplace chaque lettre ET espace par un <span>
@@ -106,10 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-});
+});*/
 
 
-
+/*----------------fin ------------------- */
 
 let nb_img_caroussel = 3; // Nombre total d'éléments du carrousel (y compris la vidéo)
 let currentIndex = nb_img_caroussel; // Position actuelle
@@ -1096,6 +1098,7 @@ const ctx = canvas.getContext("2d");
 const imageCanvases = new Map();
 
 function enableHoverEffect() {
+   if (window.innerWidth > dim_tel) {
   console.log("✅ Hover ACTIVÉ");
 
   tshirts.forEach((tshirt) => {
@@ -1104,6 +1107,7 @@ function enableHoverEffect() {
     // Ajoute un écouteur de mouvement de souris sur chaque image
     tshirt.addEventListener("mousemove", handleMouseMove);
   });
+}
 }
 
 function disableHoverEffect() {
@@ -1577,7 +1581,20 @@ markers: false
 }
 });
 
+gsap.fromTo("#carousel_tshirt_tel", {
+opacity: 1,
+}, {
+opacity: 0,
+scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
+    start: "bottom+=455px top", // Quand le haut de la section 1 touche le bas du viewport
+    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
+    end: "bottom+=456px top", // Quand le bas de la section 3 touche le haut du viewport 
 
+scrub: 0,  
+markers: false
+}
+});
 
 gsap.fromTo("#carousel_tshirt_tel", {
 opacity: 0,
@@ -1593,6 +1610,7 @@ scrub: 0,
 markers: false
 }
 });
+
 
 
   }
@@ -2692,7 +2710,7 @@ document.addEventListener('DOMContentLoaded', () => {
 console.log("chargement en cours .... !");
 
     // Vérifie si la page a été rechargée suite à un resize
-    const fromResize = sessionStorage.getItem("fromResize");
+   /*  const fromResize = sessionStorage.getItem("fromResize");
 
     if (fromResize) {
         console.log("Rechargement suite à un resize, pas d'animation.");
@@ -2700,7 +2718,7 @@ console.log("chargement en cours .... !");
         document.getElementById('overlay').style.display = 'none';
         document.body.style.overflow = 'auto';
         return; // On stoppe ici pour éviter de lancer l'animation
-    }
+    }*/
 
 // Sélectionner les éléments
 const overlay = document.getElementById('overlay');
