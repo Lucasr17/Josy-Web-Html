@@ -1615,21 +1615,21 @@ let tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".section_histoire:nth-child(5)",
     start: "bottom+=405px top",
-    end: "bottom+=706px top",
-    scrub: 0,
-    markers: false
+    end: "bottom+=706px top", // 405 -> 406 (fade-in) + 50px (pause) + 300px (fade-out)
+    scrub: true,
+    markers: true
   }
 });
 
 tl.fromTo("#carousel_tshirt_tel", 
-  { opacity: 0 },
-  { 
-    opacity: 1, 
-    duration: 0.1,
-    onComplete: () => carousel.reset()
-  }
-).to("#carousel_tshirt_tel", 
-  { opacity: 0, duration: 1 }
+  { opacity: 0 }, 
+  { opacity: 1, duration: 0.1, onComplete: () => carousel.reset() } // Fade-in
+)
+.to("#carousel_tshirt_tel", 
+  { opacity: 1, duration: 50/300 } // Maintien à 1 sur ~50px
+)
+.to("#carousel_tshirt_tel", 
+  { opacity: 0, duration: 0.5 } // Fade-out
 );
   }
 
