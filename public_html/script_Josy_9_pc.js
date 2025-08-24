@@ -1616,8 +1616,8 @@ let tl = gsap.timeline({
     trigger: ".section_histoire:nth-child(5)",
     start: "bottom+=405px top",
     end: "bottom+=706px top", // 405 -> 406 (fade-in) + 50px (pause) + 300px (fade-out)
-    scrub: true,
-    markers: true
+    scrub: 0,
+    markers: false
   }
 });
 
