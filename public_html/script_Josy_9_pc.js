@@ -1611,42 +1611,26 @@ markers: false
 }
 });
 
-gsap.fromTo("#carousel_tshirt_tel", {
-opacity: 1,
-}, {
-opacity: 0,
-scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=455px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=456px top", // Quand le bas de la section 3 touche le haut du viewport 
-
-scrub: 0,  
-markers: false
-}
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)",
+    start: "bottom+=405px top",
+    end: "bottom+=706px top",
+    scrub: 0,
+    markers: false
+  }
 });
 
-gsap.fromTo("#carousel_tshirt_tel", 
+tl.fromTo("#carousel_tshirt_tel", 
   { opacity: 0 },
   { 
-    opacity: 1,
-    scrollTrigger: {
-      trigger: ".section_histoire:nth-child(5)",
-      start: "bottom+=405px top",
-      endTrigger: ".section_histoire:nth-child(5)",
-      end: "bottom+=406px top",
-      scrub: 0,
-      markers: false
-    },
-    onComplete: () => {
-      carousel.reset(); // force l’image 2 au centre
-    }
+    opacity: 1, 
+    duration: 0.1,
+    onComplete: () => carousel.reset()
   }
+).to("#carousel_tshirt_tel", 
+  { opacity: 0, duration: 1 }
 );
-
-
-
-
   }
 
 }
