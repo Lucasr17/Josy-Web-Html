@@ -454,10 +454,19 @@ z-index: 12;
                              
                              .vertical-noir {
                                  width: 30vw; 
-                                 height: 110vh; 
+                                 height: 100vh; 
                                  left: 0%; 
                                  background-color: var(--Color_1); 
                                  position: absolute; 
+                                }
+
+                              .vertical-bas {
+                                 width: 100vw; 
+                                 height: 50vh; 
+                                 top: 90%; 
+                                 background-color:  var(--Color_1);
+                                 position: fixed; 
+                                  z-index: 999999; 
                                 }
                                 
                                 .vertical-line { 
