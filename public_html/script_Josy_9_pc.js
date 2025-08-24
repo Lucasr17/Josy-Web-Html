@@ -1626,20 +1626,24 @@ markers: false
 }
 });
 
-gsap.fromTo("#carousel_tshirt_tel", {
-opacity: 0,
-}, {
-opacity: 1,
-scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=405px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=406px top", // Quand le bas de la section 3 touche le haut du viewport 
+gsap.fromTo("#carousel_tshirt_tel", 
+  { opacity: 0 },
+  { 
+    opacity: 1,
+    scrollTrigger: {
+      trigger: ".section_histoire:nth-child(5)",
+      start: "bottom+=405px top",
+      endTrigger: ".section_histoire:nth-child(5)",
+      end: "bottom+=406px top",
+      scrub: 0,
+      markers: false
+    },
+    onComplete: () => {
+      carousel.reset(); // force l’image 2 au centre
+    }
+  }
+);
 
-scrub: 0,  
-markers: false
-}
-});
 
 
 
@@ -1722,7 +1726,7 @@ gsap.fromTo(".T_shirt_Josy_1", {
 
 gsap.fromTo(".T_shirt_Josy_1", {
   x: () => -sreen_largeur,
-  y: 500,
+  y: 600,
   width: "55vw",
   opacity: 0.5,
 }, {
@@ -3186,8 +3190,6 @@ class Carousel {
     // Constructor, initialise the carousel
     constructor() {
 
-
-
         // Get image elements
         this.img = [];
         this.img[0] = document.getElementById("carousel-image-0");
@@ -3203,6 +3205,7 @@ class Carousel {
 
         // Reset carousel 
         this.reset();
+
     }
 
 
@@ -3300,6 +3303,7 @@ class Carousel {
 let carousel = new Carousel();
 
 document.addEventListener('touchstart', (event) => {
+  console.log("Click next carousel ... ");
   const touch = event.touches[0];
   const y = touch.clientY;
   const x = touch.clientX;
