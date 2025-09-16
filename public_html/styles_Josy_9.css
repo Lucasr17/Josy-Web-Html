@@ -1547,6 +1547,7 @@ body2 {
     transform: translate(-50%, -50%);
     color: var(--Color_2);
     opacity: 0;
+    pointer-events: none;
     z-index: 2000;
 }
 

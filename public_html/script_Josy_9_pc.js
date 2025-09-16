@@ -1186,10 +1186,9 @@ function resetEffect() {
 
 // Ajout des événements de survol sur tous les éléments
 tshirts.forEach((tshirt) => {
-  console.log(`🎯 D Event ajouté sur ${tshirt.className}`);
     tshirt.addEventListener("mouseover", hoverEffect);
     tshirt.addEventListener("mouseleave", resetEffect);
-    console.log(`🎯 F Event ajouté sur ${tshirt.className}`);
+    console.log(`🎯 Event ajouté sur ${tshirt.className}`);
 });
 
 
