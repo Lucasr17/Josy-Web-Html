@@ -1196,27 +1196,11 @@ function handleMouseMove(e) {
 
 
 // Effet au survol 
-/*function hoverEffect(event) {
+function hoverEffect(event) {
     let index = Array.from(tshirts).indexOf(event.target);
    // console.log(`🖱️ Survol détecté sur ${event.target.className} - Index: ${index}`);
 
     tshirts.forEach((other, i) => {
-
-      if(i.style.cursor == "default"){
-
-        if (i > index + 1) {
-            other.style.transform = `translateX(0px)`;
-            other.style.opacity = "0.5";
-        } else if (i === index + 1) {
-            other.style.transform = "translateX(7%)";
-            other.style.opacity = "1";
-        } else {
-            other.style.transform = "translateX(-20%)";
-            other.style.opacity = "0.5";
-        }
-
-      }else{
-
         if (i > index) {
             other.style.transform = `translateX(0px)`;
             other.style.opacity = "0.5";
@@ -1227,44 +1211,10 @@ function handleMouseMove(e) {
             other.style.transform = "translateX(-20%)";
             other.style.opacity = "0.5";
         }
-      }
     });
-}*/
-
-// Effet au survol
-function hoverEffect(event) {
-  let index = Array.from(tshirts).indexOf(event.target);
-
-  tshirts.forEach((other, i) => {
-     console.log(` other : ${other}`);
-    if (other.style.cursor === "default") {
-       console.log(`📜 zone transparent 2 : ${other}`);
-      // cas : zone transparente
-      if (i > index + 1) {
-        other.style.transform = `translateX(0px)`;
-        other.style.opacity = "0.5";
-      } else if (i === index + 1) {
-        other.style.transform = "translateX(7%)";
-        other.style.opacity = "1";
-      } else {
-        other.style.transform = "translateX(-20%)";
-        other.style.opacity = "0.5";
-      }
-    } else {
-      // cas : zone visible
-      if (i > index) {
-        other.style.transform = `translateX(0px)`;
-        other.style.opacity = "0.5";
-      } else if (i === index) {
-        other.style.transform = "translateX(7%)";
-        other.style.opacity = "1";
-      } else {
-        other.style.transform = "translateX(-20%)";
-        other.style.opacity = "0.5";
-      }
-    }
-  });
 }
+
+
 
 // Effet quand on quitte le survol
 function resetEffect() {
