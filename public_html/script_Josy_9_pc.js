@@ -1488,15 +1488,19 @@ ScrollTrigger.create({
   end: "bottom+=1000px top",
   onEnter: () => {
     vous_josy.style.opacity = "1"; // Devient visible quand on entre dans la zone
+    vous_josy.style.pointerEvents = "auto";
   },
   onLeave: () => {
     vous_josy.style.opacity = "0"; // Devient invisible quand on quitte la zone vers le bas
+    vous_josy.style.pointerEvents = "none";
   },
   onEnterBack: () => {
     vous_josy.style.opacity = "1"; // Quand on remonte et rentre à nouveau dans la zone
+    vous_josy.style.pointerEvents = "auto";
   },
   onLeaveBack: () => {
     vous_josy.style.opacity = "0"; // Quand on sort vers le haut
+    vous_josy.style.pointerEvents = "none";
   },
   markers: false
 });
@@ -1509,15 +1513,19 @@ ScrollTrigger.create({
   end: "bottom+=1000px top",
   onEnter: () => {
     vous_josy_2.style.opacity = "1"; // Devient visible quand on entre dans la zone
+    vous_josy_2.style.pointerEvents = "auto";
   },
   onLeave: () => {
     vous_josy_2.style.opacity = "0"; // Devient invisible quand on quitte la zone vers le bas
+    vous_josy_2.style.pointerEvents = "none";
   },
   onEnterBack: () => {
     vous_josy_2.style.opacity = "1"; // Quand on remonte et rentre à nouveau dans la zone
+    vous_josy_2.style.pointerEvents = "auto";
   },
   onLeaveBack: () => {
     vous_josy_2.style.opacity = "0"; // Quand on sort vers le haut
+    vous_josy_2.style.pointerEvents = "none";
   },
   markers: false
 });
