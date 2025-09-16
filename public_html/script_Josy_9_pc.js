@@ -1236,7 +1236,9 @@ function hoverEffect(event) {
   let index = Array.from(tshirts).indexOf(event.target);
 
   tshirts.forEach((other, i) => {
+     console.log(` other : ${other}`);
     if (other.style.cursor === "default") {
+       console.log(`📜 zone transparent 2 : ${other}`);
       // cas : zone transparente
       if (i > index + 1) {
         other.style.transform = `translateX(0px)`;
