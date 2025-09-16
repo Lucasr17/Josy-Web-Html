@@ -1120,7 +1120,7 @@ function disableHoverEffect() {
 }
 
 // Fonction qui vérifie si le pixel sous la souris est opaque
-function handleMouseMove(e) {
+/*function handleMouseMove(e) {
   const img = e.currentTarget;
 
   if (!imageCanvases.has(img)) {
@@ -1153,6 +1153,57 @@ function handleMouseMove(e) {
   } else {
     //img.style.pointerEvents = "none"; // Zone transparente → laisse passer les events dessous
     img.style.cursor = "default";
+  }
+}
+*/
+
+function handleMouseMove(e) {
+  const img = e.currentTarget;
+
+  if (!imageCanvases.has(img)) {
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
+
+    tempCanvas.width = img.naturalWidth;
+    tempCanvas.height = img.naturalHeight;
+    tempCtx.drawImage(img, 0, 0);
+
+    imageCanvases.set(img, { canvas: tempCanvas, ctx: tempCtx });
+  }
+
+  const { canvas, ctx } = imageCanvases.get(img);
+  const rect = img.getBoundingClientRect();
+  const scaleX = img.naturalWidth / rect.width;
+  const scaleY = img.naturalHeight / rect.height;
+
+  const x = (e.clientX - rect.left) * scaleX;
+  const y = (e.clientY - rect.top) * scaleY;
+
+  const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
+  const alpha = pixel[3];
+
+  if (alpha > 1) {
+    // Zone visible → reste sur ce t-shirt
+    img.style.cursor = "pointer";
+  } else {
+    // Zone transparente → passer au suivant
+    img.style.cursor = "default";
+    showNextTshirt(img);
+  }
+}
+
+function showNextTshirt(currentImg) {
+  const tshirtsArray = Array.from(document.querySelectorAll(".tshirtss"));
+  const index = tshirtsArray.indexOf(currentImg);
+
+  if (index !== -1 && index < tshirtsArray.length - 1) {
+    const next = tshirtsArray[index + 1];
+
+    // Masquer l’actuel
+    currentImg.style.display = "none";
+
+    // Afficher le suivant
+    next.style.display = "block";
   }
 }
 
