@@ -1,3 +1,14 @@
+    // Revenir automatiquement en haut dès le chargement
+    window.addEventListener('load', function () {
+      window.scrollTo(0, 0);
+    });
+
+    // Supprimer tout ce qui est potentiellement stocké
+    localStorage.clear();
+    sessionStorage.clear();
+    document.cookie.split(";").forEach(function(c) {
+      document.cookie = c.trim().split("=")[0] + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';
+    });
 
 
 // Fonction pour convertir automatiquement le texte en minuscules
@@ -104,8 +115,5 @@ let scrollPosition = window.scrollY;
 });
 
 // Initialiser la barre de progression au chargement de la page
-
-
-
 
 

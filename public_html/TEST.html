@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOSY - L’Histoire</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: 'Helvetica Neue', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .section {
+      position: relative;
+      min-height: 60vh;
+      padding: 60px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    [data-lightwave] span {
+  display: inline-block;
+  opacity: 0.3;
+  transition: color 0.3s, opacity 0.3s;
+  color: white;
+}
+
+
+    .emoji {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      filter: grayscale(1) brightness(1.5) sepia(1) hue-rotate(250deg) saturate(2);
+      opacity: 0.85;
+      transform: scale(0.5);
+    }
+
+    .content {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      max-width: 700px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .line-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 100px;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+svg {
+  position: absolute;
+  width: 150%;
+  height: 100px;
+  top: 50%;
+  left: -25%;
+  transform: rotate(-6deg);
+}
+
+.section:nth-child(even) svg {
+  transform: rotate(6deg) scaleX(-1); /* ← On inverse ici */
+  top: 45%;
+}
+
+
+
+    .line {
+      stroke: #a259ff;
+      stroke-width: 4;
+      fill: none;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+
+
+    .section:nth-child(even) .emoji {
+      transform: rotate(-8deg) scale(0.5);
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        font-size: 1.2rem;
+      }
+
+      .emoji {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SECTION 1 -->
+  <section class="section">
+    <div class="line-wrapper">
+      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+    </div>
+    <div class="emoji">👟</div>
+    <div class="content">
+      <p>Il était une fois, dans un monde où la mode était trop sérieuse, trois amis décidèrent de tout changer. Leur mission ? Apporter du fun et du style à la mode !</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section">
+    <div class="line-wrapper">
+      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+    </div>
+    <div class="emoji">💥</div>
+    <div class="content">
+      <p data-lightwave>BOUM ! Josy était né ! Une marque décalée, remplie de jeux de mots et de créativité.</p>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section">
+    <div class="line-wrapper">
+      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+    </div>
+    <div class="emoji">🧵</div>
+    <div class="content">
+      <p>Chaque vêtement Josy raconte une histoire. De Josydole à Josyrlande, chaque pièce est un clin d'œil à l'humour et au style.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section">
+    <div class="line-wrapper">
+      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+    </div>
+    <div class="emoji">😎</div>
+    <div class="content">
+      <p>Josy c’est pour ceux qui veulent du style sans se prendre au sérieux. Tu veux être unique et marrer en même temps ? Tu es au bon endroit !</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section">
+    <div class="line-wrapper">
+      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+    </div>
+    <div class="emoji">🎭</div>
+    <div class="content">
+      <p>Enfile Josy et deviens l’âme de la fête. Ici, chaque vêtement est une punchline et chaque jour une aventure ! Prêt(e) à nous rejoindre ?</p>
+    </div>
+  </section>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animation des traits violets
+    document.querySelectorAll(".line").forEach(line => {
+      gsap.to(line, {
+        strokeDashoffset: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: line.closest(".section"),
+          start: "top bottom",
+          end: "bottom center",
+          scrub: true
+        }
+      });
+    });
+
+    // Animation apparition emoji + texte
+    document.querySelectorAll(".section").forEach(section => {
+      const emoji = section.querySelector('.emoji');
+      const content = section.querySelector('.content');
+
+      gsap.to([emoji, content], {
+        opacity: 1,
+        transform: "none",
+        scale: 1,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+  </script>
+
+  <script>
+  // Split le texte en span par lettre
+  document.querySelectorAll('[data-lightwave]').forEach(el => {
+    const text = el.textContent;
+    el.innerHTML = '';
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      el.appendChild(span);
+    });
+  });
+
+  // GSAP animation vague
+  document.querySelectorAll('[data-lightwave]').forEach(el => {
+    const letters = el.querySelectorAll('span');
+    gsap.to(letters, {
+      opacity: 1,
+      stagger: {
+        each: 0.03,
+        from: "start"
+      },
+      duration: 0.5,
+      ease: "sine.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>

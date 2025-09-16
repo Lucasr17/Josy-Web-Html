@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JOSY — Optimized</title>
+
+  <!-- Gardé : GSAP pour les animations existantes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/MotionPathPlugin.min.js"></script>
+
+  <!-- NOTE : j'ai intégré ici une version allégée du CSS original.
+       Le reste du CSS legacy était très verbeux et contenait beaucoup
+       de règles commentées / dupliquées. J'ai conservé les styles
+       essentiels au rendu et aux animations (overlay, modals, navbar,
+       carousel, boutons). Tout ce qui était commenté ou manifestement
+       non utilisé a été retiré pour clarifier. -->
+  <style>
+  /* ------------------ Variables & Reset minimal ------------------ */
+  :root{ --bg:#202020; --fg:#EAEAEA; --accent:#9400D3 }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;width:100%;background:var(--bg);color:var(--fg);font-family:Poppins,system-ui,Arial}
+
+  /* ------------------ Layout helpers ------------------ */
+  .fixed{position:fixed}
+  .center{display:flex;align-items:center;justify-content:center}
+
+  /* ------------------ Overlay / Intro ------------------ */
+  .overlay{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center}
+  .intro-image{width:30vw;min-width:160px;max-width:360px;object-fit:contain}
+  /* petites barres noires qui masquent les bords: conservées pour le look */
+  .vertical-noir{position:absolute;left:0;top:0;width:30vw;height:100vh;background:var(--bg)}
+  .vertical-bas{position:fixed;left:0;bottom:0;width:100vw;height:50vh;background:var(--bg);z-index:10000}
+
+  /* ------------------ Navbar & controls ------------------ */
+  .navbar{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:flex-end;padding:12px 20px;z-index:9998}
+  .menu-toggle{width:36px;height:28px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+  .menu-toggle div{height:3px;background:var(--fg);border-radius:2px}
+  .nav-buttons{display:flex;gap:12px;align-items:center}
+  .nav-buttons button{background:transparent;color:var(--fg);border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;cursor:pointer}
+
+  /* ------------------ Boutique CTA (fixed) ------------------ */
+  .custom-btn{position:fixed;left:6vw;top:42vh;padding:10px 16px;border-radius:18px;background:linear-gradient(180deg,#ba21fb,#ba4cea);color:white;border:none;z-index:9999}
+
+  /* ------------------ Modal (all devices) ------------------ */
+  #modal-container{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);z-index:10010}
+  #modal-container.active{display:flex}
+  .modal{background:var(--fg);color:#111;border-radius:10px;max-width:760px;width:92%;padding:20px;max-height:90vh;overflow:auto}
+  .modal input[type=text]{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #ccc}
+  .modal button{margin-top:12px;padding:10px 14px;border-radius:8px;background:var(--bg);color:var(--fg);border:1px solid rgba(0,0,0,.2);cursor:pointer}
+
+  /* ------------------ Carousel (kept minimal) ------------------ */
+  .carouselcontainer{position:relative;width:100%;height:70vh;overflow:hidden}
+  .carousel img,.carousel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+  .carousel img.active,.carousel video.active{opacity:1}
+  .carousel-button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.35);border:none;color:#fff;padding:12px;border-radius:10px;cursor:pointer}
+  .prev{left:18px}.next{right:18px}
+
+  /* ------------------ Scroll bar / points (lightweight) ------------------ */
+  .scroll_bar_container{position:fixed;right:12px;top:100px;bottom:60px;width:6px;background:var(--accent);border-radius:10px;z-index:9997;opacity:.0;transition:opacity:.3s}
+  .scroll-bar{width:100%;height:0;background:#ddd;border-radius:10px}
+  .scroll-point{position:absolute;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#f2d3ff}
+
+  /* ------------------ Responsive quick rules ------------------ */
+  @media (max-width:768px){
+    .intro-image{width:120px}
+    .carouselcontainer{height:50vh}
+    .custom-btn{left:4vw;top:40vh}
+    .nav-buttons{gap:8px}
+  }
+  </style>
+
+</head>
+<body>
+  <!--
+    Version optimisée :
+    - J'ai retiré le code commenté / dupliqué et gardé les éléments utilisés par le JS (ids/classes conservés).
+    - J'ai conservé les <script> externes en bas : certaines fonctions (startTyping, compterMot, changeImage, etc.) sont appelées par le HTML
+      et doivent rester dans vos fichiers JS. Si vous voulez, je peux aussi nettoyer ces fichiers.
+    - J'ai réduit le CSS à l'essentiel pour préserver look & animations; seules les règles critiques sont gardées ici.
+  -->
+
+  <header class="navbar">
+    <div class="nav-buttons" id="navButtons">
+      <button onclick="scrollToPosition_8()">Nous contacter</button>
+      <button onclick="ToBoutique()">Boutique</button>
+      <button onclick="scrollToPosition_7()">La team Josy</button>
+    </div>
+    <div class="menu-toggle" id="menuToggle" aria-label="menu" role="button">
+      <div></div><div></div><div></div>
+    </div>
+  </header>
+
+  <!-- Intro overlay (visible par défaut). Le JS peut retirer la classe ou l'attribut quand prêt. -->
+  <div class="overlay" id="overlay">
+    <div class="vertical-noir" aria-hidden="true"></div>
+    <img src="images/Josy.png" alt="Logo JOSY" class="intro-image">
+    <div class="vertical-bas" aria-hidden="true"></div>
+  </div>
+
+  <main id="page-container">
+
+    <!-- Hero / Carousel -->
+    <section class="carouselcontainer">
+      <div class="carousel" id="heroCarousel">
+        <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
+        <img src="https://static.wixstatic.com/media/091b9b_de244d9b4999468eb27db302720ed259~mv2.png" alt="Image 2">
+        <video src="https://video.wixstatic.com/video/091b9b_663dfbc9a88e4dda8055577abaebf7a8/1080p/mp4/file.mp4" muted loop playsinline></video>
+      </div>
+      <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
+      <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
+    </section>
+
+    <!-- CTA fixe vers la boutique (conserve l'effet visuel) -->
+    <button class="custom-btn btn-11" onclick="ToBoutique()">Boutique</button>
+
+    <!-- Modal simplifié : le JS doit add/remove class 'active' sur #modal-container -->
+    <div id="modal-container" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true">
+        <button onclick="document.getElementById('modal-container').classList.remove('active')" style="float:right;">✕</button>
+        <h2>Trouvez un Josy mot</h2>
+        <p><span id="textContainer1">...</span></p>
+        <label for="motInput">Entrez un mot : JOSY</label>
+        <input id="motInput" type="text" oninput="convertToLowercase(this)" autocomplete="off" autocapitalize="none">
+        <button onclick="compterMot()">Valider</button>
+        <p id="resultat"></p>
+      </div>
+    </div>
+
+    <!-- Sections supplémentaires gardées sous forme minimale (histoire, contact...).
+         Gardez les IDs si le JS s'en sert (ex: scrollToPosition_1 etc.). -->
+    <section style="padding:60px 20px;min-height:50vh;" id="section-history">
+      <h3>JOSY... une histoire d'amis</h3>
+      <p style="max-width:800px;">Il était une fois, dans un monde où la mode était trop sérieuse, trois amis décidèrent de tout changer...</p>
+    </section>
+
+  </main>
+
+  <!-- Garder les scripts externes — ils contiennent la logique JS existante.
+       Si vous voulez, j'optimiserai ensuite ces fichiers (supprimer fonctions mortes, consolider). -->
+  <script src="script_Josy_9_common.js"></script>
+  <script src="script_Josy_8_tel.js"></script>
+  <!-- Si vous avez un script pour la version PC, conservez-le aussi : -->
+  <!-- <script src="script_Josy_9_pc.js"></script> -->
+
+  <!-- Petit helper : retirer l'overlay quand la page est prête. Peut être surchargé par vos scripts. -->
+  <script>
+    // Retrait propre de l'overlay après chargement. Si vos scripts d'animation veulent gérer l'overlay,
+    // supprimez ou commentez ce bloc.
+    window.addEventListener('load',()=>{
+      const ov=document.getElementById('overlay');
+      if(ov){
+        // laisse une transition fluide si GSAP est utilisé
+        ov.style.transition='opacity .6s ease';
+        ov.style.opacity='0';
+        setTimeout(()=>ov.remove(),700);
+      }
+    });
+
+    // NOTE: fonctions citées dans le HTML (startTyping, compterMot, changeImage, ToBoutique, scrollToPosition_7/8)
+    // doivent rester définies dans vos scripts externes. Je n'ai pas modifié leur usage pour éviter de casser
+    // l'expérience. Si vous souhaitez que j'unifie les scripts (ex: regrouper changeImage dans un module),
+    // dites-le et je nettoierai aussi le JS.
+  </script>
+
+</body>
+</html>

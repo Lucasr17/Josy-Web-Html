@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation SVG avec Image et Scroll</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 2000px; /* Simuler un long défilement */
+            background-color: black;
+        }
+
+        #svg_chemin_t_shirt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: auto;
+        }
+
+        #img_chemin {
+            opacity: 1;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG avec le chemin et l'image -->
+    <svg id="svg_chemin_t_shirt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" style="width: 95vw; height: auto;">
+        <path id="theLine2" class="theLine2" 
+        d="M 0,300    
+           L 900,200
+           L 900,120  
+           L 500,50  
+           L 500,0" 
+        fill="none" stroke="white" stroke-width="2px" />
+
+        <!-- Image dans le SVG qui suit le chemin -->
+    </svg>
+
+    <image id="img_chemin" href="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" x="0" y="300" width="20vw" height="auto" />
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/MotionPathPlugin.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+        // Récupérer le chemin
+        const path = document.querySelector("#theLine2");
+        const pathLength = path.getTotalLength();
+
+        // Appliquer strokeDasharray et strokeDashoffset pour simuler le dessin du chemin
+        gsap.set(path, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+        });
+
+        // Animation avec GSAP
+        const mainTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#svg_chemin_t_shirt",
+                scrub: true,
+                start: "top top", // Animation commencera au début du scroll
+                end: "bottom 200%" // Fin de l'animation (200% = deux fois la hauteur de la page)
+            }
+        });
+
+        // Dessiner le chemin progressivement avec le scroll
+        mainTimeline.to(path, { strokeDashoffset: 0, duration: 4 }, 0);
+
+        // Faire suivre le chemin à l'image avec MotionPathPlugin
+        mainTimeline.to("#img_chemin", {
+            motionPath: {
+                path: "#theLine2",
+                align: "#theLine2",
+                alignOrigin: [0.5, 0.5],
+            },
+            duration: 4,
+        }, 0);
+    </script>
+
+</body>
+</html>

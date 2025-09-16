@@ -350,7 +350,7 @@ z-index: 12;
         height: 100%; 
         width: 100%; 
         transform: scale(0); 
-        z-index: 9999; 
+        z-index: -100; 
     
     } 
         
@@ -1305,11 +1305,11 @@ body2 {
 #descriptif_tshirt {
     position: fixed;
     top: 250px;
-    opacity: 0;
     left: 13vw;
     width: 50vw;
     color: var(--Color_2);
     font-size: 21px;
+     opacity: 0;
 }
 
 .small-text {
@@ -1325,6 +1325,56 @@ body2 {
     font-size: 25px;
 }
 
+.circle_tshirt {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: grey;
+    z-index: 9998;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .circle_tshirt:hover {
+    background-color: var(--Color_3);
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Tooltip commun */
+  .tooltip_text {
+    position: absolute;
+    top: -10px;
+    background: #f0f0f0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Position gauche */
+  .tooltip_left {
+    right: 30px;
+  }
+  
+  /* Position droite */
+  .tooltip_right {
+    left: 30px;
+  }
+  
+  /* Hover */
+  .circle_tshirt:hover .tooltip_text {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+  
+
 /* Style de l'image du drone 
 .photodrone {
     position: fixed;
@@ -1339,6 +1389,23 @@ body2 {
     border-radius: 30px;
     z-index: 1;
 }*/
+
+.photodrone_sup {
+    position: relative;
+    top: -10vw;
+    right: 1vw;
+    transform: translate(0%, 0%);
+    width: 100vw;
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 30px;
+    z-index: 9997;/*
+    overflow: hidden;*/
+
+    /* Rognage de 100px à gauche et à droite */
+   /* clip-path: inset(0 100px 0 100px);*/
+}
+
 
 .carouselcontainer {
     position: absolute;
@@ -1406,7 +1473,7 @@ body2 {
     padding: 15px;
     cursor: pointer;
     font-size: 18px;
-    z-index: 9997;
+    z-index: 9998;
     opacity: 1;
     transition: background 0.3s;
 }
