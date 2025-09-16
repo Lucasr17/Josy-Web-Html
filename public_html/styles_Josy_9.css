@@ -387,7 +387,6 @@ z-index: 12;
     z-index: calc(5 - var(--order));  /* Inverser l'empilement */ 
     cursor: pointer;  /* pointer-events: none; /* Par défaut, désactive le survol */ 
     pointer-events: none; 
-    z-index: 9996; 
   }
 /* fin t shirt cintre *//* histoire josy */
 

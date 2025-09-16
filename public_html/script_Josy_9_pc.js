@@ -1391,7 +1391,7 @@ T_shirt_1.style.zIndex = "1000000";
   T_shirt_7.style.zIndex = "40 000";
   T_shirt_8.style.zIndex = "30 000";
   T_shirt_9.style.zIndex = "20 000";
-  T_shirt_10.style.zIndex = "10 000";
+  T_shirt_10.style.zIndex = "100 000";
 
     }
 //   console.log("🔄 ok ajustement");
