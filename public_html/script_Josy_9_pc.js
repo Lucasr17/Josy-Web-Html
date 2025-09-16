@@ -1115,7 +1115,7 @@ function disableHoverEffect() {
     tshirt.style.pointerEvents = "none";
 
     // Retire les écouteurs quand le hover est désactivé
-   // tshirt.removeEventListener("mousemove", handleMouseMove);
+    tshirt.removeEventListener("mousemove", handleMouseMove);
   });
 }
 
@@ -1125,7 +1125,9 @@ function handleMouseMove(e) {
 
   if (!imageCanvases.has(img)) {
     const tempCanvas = document.createElement("canvas");
-    const tempCtx = tempCanvas.getContext("2d");
+   //ancien code == const tempCtx = tempCanvas.getContext("2d");
+    const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
+
 
     tempCanvas.width = img.naturalWidth;
     tempCanvas.height = img.naturalHeight;
