@@ -1408,7 +1408,7 @@ T_shirt_1.style.zIndex = "1000000";
   T_shirt_9.style.zIndex = "20 000";
   T_shirt_10.style.zIndex = "10 000";
 
- console.log("🔄 ok ajustement");
+ console.log("🔄 ok ajustement" );
 
     }
 //   console.log("🔄 ok ajustement");
@@ -1793,8 +1793,10 @@ gsap.fromTo(".T_shirt_Josy_1", {
 
 gsap.fromTo("#descriptif_tshirt", {
     opacity : 0,
+    pointerEvents: "none", 
     }, {
     opacity : 1,
+    pointerEvents: "auto",
     scrollTrigger: {
    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
     start: "bottom+=210px top", // Quand le haut de la section 1 touche le bas du viewport
@@ -1805,24 +1807,31 @@ gsap.fromTo("#descriptif_tshirt", {
     }
 });
 
-gsap.fromTo("#descriptif_tshirt", {
-    opacity : 1,
-    }, {
-    opacity : 0,
+gsap.fromTo("#descriptif_tshirt", { 
+    opacity: 1, 
+    pointerEvents: "auto" 
+  }, 
+  { 
+    opacity: 0, 
+    pointerEvents: "none", 
     scrollTrigger: {
-   trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=245px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=260px top", // Quand le bas de la section 3 touche le haut du viewport
-    scrub: 0,  
-    markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
+      trigger: ".section_histoire:nth-child(5)",
+      start: "bottom+=245px top",
+      endTrigger: ".section_histoire:nth-child(5)",
+      end: "bottom+=260px top",
+      scrub: 0,
+      markers: false
     }
-});
+  }
+);
+
 
 gsap.fromTo("#descriptif_tshirt", {
     opacity : 0,
+    pointerEvents: "none", 
     }, {
     opacity : 0,
+    pointerEvents: "none", 
     scrollTrigger: {
    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
     start: "bottom-=2000px top", // Quand le haut de la section 1 touche le bas du viewport
