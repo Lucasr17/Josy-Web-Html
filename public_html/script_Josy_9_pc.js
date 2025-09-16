@@ -1115,7 +1115,7 @@ function disableHoverEffect() {
     tshirt.style.pointerEvents = "none";
 
     // Retire les écouteurs quand le hover est désactivé
-    tshirt.removeEventListener("mousemove", handleMouseMove);
+   // tshirt.removeEventListener("mousemove", handleMouseMove);
   });
 }
 
