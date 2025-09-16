@@ -1188,7 +1188,8 @@ function handleMouseMove(e) {
   } else {
     // Zone transparente → passer au suivant
     img.style.cursor = "default";
-    showNextTshirt(img);
+    console.log(`📜 zone transparent : ${img}`);
+   // showNextTshirt(img);
   }
 }
 
