@@ -1193,29 +1193,30 @@ function handleMouseMove(e) {
   }
 }
 
-function showNextTshirt(currentImg) {
-  const tshirtsArray = Array.from(document.querySelectorAll(".tshirtss"));
-  const index = tshirtsArray.indexOf(currentImg);
-
-  if (index !== -1 && index < tshirtsArray.length - 1) {
-    const next = tshirtsArray[index + 1];
-
-    // Masquer l’actuel
-    currentImg.style.display = "none";
-
-    // Afficher le suivant
-    next.style.display = "block";
-  }
-}
 
 
-
-// Effet au survol
-function hoverEffect(event) {
+// Effet au survol 
+/*function hoverEffect(event) {
     let index = Array.from(tshirts).indexOf(event.target);
    // console.log(`🖱️ Survol détecté sur ${event.target.className} - Index: ${index}`);
 
     tshirts.forEach((other, i) => {
+
+      if(i.style.cursor == "default"){
+
+        if (i > index + 1) {
+            other.style.transform = `translateX(0px)`;
+            other.style.opacity = "0.5";
+        } else if (i === index + 1) {
+            other.style.transform = "translateX(7%)";
+            other.style.opacity = "1";
+        } else {
+            other.style.transform = "translateX(-20%)";
+            other.style.opacity = "0.5";
+        }
+
+      }else{
+
         if (i > index) {
             other.style.transform = `translateX(0px)`;
             other.style.opacity = "0.5";
@@ -1226,7 +1227,41 @@ function hoverEffect(event) {
             other.style.transform = "translateX(-20%)";
             other.style.opacity = "0.5";
         }
+      }
     });
+}*/
+
+// Effet au survol
+function hoverEffect(event) {
+  let index = Array.from(tshirts).indexOf(event.target);
+
+  tshirts.forEach((other, i) => {
+    if (other.style.cursor === "default") {
+      // cas : zone transparente
+      if (i > index + 1) {
+        other.style.transform = `translateX(0px)`;
+        other.style.opacity = "0.5";
+      } else if (i === index + 1) {
+        other.style.transform = "translateX(7%)";
+        other.style.opacity = "1";
+      } else {
+        other.style.transform = "translateX(-20%)";
+        other.style.opacity = "0.5";
+      }
+    } else {
+      // cas : zone visible
+      if (i > index) {
+        other.style.transform = `translateX(0px)`;
+        other.style.opacity = "0.5";
+      } else if (i === index) {
+        other.style.transform = "translateX(7%)";
+        other.style.opacity = "1";
+      } else {
+        other.style.transform = "translateX(-20%)";
+        other.style.opacity = "0.5";
+      }
+    }
+  });
 }
 
 // Effet quand on quitte le survol
