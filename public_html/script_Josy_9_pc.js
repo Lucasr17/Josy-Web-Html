@@ -1148,10 +1148,10 @@ function handleMouseMove(e) {
   const alpha = pixel[3];
 
   if (alpha > 1) {
-    img.style.pointerEvents = "auto"; // Zone visible → bloque les événements sous-jacents
+    //img.style.pointerEvents = "auto"; // Zone visible → bloque les événements sous-jacents
     img.style.cursor = "pointer";
   } else {
-    img.style.pointerEvents = "none"; // Zone transparente → laisse passer les events dessous
+    //img.style.pointerEvents = "none"; // Zone transparente → laisse passer les events dessous
     img.style.cursor = "default";
   }
 }
