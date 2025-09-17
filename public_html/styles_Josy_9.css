@@ -1276,9 +1276,9 @@ z-index: 12;
  @font-face { 
     font-family: 'Warsaw Gothic'; 
     src: 
-   /* url('../fonts/WarsawGothic3D.woff2') format('woff2'),*/
-    url('../fonts/WarsawGothic3D.woff') format('woff'),
-    url('../fonts/WarsawGothic3D.otf') format('opentype'); 
+   /* url('fonts/WarsawGothic3D.woff2') format('woff2'),*/
+    url('fonts/WarsawGothic3D.woff') format('woff'),
+    url('fonts/WarsawGothic3D.otf') format('opentype'); 
     font-weight: normal; 
     font-style: normal;
 } 
@@ -1286,9 +1286,9 @@ z-index: 12;
 @font-face { 
     font-family: 'Poppins'; 
     src: 
-    url('../fonts/Poppins-Medium.woff2') format('woff2'),
-    url('../fonts/Poppins-Medium.woff') format('woff'),
-    url('../fonts/Poppins-Medium.otf') format('opentype'); font-weight: normal; font-style: normal; } 
+    url('fonts/Poppins-Medium.woff2') format('woff2'),
+    url('fonts/Poppins-Medium.woff') format('woff'),
+    url('fonts/Poppins-Medium.otf') format('opentype'); font-weight: normal; font-style: normal; } 
 
 body2 { 
     background: #111; 

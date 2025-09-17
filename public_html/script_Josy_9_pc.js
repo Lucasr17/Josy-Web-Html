@@ -2007,7 +2007,7 @@ slideIndex = 3;
 showSlides(slideIndex);
 
 function plusSlides(n) {
-if (n == -1 && slideIndex == 3) {
+if (n === -1 && slideIndex === 3) {
 }else{
 showSlides(slideIndex += n);
 }
@@ -2833,7 +2833,7 @@ const verticalline = document.querySelector('.vertical-line');
 
 // Précharger l'image en arrière-plan
 const preloadImage = new Image();
-preloadImage.src = '../Image/Josy - St barth 5.webp'; // Source de votre image
+preloadImage.src = 'Image/Josy - St barth 5.webp'; // Source de votre image
 
 preloadImage.onload = () => {
 //console.log("Image chargée en arrière-plan !");
