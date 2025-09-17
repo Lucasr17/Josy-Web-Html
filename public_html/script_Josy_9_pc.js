@@ -1188,8 +1188,9 @@ function handleMouseMove(e) {
   } else {
     // Zone transparente → passer au suivant
     img.style.cursor = "default";
-    console.log(`📜 zone transparent : ${img}`);
+    console.log(`📜 zone transparent handleMouseMove`);
    // showNextTshirt(img);
+   hoverEffect(e);
   }
 }
 
@@ -1197,8 +1198,53 @@ function handleMouseMove(e) {
 
 // Effet au survol 
 function hoverEffect(event) {
-    let index = Array.from(tshirts).indexOf(event.target);
-   // console.log(`🖱️ Survol détecté sur ${event.target.className} - Index: ${index}`);
+
+  var index = 0;
+
+  const img = event.currentTarget;
+
+  if (!imageCanvases.has(img)) {
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
+
+    tempCanvas.width = img.naturalWidth;
+    tempCanvas.height = img.naturalHeight;
+    tempCtx.drawImage(img, 0, 0);
+
+    imageCanvases.set(img, { canvas: tempCanvas, ctx: tempCtx });
+  }
+
+  const { canvas, ctx } = imageCanvases.get(img);
+  const rect = img.getBoundingClientRect();
+  const scaleX = img.naturalWidth / rect.width;
+  const scaleY = img.naturalHeight / rect.height;
+
+  const x = (event.clientX - rect.left) * scaleX;
+  const y = (event.clientY - rect.top) * scaleY;
+
+  const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
+  const alpha = pixel[3];
+
+  if (alpha > 1) {
+    // Zone visible → reste sur ce t-shirt
+    img.style.cursor = "pointer";
+
+     index = Array.from(tshirts).indexOf(event.target);
+    console.log(`🖱️ Survol principal détecté sur ${event.target.className} - Index: ${index}`);
+
+
+  } else {
+    // Zone transparente → passer au suivant
+    img.style.cursor = "default";
+    console.log(`📜 zone transparent`);
+   // showNextTshirt(img);
+
+    index = Array.from(tshirts).indexOf(event.target) + 1;
+    console.log(`🖱️ Survol arrière détecté sur ${event.target.className} - Index: ${index}`);
+
+
+  }
+
 
     tshirts.forEach((other, i) => {
         if (i > index) {
@@ -2069,7 +2115,7 @@ let reverseScrollPercentage = 100 - scrollPercentage;
 // Mettre à jour la hauteur de la barre de progression
 document.getElementById('scrollBar').style.height = reverseScrollPercentage + '%';
 
-variables =  sreen_largeur * 0.30 + 0;//433;
+variables =  sreen_largeur * 0.3 + 0;//433;
 variables_2 = sreen_largeur * 0.063 + 0;//90.7;
 opacitys = 0;
 
@@ -2507,7 +2553,7 @@ function updateGrid() {
         var emoji_0 = document.getElementById("emoji_0");
         var emoji_1 = document.getElementById("emoji_1");
 
-        if (emoji_0.style.opacity == 1 || (emoji_0.style.opacity == 0 && emoji_1.style.opacity == 0)) {
+        if (emoji_0.style.opacity === 1 || (emoji_0.style.opacity === 0 && emoji_1.style.opacity === 0)) {
 
         
             // Si l'index est 0, on le cache
@@ -2773,7 +2819,7 @@ function ecriture_text() {
         // Fonction pour afficher le texte progressivement
         function typeWriter(text, i) {
         if (i < text.length) {
-            textContainer.innerHTML += text.charAt(i);
+            textContainer.textContent += text.charAt(i);
             i++;
             setTimeout(function () {
                 typeWriter(text, i);
