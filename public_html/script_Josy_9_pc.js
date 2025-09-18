@@ -3424,24 +3424,31 @@ class Carousel {
 
 let carousel = new Carousel();
 
+let startX2 = 0;
+let startY2 = 0;
+
 document.addEventListener('touchstart', (event) => {
-  console.log("Click next carousel ... ");
   const touch = event.touches[0];
-  const y = touch.clientY;
-  const x = touch.clientX;
-  const screenWidth = window.innerWidth;
+  startX2 = touch.clientX;
+  startY2 = touch.clientY;
+});
 
-  // Ignore touches dans la zone haute (ex: Tab bar)
-  if (y < 100) return;
+document.addEventListener('touchend', (event) => {
+  const touch = event.changedTouches[0];
+  const endX = touch.clientX;
+  const endY = touch.clientY;
 
-  if (x < screenWidth / 2) {
-    // Touche côté gauche
-    carousel.previous();
-  } else {
-    // Touche côté droit
-    carousel.showImage(5); // si tu veux toujours afficher celle-ci
-    carousel.next();
+  const diffX = endX - startX2;
+  const diffY = endY - startY2;
+
+  // Vérifie si c’est un vrai swipe horizontal (et pas un scroll vertical)
+  if (Math.abs(diffX) > 50 && Math.abs(diffY) < 50) {
+    if (diffX > 0) {
+      // Swipe droite → image précédente
+      carousel.previous();
+    } else {
+      // Swipe gauche → image suivante
+      carousel.next();
+    }
   }
-
-  event.preventDefault(); // évite les comportements par défaut (scroll, etc.)
 });
