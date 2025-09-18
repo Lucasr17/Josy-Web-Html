@@ -1099,7 +1099,7 @@ const imageCanvases = new Map();
 
 function enableHoverEffect() {
    if (window.innerWidth > dim_tel) {
-  console.log("✅ Hover ACTIVÉ");
+ // console.log("✅ Hover ACTIVÉ");
 
   tshirts.forEach((tshirt) => {
     tshirt.style.pointerEvents = "auto";
@@ -1185,10 +1185,12 @@ function handleMouseMove(e) {
   if (alpha > 1) {
     // Zone visible → reste sur ce t-shirt
     img.style.cursor = "pointer";
+     //console.log(`🖱️ ${alpha} `);
+     hoverEffect(e);
   } else {
     // Zone transparente → passer au suivant
     img.style.cursor = "default";
-    console.log(`📜 zone transparent handleMouseMove`);
+  //  console.log(`📜 zone transparent handleMouseMove`);
    // showNextTshirt(img);
    hoverEffect(e);
   }
@@ -1225,22 +1227,24 @@ function hoverEffect(event) {
   const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
   const alpha = pixel[3];
 
+//console.log(`🖱️ ${alpha} `);
+
   if (alpha > 1) {
     // Zone visible → reste sur ce t-shirt
     img.style.cursor = "pointer";
 
      index = Array.from(tshirts).indexOf(event.target);
-    console.log(`🖱️ Survol principal détecté sur ${event.target.className} - Index: ${index}`);
+  //  console.log(`🖱️ Survol principal détecté sur ${event.target.className} - Index: ${index}`);
 
 
   } else {
     // Zone transparente → passer au suivant
     img.style.cursor = "default";
-    console.log(`📜 zone transparent`);
+ //   console.log(`📜 zone transparent`);
    // showNextTshirt(img);
 
     index = Array.from(tshirts).indexOf(event.target) + 1;
-    console.log(`🖱️ Survol arrière détecté sur ${event.target.className} - Index: ${index}`);
+  //  console.log(`🖱️ Survol arrière détecté sur ${event.target.className} - Index: ${index}`);
 
 
   }
@@ -1264,7 +1268,7 @@ function hoverEffect(event) {
 
 // Effet quand on quitte le survol
 function resetEffect() {
-    console.log("🔄 Reset des effets de hover");
+ //   console.log("🔄 Reset des effets de hover");
     tshirts.forEach((other) => {
         other.style.transform = "translateX(0px)";
         other.style.opacity = "1";
