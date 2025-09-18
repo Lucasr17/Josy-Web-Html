@@ -1426,7 +1426,7 @@ let trigger = ScrollTrigger.create({
 
     const start = self.start;
     const end = self.end;
-    const endPlus = end + 50;
+    const endPlus = end + 24;
 
 
 if (window.innerWidth > dim_tel) {

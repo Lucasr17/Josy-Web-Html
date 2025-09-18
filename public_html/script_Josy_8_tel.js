@@ -1,7 +1,7 @@
-
 let currentIndex_tel = 0;
 const images_tel = document.querySelectorAll('.carousel img');
 
+// Fonction de changement d'image
 function changeImage(direction) {
     images_tel[currentIndex_tel].classList.remove('active');
     images_tel[currentIndex_tel].style.left = direction === 1 ? "-100%" : "100%";
@@ -20,6 +20,31 @@ function changeImage(direction) {
         images_tel[currentIndex_tel].style.opacity = "1";
     }, 50);
 }
+
+// Détection du swipe tactile
+let startX = 0;
+let endX = 0;
+
+const carousel_tel = document.querySelector('.carousel');
+
+carousel_tel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+carousel_tel.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    let diff = endX - startX;
+
+    if (Math.abs(diff) > 50) { // seuil pour éviter les faux swipes
+        if (diff > 0) {
+            // swipe vers la droite → image précédente
+            changeImage(-1);
+        } else {
+            // swipe vers la gauche → image suivante
+            changeImage(1);
+        }
+    }
+});
 
 
 window.addEventListener('scroll', function() {
