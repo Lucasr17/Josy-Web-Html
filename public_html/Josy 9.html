@@ -158,7 +158,7 @@
                 </div>
               <!--   <div id="scroll-position"></div> -->
 
-              <button class="custom-btn btn-11">Boutique<div class="dot"></div></button>
+              <button onclick="ToBoutique()" class="custom-btn btn-11">Boutique<div class="dot"></div></button>
 
 <script src="script_Josy_9_common.js"></script>
                 
@@ -172,43 +172,6 @@
                         <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
                         <button onclick="startTyping()" id="one" class="button bouton_jeu_tel">Participer aux jeux</button>
                     </div>
-
-                <div id="popup_Jeu" class="popup_Jeu hidden">
-                    <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
-                    <div id="grid" class="grid-container">
-                        <div class="grid-item" data-index="0">
-                            <div class="game-container">
-                                <!-- Titre au-dessus -->
-                                <div class="text-gradient title" id="text_0"style="text-align: center; margin-bottom: 10px;"> Trouvez un JOSYmot</div>
-
-                                <div class="text-gradient" id="emoji_0" style="opacity: 0; text-align: center; top: 41vh;  transition: transform 0.3s ease, opacity 0.5s ease;">
-                                    🖊️
-                                </div>
-                                
-                                <!-- Contenu en dessous -->
-                                <div class="content">
-
-                                    <p id="space-above"></p>
-                                    <div class="container23" style="position: relative; width: 100%;">
-                                        <p><span id="textContainer">...</span></p>
-                                    </div>
-                                    <p id="space-below"></p>
-                                    
-                                    <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
-                                    <input id="motInput_" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element" zindex="99999"/><br>
-                                    <button onclick="compterMot()" class="spaced-element">Valider</button><br>
-                                    <p id="resultat" class="spaced-element"></p>
-                    
-                                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
-                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect> 
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                    
-                </div>
         
 
 
@@ -252,6 +215,55 @@ alt="Party Popper"
            </div>
 </div>      --> 
 
+
+                <div id="popup_Jeu" class="popup_Jeu hidden">
+                    <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
+                    <div id="grid" class="grid-container">
+                        <div class="grid-item" data-index="0">
+                            <div class="game-container">
+                                <!-- Titre au-dessus -->
+                                <div class="text-gradient title" id="text_0"style="text-align: center; margin-bottom: 10px;"> Trouvez un JOSYmot</div>
+
+                                <div class="text-gradient" id="emoji_0" style="opacity: 0; text-align: center; top: 41vh;  transition: transform 0.3s ease, opacity 0.5s ease;">
+                                    🖊️
+                                </div>
+                                
+                                <!-- Contenu en dessous -->
+                                <div class="content">
+
+                                    <p id="space-above"></p>
+                                    <div class="container23" style="position: relative; width: 100%;">
+                                        <p><span id="textContainer">...</span></p>
+                                    </div>
+                                    <p id="space-below"></p>
+                                    
+                                    <label for="motInput" class="spaced-element">Entrez un mot : JOSY</label>
+                                    <input id="motInput_" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)" class="spaced-element" zindex="99999"/><br>
+                                    <button onclick="compterMot()" class="spaced-element">Valider</button><br>
+                                    <p id="resultat" class="spaced-element"></p>
+                    
+                                    <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="50%" height="100vh" preserveAspectRatio="none">
+                                        <rect x="0" y="0" fill="none" width="250" height="500" rx="3" ry="3"></rect> 
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="grid-item" data-index="1" style="display: inline; flex-direction: column; align-items: center; width: 100%;">
+                            <!-- Titre centré -->
+                            <div class="text-gradient" id="text_1" style="text-align: center; margin-bottom: 10px;"> Voyez-vous le JOSYmot </div>
+
+                            <div class="text-gradient" id="emoji_1" style="opacity: 0; text-align: center; top: 47%; transition: transform 0.3s ease, opacity 0.5s ease;">
+                                🔍
+                            </div>
+                    
+                            <!-- Conteneur de l'iframe -->
+                            <iframe id="iframe-jeu" class="iframe-jeu" scr="https://josy2.fly.dev/Josy_Jeu"></iframe>
+
+                        </div>
+                    </div>
+                    
+                </div>
   
 
  

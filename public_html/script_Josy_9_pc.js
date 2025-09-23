@@ -2556,19 +2556,20 @@ function updateGrid() {
 
         var emoji_0 = document.getElementById("emoji_0");
         var emoji_1 = document.getElementById("emoji_1");
+        var iframe = document.querySelector(".iframe-jeu");
 
-        if (emoji_0.style.opacity === 1 || (emoji_0.style.opacity === 0 && emoji_1.style.opacity === 0)) {
+        console.log(`emoji_1 : ${emoji_1.style.opacity} emoji_0 : ${emoji_0.style.opacity}`);
+  
+        iframe.style.opacity = "0";  // Commence la transition de disparition
+
+        if (emoji_0.style.opacity == 1 || (emoji_0.style.opacity == 0 && emoji_1.style.opacity == 0)) {
 
         
             // Si l'index est 0, on le cache
         
-
-        var emoji_0 = document.getElementById("emoji_0");
         emoji_0.style.opacity = 0;
 
-        var iframe = document.querySelector(".iframe-jeu");
-  
-        iframe.style.opacity = "0";  // Commence la transition de disparition
+
         //iframe.style.zIndex = "-1";  // Place en arrière-plan
         setTimeout(() => {
         iframe.src="";
@@ -2597,7 +2598,7 @@ function updateGrid() {
         gridItems.forEach(function(gridItem) {
             gridItem.style.display = 'inline'; // ou 'flex', 'inline', etc. selon ton besoin
            gridItem.style.opacity = 1;
-            console.log("Spaced element 2 OK");
+         //   console.log("Spaced element 2 OK");
         });  
         }, 1000);
 
@@ -2773,7 +2774,8 @@ function startTyping() {
        ease: 'power2.inOut'
     /*   color: transparent,  // Change de dégradé
        background: "linear-gradient(135deg, #ff4e7d, #6a4cff)",  // Change de dégradé*/
-     }, "<")  
+     }, "<")
+
 
    activeIndex = null;
 

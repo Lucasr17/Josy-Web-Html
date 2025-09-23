@@ -2619,6 +2619,8 @@ function updateGrid() {
       
 
         iframe.style.display = "flex"; 
+        console.log("iframe == 1");
+
         setTimeout(() => {
             iframe.style.opacity = "1";   // Rend visible avec transition
             iframe.style.zIndex = "9999";  // S'assure qu'il est au-dessus
@@ -2649,6 +2651,11 @@ function updateGrid() {
 
         var emoji_0 = document.getElementById("emoji_0");
         var emoji_1 = document.getElementById("emoji_1");
+        var iframe = document.querySelector(".iframe-jeu");
+
+          console.log("iframe == 0");
+  
+        iframe.style.opacity = "0";  // Commence la transition de disparition
 
         if (emoji_0.style.opacity == 1 || (emoji_0.style.opacity == 0 && emoji_1.style.opacity == 0)) {
 
@@ -2659,9 +2666,8 @@ function updateGrid() {
         var emoji_0 = document.getElementById("emoji_0");
         emoji_0.style.opacity = 0;
 
-        var iframe = document.querySelector(".iframe-jeu");
-  
-        iframe.style.opacity = "0";  // Commence la transition de disparition
+        
+        
         //iframe.style.zIndex = "-1";  // Place en arrière-plan
         setTimeout(() => {
         iframe.src="";
