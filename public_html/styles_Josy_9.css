@@ -953,7 +953,7 @@ z-index: 12;
   }
 
   .bouton_jeu_pc {
-    z-index: 1006;
+    z-index: 10006;
     position: fixed;
     display: inline-block;
     text-align: center;
@@ -1238,7 +1238,7 @@ z-index: 12;
     opacity: 1;  /* Devenir visible */ 
     background-color: var(--Color_1);  /* rgba(0, 0, 0, 0); /* Fond transparent avec 50% d'opacité */
     display: flex;  
-    z-index: 9997;
+    z-index: 999;
 }
 
              .navbar { 
@@ -1252,7 +1252,7 @@ z-index: 12;
                 display: flex; 
                 justify-content: space-between; 
                 align-items: center; 
-                z-index: 99970; 
+                z-index: 990; 
             } 
 
              .navbar a { 
@@ -1339,7 +1339,19 @@ body2 {
     top: calc(-1vw + 10px);
    /*  max-width: 108px; /* Taille de l'image */
      width: clamp(60px, (7vw + 8px), 120px);
-    opacity: 100;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Transition d'opacité */
+}
+
+
+.Image_JOSY {
+    z-index: 10000;
+    position: fixed; /* Position fixe pour l'image */
+    top: 135px;
+    left : 150px; /*calc(-1vw + 10px);
+   /*  max-width: 108px; /* Taille de l'image */
+    width: clamp(60px, (14vw + 8px), 220px);
+    opacity: 1;
     transition: opacity 0.5s ease; /* Transition d'opacité */
 }
 
@@ -1524,6 +1536,7 @@ body2 {
 .josy_text1 {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(50px, 9.4vw, 80px);
+    opacity: 0;
 }
 
 
@@ -1716,6 +1729,7 @@ body2 {
     position: absolute;
     width: 100vw;
     height: 100%;
+    top :-2px;
     opacity: 1;
     z-index: 9996;
 }
