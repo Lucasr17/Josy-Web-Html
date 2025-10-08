@@ -937,19 +937,20 @@ z-index: 12;
     background-color: var(--Color_1);
     display: flex;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 99;
   }
 
   .support_titre {
     position: fixed;
     opacity: 100%;
     top: 50px;
-    right: 10px;
-    width: 70vw;
+    right: 50%;
+    width: 40vw;
     height: 100px;
     background-color:  var(--Color_1);
     cursor: none;
     z-index: 1001;
+     transform: translate(50%, 0%);
   }
 
   .bouton_jeu_pc {
@@ -1013,13 +1014,13 @@ z-index: 12;
     right: 24px;
     width: 25px;
     height: 35px;
-    background-color: var(--Color_1);
+   /* background-color: var(--Color_1);*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    z-index: 1003;
+    z-index: 1004;
   }
   
   .menu-toggle div {
@@ -1028,7 +1029,7 @@ z-index: 12;
     background-color: var(--Color_2);
     margin: 3px 0;
     transition: 0.4s;
-    z-index: 1003;
+    z-index: 1004;
   }
   
   /* Style pour la navigation */
@@ -1039,13 +1040,13 @@ z-index: 12;
     right: 60px;
     flex-direction: row-reverse;
     align-items: center;
-    z-index: 1002;
+    z-index: 1003;
   }
   
   .nav-buttons button {
     margin: 0 10px;
     padding: 5px 10px;
-    background-color: var(--Color_1);
+    background-color: transparent/*var(--Color_1)*/;
     color: var(--Color_2);
     cursor: auto;
     transition: transform 1.0s, opacity 0.8s, border-radius 0.3s ease-in-out;
@@ -1057,7 +1058,7 @@ z-index: 12;
     
     /* Suppression de `border`, remplacé par `box-shadow` */
     border: none;
-    box-shadow: 0 0 0 20px var(--Color_1); /* Simule un contour */
+   /* box-shadow: 0 0 0 20px var(--Color_1); /* Simule un contour */
     border-radius: 10px; /* Initialement sans arrondi */
     pointer-events: none; /* Empêche les clics et autres interactions avec l'élément */
 }
@@ -1238,7 +1239,7 @@ z-index: 12;
     opacity: 1;  /* Devenir visible */ 
     background-color: var(--Color_1);  /* rgba(0, 0, 0, 0); /* Fond transparent avec 50% d'opacité */
     display: flex;  
-    z-index: 999;
+    z-index: 990;
 }
 
              .navbar { 

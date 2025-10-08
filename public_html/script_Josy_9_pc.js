@@ -2027,10 +2027,12 @@ document.querySelectorAll('.circle_tshirt').forEach(circle => {
 //photodrone
 gsap.fromTo(".carouselcontainer", 
   {
-    opacity: 1
+    opacity: 1,
+    pointerEvents: "auto"
   }, 
   {
     opacity: 0,
+    pointerEvents: "none",
     scrollTrigger: {
       trigger: document.body, // Déclencheur sur le carrousel
       start: "0px top", // Déclenche quand le haut de la page atteint 0px
@@ -2225,13 +2227,15 @@ document.body.classList.add('hide-menu');
 
 setTimeout(() => {
     if (document.body.classList.contains('hide-menu')) {
-    boutonJeu.style.zIndex = "1006";
+    boutonJeu.style.zIndex = "10006";
+    boutonJeu.style.opacity = "1";
     }
 }, 900); // Un peu plus tard que la réduction
 
 } else {
 // Si le menu est caché, on enlève hide-menu et on ajoute show-menu
 boutonJeu.style.zIndex = "1002";
+boutonJeu.style.opacity = "0";
 document.body.classList.remove('hide-menu');
 document.body.classList.add('show-menu');
 
