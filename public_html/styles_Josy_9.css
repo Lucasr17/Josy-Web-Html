@@ -943,15 +943,16 @@ z-index: 12;
   .support_titre {
     position: fixed;
     opacity: 100%;
-    top: 50px;
+    top: 80px;
     right: 50%;
-    width: 40vw;
-    height: 100px;
+    width: 90vw;
+    height: 80px;
     background-color:  var(--Color_1);
     cursor: none;
-    z-index: 1001;
+    z-index: 998;
      transform: translate(50%, 0%);
   }
+
 
   .bouton_jeu_pc {
     z-index: 10006;
@@ -1346,15 +1347,26 @@ body2 {
 
 
 .Image_JOSY {
-    z-index: 10000;
-    position: fixed; /* Position fixe pour l'image */
-    top: 135px;
-    left : 150px; /*calc(-1vw + 10px);
-   /*  max-width: 108px; /* Taille de l'image */
-    width: clamp(60px, (14vw + 8px), 220px);
-    opacity: 1;
-    transition: opacity 0.5s ease; /* Transition d'opacité */
+  z-index: 10000;
+  position: fixed;
+  width: clamp(120px, 14vw + 8px, 220px);
+  top: 125px;
 }
+
+/* Écran large */
+@media (min-width: 768px) {
+  .Image_JOSY {
+    left: 165px;
+  }
+}
+
+/* Écran mobile */
+@media (max-width: 767px) {
+  .Image_JOSY {
+    left: 55px;
+  }
+}
+
 
 /* Animation du slider */
 @keyframes slider2 {
@@ -1524,7 +1536,6 @@ body2 {
 #text1 {
     position: fixed;
     top: calc(0vw + 155px);
-    left: 11vw;
     color: var(--Color_2);
     font-family: 'Poppins', sans-serif;
     font-size: 6.4vw;
@@ -1532,6 +1543,18 @@ body2 {
     /*transform: translate(-50%, -50%);*/
     z-index: 9997;
     transition: opacity 0.3s ease;
+}
+
+@media (min-width: 768px) {
+#text1 {
+    left: 147px;/*11vw;*/
+}
+}
+
+@media (max-width: 768px) {
+#text1 {
+    left: 65px;/*11vw;*/
+}
 }
 
 .josy_text1 {

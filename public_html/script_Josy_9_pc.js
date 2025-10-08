@@ -323,25 +323,20 @@ gsap.fromTo(".slider2", {
 });
 
 
-gsap.fromTo(".Image_JOSY", 
-  {
-    width: "clamp(120px, 14vw + 8px, 220px)",
-    top: "118px",
-    left : "12vw",
-  }, 
-  {
-    width: "clamp(60px, 7vw + 8px, 120px)",
-    top: "calc(-1vw + 10px)",
-    left:"18px",
-    scrollTrigger: {
-      trigger: document.body,
-      start: "5px top",
-      end: "95px top",
-      scrub: true,
-      markers: false
-    }
+// JS avec GSAP
+gsap.to(".Image_JOSY", {
+  width: "clamp(60px, 7vw + 8px, 120px)",
+  top: "calc(-1vw + 10px)",
+  left: "18px",
+  scrollTrigger: {
+    trigger: document.body,
+    start: "5px top",
+    end: "95px top",
+    scrub: true,
+    markers: false,
+    invalidateOnRefresh: true // important quand tu scrolls ou redimensionnes vite
   }
-);
+});
 
 
 /*
