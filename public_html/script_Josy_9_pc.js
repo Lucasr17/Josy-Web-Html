@@ -323,20 +323,51 @@ gsap.fromTo(".slider2", {
 });
 
 
-// JS avec GSAP
-gsap.to(".Image_JOSY", {
+
+let mm = gsap.matchMedia();
+
+mm.add("(min-width: 768px)", () => {
+  gsap.fromTo(".Image_JOSY", {
+    width: "clamp(120px, 200px + 8px, 220px)",
+    top: "125px",
+    left: "159px",
+      }, {
   width: "clamp(60px, 7vw + 8px, 120px)",
   top: "calc(-1vw + 10px)",
   left: "18px",
   scrollTrigger: {
     trigger: document.body,
-    start: "5px top",
+    start: "top top",
     end: "95px top",
+    onLeaveBack: () => gsap.set(".Image_JOSY", { top: "125px", left: "159px", width: "clamp(120px, 200px + 8px, 220px)" }),
     scrub: true,
     markers: false,
     invalidateOnRefresh: true // important quand tu scrolls ou redimensionnes vite
   }
 });
+});
+
+mm.add("(max-width: 767px)", () => {
+  gsap.fromTo(".Image_JOSY", {
+    width: "clamp(120px, 130px + 8px, 220px)",
+    top: "125px",
+    left: "12vw",
+      }, {
+  width: "clamp(60px, 7vw + 8px, 120px)",
+  top: "calc(-1vw + 10px)",
+  left: "18px",
+  scrollTrigger: {
+    trigger: document.body,
+    start: "top top",
+    end: "95px top",
+    onLeaveBack: () => gsap.set(".Image_JOSY", { top: "125px", left: "12vw", width: "clamp(120px, 130px + 8px, 220px)" }),
+    scrub: true,
+    markers: false,
+    invalidateOnRefresh: true // important quand tu scrolls ou redimensionnes vite
+  }
+});
+});
+
 
 
 /*

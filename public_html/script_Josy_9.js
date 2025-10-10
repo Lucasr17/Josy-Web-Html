@@ -151,7 +151,8 @@ document.querySelectorAll(".section_histoire .content_section").forEach(content 
       start: "top 300px",
       end: "top 120px",
       scrub: true,
-      markers: false // Retire en prod
+      markers: false, // Retire en prod
+      invalidateOnRefresh: true // important quand tu scrolls ou redimensionnes vite
     }
   });
 });

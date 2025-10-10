@@ -53,7 +53,7 @@ body {
 .custom-btn {
   width: 140px;
   height: 45px;
-  top: 40vh;
+  top: 45vh;
   left: 23%;
   color: #fff;
   border-radius: 20px;
@@ -495,14 +495,14 @@ z-index: 12;
     
     } 
         
-        #modal-container_carte.four { 
+    #modal-container_carte.four { 
             z-index: 2001; 
             transform: scale(1); 
-        } 
+    } 
         
-        #modal-container_carte.four  .modal-background_carte { 
+    #modal-container_carte.four  .modal-background_carte { 
             background: rgba(0, 0, 0, .7);
-         } 
+     } 
          
          #modal-container_carte.four .modal_carte { 
             animation: blowUpModal .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -818,7 +818,7 @@ z-index: 12;
     border: 2px solid var(--Color_1);
     border-radius: 8px;
     transform: translate(-50%, -50%);
-    z-index: 2000;
+    z-index: -2000;
     opacity: 0;
     cursor: pointer;
 }
@@ -943,10 +943,10 @@ z-index: 12;
   .support_titre {
     position: fixed;
     opacity: 100%;
-    top: 80px;
+    top: 70px;
     right: 50%;
-    width: 90vw;
-    height: 80px;
+    width: 50vw;
+    height: 85px;
     background-color:  var(--Color_1);
     cursor: none;
     z-index: 998;
@@ -1346,26 +1346,6 @@ body2 {
 }
 
 
-.Image_JOSY {
-  z-index: 10000;
-  position: fixed;
-  width: clamp(120px, 14vw + 8px, 220px);
-  top: 125px;
-}
-
-/* Écran large */
-@media (min-width: 768px) {
-  .Image_JOSY {
-    left: 165px;
-  }
-}
-
-/* Écran mobile */
-@media (max-width: 767px) {
-  .Image_JOSY {
-    left: 55px;
-  }
-}
 
 
 /* Animation du slider */
@@ -1535,7 +1515,6 @@ body2 {
 /* Style du texte principal */
 #text1 {
     position: fixed;
-    top: calc(0vw + 155px);
     color: var(--Color_2);
     font-family: 'Poppins', sans-serif;
     font-size: 6.4vw;
@@ -1548,13 +1527,38 @@ body2 {
 @media (min-width: 768px) {
 #text1 {
     left: 147px;/*11vw;*/
+    top: calc(0vw + 185px);
 }
 }
 
 @media (max-width: 768px) {
 #text1 {
-    left: 65px;/*11vw;*/
+    left: 68px;/*11vw;*/
+    top: calc(0vw + 163px);
 }
+}
+
+.Image_JOSY {
+  z-index: 10000;
+  position: fixed;
+  /*clamp(120px, 14vw + 8px, 220px);*/ 
+  top: 125px;
+}
+
+/* Écran large */
+@media (min-width: 768px) {
+  .Image_JOSY {
+    left: 159px;
+     width: clamp(120px, 200px + 8px, 220px);
+  }
+}
+
+/* Écran mobile */
+@media (max-width: 767px) {
+  .Image_JOSY {
+    left: 12vw;
+     width: clamp(120px, 130px + 8px, 220px);
+  }
 }
 
 .josy_text1 {
@@ -1927,7 +1931,7 @@ body2 {
   margin: auto;
 }
 
-.button-box_boutique {
+.button-box_ {
   height: 500px;
   max-width: 500px;
   align-items: center;
