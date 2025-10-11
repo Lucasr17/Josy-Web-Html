@@ -266,15 +266,25 @@
       updateImage();
     });
 
-    colorDots.forEach(dot => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".color-dot.active").classList.remove("active");
-        dot.classList.add("active");
-        currentColor = dot.dataset.color;
-        currentIndex = 0;
-        updateImage();
-      });
-    });
+colorDots.forEach(dot => {
+  dot.addEventListener("click", () => {
+    document.querySelector(".color-dot.active").classList.remove("active");
+    dot.classList.add("active");
+
+    // Sauvegarder l’index actuel avant changement
+    const previousIndex = currentIndex;
+
+    // Changer la couleur
+    currentColor = dot.dataset.color;
+
+    // Ajuster l’index si la nouvelle couleur a moins d’images
+    const images = productImages[currentColor];
+    currentIndex = Math.min(previousIndex, images.length - 1);
+
+    updateImage();
+  });
+});
+
   </script>
 
 </body>
