@@ -2,8 +2,6 @@
 var dim_tel = 768;
 
 
-
-
 function debugScrollOverflow() {
   const all = document.querySelectorAll('*');
 
