@@ -1,234 +1,281 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JOSY - L’Histoire</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personnalisation JOSY</title>
   <style>
-    body {
-      margin: 0;
-      background: #0d0d0d;
-      color: white;
-      font-family: 'Helvetica Neue', sans-serif;
-      overflow-x: hidden;
+    :root {
+      --Color_1: #202020;
+      --Color_2: #EAEAEA;
+      --Color_3: #9400D3;
     }
 
-    .section {
-      position: relative;
-      min-height: 60vh;
-      padding: 60px 60px;
+    body {
+      background-color: var(--Color_1);
+      color: var(--Color_2);
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      max-width: 1100px;
+      padding: 40px;
+    }
+
+    /* --- PREVIEW --- */
+    .preview {
+      position: relative;
+      width: 450px;
+      height: 350px;
+      background-color: #2a2a2a;
+      border-radius: 20px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    [data-lightwave] span {
-  display: inline-block;
-  opacity: 0.3;
-  transition: color 0.3s, opacity 0.3s;
-  color: white;
-}
-
-
-    .emoji {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
-      filter: grayscale(1) brightness(1.5) sepia(1) hue-rotate(250deg) saturate(2);
-      opacity: 0.85;
-      transform: scale(0.5);
-    }
-
-    .content {
-      font-size: 1.5rem;
-      line-height: 1.6;
-      max-width: 700px;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .line-wrapper {
-      position: absolute;
+    .preview img {
       width: 100%;
-      height: 100px;
-      top: 0;
-      left: 0;
-      pointer-events: none;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.4s ease;
     }
 
-svg {
-  position: absolute;
-  width: 150%;
-  height: 100px;
-  top: 50%;
-  left: -25%;
-  transform: rotate(-6deg);
-}
-
-.section:nth-child(even) svg {
-  transform: rotate(6deg) scaleX(-1); /* ← On inverse ici */
-  top: 45%;
-}
-
-
-
-    .line {
-      stroke: #a259ff;
-      stroke-width: 4;
-      fill: none;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
+    .preview button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(234, 234, 234, 0.1);
+      color: var(--Color_2);
+      border: none;
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+      font-size: 1.4em;
     }
 
-
-    .section:nth-child(even) .emoji {
-      transform: rotate(-8deg) scale(0.5);
+    .preview button:hover {
+      background-color: var(--Color_3);
     }
 
-    @media (max-width: 768px) {
-      .content {
-        font-size: 1.2rem;
-      }
+    .preview .left {
+      left: 10px;
+    }
 
-      .emoji {
-        font-size: 2.5rem;
-      }
+    .preview .right {
+      right: 10px;
+    }
+
+    /* --- OPTIONS --- */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      min-width: 280px;
+    }
+
+    .option {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+
+    select {
+      background-color: var(--Color_2);
+      color: var(--Color_1);
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    select:hover {
+      transform: scale(1.02);
+    }
+
+    .color-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--Color_2);
+      transition: 0.3s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.2);
+      border-color: var(--Color_3);
+    }
+
+    .color-dot.active {
+      border-color: var(--Color_3);
+      transform: scale(1.15);
     }
   </style>
 </head>
 <body>
 
-  <!-- SECTION 1 -->
-  <section class="section">
-    <div class="line-wrapper">
-      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+  <div class="container">
+    <!-- PREVIEW -->
+    <div class="preview">
+      <button class="left">‹</button>
+      <img id="productImage" src="Image/Casquette_Josy_mot/classic-dad-hat-black-front.png" alt="Casquette JOSY">
+      <button class="right">›</button>
     </div>
-    <div class="emoji">👟</div>
-    <div class="content">
-      <p>Il était une fois, dans un monde où la mode était trop sérieuse, trois amis décidèrent de tout changer. Leur mission ? Apporter du fun et du style à la mode !</p>
-    </div>
-  </section>
 
-  <!-- SECTION 2 -->
-  <section class="section">
-    <div class="line-wrapper">
-      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
-    </div>
-    <div class="emoji">💥</div>
-    <div class="content">
-      <p data-lightwave>BOUM ! Josy était né ! Une marque décalée, remplie de jeux de mots et de créativité.</p>
+    <!-- OPTIONS -->
+    <div class="options">
+      <!-- Couleur -->
+      <div class="option">
+        <label>Couleur du produit</label>
+        <div class="color-options">
+          <div class="color-dot active" data-color="black" style="background:#202020"></div>
+          <div class="color-dot" data-color="dark-grey" style="background:#4a4a4a"></div>
+          <div class="color-dot" data-color="stone" style="background:#b8a896"></div>
+          <div class="color-dot" data-color="purple" style="background:#9400D3"></div>
+          <div class="color-dot" data-color="white" style="background:#EAEAEA"></div>
+          <div class="color-dot" data-color="pink" style="background:#FF69B4"></div>
+        </div>
+      </div>
 
-    </div>
-  </section>
+      <!-- Logo ou Signature -->
+      <div class="option">
+        <label>Style</label>
+        <select id="styleSelect">
+          <option value="logo">Logo JOSY</option>
+          <option value="signature">Signature JOSY</option>
+        </select>
+      </div>
 
-  <!-- SECTION 3 -->
-  <section class="section">
-    <div class="line-wrapper">
-      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
+      <!-- JosyMot -->
+      <div class="option">
+        <label>Mot JOSY</label>
+        <select id="motSelect">
+          <option value="JOSYdiot">JOSYdiot</option>
+          <option value="JOSYdéal">JOSYdéal</option>
+          <option value="JOSYdée">JOSYdée</option>
+          <option value="JOSYgloo">JOSYgloo</option>
+        </select>
+      </div>
     </div>
-    <div class="emoji">🧵</div>
-    <div class="content">
-      <p>Chaque vêtement Josy raconte une histoire. De Josydole à Josyrlande, chaque pièce est un clin d'œil à l'humour et au style.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 4 -->
-  <section class="section">
-    <div class="line-wrapper">
-      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
-    </div>
-    <div class="emoji">😎</div>
-    <div class="content">
-      <p>Josy c’est pour ceux qui veulent du style sans se prendre au sérieux. Tu veux être unique et marrer en même temps ? Tu es au bon endroit !</p>
-    </div>
-  </section>
-
-  <!-- SECTION 5 -->
-  <section class="section">
-    <div class="line-wrapper">
-      <svg viewBox="0 0 1000 10"><line class="line" x1="0" y1="5" x2="1000" y2="5" /></svg>
-    </div>
-    <div class="emoji">🎭</div>
-    <div class="content">
-      <p>Enfile Josy et deviens l’âme de la fête. Ici, chaque vêtement est une punchline et chaque jour une aventure ! Prêt(e) à nous rejoindre ?</p>
-    </div>
-  </section>
-
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </div>
 
   <script>
-    gsap.registerPlugin(ScrollTrigger);
+    // --- Images par couleur ---
+    const productImages = {
+      black: [
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-left-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-left-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-left.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-right.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-right-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-right-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-right-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-black-product-details.png"
+      ],
+      "dark-grey": [
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-left-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-left-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-left.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-right.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-right-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-right-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-right-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-dark-grey-product-details.png"
+      ],
+      "stone": [
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-left-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-left-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-left.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-right.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-right-front.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-right-side.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-right-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-back.png",
+        "Image/Casquette_Josy_mot/classic-dad-hat-stone-product-details.png"
+      ],
+      purple: [
+        "https://via.placeholder.com/350x350/9400D3/FFFFFF?text=Purple"
+      ],
+      white: [
+        "https://via.placeholder.com/350x350/EAEAEA/202020?text=White"
+      ],
+      pink: [
+        "https://via.placeholder.com/350x350/FF69B4/FFFFFF?text=Pink"
+      ]
+    };
 
-    // Animation des traits violets
-    document.querySelectorAll(".line").forEach(line => {
-      gsap.to(line, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: line.closest(".section"),
-          start: "top bottom",
-          end: "bottom center",
-          scrub: true
-        }
-      });
+    let currentColor = "black";
+    let currentIndex = 0;
+
+    const productImage = document.getElementById("productImage");
+    const leftBtn = document.querySelector(".left");
+    const rightBtn = document.querySelector(".right");
+    const colorDots = document.querySelectorAll(".color-dot");
+
+    function updateImage() {
+      const images = productImages[currentColor];
+      if (!images) return;
+      productImage.style.opacity = 0;
+      setTimeout(() => {
+        productImage.src = images[currentIndex];
+        productImage.style.opacity = 1;
+      }, 200);
+    }
+
+    leftBtn.addEventListener("click", () => {
+      const images = productImages[currentColor];
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateImage();
     });
 
-    // Animation apparition emoji + texte
-    document.querySelectorAll(".section").forEach(section => {
-      const emoji = section.querySelector('.emoji');
-      const content = section.querySelector('.content');
+    rightBtn.addEventListener("click", () => {
+      const images = productImages[currentColor];
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage();
+    });
 
-      gsap.to([emoji, content], {
-        opacity: 1,
-        transform: "none",
-        scale: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          toggleActions: "play none none none"
-        }
+    colorDots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        document.querySelector(".color-dot.active").classList.remove("active");
+        dot.classList.add("active");
+        currentColor = dot.dataset.color;
+        currentIndex = 0;
+        updateImage();
       });
     });
   </script>
-
-  <script>
-  // Split le texte en span par lettre
-  document.querySelectorAll('[data-lightwave]').forEach(el => {
-    const text = el.textContent;
-    el.innerHTML = '';
-    text.split('').forEach(char => {
-      const span = document.createElement('span');
-      span.textContent = char === ' ' ? '\u00A0' : char;
-      el.appendChild(span);
-    });
-  });
-
-  // GSAP animation vague
-  document.querySelectorAll('[data-lightwave]').forEach(el => {
-    const letters = el.querySelectorAll('span');
-    gsap.to(letters, {
-      opacity: 1,
-      stagger: {
-        each: 0.03,
-        from: "start"
-      },
-      duration: 0.5,
-      ease: "sine.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 80%",
-        toggleActions: "play none none none"
-      }
-    });
-  });
-</script>
-
 
 </body>
 </html>
