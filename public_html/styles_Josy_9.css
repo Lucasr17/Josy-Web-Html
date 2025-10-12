@@ -980,8 +980,8 @@ z-index: 12;
     transition: all 0.6s ease-in-out;
     white-space: nowrap; /* Empêche le retour à la ligne */
     overflow: hidden;
-    min-width: 34.5px; /* Largeur initiale minimale */
-    width: 34.5px; /* Largeur de base */
+    min-width: 35px; /* Largeur initiale minimale */
+    width: 35px; /* Largeur de base */
     padding-left: 9px; /* Améliore la détection du survol */
     padding-right: 8.5px;
 }

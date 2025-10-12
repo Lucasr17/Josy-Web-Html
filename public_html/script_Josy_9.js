@@ -160,3 +160,50 @@ document.querySelectorAll(".section_histoire .content_section").forEach(content 
 
 
 /*FIN section histoire JOSY*/
+
+
+const points = [180, 2700];
+let isSnapping = false;
+let lastScrollY = window.scrollY;
+let lastDirection = null;
+
+window.addEventListener('scroll', () => {
+  if (isSnapping) return;
+
+  const scrollY = window.scrollY;
+  const direction = scrollY > lastScrollY ? "down" : "up";
+  lastScrollY = scrollY;
+
+  let closestPoint = null;
+  let closestDistance = Infinity;
+
+  // Cherche le point le plus proche
+  points.forEach(point => {
+    const distance = Math.abs(scrollY - point);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestPoint = point;
+    }
+  });
+
+  // Rayon de magnétisation (en px)
+  const radius = 100;
+
+  // Si on est dans la zone d’un point magnétique
+  if (closestDistance < radius) {
+    // Si on scroll vers le bas : on ne s'accroche que si on passe AU-DESSUS du point
+    if (direction === "down" && scrollY < closestPoint) {
+      snapTo(closestPoint);
+    }
+    // Si on scroll vers le haut : on ne s'accroche que si on passe EN DESSOUS du point
+    else if (direction === "up" && scrollY > closestPoint) {
+      snapTo(closestPoint);
+    }
+  }
+
+  function snapTo(target) {
+    isSnapping = true;
+    window.scrollTo({ top: target, behavior: 'smooth' });
+    setTimeout(() => isSnapping = false, 800);
+  }
+});

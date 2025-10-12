@@ -1,6 +1,47 @@
-//Variable dimension tel 
+/// VARIABLE DIMENSION TEL 
 var dim_tel = 768;
 
+//-------------------
+
+/// VARIABLES DESCRIPTIF
+
+
+let offset_descriptif = 295; // ton point d’entrée
+
+
+//-------------------
+
+/// VARIABLES QUALITE
+
+let offset_qualite = 450; // ton point d’entrée
+let endOffset_qualite = 850; // ton point de sortie
+
+//-------------------
+
+/// VARIABLES T-SHIRT CINTRE
+
+let offset_debut_cintre = 900; // ton point d’entrée
+let endOffset_debut_cintre = offset_debut_cintre + 100; // ton point de sortie
+
+let offset_retour_cintre = 1200; // ton point d’entrée
+let endOffset_retour_cintre = offset_retour_cintre + 100; // ton point de sortie
+
+let offset_sortie_cintre = 1420; // ton point d’entrée
+let endOffset_sortie_cintre = offset_retour_cintre + 300; // ton point de sortie
+
+//-------------------
+
+/// VARIABLES GALERIE JOSY
+
+let offset_galerie = 1600; // ton point d’entrée
+let endOffset_galerie = 1800; // ton point de sortie
+
+//-------------------
+
+
+
+
+///////////////////--------------------------------------------/////////////////////////////
 
 function debugScrollOverflow() {
   const all = document.querySelectorAll('*');
@@ -435,7 +476,7 @@ function updateGSAPAnimation() {
 
     // Recrée l'animation GSAP avec les nouvelles valeurs
 
-    if (window.innerWidth > dim_tel) {
+if (window.innerWidth > dim_tel) {
 
 //sortie t shirt cintre
 
@@ -443,12 +484,12 @@ gsap.fromTo("#T_shirt_1", {
     y: 0,
     // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
     }, {
-    y: -1500,
+    y: -1200,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=820px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=950px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_sortie_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_sortie_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -456,24 +497,25 @@ gsap.fromTo("#T_shirt_1", {
 
 //retour t shirt cintre
 
+
 gsap.fromTo("#T_shirt_1", {
-    scale: 1,  // Réduit la largeur à zéro au début
-    x: 0,//
-    y: 0,
-    // transformOrigin: "bottom left", // Origine de transformation en bas à gauche
-    }, {
-    scale: 1,  // Agrandit la largeur à sa taille originale
-    x: variables,
-    y: 0,
-    scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+  scale: 1,
+  x: 0,
+  y: 0,
+}, {
+  scale: 1,
+  x: variables, // ta variable existante
+  y: 0,
+  scrollTrigger: {
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
-    }
-    });
+  }
+});
+
 
 gsap.fromTo("#T_shirt_2", {
     scale: 1,  // Réduit la largeur à zéro au début
@@ -485,10 +527,10 @@ gsap.fromTo("#T_shirt_2", {
     x: variables - variables_2,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -504,10 +546,10 @@ gsap.fromTo("#T_shirt_3", {
     x: variables - variables_2*2,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -523,10 +565,10 @@ gsap.fromTo("#T_shirt_4", {
     x: variables - variables_2*3,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -542,10 +584,10 @@ gsap.fromTo("#T_shirt_5", {
     x: variables - variables_2*4,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -561,10 +603,10 @@ gsap.fromTo("#T_shirt_6", {
     x: variables - variables_2*5,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -580,10 +622,10 @@ gsap.fromTo("#T_shirt_7", {
     x: variables - variables_2*6,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -599,10 +641,10 @@ gsap.fromTo("#T_shirt_8", {
     x: variables - variables_2*7,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -618,10 +660,10 @@ gsap.fromTo("#T_shirt_9", {
     x: variables - variables_2*8,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
     }
@@ -637,10 +679,10 @@ gsap.fromTo("#T_shirt_10", {
     x: variables - variables_2*9,
     y: 0,
     scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=700px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_retour_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_retour_cintre}px top`,  // ✅ offset + 100
     scrub: 0,
     markers: false
     }
@@ -659,10 +701,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -678,10 +720,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -697,10 +739,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -716,10 +758,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -735,10 +777,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -754,10 +796,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -773,10 +815,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -792,10 +834,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -811,10 +853,10 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -830,16 +872,17 @@ scale: 1,  // Agrandit la largeur à sa taille originale
 x: 0,
 y: 0,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=500px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
 });
 
 
+///RESET TSHIRT CINTRE JOSY
 gsap.fromTo("#T_shirt_1", {
 scale: 1,  // Réduit la largeur à zéro au début
 x: variables,// sreen_largeur * 0.40 + 60,
@@ -1000,15 +1043,17 @@ markers: false
 }
 });
 
+
+///apparition t shirt cintre
 gsap.fromTo("#T_shirt_1", {
 opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1019,10 +1064,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1033,10 +1078,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1047,10 +1092,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1061,10 +1106,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1075,10 +1120,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1089,10 +1134,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1103,10 +1148,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1117,10 +1162,10 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
@@ -1131,15 +1176,14 @@ opacity: 0
 }, {
 opacity: 1,
 scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=399px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport 
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre - 1}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre}px top`,  // ✅ offset + 100
 scrub: 0,
 markers: false
 }
 });
-
 
 
 //fin t shirt cintre
@@ -1354,8 +1398,8 @@ function updateScrollBounds() {
   const absoluteBottom = window.scrollY + rect.bottom;
 
   // ⛔️ NE PAS redeclarer avec const ici !
-  scrollStart = absoluteBottom + 500;
-  scrollEnd = absoluteBottom + 700;
+  scrollStart = absoluteBottom + endOffset_debut_cintre + 1;
+  scrollEnd = absoluteBottom + offset_retour_cintre - 1;
 }
 
 // Met à jour les bornes au chargement et au resize
@@ -1465,8 +1509,8 @@ const scrollTop = window.scrollY; // Obtenir la position actuelle du scroll
 
 ScrollTrigger.create({
   trigger: ".section_histoire:nth-child(5)",
-  start: "bottom+=320px top",
-  end: "bottom+=390px top",
+  start: `bottom+=${offset_qualite - 1}px top`,   // ✅ utilisation dynamique
+  end: `bottom+=${endOffset_qualite - 1}px top`,   // ✅ utilisation dynamique
   onEnter: () => txt_tel_qualite.style.opacity = "1",
   onLeave: () => txt_tel_qualite.style.opacity = "0",
   onEnterBack: () => txt_tel_qualite.style.opacity = "1",
@@ -1474,14 +1518,18 @@ ScrollTrigger.create({
 });
 
 
+
 let trigger = ScrollTrigger.create({
 
     trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
     trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start2: "bottom+=300px top", // Quand le haut de la section 1 touche le bas du viewport
+    start2: `bottom+=${offset_debut_cintre - 50}px top`,   // ✅ utilisation dynamique
     endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=800px top", // Quand le bas de la section 3 touche le haut du viewport 
+    end: `bottom+=${offset_sortie_cintre - 100}px top`,  // ✅ offset_retour_cintre + 100
+
+
+    
 
   onUpdate: self => {
     let scrollTop = window.scrollY || window.pageYOffset;
@@ -1637,8 +1685,8 @@ ScrollTrigger.create({
 //vous_josy
 ScrollTrigger.create({
   trigger: ".section_histoire:nth-child(5)",
-  start: "bottom+=900px top",
-  end: "bottom+=1000px top",
+  start: `bottom+=${offset_galerie}px top`,   // ✅ utilisation dynamique
+  end: `bottom+=${endOffset_galerie}px top`,   // ✅ utilisation dynamique
   onEnter: () => {
     vous_josy.style.opacity = "1"; // Devient visible quand on entre dans la zone
     vous_josy.style.pointerEvents = "auto";
@@ -1662,8 +1710,8 @@ ScrollTrigger.create({
 //vous_josy_2
 ScrollTrigger.create({
   trigger: ".section_histoire:nth-child(5)",
-  start: "bottom+=920px top",
-  end: "bottom+=1000px top",
+  start: `bottom+=${offset_galerie + 20}px top`,   // ✅ utilisation dynamique
+  end: `bottom+=${endOffset_galerie}px top`,   // ✅ utilisation dynamique
   onEnter: () => {
     vous_josy_2.style.opacity = "1"; // Devient visible quand on entre dans la zone
     vous_josy_2.style.pointerEvents = "auto";
@@ -1717,8 +1765,10 @@ const yStart = rect.top; //+ rect.height;
 
 if (window.innerWidth >= dim_tel) {
 
+
+//tshirt mouvement après la description 
 gsap.fromTo(".T_shirt_Josy_1_", {
-x: sreen_largeur * 0.332,
+x: sreen_largeur * 0.33,
 y: yStart - window.innerHeight * 0.24,
 width: "40vw",
 }, {
@@ -1727,11 +1777,11 @@ y: 0,
 width: "42vw",
 scrollTrigger: {
     trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=265px top", // Quand le haut de la section 1 touche le bas du viewport
+     start: `bottom+=${offset_descriptif}px top`,   // ✅ utilisation dynamique
     endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=350px top", // Quand le bas de la section 3 touche le haut du viewport 
+    end: `bottom+=${offset_descriptif + 200}px top`,   // ✅ utilisation dynamique
 
-scrub: 0,  
+ scrub: 0,  
 markers: false
 }
 });
@@ -1867,10 +1917,10 @@ gsap.fromTo(".T_shirt_Josy_1_", {
 }, {
  opacity: 0,
   scrollTrigger: {
-    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=400px top", // Quand le haut de la section 1 touche le bas du viewport
-    endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=401px top", // Quand le bas de la section 3 touche le haut du viewport
+    trigger: ".section_histoire:nth-child(5)",
+    start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
+    endTrigger: ".section_histoire:nth-child(5)",
+    end: `bottom+=${offset_debut_cintre + 1}px top`,  // ✅ offset_retour_cintre + 100
     scrub: 0,
     markers: false
   }
@@ -1977,9 +2027,9 @@ gsap.fromTo("#descriptif_tshirt", {
     pointerEvents: "none", 
     scrollTrigger: {
       trigger: ".section_histoire:nth-child(5)",
-      start: "bottom+=245px top",
+      start: `bottom+=${offset_descriptif + 5}px top`,   // ✅ utilisation dynamique
       endTrigger: ".section_histoire:nth-child(5)",
-      end: "bottom+=260px top",
+      end: `bottom+=${offset_descriptif + 25}px top`,   // ✅ utilisation dynamique
       scrub: 0,
       markers: false
     }
@@ -2006,11 +2056,11 @@ gsap.fromTo("#descriptif_tshirt", {
   gsap.timeline({
     scrollTrigger: {
    trigger: ".section_histoire:nth-child(5)", // Déclenche quand la section 1 arrive
-    start: "bottom+=351px top", // Quand le haut de la section 1 touche le bas du viewport
+    start: `bottom+=${offset_qualite + 65}px top`,
     endTrigger: ".section_histoire:nth-child(5)", // Finit quand la section 3 quitte
-    end: "bottom+=400px top", // Quand le bas de la section 3 touche le haut du viewport
-      scrub: true,
-      markers: false
+    end: `bottom+=${endOffset_qualite - 1}px top`,
+    scrub: true,
+    markers: false
     }
   })
   .fromTo(".circle_tshirt", {
@@ -2089,13 +2139,12 @@ opacity : 1
 opacity : 0,
 scrollTrigger: {
   trigger: ".section_histoire:nth-child(5)",
-  start: "bottom+=1000px top",
-  end: "bottom+=1001px top",
+  start: `bottom+=${endOffset_galerie}px top`,   // ✅ utilisation dynamique
+  end: `bottom+=${endOffset_galerie + 50}px top`,   // ✅ utilisation dynamique
 scrub: 0,  
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
 });
-
 
 gsap.fromTo(".gallery2-container", {
 y : 1000
@@ -2103,8 +2152,8 @@ y : 1000
 y : 0,
 scrollTrigger: {
   trigger: ".section_histoire:nth-child(5)",
-  start: "bottom+=900px top",
-  end: "bottom+=915px top",
+  start: `bottom+=${offset_galerie}px top`,   // ✅ utilisation dynamique
+  end: `bottom+=${offset_galerie + 50}px top`,   // ✅ utilisation dynamique
 scrub: 0,  
 markers: false          // Pour voir les repères de démarrage et de fin (pour le debug)
 }
@@ -2793,6 +2842,7 @@ gsap.to(popup, {
 
 function startTyping() {
 
+if (window.innerWidth >= dim_tel) {
 
     const t0 = gsap.timeline();
 
@@ -2873,6 +2923,7 @@ button.addEventListener("click", () => {
 });
 
 }
+}
 
 function ecriture_text() {
 
@@ -2931,7 +2982,17 @@ function ecriture_text() {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-console.log("chargement en cours .... !");
+////POUR LES TESTS ON DESACTIVE L'ANIMATION
+//document.getElementById('overlay').style.display = 'none';
+//return; 
+
+////FIN POUR LES TESTS ON DESACTIVE L'ANIMATION
+
+
+
+// On stoppe ici pour éviter de lancer l'animation
+
+//console.log("chargement en cours .... !");
 
     // Vérifie si la page a été rechargée suite à un resize
    /*  const fromResize = sessionStorage.getItem("fromResize");
@@ -3520,3 +3581,4 @@ document.addEventListener('touchend', (event) => {
     }
   }
 });
+
