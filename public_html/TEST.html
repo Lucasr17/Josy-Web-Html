@@ -328,27 +328,10 @@
       dot.addEventListener("click", () => {
         document.querySelector(".color-dot.active").classList.remove("active");
         dot.classList.add("active");
-
-        const prevIndex = currentIndex;
         currentColor = dot.dataset.color;
-        const images = baseImages[currentColor];
-        currentIndex = Math.min(prevIndex, images.length - 1);
+        currentIndex = 0;
         updateImage();
       });
-    });
-
-    styleSelect.addEventListener("change", () => {
-      const prevIndex = currentIndex;
-      currentStyle = styleSelect.value;
-      currentIndex = prevIndex;
-      updateImage();
-    });
-
-    motSelect.addEventListener("change", () => {
-      const prevIndex = currentIndex;
-      mot = motSelect.value;
-      currentIndex = prevIndex;
-      updateImage();
     });
   </script>
 

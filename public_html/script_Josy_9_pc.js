@@ -2982,17 +2982,7 @@ function ecriture_text() {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-////POUR LES TESTS ON DESACTIVE L'ANIMATION
-//document.getElementById('overlay').style.display = 'none';
-//return; 
-
-////FIN POUR LES TESTS ON DESACTIVE L'ANIMATION
-
-
-
-// On stoppe ici pour éviter de lancer l'animation
-
-//console.log("chargement en cours .... !");
+console.log("chargement en cours .... !");
 
     // Vérifie si la page a été rechargée suite à un resize
    /*  const fromResize = sessionStorage.getItem("fromResize");
