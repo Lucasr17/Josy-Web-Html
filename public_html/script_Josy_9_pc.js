@@ -37,7 +37,7 @@ let offset_galerie = 1600; // ton point d’entrée
 let endOffset_galerie = 1800; // ton point de sortie
 
 //-------------------
-
+ 
 
 
 
@@ -1284,31 +1284,39 @@ function handleMouseMove(e) {
 
   const x = (e.clientX - rect.left) * scaleX;
   const y = (e.clientY - rect.top) * scaleY;
-
   const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
   const alpha = pixel[3];
+  const index = Array.from(tshirts).indexOf(img);
 
-  if (alpha > 1) {
-    // Zone visible → reste sur ce t-shirt
-    img.style.cursor = "pointer";
-     //console.log(`🖱️ ${alpha} `);
-     hoverEffect(e);
-  } else {
-    // Zone transparente → passer au suivant
+  const limiteGauche = canvas.width * 0.4;
+  const limiteDroite = canvas.width * 0.6; // 60 % de la largeur — à ajuster si besoin
+
+  // 🧠 Cas 1 : premier t-shirt (index 0) → ignorer zone gauche transparente
+  if (index === 0 && x < limiteGauche && alpha <= 1) {
     img.style.cursor = "default";
-  //  console.log(`📜 zone transparent handleMouseMove`);
-   // showNextTshirt(img);
-   hoverEffect(e);
+    return;
+  }
+
+  // 🧠 Cas 2 : dernier t-shirt (index 9) → ignorer zone droite transparente
+  if (index === 9 && x > limiteDroite && alpha <= 1) {
+    img.style.cursor = "default";
+    return;
+  }
+
+  // ✅ Comportement normal
+  if (alpha > 1) {
+    img.style.cursor = "pointer";
+    hoverEffect(e);
+  } else {
+    img.style.cursor = "default";
+    hoverEffect(e);
   }
 }
 
 
-
-// Effet au survol 
+// 🎨 Effet au survol 
 function hoverEffect(event) {
-
-  var index = 0;
-
+  let index = 0;
   const img = event.currentTarget;
 
   if (!imageCanvases.has(img)) {
@@ -1329,45 +1337,46 @@ function hoverEffect(event) {
 
   const x = (event.clientX - rect.left) * scaleX;
   const y = (event.clientY - rect.top) * scaleY;
-
   const pixel = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1).data;
   const alpha = pixel[3];
 
-//console.log(`🖱️ ${alpha} `);
+  index = Array.from(tshirts).indexOf(event.target);
 
-  if (alpha > 1) {
-    // Zone visible → reste sur ce t-shirt
-    img.style.cursor = "pointer";
+  const limiteGauche = canvas.width * 0.4;
+  const limiteDroite = canvas.width * 0.6;
 
-     index = Array.from(tshirts).indexOf(event.target);
-  //  console.log(`🖱️ Survol principal détecté sur ${event.target.className} - Index: ${index}`);
-
-
-  } else {
-    // Zone transparente → passer au suivant
+  // 🧠 Cas 1 : t-shirt 1 → ignorer la zone gauche transparente
+  if (index === 0 && x < limiteGauche && alpha <= 1) {
     img.style.cursor = "default";
- //   console.log(`📜 zone transparent`);
-   // showNextTshirt(img);
-
-    index = Array.from(tshirts).indexOf(event.target) + 1;
-  //  console.log(`🖱️ Survol arrière détecté sur ${event.target.className} - Index: ${index}`);
-
-
+    return;
   }
 
+  // 🧠 Cas 2 : t-shirt 10 → ignorer la zone droite transparente
+  if (index === 9 && x > limiteDroite && alpha <= 1) {
+    img.style.cursor = "default";
+    return;
+  }
 
-    tshirts.forEach((other, i) => {
-        if (i > index) {
-            other.style.transform = `translateX(0px)`;
-            other.style.opacity = "0.5";
-        } else if (i === index) {
-            other.style.transform = "translateX(7%)";
-            other.style.opacity = "1";
-        } else {
-            other.style.transform = "translateX(-20%)";
-            other.style.opacity = "0.5";
-        }
-    });
+  // ✅ Comportement normal
+  if (alpha > 1) {
+    img.style.cursor = "pointer";
+  } else {
+    img.style.cursor = "default";
+    index = Array.from(tshirts).indexOf(event.target) + 1;
+  }
+
+  tshirts.forEach((other, i) => {
+    if (i > index) {
+      other.style.transform = `translateX(0px)`;
+      other.style.opacity = "0.5";
+    } else if (i === index) {
+      other.style.transform = "translateX(7%)";
+      other.style.opacity = "1";
+    } else {
+      other.style.transform = "translateX(-20%)";
+      other.style.opacity = "0.5";
+    }
+  });
 }
 
 
