@@ -3581,3 +3581,42 @@ document.addEventListener('touchend', (event) => {
   }
 });
 
+
+
+
+/// BOUTON REMONTE PAGE
+
+ const scrollBtn = document.getElementById("scrollTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add("show");
+    } else {
+      scrollBtn.classList.remove("show");
+    }
+  });
+
+  scrollBtn.addEventListener("click", () => {
+    scrollToTop(400); // durée du scroll en ms
+  });
+
+  function scrollToTop(duration) {
+    const start = window.scrollY;
+    const startTime = performance.now();
+
+    function animate(time) {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      window.scrollTo(0, start * (1 - ease));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+  
+///---------------------------------------------------

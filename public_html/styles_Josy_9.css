@@ -48,6 +48,40 @@ body {
        overflow-x: hidden; /* ! important;*/
 } 
 
+ /* Flèche uniquement, arrondie et douce */
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  #scrollTopBtn.show {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  #scrollTopBtn svg {
+    width: 40px;
+    height: 40px;
+    fill: #a702ee; /* couleur sombre */
+    stroke: #a702ee;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.3s ease, fill 0.3s ease;
+  }
+
+  #scrollTopBtn:hover svg {
+    transform: translateY(-5px);
+    fill: #9400D3; /* couleur hover */
+    stroke: #9400D3;
+  }
+
 /** {
   outline: 1px solid red;
 }*/
