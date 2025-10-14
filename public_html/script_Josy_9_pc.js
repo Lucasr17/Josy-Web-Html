@@ -2511,6 +2511,11 @@ function ToBoutique() {
 window.location.href = 'https://josyte.wixstudio.io/josys/category/all-products';
 }
 
+function ToPersonnalisation() {
+   console.log("clicked");
+window.location.href = 'https://josy2.fly.dev/test';
+}
+
 const openPopupButton = document.getElementById("open-popup_Jeu");
 const popup = document.getElementById("popup_Jeu");
 const closePopupButton = document.getElementById("close-popup_Jeu");

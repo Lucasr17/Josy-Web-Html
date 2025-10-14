@@ -991,6 +991,46 @@ z-index: 12;
   }
 
 
+.bouton_testmoi_pc {
+    z-index: 10006;
+    position: fixed;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 1px;
+    margin: 13px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--Color_2);
+    border: 0px solid var(--Color_2);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transform: translate(0%, 0%);
+    opacity: 1;
+    top: 5px;
+    right: 50vw;
+    pointer-events: auto;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: calc(20px);
+    transition: all 0.1s ease-in-out;
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    overflow: hidden;
+    min-width: 35px; /* Largeur initiale minimale */
+    padding-left: 9px; /* Améliore la détection du survol */
+    padding-right: 8.5px;
+    transform: translateX(50%);
+}
+
+/* Contenu initial 🎁 */
+.bouton_testmoi_pc::before {
+    content: "👚 Testez JOSY ! 👕";
+    display: inline-block;
+}
+
+.bouton_testmoi_pc:hover {
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+background: rgba(0, 0, 0, 0.6);
+}
+
   .bouton_jeu_pc {
     z-index: 10006;
     position: fixed;
