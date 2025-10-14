@@ -70,13 +70,8 @@
       background-color: var(--Color_3);
     }
 
-    .preview .left {
-      left: 10px;
-    }
-
-    .preview .right {
-      right: 10px;
-    }
+    .preview .left { left: 10px; }
+    .preview .right { right: 10px; }
 
     .options {
       display: flex;
@@ -107,9 +102,7 @@
       transition: 0.3s;
     }
 
-    select:hover {
-      transform: scale(1.02);
-    }
+    select:hover { transform: scale(1.02); }
 
     .color-options {
       display: flex;
@@ -135,6 +128,10 @@
       border-color: var(--Color_3);
       transform: scale(1.15);
     }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -142,21 +139,24 @@
   <div class="container">
     <div class="preview">
       <button class="left">‹</button>
-      <img id="productImage" src="Image/Casquette_Josy_mot/Logo_JOSYnedit/classic-dad-hat-black-front.png" alt="Casquette JOSY">
+      <img id="productImage" src="Image/Casquette_Josy_mot/Logo_JOSYnedit/classic-dad-hat-black-right-side.png" alt="Casquette JOSY">
       <button class="right">›</button>
     </div>
 
     <div class="options">
-      <!-- Couleur -->
+      <!-- Couleur produit -->
       <div class="option">
         <label>Couleur du produit</label>
-        <div class="color-options">
+        <div class="color-options" id="productColors">
           <div class="color-dot active" data-color="black" style="background:#202020"></div>
           <div class="color-dot" data-color="dark-grey" style="background:#4a4a4a"></div>
+          <div class="color-dot" data-color="navy" style="background:#000948"></div>
           <div class="color-dot" data-color="stone" style="background:#b8a896"></div>
           <div class="color-dot" data-color="pink" style="background:#FF69B4"></div>
-           <div class="color-dot" data-color="white" style="background:#ffffff"></div>
-            <div class="color-dot" data-color="light_blue" style="background:#59bffa"></div>
+          <div class="color-dot" data-color="white" style="background:#ffffff"></div>
+          <div class="color-dot" data-color="light-blue" style="background:#59bffa"></div>
+          <div class="color-dot" data-color="cranberry" style="background:#b33232"></div>
+          <div class="color-dot" data-color="spruce" style="background:#115b27"></div>          
         </div>
       </div>
 
@@ -170,170 +170,239 @@
       </div>
 
       <!-- Mot -->
-      <div class="option">
+      <div class="option" id="motOption">
         <label>Mot JOSY</label>
         <select id="motSelect">
           <option value="JOSYnedit">JOSYnedit</option>
           <option value="JOSYdee">JOSYdee</option>
           <option value="JOSYdiot">JOSYdiot</option>
-          <option value="JOSYdéal">JOSYdéal</option>
+          <option value="JOSYdeal">JOSYdéal</option>
           <option value="JOSYgloo">JOSYgloo</option>
         </select>
+      </div>
+
+      <!-- Couleurs Signature (cachées au départ) -->
+      <div class="option hidden" id="signatureColors">
+        <label>Couleur de la Signature</label>
+        <div class="color-options">
+          <div class="color-dot active" data-signature="black" style="background:#202020"></div>
+          <div class="color-dot" data-signature="blue" style="background:#255ed0"></div>
+          <div class="color-dot" data-signature="pink" style="background:#FF69B4"></div>
+        </div>
       </div>
     </div>
   </div>
 
-
-
   <script>
-
   const typeSelect = document.getElementById("styleSelect");
   const motSelect = document.getElementById("motSelect");
-
-  typeSelect.addEventListener("change", () => {
-    if (typeSelect.value === "signature") {
-      motSelect.disabled = true; // désactive le sélecteur
-      motSelect.style.opacity = "0.5"; // effet grisé visuel
-      motSelect.style.pointerEvents = "none"; // empêche tout clic
-    } else {
-      motSelect.disabled = false;
-      motSelect.style.opacity = "1";
-      motSelect.style.pointerEvents = "auto";
-    }
-  });
-
+  const motOption = document.getElementById("motOption");
+  const productImage = document.getElementById("productImage");
+  const leftBtn = document.querySelector(".left");
+  const rightBtn = document.querySelector(".right");
+  const colorDots = document.querySelectorAll("#productColors .color-dot");
+  const signatureColors = document.getElementById("signatureColors");
+  const signatureDots = signatureColors.querySelectorAll(".color-dot");
 
     const baseImages = {
       black: [
+        "classic-dad-hat-black-back.png",
+        "classic-dad-hat-black-right-side.png",
+        "classic-dad-hat-black-right-front.png",
         "classic-dad-hat-black-front.png",
         "classic-dad-hat-black-left-front.png",
         "classic-dad-hat-black-left-side.png",
-        "classic-dad-hat-black-left.png",
-        "classic-dad-hat-black-right.png",
-        "classic-dad-hat-black-right-front.png",
-        "classic-dad-hat-black-right-side.png",
-        "classic-dad-hat-black-right-back.png",
-        "classic-dad-hat-black-back.png",
         "classic-dad-hat-black-product-details.png"
       ],
       "dark-grey": [
+        "classic-dad-hat-dark-grey-back.png",
+        "classic-dad-hat-dark-grey-right-side.png",
+        "classic-dad-hat-dark-grey-right-front.png",
         "classic-dad-hat-dark-grey-front.png",
         "classic-dad-hat-dark-grey-left-front.png",
         "classic-dad-hat-dark-grey-left-side.png",
-        "classic-dad-hat-dark-grey-left.png",
-        "classic-dad-hat-dark-grey-right.png",
-        "classic-dad-hat-dark-grey-right-front.png",
-        "classic-dad-hat-dark-grey-right-side.png",
-        "classic-dad-hat-dark-grey-right-back.png",
-        "classic-dad-hat-dark-grey-back.png",
         "classic-dad-hat-dark-grey-product-details.png"
       ],
       stone: [
+        "classic-dad-hat-stone-back.png",
+        "classic-dad-hat-stone-right-side.png",
+        "classic-dad-hat-stone-right-front.png",
         "classic-dad-hat-stone-front.png",
         "classic-dad-hat-stone-left-front.png",
         "classic-dad-hat-stone-left-side.png",
-        "classic-dad-hat-stone-left.png",
-        "classic-dad-hat-stone-right.png",
-        "classic-dad-hat-stone-right-front.png",
-        "classic-dad-hat-stone-right-side.png",
-        "classic-dad-hat-stone-right-back.png",
-        "classic-dad-hat-stone-back.png",
         "classic-dad-hat-stone-product-details.png"
       ],
-      light_blue: [
-        "classic-dad-hat-light-blue-front.png",
-        "classic-dad-hat-light-blue-left-front.png",
-        "classic-dad-hat-light-blue-left-side.png",
-        "classic-dad-hat-light-blue-left.png",
-        "classic-dad-hat-light-blue-right.png",
-        "classic-dad-hat-light-blue-right-front.png",
-        "classic-dad-hat-light-blue-right-side.png",
-        "classic-dad-hat-stone-right-back.png",
-        "classic-dad-hat-light-blue-back.png",
-        "classic-dad-hat-light-blue-product-details.png"
-      ],
-      white: [
-        "classic-dad-hat-white-front.png",
-        "classic-dad-hat-white-left-front.png",
-        "classic-dad-hat-white-left-side.png",
-        "classic-dad-hat-white-left.png",
-        "classic-dad-hat-white-right.png",
-        "classic-dad-hat-white-right-front.png",
-        "classic-dad-hat-white-right-side.png",
-        "classic-dad-hat-white-right-back.png",
-        "classic-dad-hat-white-back.png",
-        "classic-dad-hat-white-product-details.png"
+      navy: [
+        "classic-dad-hat-navy-back.png",
+        "classic-dad-hat-navy-right-side.png",
+        "classic-dad-hat-navy-right-front.png",
+        "classic-dad-hat-navy-front.png",
+        "classic-dad-hat-navy-left-front.png",
+        "classic-dad-hat-navy-left-side.png",
+        "classic-dad-hat-navy-product-details.png"
       ],
       pink: [
+        "classic-dad-hat-pink-back.png",
+        "classic-dad-hat-pink-right-side.png",
+        "classic-dad-hat-pink-right-front.png",
         "classic-dad-hat-pink-front.png",
         "classic-dad-hat-pink-left-front.png",
         "classic-dad-hat-pink-left-side.png",
-        "classic-dad-hat-pink-left.png",
-        "classic-dad-hat-pink-right.png",
-        "classic-dad-hat-pink-right-front.png",
-        "classic-dad-hat-pink-right-side.png",
-        "classic-dad-hat-pink-right-back.png",
-        "classic-dad-hat-pink-back.png",
         "classic-dad-hat-pink-product-details.png"
       ],
-      purple: ["https://via.placeholder.com/350x350/9400D3/FFFFFF?text=Purple"],
+      white: [
+        "classic-dad-hat-white-back.png",
+        "classic-dad-hat-white-right-side.png",
+        "classic-dad-hat-white-right-front.png",
+        "classic-dad-hat-white-front.png",
+        "classic-dad-hat-white-left-front.png",
+        "classic-dad-hat-white-left-side.png",
+        "classic-dad-hat-white-product-details.png"
+      ],
+      "light-blue": [
+        "classic-dad-hat-light-blue-back.png",
+        "classic-dad-hat-light-blue-right-side.png",
+        "classic-dad-hat-light-blue-right-front.png",
+        "classic-dad-hat-light-blue-front.png",
+        "classic-dad-hat-light-blue-left-front.png",
+        "classic-dad-hat-light-blue-left-side.png",
+        "classic-dad-hat-light-blue-product-details.png"
+      ],
+      cranberry: [
+        "classic-dad-hat-cranberry-back.png",
+        "classic-dad-hat-cranberry-right-side.png",
+        "classic-dad-hat-cranberry-right-front.png",
+        "classic-dad-hat-cranberry-front.png",
+        "classic-dad-hat-cranberry-left-front.png",
+        "classic-dad-hat-cranberry-left-side.png",
+        "classic-dad-hat-cranberry-product-details.png"
+      ],
+      spruce: [
+        "classic-dad-hat-spruce-back.png",
+        "classic-dad-hat-spruce-right-side.png",
+        "classic-dad-hat-spruce-right-front.png",
+        "classic-dad-hat-spruce-front.png",
+        "classic-dad-hat-spruce-left-front.png",
+        "classic-dad-hat-spruce-left-side.png",
+        "classic-dad-hat-spruce-product-details.png"
+      ]
     };
 
-    let currentColor = "black";
-    let currentStyle = "logo";
-    let currentIndex = 0;
+  let currentColor = "black";
+  let currentStyle = "logo";
+  let currentIndex = 3;
+  let mot = motSelect.value;
+  let Color_Josy = "black";
 
-    const productImage = document.getElementById("productImage");
-    const leftBtn = document.querySelector(".left");
-    const rightBtn = document.querySelector(".right");
-    const colorDots = document.querySelectorAll(".color-dot");
-    const styleSelect = document.getElementById("styleSelect");
+  function getImagePath(filename) {
+    if (currentStyle === "signature") {
+      return `Image/Casquette_Josy_mot/signature_${Color_Josy}/josy_${currentColor}/${filename}`;
+    } else {
+      return `Image/Casquette_Josy_mot/Logo_${mot}/${filename}`;
+    }
+  }
 
-    var mot = motSelect.value;
+  function updateImage() {
+    const images = baseImages[currentColor];
+    if (!images) return;
+    const file = images[currentIndex];
+    const fullPath = getImagePath(file);
+    productImage.style.opacity = 0;
+    setTimeout(() => {
+      productImage.src = fullPath;
+      productImage.style.opacity = 1;
+    }, 10);
+  }
 
-    function getImagePath(filename) {
+  // Vérifie si un dossier existe
+  async function folderExists(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD" });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  // Met à jour les couleurs cliquables
+  async function checkAvailableColors() {
+    for (const dot of colorDots) {
+      const color = dot.dataset.color;
+      let path;
       if (currentStyle === "signature") {
-        return `Image/Casquette_Josy_mot/josy_${currentColor}/${filename}`;
+        path = `Image/Casquette_Josy_mot/signature_${Color_Josy}/josy_${color}/`;
       } else {
-        return `Image/Casquette_Josy_mot/Logo_${mot}/${filename}`;
+        path = `Image/Casquette_Josy_mot/Logo_${mot}/classic-dad-hat-${color}-front.png`;
+      }
+
+      const exists = await folderExists(path);
+      if (exists) {
+        dot.style.opacity = "1";
+        dot.style.pointerEvents = "auto";
+        dot.style.filter = "none";
+      } else {
+        dot.style.opacity = "0.2";
+        dot.style.pointerEvents = "none";
+        dot.style.filter = "grayscale(100%)";
       }
     }
+  }
 
-    function updateImage() {
-      const images = baseImages[currentColor];
-      if (!images) return;
-      const file = images[currentIndex];
-      const fullPath = getImagePath(file);
+  leftBtn.addEventListener("click", () => {
+    const images = baseImages[currentColor];
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateImage();
+  });
 
-      productImage.style.opacity = 0;
-      setTimeout(() => {
-        productImage.src = fullPath;
-        productImage.style.opacity = 1;
-      }, 200);
+  rightBtn.addEventListener("click", () => {
+    const images = baseImages[currentColor];
+    currentIndex = (currentIndex + 1) % images.length;
+    updateImage();
+  });
+
+  colorDots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      if (dot.style.pointerEvents === "none") return;
+      document.querySelector("#productColors .color-dot.active").classList.remove("active");
+      dot.classList.add("active");
+      currentColor = dot.dataset.color;
+      updateImage();
+    });
+  });
+
+  signatureDots.forEach(dot => {
+    dot.addEventListener("click", async () => {
+      signatureColors.querySelector(".color-dot.active").classList.remove("active");
+      dot.classList.add("active");
+      Color_Josy = dot.dataset.signature;
+      await checkAvailableColors();
+      updateImage();
+    });
+  });
+
+  typeSelect.addEventListener("change", async () => {
+    currentStyle = typeSelect.value;
+    if (currentStyle === "signature") {
+      motOption.classList.add("hidden");
+      signatureColors.classList.remove("hidden");
+    } else {
+      motOption.classList.remove("hidden");
+      signatureColors.classList.add("hidden");
     }
+    await checkAvailableColors();
+    updateImage();
+  });
 
-    leftBtn.addEventListener("click", () => {
-      const images = baseImages[currentColor];
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateImage();
-    });
+  motSelect.addEventListener("change", async () => {
+    mot = motSelect.value;
+    await checkAvailableColors();
+    updateImage();
+  });
 
-    rightBtn.addEventListener("click", () => {
-      const images = baseImages[currentColor];
-      currentIndex = (currentIndex + 1) % images.length;
-      updateImage();
-    });
-
-    colorDots.forEach(dot => {
-      dot.addEventListener("click", () => {
-        document.querySelector(".color-dot.active").classList.remove("active");
-        dot.classList.add("active");
-        currentColor = dot.dataset.color;
-        currentIndex = 0;
-        updateImage();
-      });
-    });
-  </script>
+  // Initialisation
+  checkAvailableColors();
+  updateImage();
+</script>
 
 </body>
 </html>

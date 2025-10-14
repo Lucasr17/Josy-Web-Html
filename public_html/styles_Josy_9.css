@@ -1421,7 +1421,7 @@ body2 {
 .carouselcontainer {
     position: absolute;
     width: 100vw;
-    height: 60%;
+    height: 100%;
     opacity: 1;
     z-index: 9996;
 }

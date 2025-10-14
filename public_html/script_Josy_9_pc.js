@@ -876,7 +876,7 @@ scrollTrigger: {
     start: `bottom+=${offset_debut_cintre}px top`,   // ✅ utilisation dynamique
     endTrigger: ".section_histoire:nth-child(5)",
     end: `bottom+=${endOffset_debut_cintre}px top`,  // ✅ offset + 100
-scrub: 0,
+scrub: true,
 markers: false
 }
 });
@@ -3597,7 +3597,7 @@ document.addEventListener('touchend', (event) => {
   });
 
   scrollBtn.addEventListener("click", () => {
-    scrollToTop(400); // durée du scroll en ms
+    scrollToTop(500); // durée du scroll en ms
   });
 
   function scrollToTop(duration) {
@@ -3618,5 +3618,5 @@ document.addEventListener('touchend', (event) => {
 
     requestAnimationFrame(animate);
   }
-  
+
 ///---------------------------------------------------
