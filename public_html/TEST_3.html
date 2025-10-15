@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personnalisation JOSY</title>
+  <style>
+    :root {
+      --Color_1: #202020;
+      --Color_2: #EAEAEA;
+      --Color_3: #9400D3;
+      --transition-speed: 0.5s;
+    }
+
+    body {
+      background-color: var(--Color_1);
+      color: var(--Color_2);
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+.container {
+  display: flex;
+  gap: 20px;
+ /* max-width: 1200px;*/
+  padding: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.box {
+  background-color: #2a2a2a;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  flex: 1 1 30vw; /* base flex grow/shrink/basis */
+ /* max-width: 500px;*/
+  height: 70vh;
+  display: flex;
+  align-items: center;   /* centre verticalement l’image */
+  justify-content: center; /* centre horizontalement l’image par défaut */
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  transition: flex 0.5s ease, transform 0.5s ease;
+}
+
+.box.active {
+  transition: all 4.5s ease, flex 0.5s ease;
+  flex: 2 1 80vw; /* la box active devient plus large */
+}
+
+.box img {
+  height: 90%;
+  width: auto;
+  object-fit: contain;
+  right: 10px;
+  transition: all 0.7s ease;
+  filter: blur(6px);
+}
+
+#capBox.active img {
+  margin-left: 0;       /* image collée à gauche */
+  margin-right: auto;
+  filter: blur(0px);
+}
+
+#tshirtBox.active img {
+  margin-left: auto;
+  margin-right: 35px;      /* image collée à droite */
+  filter: blur(0px);
+}
+
+.box img:hover {
+    filter: blur(0px);
+}
+
+.box:not(.active) {
+  width: 90vw;
+  transition: all 0.5s ease, flex 0.5s ease;
+}
+
+.box:not(.active) img {
+  transition: all 0.5s ease, flex 0.5s ease;
+  height: 70%;
+  width: auto;
+}
+
+
+.box.active {
+  width: 20vw;
+}
+
+
+.leftBtn, .rightBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(234,234,234,0.1);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.6em;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.3s;
+  display: none; /* caché par défaut */
+}
+
+.leftBtn:hover, .rightBtn:hover {
+  background-color: #9400D3;
+}
+
+.box.active .leftBtn,
+.box.active .rightBtn {
+  display: block; /* affiché quand la box est active */
+}
+
+.capActive .leftBtn { left: 5px; }
+.capActive .rightBtn {
+  top: 40%;
+  rotate: 180deg; 
+  left: 405px; 
+}
+
+.tshirtActive .leftBtn { 
+  top: 40%;
+  right: 5px; 
+  rotate: 180deg; 
+}
+.tshirtActive .rightBtn {
+  right: 405px; 
+}
+
+
+    .options {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .options.active {
+      display: flex;
+    }
+
+    label {
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    select {
+      background-color: var(--Color_2);
+      color: var(--Color_1);
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--Color_2);
+      transition: 0.3s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.2);
+      border-color: var(--Color_3);
+    }
+
+    .color-dot.active {
+      border-color: var(--Color_3);
+      transform: scale(1.15);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .box.active, .box {
+        flex: unset;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Box T-shirt -->
+  <div class="box" id="tshirtBox">
+    <div class="options" id="tshirtOptions">
+      <label>Couleur du T-shirt</label>
+      <div class="color-options" id="tshirtColors">
+        <div class="color-dot active" style="background:#202020" data-color="black"></div>
+        <div class="color-dot" style="background:#ffffff" data-color="white"></div>
+        <div class="color-dot" style="background:#FF69B4" data-color="pink"></div>
+      </div>
+
+
+      <!-- Style -->
+      <label>Style</label>
+      <select id="styleSelect_tshirt">
+        <option value="signature">Signature JOSY</option>
+        <option value="signature">Grand JOSYmot</option>
+        <option value="signature">Petit JOSYmot</option>
+        <option value="logo">Logo JOSY</option>
+      </select>
+
+            <!-- Mot -->
+      <div id="motOption_tshirt">
+        <label>Mot JOSY : </label>
+        <select id="motSelect">
+          <option value="JOSYnédit">JOSYnédit</option>
+          <option value="JOSYdee">JOSYdee</option>
+          <option value="JOSYdiot">JOSYdiot</option>
+          <option value="JOSYdeal">JOSYdéal</option>
+          <option value="JOSYgloo">JOSYgloo</option>
+        </select>
+      </div>
+
+    </div>
+    <button class="leftBtn">‹</button>
+    <img src="Image/T_shirts/T_shirt_1.png" alt="T-shirt JOSY" id="tshirtImage">
+    <button class="rightBtn">‹</button>
+  </div>
+
+  <!-- Box Casquette -->
+  <div class="box active" id="capBox">
+    <button class="leftBtn">‹</button>
+    <img id="productImage" src="Image/Casquette_Josy_mot/Logo_JOSYdiot/classic-dad-hat-black-right-side.png" alt="Casquette JOSY">
+   <button class="rightBtn">‹</button>
+    <div class="options active" id="capOptions">
+      <!-- Couleur produit -->
+      <label>Couleur du produit</label>
+      <div class="color-options" id="productColors">
+        <div class="color-dot active" data-color="black" style="background:#202020"></div>
+        <div class="color-dot" data-color="dark-grey" style="background:#4a4a4a"></div>
+        <div class="color-dot" data-color="navy" style="background:#000948"></div>
+        <div class="color-dot" data-color="stone" style="background:#b8a896"></div>
+        <div class="color-dot" data-color="pink" style="background:#FF69B4"></div>
+        <div class="color-dot" data-color="white" style="background:#ffffff"></div>
+        <div class="color-dot" data-color="light-blue" style="background:#59bffa"></div>
+        <div class="color-dot" data-color="cranberry" style="background:#b33232"></div>
+        <div class="color-dot" data-color="spruce" style="background:#115b27"></div>
+      </div>
+
+      <!-- Style -->
+      <label>Style</label>
+      <select id="styleSelect">
+        <option value="logo">Logo JOSY</option>
+        <option value="signature">Signature JOSY</option>
+      </select>
+
+      <!-- Mot -->
+      <div id="motOption">
+        <label>Mot JOSY : </label>
+        <select id="motSelect">
+          <option value="JOSYnédit">JOSYnédit</option>
+          <option value="JOSYdee">JOSYdee</option>
+          <option value="JOSYdiot">JOSYdiot</option>
+          <option value="JOSYdeal">JOSYdéal</option>
+          <option value="JOSYgloo">JOSYgloo</option>
+        </select>
+      </div>
+
+      <!-- Couleurs Signature -->
+      <div class="option hidden" id="signatureColors">
+        <label>Couleur de la Signature</label>
+        <div class="color-options">
+          <div class="color-dot active" data-signature="black" style="background:#202020"></div>
+          <div class="color-dot" data-signature="blue" style="background:#255ed0"></div>
+          <div class="color-dot" data-signature="pink" style="background:#FF69B4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Gestion du switch box
+const capBox = document.getElementById("capBox");
+const tshirtBox = document.getElementById("tshirtBox");
+const capImage = document.getElementById("capImage");
+const tshirtImage = document.getElementById("tshirtImage");
+
+let currentCapIndex = 3; // index casquette
+let currentTshirtIndex = 0; // index t-shirt
+
+function activateBox(boxType) {
+  capBox.classList.remove("active", "capActive", "tshirtActive");
+  tshirtBox.classList.remove("active", "capActive", "tshirtActive");
+
+  if(boxType === "cap") {
+    capBox.classList.add("active", "capActive");
+  } else if(boxType === "tshirt") {
+    tshirtBox.classList.add("active", "tshirtActive");
+  }
+}
+
+
+activateBox("cap");
+
+// Clic sur la box
+capBox.addEventListener("click", () => activateBox("cap"));
+tshirtBox.addEventListener("click", () => activateBox("tshirt"));
+
+
+  const tshirtOptions = document.getElementById("tshirtOptions");
+  const capOptions = document.getElementById("capOptions");
+  
+
+function toggleActive(box) {
+  if(box === tshirtBox) {
+    tshirtBox.classList.add("active");
+    capBox.classList.remove("active");
+    tshirtOptions.classList.add("active");
+    capOptions.classList.remove("active");
+  } else {
+    capBox.classList.add("active");
+    tshirtBox.classList.remove("active");
+    capOptions.classList.add("active");
+    tshirtOptions.classList.remove("active");
+  }
+}
+
+
+
+  tshirtBox.addEventListener("click", () => toggleActive(tshirtBox));
+  capBox.addEventListener("click", () => toggleActive(capBox));
+
+  // Personnalisation T-shirt simple
+  const tshirtColors = document.querySelectorAll("#tshirtColors .color-dot");
+
+  tshirtColors.forEach(dot => {
+    dot.addEventListener("click", () => {
+      document.querySelector("#tshirtColors .color-dot.active").classList.remove("active");
+      dot.classList.add("active");
+      const color = dot.dataset.color;
+      tshirtImage.src = `Image/T_shirts/T_shirt_1.png`; // Remplacer par logique de couleurs si plusieurs images
+    });
+  });
+
+  // -------------------
+  // Personnalisation Casquette (Ton code complet fusionné)
+  // -------------------
+  const typeSelect = document.getElementById("styleSelect");
+  const motSelect = document.getElementById("motSelect");
+  const motOption = document.getElementById("motOption");
+  const productImage = document.getElementById("productImage");
+  const colorDots = document.querySelectorAll("#productColors .color-dot");
+  const signatureColors = document.getElementById("signatureColors");
+  const signatureDots = signatureColors.querySelectorAll(".color-dot");
+
+  const baseImages = {
+    black: ["classic-dad-hat-black-back.png","classic-dad-hat-black-right-side.png","classic-dad-hat-black-right-front.png","classic-dad-hat-black-front.png","classic-dad-hat-black-left-front.png","classic-dad-hat-black-left-side.png","classic-dad-hat-black-product-details.png"],
+    "dark-grey": ["classic-dad-hat-dark-grey-back.webp","classic-dad-hat-dark-grey-right-side.webp","classic-dad-hat-dark-grey-right-front.webp","classic-dad-hat-dark-grey-front.webp","classic-dad-hat-dark-grey-left-front.webp","classic-dad-hat-dark-grey-left-side.webp","classic-dad-hat-dark-grey-product-details.webp"],
+    navy: ["classic-dad-hat-navy-back.png","classic-dad-hat-navy-right-side.png","classic-dad-hat-navy-right-front.png","classic-dad-hat-navy-front.png","classic-dad-hat-navy-left-front.png","classic-dad-hat-navy-left-side.png","classic-dad-hat-navy-product-details.png"],
+    stone: ["classic-dad-hat-stone-back.png","classic-dad-hat-stone-right-side.png","classic-dad-hat-stone-right-front.png","classic-dad-hat-stone-front.png","classic-dad-hat-stone-left-front.png","classic-dad-hat-stone-left-side.png","classic-dad-hat-stone-product-details.png"],
+    pink: ["classic-dad-hat-pink-back.png","classic-dad-hat-pink-right-side.png","classic-dad-hat-pink-right-front.png","classic-dad-hat-pink-front.png","classic-dad-hat-pink-left-front.png","classic-dad-hat-pink-left-side.png","classic-dad-hat-pink-product-details.png"],
+    white: ["classic-dad-hat-white-back.png","classic-dad-hat-white-right-side.png","classic-dad-hat-white-right-front.png","classic-dad-hat-white-front.png","classic-dad-hat-white-left-front.png","classic-dad-hat-white-left-side.png","classic-dad-hat-white-product-details.png"],
+    "light-blue": ["classic-dad-hat-light-blue-back.png","classic-dad-hat-light-blue-right-side.png","classic-dad-hat-light-blue-right-front.png","classic-dad-hat-light-blue-front.png","classic-dad-hat-light-blue-left-front.png","classic-dad-hat-light-blue-left-side.png","classic-dad-hat-light-blue-product-details.png"],
+    cranberry: ["classic-dad-hat-cranberry-back.png","classic-dad-hat-cranberry-right-side.png","classic-dad-hat-cranberry-right-front.png","classic-dad-hat-cranberry-front.png","classic-dad-hat-cranberry-left-front.png","classic-dad-hat-cranberry-left-side.png","classic-dad-hat-cranberry-product-details.png"],
+    spruce: ["classic-dad-hat-spruce-back.png","classic-dad-hat-spruce-right-side.png","classic-dad-hat-spruce-right-front.png","classic-dad-hat-spruce-front.png","classic-dad-hat-spruce-left-front.png","classic-dad-hat-spruce-left-side.png","classic-dad-hat-spruce-product-details.png"]
+  };
+
+  let currentColor = "black";
+  let currentStyle = "logo";
+  let currentIndex = 3;
+  let mot = motSelect.value;
+  let Color_Josy = "black";
+
+  function getImagePath(filename) {
+    if (currentStyle === "signature") {
+      return `Image/Casquette_Josy_mot/signature_${Color_Josy}/josy_${currentColor}/${filename}`;
+    } else {
+      return `Image/Casquette_Josy_mot/Logo_${mot}/${filename}`;
+    }
+  }
+
+  // boutons casquette
+capBox.querySelector(".leftBtn").addEventListener("click", () => {
+  const images = baseImages[currentColor];
+  currentCapIndex = (currentCapIndex - 1 + images.length) % images.length;
+  //capImage.src = getImagePath(images[currentCapIndex]);
+  updateImage_casquette();
+});
+
+capBox.querySelector(".rightBtn").addEventListener("click", () => {
+  const images = baseImages[currentColor];
+  currentCapIndex = (currentCapIndex + 1) % images.length;
+  //capImage.src = getImagePath(images[currentCapIndex]);
+  updateImage_casquette();
+});
+
+// boutons t-shirt (si tu as plusieurs images)
+tshirtBox.querySelector(".leftBtn").addEventListener("click", () => {
+  currentTshirtIndex = (currentTshirtIndex - 1 + tshirtImages.length) % tshirtImages.length;
+ // tshirtImage.src = tshirtImages[currentTshirtIndex];
+  updateImage_tshirt();
+});
+
+tshirtBox.querySelector(".rightBtn").addEventListener("click", () => {
+  currentTshirtIndex = (currentTshirtIndex + 1) % tshirtImages.length;
+  //tshirtImage.src = tshirtImages[currentTshirtIndex];
+  updateImage_tshirt();
+});
+
+  function updateImage_casquette() {
+    const images = baseImages[currentColor];
+    if (!images) return;
+    const file = images[currentCapIndex];
+    const fullPath = getImagePath(file);
+    productImage.style.opacity = 0;
+    setTimeout(() => {
+      productImage.src = fullPath;
+      productImage.style.opacity = 1;
+    }, 10);
+  }
+
+
+    function updateImage_tshirt() {
+    const images = baseImages[currentColor];
+    if (!images) return;
+    const file = images[currentTshirtIndex];
+    const fullPath = getImagePath(file);
+    productImage.style.opacity = 0;
+    setTimeout(() => {
+      productImage.src = fullPath;
+      productImage.style.opacity = 1;
+    }, 10);
+  }
+
+  async function folderExists(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD" });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  async function checkAvailableColors() {
+    for (const dot of colorDots) {
+      const color = dot.dataset.color;
+      let path;
+      if (currentStyle === "signature") {
+        path = `Image/Casquette_Josy_mot/signature_${Color_Josy}/josy_${color}/classic-dad-hat-${color}-front.png`;
+      } else {
+        path = `Image/Casquette_Josy_mot/Logo_${mot}/classic-dad-hat-${color}-front.png`;
+      }
+
+      const exists = await folderExists(path);
+      if (exists) {
+        dot.style.opacity = "1";
+        dot.style.pointerEvents = "auto";
+        dot.style.filter = "none";
+      } else {
+        if (currentColor == color) {
+          currentColor = "black";
+        }
+        dot.style.opacity = "0.2";
+        dot.style.pointerEvents = "none";
+        dot.style.filter = "grayscale(100%)";
+      }
+    }
+  }
+
+  colorDots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      if (dot.style.pointerEvents === "none") return;
+      document.querySelector("#productColors .color-dot.active").classList.remove("active");
+      dot.classList.add("active");
+      currentColor = dot.dataset.color;
+      updateImage_tshirt();
+      updateImage_casquette();
+    });
+  });
+
+  signatureDots.forEach(dot => {
+    dot.addEventListener("click", async () => {
+      signatureColors.querySelector(".color-dot.active").classList.remove("active");
+      dot.classList.add("active");
+      Color_Josy = dot.dataset.signature;
+      await checkAvailableColors();
+      updateImage_tshirt();
+      updateImage_casquette();
+    });
+  });
+
+  typeSelect.addEventListener("change", async () => {
+    currentStyle = typeSelect.value;
+    if (currentStyle === "signature") {
+      motOption.classList.add("hidden");
+      signatureColors.classList.remove("hidden");
+    } else {
+      motOption.classList.remove("hidden");
+      signatureColors.classList.add("hidden");
+    }
+    await checkAvailableColors();
+    updateImage_tshirt();
+    updateImage_casquette();
+  });
+
+  motSelect.addEventListener("change", async () => {
+    mot = motSelect.value;
+    await checkAvailableColors();
+    updateImage_tshirt();
+    updateImage_casquette();
+  });
+
+  // Initialisation
+  checkAvailableColors();
+  updateImage_tshirt();
+  updateImage_casquette();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personnalisation JOSY</title>
+  <style>
+    :root {
+      --Color_1: #202020;
+      --Color_2: #EAEAEA;
+      --Color_3: #9400D3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: var(--Color_1);
+      color: var(--Color_2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* 🔹 Conteneur général */
+    .product-select {
+      display: flex;
+      gap: 60px;
+      transition: all 0.6s ease;
+    }
+
+    /* 🔹 Style des cartes produit */
+    .product-card {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 25px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 40px rgba(148, 0, 211, 0.4);
+    }
+
+    .product-card img {
+      width: 80%;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.4s ease;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      filter: blur(5px);
+    }
+
+     .product-card img:hover {
+        filter: blur(0px);
+     }
+
+    .product-card h3 {
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    /* 🔹 Mode actif : carte agrandie */
+    .active-card {
+      position: fixed;
+      inset: 0;
+      background: var(--Color_1);
+      z-index: 10;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      gap: 60px;
+      transition: all 0.8s ease;
+      cursor: default;
+    }
+
+    .product-select.hide {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+    }
+
+    /* 🔹 Zone preview + options */
+    .preview {
+      position: relative;
+      width: 420px;
+      height: 380px;
+      border-radius: 20px;
+      background-color: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 220px;
+    }
+
+    label {
+      font-size: 1.1rem;
+    }
+
+    select {
+      background-color: var(--Color_2);
+      color: var(--Color_1);
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .color-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--Color_2);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.15);
+      border-color: var(--Color_3);
+    }
+
+    .color-dot.active {
+      border-color: var(--Color_3);
+    }
+
+    /* 🔹 Bouton retour */
+    .back-btn {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      background: none;
+      border: 2px solid var(--Color_2);
+      color: var(--Color_2);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--Color_3);
+      border-color: var(--Color_3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-select">
+    <div class="product-card" data-type="tshirt">
+      <img src="Image/T_shirts/T_shirt_1.png" alt="T-shirt JOSY">
+      <h3>Personnalise ton T-shirt</h3>
+    </div>
+
+    <div class="product-card" data-type="cap">
+      <img src="Image/Casquette_Josy_mot/Logo_JOSYdiot/classic-dad-hat-stone-right-front.png" alt="Casquette JOSY">
+      <h3>Personnalise ta Casquette</h3>
+    </div>
+  </div>
+
+  <!-- 🧢 Zone de personnalisation dynamique -->
+  <div id="activeArea"></div>
+
+  <script>
+    const cards = document.querySelectorAll('.product-card');
+    const productSelect = document.querySelector('.product-select');
+    const activeArea = document.getElementById('activeArea');
+
+    const colors = {
+      cap: ['#202020', '#4a4a4a', '#b8a896', '#ffffff'],
+      tshirt: ['#202020', '#9400D3', '#EAEAEA']
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const type = card.dataset.type;
+        const imgSrc = card.querySelector('img').src;
+
+        // Cache la sélection
+        productSelect.classList.add('hide');
+
+        // Crée la vue de personnalisation
+        activeArea.innerHTML = `
+          <div class="active-card">
+            <button class="back-btn">← Retour</button>
+            <div class="preview">
+              <img id="previewImg" src="${imgSrc}" alt="Preview ${type}">
+            </div>
+            <div class="options">
+              <div>
+                <label>Couleur</label>
+                <div class="color-options">
+                  ${colors[type].map(c => `<div class="color-dot" style="background:${c}" data-color="${c}"></div>`).join('')}
+                </div>
+              </div>
+              <div>
+                <label>Logo ou Signature</label>
+                <select id="typeSelect">
+                  <option value="logo">Logo</option>
+                  <option value="signature">Signature</option>
+                </select>
+              </div>
+              <div>
+                <label>JOSY mot</label>
+                <select id="josySelect">
+                  <option>JOSYdiot</option>
+                  <option>JOSYdéal</option>
+                  <option>JOSYdée</option>
+                  <option>JOSYgloo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Gestion couleur
+        document.querySelectorAll('.color-dot').forEach(dot => {
+          dot.addEventListener('click', () => {
+            document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+            const color = dot.dataset.color;
+            document.getElementById('previewImg').style.filter = `drop-shadow(0 0 0 ${color})`;
+          });
+        });
+
+        // Désactiver Josy mot si signature
+        const typeSelect = document.getElementById('typeSelect');
+        const josySelect = document.getElementById('josySelect');
+        typeSelect.addEventListener('change', () => {
+          josySelect.disabled = (typeSelect.value === 'signature');
+        });
+
+        // Bouton retour
+        document.querySelector('.back-btn').addEventListener('click', () => {
+          activeArea.innerHTML = '';
+          productSelect.classList.remove('hide');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
