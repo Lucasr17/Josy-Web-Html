@@ -241,79 +241,70 @@
 /*-----------------FORMAT TEL----------------------*/
 
 @media (max-width: 768px) {
-    body {
-      flex-direction: column;
-      align-items: stretch;
-      padding: 0;
-      min-height: auto;
-    }
-
-    .container {
-      flex-direction: column;
-      gap: 30px;
-      padding: 20px;
-    }
-
-    .box {
-      flex: none;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      background-color: #2a2a2a;
-      position: relative;
-    }
-
-    .box img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: contain;
-      filter: none !important;
-      transition: all 0.3s ease;
-    }
-
-    .box .options {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      padding: 15px;
-      box-sizing: border-box;
-      background-color: #1e1e1e;
-      border-top: 1px solid #444;
-    }
-
-    .box.active {
-      background-color: #2a2a2a;
-      transform: scale(1.01);
-      box-shadow: 0 0 10px rgba(148, 0, 211, 0.4);
-    }
-
-    .box.active .options {
-      display: flex;
-      animation: slideDown 0.5s ease forwards;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Désactiver les boutons sur mobile */
-    .leftBtn, .rightBtn {
-      display: none !important;
-    }
+  body {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: auto;
   }
+
+  .container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+  }
+
+  .box {
+    flex: none;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0s ease;
+    background-color: #2a2a2a;
+    position: relative;
+  }
+
+  .box img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    filter: none !important;
+    transition: all 0s ease;
+     pointer-events: none;
+  }
+
+  /* 🟣 Toujours montrer les options sur mobile */
+  .box .options {
+    display: flex !important;
+    flex-direction: column;
+    width: auto;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #1e1e1e;
+    border-top: 1px solid #444;
+  }
+
+  /* Supprime les effets d’ouverture/fermeture */
+  .box.active {
+    transform: none;
+    box-shadow: none;
+    width: auto;
+  }
+
+  /* Cache les boutons de navigation */
+  .leftBtn,
+  .rightBtn {
+  /*  display: none !important;*/
+  }
+
+
+}
+
 
 /*----------FIN TEL--------------*/
 
@@ -414,10 +405,6 @@
   <div class="color-dot2" style="background:#f7fee5" data-color="Citron"></div>
   <div class="color-dot2" style="background:#fcfcfc" data-color="Solid-White-Blend"></div>
 </div>
-
-
-      
-
       <div>
         <label>Style</label>
         <select id="styleSelect_tshirt">
@@ -548,19 +535,6 @@ function activateBox(boxType) {
     tshirtBox.classList.add("active", "tshirtActive");
   }
 }
-
-  // 🔹 Animation d’ouverture sur mobile
-  document.querySelectorAll('.box').forEach(box => {
-    box.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        const isActive = box.classList.contains('active');
-        document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
-        if (!isActive) {
-          box.classList.add('active');
-        }
-      }
-    });
-  });
 
 
 activateBox("cap");
