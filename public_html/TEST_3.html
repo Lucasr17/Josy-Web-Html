@@ -12,84 +12,6 @@
       --transition-speed: 0.5s;
     }
 
-/*-----------------FORMAT TEL----------------------*/
-
-@media (max-width: 768px) {
-    body {
-      flex-direction: column;
-      align-items: stretch;
-      padding: 0;
-      min-height: auto;
-    }
-
-    .container {
-      flex-direction: column;
-      gap: 30px;
-      padding: 20px;
-    }
-
-    .box {
-      flex: none;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      background-color: #2a2a2a;
-      position: relative;
-    }
-
-    .box img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: contain;
-      filter: none !important;
-      transition: all 0.3s ease;
-    }
-
-    .box .options {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      padding: 15px;
-      box-sizing: border-box;
-      background-color: #1e1e1e;
-      border-top: 1px solid #444;
-    }
-
-    .box.active {
-      background-color: #2a2a2a;
-      transform: scale(1.01);
-      box-shadow: 0 0 10px rgba(148, 0, 211, 0.4);
-    }
-
-    .box.active .options {
-      display: flex;
-      animation: slideDown 0.5s ease forwards;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Désactiver les boutons sur mobile */
-    .leftBtn, .rightBtn {
-      display: none !important;
-    }
-  }
-
-/*----------FIN TEL--------------*/
 
     body {
       background-color: var(--Color_1);
@@ -313,6 +235,89 @@
         width: 100%;
       }
     }
+
+
+
+/*-----------------FORMAT TEL----------------------*/
+
+@media (max-width: 768px) {
+    body {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      min-height: auto;
+    }
+
+    .container {
+      flex-direction: column;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .box {
+      flex: none;
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      background-color: #2a2a2a;
+      position: relative;
+    }
+
+    .box img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      filter: none !important;
+      transition: all 0.3s ease;
+    }
+
+    .box .options {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      padding: 15px;
+      box-sizing: border-box;
+      background-color: #1e1e1e;
+      border-top: 1px solid #444;
+    }
+
+    .box.active {
+      background-color: #2a2a2a;
+      transform: scale(1.01);
+      box-shadow: 0 0 10px rgba(148, 0, 211, 0.4);
+    }
+
+    .box.active .options {
+      display: flex;
+      animation: slideDown 0.5s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Désactiver les boutons sur mobile */
+    .leftBtn, .rightBtn {
+      display: none !important;
+    }
+  }
+
+/*----------FIN TEL--------------*/
+
+
   </style>
 </head>
 <body>
@@ -706,7 +711,6 @@ capBox.querySelector(".rightBtn").addEventListener("click", () => {
       document.querySelector("#productColors .color-dot.active").classList.remove("active");
       dot.classList.add("active");
       currentColor = dot.dataset.color;
-      updateImage_tshirt();
       updateImage_casquette();
     });
   });
@@ -717,7 +721,6 @@ capBox.querySelector(".rightBtn").addEventListener("click", () => {
       dot.classList.add("active");
       Color_Josy = dot.dataset.signature;
       await checkAvailableColors();
-      updateImage_tshirt();
       updateImage_casquette();
     });
   });
@@ -732,14 +735,12 @@ capBox.querySelector(".rightBtn").addEventListener("click", () => {
       signatureColors.classList.add("hidden");
     }
     await checkAvailableColors();
-    updateImage_tshirt();
     updateImage_casquette();
   });
 
   motSelect.addEventListener("change", async () => {
     mot = motSelect.value;
     await checkAvailableColors();
-    updateImage_tshirt();
     updateImage_casquette();
   });
 
@@ -789,9 +790,9 @@ tshirtBox.querySelector(".rightBtn").addEventListener("click", () => {
 
   function updateImage_tshirt() {
   const view = tshirtViews[currentViewIndex_tshirt];
-    style = styleSelect_tshirt.value;
+  style = styleSelect_tshirt.value;
   const imageName = `unisex-staple-t-shirt-${currentColor_tshirt}-${view}.png`;
-  productImage.src = `Image/T_shirts/${style}/${imageName}`;
+  tshirtPreview.src = `Image/T_shirts/${style}/${imageName}`;
 }
 
 // ---- Boutons de couleur ----
