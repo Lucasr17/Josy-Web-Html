@@ -895,8 +895,10 @@ colorJosy.forEach(dot => {
     colorJosy_ = dot.dataset.color;
     colorJosy.forEach(d => d.classList.remove("active"));
     dot.classList.add("active");
-    await checkAvailableColors_tshirt();
+
     updatePreview();
+    checkAvailableColors_tshirt_optimized();
+
   });
 });
   
@@ -982,7 +984,7 @@ colorDots.forEach(dot => {
     // Gestion affichage des options selon le style
     styleSelect_tshirt.addEventListener("change", async () => {
 
-       console.log("changed");
+ //      console.log("changed");
 
        //  console.log(`Changed T-shirt : ${currentColor_tshirt} `);
 
@@ -999,8 +1001,8 @@ colorDots.forEach(dot => {
         logoOptions_tshirt.classList.remove("hidden");
       }
 
-      await checkAvailableColors_tshirt();
       updatePreview();
+      checkAvailableColors_tshirt_optimized();
     });
 
     // Gestion affichage du JOSYmot sur manche
@@ -1011,23 +1013,76 @@ colorDots.forEach(dot => {
 
     // 🔁 Mise à jour de l’image selon la config
 function updatePreview() {
-  console.time("updatePreview"); // 🔹 timer
+//  console.time("updatePreview"); // 🔹 timer
 
   style = styleSelect_tshirt.value;
   const colorName = currentColor_tshirt; //.toLowerCase();
 
-  console.log(`🔹 updatePreview start | style: ${style}, color: ${colorName}, Josy: ${colorJosy_}`);
+//  console.log(`🔹 updatePreview start | style: ${style}, color: ${colorName}, Josy: ${colorJosy_}`);
 
   tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-front.webp`;
 
-  console.log(`🔹 updatePreview end | src: ${tshirtPreview.src}`);
-  console.timeEnd("updatePreview");
+//  console.log(`🔹 updatePreview end | src: ${tshirtPreview.src}`);
+ // console.timeEnd("updatePreview");
 }
+
+// Précharge une image et retourne une promesse qui se résout quand l'image est chargée
+function preloadImage(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false); // ne bloque pas si l'image n'existe pas
+  });
+}
+
+async function checkAvailableColors_tshirt_optimized() {
+  const promises = [];
+
+  for (const dot of colorDotts) {
+    const color = dot.dataset.color;
+    const colorName = color.toLowerCase();
+    const style = styleSelect_tshirt.value;
+    const path = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-front.webp`;
+
+    // On crée une promesse pour chaque couleur et on la stocke
+    const p = preloadImage(path).then(exists => {
+      if (exists) {
+        dot.style.opacity = "1";
+        dot.style.pointerEvents = "auto";
+        dot.style.filter = "none";
+        //console.log(`✅ Couleur disponible: ${color}`);
+      } else {
+        dot.style.opacity = "0.2";
+        dot.style.pointerEvents = "none";
+        dot.style.filter = "grayscale(100%)";
+
+        // Si la couleur courante n'existe plus, on remet "white"
+        if (currentColor_tshirt === color) {
+          currentColor_tshirt = "white";
+          updatePreview();
+          setTimeout(() => {
+            document.querySelectorAll("#tshirtColors .color-dot2").forEach(d => d.classList.remove("active"));
+            const whiteDot = document.querySelector('#tshirtColors .color-dot2[data-color="white"]');
+            if (whiteDot) whiteDot.classList.add("active");
+          }, 5);
+        }
+      }
+    });
+
+    promises.push(p);
+  }
+
+  // ⚡ On attend que toutes les images soient vérifiées en parallèle
+  await Promise.all(promises);
+  console.log("✅ checkAvailableColors_tshirt terminé");
+}
+
 
 
     // Init au chargement
     updatePreview();
-    checkAvailableColors_tshirt()
+    checkAvailableColors_tshirt_optimized()
 
 
 </script>
