@@ -796,7 +796,8 @@ colorDots.forEach(dot => {
       document.querySelector("#tshirtColors .color-dot2.active")?.classList.remove("active");
       dot.classList.add("active");
       currentColor_tshirt = dot.dataset.color;
-      tshirtPreview.src = `Image/T_shirts/${style}/unisex-staple-t-shirt-${encodeURIComponent(currentColor_tshirt)}-front.webp`; // Remplacer par logique de couleurs si plusieurs images
+      const colorName = currentColor_tshirt.toLowerCase();
+      tshirtPreview.src = `Image/T_shirts/${style}/unisex-staple-t-shirt-${encodeURIComponent(colorName)}-front.webp`; // Remplacer par logique de couleurs si plusieurs images
     });
   });
 
@@ -806,12 +807,12 @@ colorDots.forEach(dot => {
       let path;
       style = styleSelect_tshirt.value;
        
-      //path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${color}-front.webp`;
-console.log(`path T-shirt : ${path}`);
+      //path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${color}-front.webp`
 
 const colorName = color.toLowerCase();
 
 path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${colorName}-front.webp`;
+console.log(`path T-shirt : ${path}`);
 
 
 const exists = await folderExists(path);
@@ -840,7 +841,7 @@ if (exists) {
 
   // Grise les couleurs non disponibles
   dot.style.opacity = "0.2";
-  dot.style.pointerEvents = "auto";
+  dot.style.pointerEvents = "none";
   dot.style.filter = "grayscale(100%)";
 }
 
@@ -885,7 +886,8 @@ if (exists) {
    //    console.log(`Changed : ${style}`);
       // Ici tu pourras adapter les chemins d’images selon ta structure
       // Par exemple :
-      tshirtPreview.src = `Image/T_shirts/${style}/unisex-staple-t-shirt-${encodeURIComponent(currentColor_tshirt)}-front.webp`;
+      const colorName = currentColor_tshirt.toLowerCase();
+      tshirtPreview.src = `Image/T_shirts/${style}/unisex-staple-t-shirt-${encodeURIComponent(colorName)}-front.webp`;
     }
 
     // Init au chargement
