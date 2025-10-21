@@ -892,21 +892,13 @@ tshirtBox.querySelector(".rightBtn").addEventListener("click", () => {
 
 colorJosy.forEach(dot => {
   dot.addEventListener("click", async() => {
-    const selectedColor = dot.dataset.color;
-    console.log("Couleur choisie :", selectedColor);
-
-    // 1️⃣ Stocke dans la variable globale
-    colorJosy_ = selectedColor;
-
-    // 2️⃣ Active ce dot et désactive les autres
-    colorJosy.forEach(d => d.classList.remove("active")); // retire active partout
-    dot.classList.add("active"); // met active sur celui cliqué
-
-      await checkAvailableColors_tshirt();
-      updatePreview();
+    colorJosy_ = dot.dataset.color;
+    colorJosy.forEach(d => d.classList.remove("active"));
+    dot.classList.add("active");
+    await checkAvailableColors_tshirt();
+    updatePreview();
   });
 });
-
   
 
   function updateImage_tshirt() {
@@ -945,7 +937,7 @@ colorDots.forEach(dot => {
       currentColor_tshirt = dot.dataset.color;
      // colorJosy_ = colorJosy_active.dataset.color; // ← prends le data-color
       const colorName = currentColor_tshirt.toLowerCase();
-      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${encodeURIComponent(colorName)}-front.webp`; // Remplacer par logique de couleurs si plusieurs images
+      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${(colorName)}-front.webp`; // Remplacer par logique de couleurs si plusieurs images
     });
   });
 
@@ -985,7 +977,7 @@ if (exists) {
       const whiteDot = document.querySelector('#tshirtColors .color-dot2[data-color="white"]');
       console.log(whiteDot);
       if (whiteDot) whiteDot.classList.add("active");
-    }, 100);
+    }, 5);
   }
 
   // Grise les couleurs non disponibles
@@ -1037,7 +1029,7 @@ if (exists) {
       // Par exemple :
       const colorName = currentColor_tshirt.toLowerCase();
    //  colorJosy_ = colorJosy_active.dataset.color; // ← prends le data-color
-      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${encodeURIComponent(colorName)}-front.webp`;
+      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${(colorName)}-front.webp`;
     }
 
     // Init au chargement
