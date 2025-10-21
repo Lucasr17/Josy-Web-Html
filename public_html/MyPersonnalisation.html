@@ -648,6 +648,7 @@ capBox.querySelector(".rightBtn").addEventListener("click", () => {
       const response = await fetch(url, { method: "HEAD" });
       return response.ok;
     } catch {
+      console.log(response.status, url)
       return false;
     }
   }
@@ -799,15 +800,18 @@ colorDots.forEach(dot => {
     });
   });
 
-    async function checkAvailableColors_tshirt() {
+  async function checkAvailableColors_tshirt() {
     for (const dot of colorDotts) {
       const color = dot.dataset.color;
       let path;
       style = styleSelect_tshirt.value;
        
       //path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${color}-front.webp`;
+console.log(`path T-shirt : ${path}`);
 
-path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${color}-front.webp`;
+const colorName = color.toLowerCase();
+
+path = `Image/T_shirts/${style}/unisex-staple-t-shirt-${colorName}-front.webp`;
 
 
 const exists = await folderExists(path);
@@ -836,7 +840,7 @@ if (exists) {
 
   // Grise les couleurs non disponibles
   dot.style.opacity = "0.2";
-  dot.style.pointerEvents = "none";
+  dot.style.pointerEvents = "auto";
   dot.style.filter = "grayscale(100%)";
 }
 
@@ -877,7 +881,7 @@ if (exists) {
     function updatePreview() {
       style = styleSelect_tshirt.value;
 
-     //  console.log(`Changed T-shirt : ${currentColor_tshirt} & ${style}`);
+      // console.log(`Changed T-shirt : ${currentColor_tshirt} & ${style}`);
    //    console.log(`Changed : ${style}`);
       // Ici tu pourras adapter les chemins d’images selon ta structure
       // Par exemple :
