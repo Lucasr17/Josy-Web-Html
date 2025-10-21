@@ -172,7 +172,7 @@
 }
 .tshirtActive .rightBtn {
   right: 405px; 
-  opacity: 0; 
+  opacity: 1; 
   cursor: none;
 }
 
@@ -871,21 +871,17 @@ capBox.querySelector(".rightBtn").addEventListener("click", () => {
     const addJosyMot_tshirt = document.getElementById("addJosyMot_tshirt");
     const motLogoContainer_tshirt = document.getElementById("motLogoContainer_tshirt");
 
-const tshirtViews = ["left", "front", "right", "back"];
-let currentViewIndex_tshirt = 1;
+const tshirtViews = ["left", "front", "right", "back"]; // ou tes vrais noms de vues
+let currentViewIndex_tshirt = 1; // front par défaut
 
-
-// boutons t-shirt (si tu as plusieurs images)
 tshirtBox.querySelector(".leftBtn").addEventListener("click", () => {
-  currentTshirtIndex = (currentTshirtIndex - 1 + tshirtImages.length) % tshirtImages.length;
- // tshirtImage.src = tshirtImages[currentTshirtIndex];
-  updateImage_tshirt();
+  currentViewIndex_tshirt = (currentViewIndex_tshirt - 1 + tshirtViews.length) % tshirtViews.length;
+  updatePreview();
 });
 
 tshirtBox.querySelector(".rightBtn").addEventListener("click", () => {
-  currentTshirtIndex = (currentTshirtIndex + 1) % tshirtImages.length;
-  //tshirtImage.src = tshirtImages[currentTshirtIndex];
-  updateImage_tshirt();
+  currentViewIndex_tshirt = (currentViewIndex_tshirt + 1) % tshirtViews.length;
+  updatePreview();
 });
 
 
@@ -920,7 +916,7 @@ colorDots.forEach(dot => {
 });
 
     // Gestion couleur t-shirt
-    document.querySelectorAll("#colorOptions .color-dot2").forEach(dot => {
+document.querySelectorAll("#colorOptions .color-dot2").forEach(dot => {
       dot.addEventListener("click", () => {
         document.querySelectorAll("#colorOptions .color-dot2").forEach(d => d.classList.remove("active"));
         dot.classList.add("active");
@@ -932,25 +928,27 @@ colorDots.forEach(dot => {
       // Personnalisation T-shirt simple
   const tshirtColors = document.querySelectorAll("#tshirtColors .color-dot2");
 
-  tshirtColors.forEach(dot => {
+tshirtColors.forEach(dot => {
     dot.addEventListener("click", () => {
       document.querySelector("#tshirtColors .color-dot2.active")?.classList.remove("active");
       dot.classList.add("active");
       currentColor_tshirt = dot.dataset.color;
      // colorJosy_ = colorJosy_active.dataset.color; // ← prends le data-color
       const colorName = currentColor_tshirt; //.toLowerCase();
-      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${(colorName)}-front.webp`; // Remplacer par logique de couleurs si plusieurs images
+       const view = tshirtViews[currentViewIndex_tshirt]; // récupère la vue actuelle
+      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${(colorName)}-${view}.webp`;// Remplacer par logique de couleurs si plusieurs images
     });
   });
 
-  async function checkAvailableColors_tshirt() {
+async function checkAvailableColors_tshirt() {
   console.time("checkAvailableColors_tshirt"); // 🔹 Début du timer global
 
   for (const dot of colorDotts) {
     const color = dot.dataset.color;
     const colorName = color; //.toLowerCase();
     const style = styleSelect_tshirt.value;
-    const path = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-front.webp`;
+     const view = tshirtViews[currentViewIndex_tshirt]; // récupère la vue actuelle
+    const path = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-${view}.webp`;
 
     console.time(`check-${color}`); // 🔹 Timer pour chaque couleur
     const exists = await folderExists(path);
@@ -1012,18 +1010,12 @@ colorDots.forEach(dot => {
     });
 
     // 🔁 Mise à jour de l’image selon la config
+// updatePreview adapté
 function updatePreview() {
-//  console.time("updatePreview"); // 🔹 timer
-
   style = styleSelect_tshirt.value;
-  const colorName = currentColor_tshirt; //.toLowerCase();
-
-//  console.log(`🔹 updatePreview start | style: ${style}, color: ${colorName}, Josy: ${colorJosy_}`);
-
-  tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-front.webp`;
-
-//  console.log(`🔹 updatePreview end | src: ${tshirtPreview.src}`);
- // console.timeEnd("updatePreview");
+  const colorName = currentColor_tshirt;
+  const view = tshirtViews[currentViewIndex_tshirt]; // récupère la vue actuelle
+  tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-${view}.webp`;
 }
 
 // Précharge une image et retourne une promesse qui se résout quand l'image est chargée
@@ -1043,7 +1035,8 @@ async function checkAvailableColors_tshirt_optimized() {
     const color = dot.dataset.color;
     const colorName = color.toLowerCase();
     const style = styleSelect_tshirt.value;
-    const path = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-front.webp`;
+     const view = tshirtViews[currentViewIndex_tshirt]; // récupère la vue actuelle
+    const path = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${colorName}-${view}.webp`;
 
     // On crée une promesse pour chaque couleur et on la stocke
     const p = preloadImage(path).then(exists => {
