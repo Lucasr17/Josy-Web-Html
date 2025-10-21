@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head> 
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/MotionPathPlugin.min.js"></script>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Josy's</title>
+    <link rel="icon" type="image/png" href="Image/JOSY logo vf.png">
     <link rel="stylesheet" href="styles_Josy_9.css">
-   <!-- <link href="css/theme.css" rel="stylesheet" type="text/css"> -->
+   <!-- 17/05/25    <link href="css/theme.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
     <header>
-        <h1>JOSY Test</h1>
+        <h1></h1>
     </header>
     <main>
         
 <!-- CODE HTML -->
 
-
-        <div id="page-container">
+<div id="page-container">
             
-            <!-- Page noire par-dessus le contenu principal -->
+    <!-- Page noire par-dessus le contenu principal -->
 
-            <div class="resizeOverlay"></div>
+    <div class="resizeOverlay"></div>
 
-            <div class="overlay" id="overlay">
-                <img src="images/Josy.png" alt="Image d'introduction" class="intro-image">
-                <div class="vertical-noir"></div>
-                <div class="vertical-line"></div>
-            </div>
-            <div class="common-section">
-                <div class="brick">
+        <div class="overlay" id="overlay">
+            <img src="images/Josy.png" alt="Image d'introduction" class="intro-image">
+            <div class="vertical-noir"></div>
+             <div class="vertical-bas"></div>
+            <div class="vertical-line"></div>
+        </div>
+            
+    <div class="common-section">
+        <div class="brick">
 
-                    
+<!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
+<img src= 'Image/Josy - St barth 5.webp' class="photodrone" alt="Image"> -->
+                
+        </div>
 
-                    <!--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
-<img src= '../Image/Josy - St barth 5.webp' class="photodrone" alt="Image"> -->
-                </div>
-                <div id="typewriter-container"></div>
-                <!-- Modal Container -->
-                <div id="modal-container">
-                    <div class="modal-background">
-                        <div class="modal">
-                            <h2>Trouvez un Josy mot</h2>
-                            <p><span id="textContainer1">...</span></p>
+        <div id="typewriter-container"></div>
+            <!-- Modal Container -->
+            <div id="modal-container">
+                <div class="modal-background">
+                    <div class="modal">
+                        <h2>Trouvez un Josy mot</h2>
+                        <p><span id="textContainer1">...</span></p>
                             <label for="motInput">Entrez un mot : JOSY</label>
                             <input id="motInput" type="text" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="convertToLowercase(this)"/><br>
                             <button onclick="compterMot()">Valider</button><br>
@@ -62,6 +67,178 @@
                         </div>
                     </div>
                 </div> 
+
+          
+                
+
+                  
+                </div>
+<!--
+                <div class="instagram-section"><a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank"> <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram"> </a>
+                    -->
+
+<div class="social-btns">
+  <a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" 
+     class="btn_insta instagram" 
+     target="_blank" 
+     rel="noopener noreferrer">
+    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M224,202.66A53.34,53.34,0,1,0,277.34,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.35-30.35C296.91,124,224,124,224,124s-72.91,0-94.36,7.27A54,54,0,0,0,99.29,161.71C92,183.09,92,256,92,256s0,72.91,7.27,94.36a54,54,0,0,0,30.35,30.35C151.09,388,224,388,224,388s72.91,0,94.36-7.27a54,54,0,0,0,30.35-30.35C356,328.91,356,256,356,256S356,183.09,348.71,161.71ZM224,338A82,82,0,1,1,306,256,81.94,81.94,0,0,1,224,338Zm85.33-148A19.2,19.2,0,1,1,290.13,171,19.2,19.2,0,0,1,309.33,190Z"/>
+    </svg>
+  </a>
+</div>
+
+  <!-- Bouton Scroll -->
+<!-- Flèche douce et arrondie -->
+<div id="scrollTopBtn" title="Remonter en haut">
+  <svg viewBox="0 0 24 24">
+    <polyline points="6 15 12 9 18 15" fill="none"/>
+  </svg>
+</div>
+
+
+
+                
+                </div>
+
+            <button onclick="ToBoutique()" class="custom-btn btn-11">Boutique<div class="dot"></div></button>
+
+            <button id="bouton_jeu_pc" onclick="startTyping()" class="button bouton_jeu_pc"></button>
+
+             <button id="bouton_testmoi_pc" class="button bouton_testmoi_pc" onclick="ToPersonnalisation()"></button>
+
+
+
+                            <!-- Barre de défilement personnalisée -->
+                <div class="scroll_bar_container">
+                    <div class="scroll-bar" id="scrollBar"></div>
+                    <!-- Points avec info-bulles -->
+                    <div class="scroll-point" onclick="scrollToPosition_1()" id="point100" style="top: calc(4% - 5px);" data-tooltip="Point à 100%">
+                        <div class="tooltip">Josy une histoire d'amis</div>
+                    </div>
+                  <!--   <div class="scroll-point" onclick="scrollToPosition_2()" id="point200" style="top: calc(23% - 5px);" data-tooltip="Point à 200%">
+                        <div class="tooltip">Josy touche !</div>
+                    </div> -->
+                    <div class="scroll-point" onclick="scrollToPosition_3()" id="point300" style="top: calc(48% - 5px);" data-tooltip="Point à 300%">
+                        <div class="tooltip">Descriptif T-shirt</div>
+                    </div>
+                    <div class="scroll-point" onclick="scrollToPosition_4()" id="point400" style="top: calc(53% - 5px);" data-tooltip="Point à 400%">
+                        <div class="tooltip">Qualité du T-shirt</div>
+                    </div>
+                    <div class="scroll-point" onclick="scrollToPosition_5()" id="point500" style="top: calc(60% - 5px);" data-tooltip="Point à 500%">
+                        <div class="tooltip">Les variantes...</div>
+                    </div>
+                    <div class="scroll-point" id="point600" style="top: calc(66% - 5px);" data-tooltip="Point à 600%">
+                        <div class="tooltip">La team Josy</div>
+                    </div>
+                 <!--   <div class="scroll-point" onclick="scrollToPosition_7()" id="point700" style="top: calc(70% - 5px);" data-tooltip="Point à 700%">
+                        <div class="tooltip">La team Josy</div>
+                    </div>
+                    <div class="scroll-point" onclick="scrollToPosition_8()" id="point800" style="top: calc(76% - 5px);" data-tooltip="Point à 800%">
+                        <div class="tooltip">Contact</div>
+                    </div>
+                    <div class="scroll-point" id="point900" style="top: calc(200% - 5px);" data-tooltip="Point à 900%">
+                        <div class="tooltip">900 pixels de défilement</div>
+                    </div>
+                    <div class="scroll-point" id="point1000" style="top: calc(200% - 5px);" data-tooltip="Point à 1000%">
+                        <div class="tooltip">1000 pixels de défilement</div>
+                    </div> -->
+                </div>
+
+                                <!-- Bouton pour le menu -->
+                <div class="menu-toggle" id="menuToggle">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="carree" id="carree"></div>
+                <!-- Menu déroulant horizontal -->
+                <div class="nav-buttons" id="navButtons">
+                    <button onclick="scrollToPosition_8()">Nous contacter</button>
+                    <button onclick="ToBoutique()">Boutique</button>
+                    <button onclick="scrollToPosition_7()">La team Josy</button>
+                    <button onclick="alert('Bouton 4 cliqué')">Nos produits</button>
+                    <button onclick="alert('Bouton 5 cliqué')">Nous découvrir</button>
+                </div>
+
+           <div class="navbar_background"> </div>
+           
+                <div class="navbar">
+                    <div class="navbar-left">
+                        <!-- Votre code HTML existant -->
+                        <body2>
+                            <!-- Vertical Slider JOSY mots-->
+                            <div class="slider-container2">
+                                <img src="images/Josy.png" class="image2" alt="Image">
+                                <div class="slider2" id="randomElements">
+                                </div>
+                        </body2>
+                    </div>
+                </div>
+
+                
+
+
+
+              <!--   <div id="scroll-position"></div> -->
+
+             
+
+<script src="script_Josy_9_common.js"></script>
+                
+
+            </div>
+            <!-- Téléphone -->
+            <div class="tel-section">
+                <div class="brick">
+                   <!-- <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image"> -->
+                    <div class="buttons">
+                        <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
+                        <button onclick="startTyping()" id="one" class="button bouton_jeu_tel">Participer aux jeux</button>
+                    </div>
+        
+
+
+                    <div class="carouselcontainer">
+                        <div class="carousel">
+                            <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
+                            <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
+                            <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
+                        </div>
+                        <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
+                        <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
+                    </div> 
+
+  
+  <script src="script_Josy_8_tel.js"></script>
+  
+                </div>
+            </div>
+            <!-- Ordinateur -->
+            <div class="pc-section">
+                <!-- Section 1 -->                 
+                <div class="brick">
+
+                    <div class="support_titre" id="support_titre"></div>  
+
+                    <!--    <button onclick="ToBoutique()" class="bouton_boutique_pc" id="bouton_boutique_pc">Boutique</button> -->
+
+                              <!-- Button 1 - Boutique
+      <div class="main-box_boutique container">
+        <div class="button-box_boutique container">
+          <button class="button_boutique" onclick="ToBoutique()">
+            <p class="title_boutique">Boutique</p>
+            <img class="img_boutique"
+src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Party%20Popper.png" 
+alt="Party Popper"
+            />
+            <p class="description_boutique">Un style qui claque !<br /></p>
+          </button>
+
+
+           </div>
+</div>      --> 
+
 
                 <div id="popup_Jeu" class="popup_Jeu hidden">
                     <div onclick="Close_Jeu()" class="close-button_Jeu" id="close-popup_Jeu">X</div>
@@ -111,133 +288,23 @@
                     </div>
                     
                 </div>
-                
-
-                  
-                </div>
-
-                <div class="instagram-section"><a href="https://www.instagram.com/josy.family?igsh=bW94ZmZybWx3Ym4y&utm_source=qr" target="_blank"> <img src="https://static.wixstatic.com/media/091b9b_a9215b4d1c0a470aa70b99140a91aa22~mv2.png" alt="Instagram"> </a>
-                   
-               
-                
-                </div>
-
-           <div class="navbar_background"> </div>>
-           
-                <div class="navbar">
-                    <div class="navbar-left">
-                        <!-- Votre code HTML existant -->
-                        <body2>
-                            <!-- Vertical Slider -->
-                            <div class="slider-container2">
-                                <img src="images/Josy.png" class="image2" alt="Image">
-                                <div class="slider2" id="randomElements">
-</div>
-                        </body2>
-                    </div>
-                </div>
-
-                <button id="bouton_jeu_pc" onclick="startTyping()" class="button bouton_jeu_pc"></button>
-                
-
-                <!-- Bouton pour le menu -->
-                <div class="menu-toggle" id="menuToggle">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="carree" id="carree"></div>
-                <!-- Menu déroulant horizontal -->
-                <div class="nav-buttons" id="navButtons">
-                    <button onclick="scrollToPosition_8()">Nous contacter</button>
-                    <button onclick="ToBoutique()">Boutique</button>
-                    <button onclick="scrollToPosition_7()">La team Josy</button>
-                    <button onclick="alert('Bouton 4 cliqué')">Nos produits</button>
-                    <button onclick="alert('Bouton 5 cliqué')">Nous découvrir</button>
-                </div>
-                <!-- Barre de défilement personnalisée -->
-                <div class="scroll_bar_container">
-                    <div class="scroll-bar" id="scrollBar"></div>
-                    <!-- Points avec info-bulles -->
-                    <div class="scroll-point" onclick="scrollToPosition_1()" id="point100" style="top: calc(2% - 5px);" data-tooltip="Point à 100%">
-                        <div class="tooltip">Josy une histoire d'amis</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_2()" id="point200" style="top: calc(23% - 5px);" data-tooltip="Point à 200%">
-                        <div class="tooltip">Josy touche !</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_3()" id="point300" style="top: calc(48% - 5px);" data-tooltip="Point à 300%">
-                        <div class="tooltip">Descriptif T-shirt</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_4()" id="point400" style="top: calc(53% - 5px);" data-tooltip="Point à 400%">
-                        <div class="tooltip">Qualité du T-shirt</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_5()" id="point500" style="top: calc(60% - 5px);" data-tooltip="Point à 500%">
-                        <div class="tooltip">Les variantes...</div>
-                    </div>
-                    <div class="scroll-point" id="point600" style="top: calc(66% - 5px);" data-tooltip="Point à 600%">
-                        <div class="tooltip">Galerie</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_7()" id="point700" style="top: calc(70% - 5px);" data-tooltip="Point à 700%">
-                        <div class="tooltip">La team Josy</div>
-                    </div>
-                    <div class="scroll-point" onclick="scrollToPosition_8()" id="point800" style="top: calc(76% - 5px);" data-tooltip="Point à 800%">
-                        <div class="tooltip">Contact</div>
-                    </div>
-                    <div class="scroll-point" id="point900" style="top: calc(200% - 5px);" data-tooltip="Point à 900%">
-                        <div class="tooltip">900 pixels de défilement</div>
-                    </div>
-                    <div class="scroll-point" id="point1000" style="top: calc(200% - 5px);" data-tooltip="Point à 1000%">
-                        <div class="tooltip">1000 pixels de défilement</div>
-                    </div>
-                </div>
-              <!--   <div id="scroll-position"></div> -->
-
-<script src="script_Josy_8_common.js"></script>
-                
-
-            </div>
-            <!-- Téléphone -->
-            <div class="tel-section">
-                <div class="brick">
-                   <!-- <img src='https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp' class="photodrone" alt="Image"> -->
-                    <div class="buttons">
-                        <!--   <button onclick="startTyping()" id="one" class="button"></button> -->
-                        <button onclick="startTyping()" id="one" class="button bouton_jeu_tel">Participer aux jeux</button>
-                    </div>
-
-
-                    <div class="carouselcontainer">
-                        <div class="carousel">
-                            <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
-                            <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
-                            <img src="https://static.wixstatic.com/media/091b9b_2799b94178204dfcb744e1e92c997068~mv2.webp" alt="Image 3">
-                        </div>
-                        <button class="carousel-button prev" onclick="changeImage(-1)">&#10094;</button>
-                        <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
-                    </div> 
-
   
-  <script src="script_Josy_8_tel.js"></script>
-  
-                </div>
-            </div>
-            <!-- Ordinateur -->
-            <div class="pc-section">
-                <!-- Section 1 -->                 
-                <div class="brick">
-                        <button onclick="ToBoutique()" class="bouton_boutique_pc" id="bouton_boutique_pc">Boutique</button>
+
  
                         <div class="carouselcontainer">
                             <div class="carousel">
                                 <img src="https://static.wixstatic.com/media/091b9b_b55af7b76c814e70b77789efd85630b8~mv2.webp" class="active" alt="Image 1">
-                                <img src="https://static.wixstatic.com/media/091b9b_2dafd7c803c448a1874d5d0429748b9a~mv2.png" alt="Image 2">
-                                <video src="https://video.wixstatic.com/video/091b9b_663dfbc9a88e4dda8055577abaebf7a8/1080p/mp4/file.mp4" muted autoplay loop playsinline></video>
- 
+                                <img src="https://static.wixstatic.com/media/091b9b_de244d9b4999468eb27db302720ed259~mv2.png" alt="Image 2">
+                            <!-- <video src="https://video.wixstatic.com/video/091b9b_19b762dbe75645e4b149dbdf185eeb76/1080p/mp4/file.mp4" muted autoplay loop playsinline></video> -->   
+                                <video src="Image/Film-t_shirt-Josy-3_4k.mp4" muted autoplay loop playsinline></video>
                         </div>
                         
                         <button class="carousel-button prev"  onclick="changeImage(-1)">&#10094;</button>
                         <button class="carousel-button next" onclick="changeImage(1)">&#10095;</button>
                     </div>
+                    
+
+               
 
 <!-- Tooltip à gauche -->
 <div class="circle_tshirt" data-tooltip="Pull en coton" data-tooltip-side="left" style="top: 45vh; left: 40%;"></div>
@@ -245,9 +312,9 @@
 <!-- Tooltip à droite -->
 <div class="circle_tshirt" data-tooltip="T-shirt oversize" data-tooltip-side="right" style="top: 70vh; left: 55%;"></div>
                                           
-                    <div class="text" id="text1"><strong><span class="josy_text1">JOSY</span></strong> À TOUT PRIX</div>
+                    <div class="text" id="text1"><strong><span class="josy_text1">JOSY</span></strong><span style="font-size: clamp(30px, 4vw, 90px);"> À TOUT PRIX</span></div>
+                    <img src="images/Josy.png" class="Image_JOSY" alt="Image">
                     <div class="text" id="txt_josy_histoire_amis">JOSY... une histoire d'amis</div>
-                    <div class="text" id="txt_les_variantes">Les variantes JOSY</div>
                     <div class="text" id="JOSY_touch">La JOSY touch !</div>
                     <div class="text" id="text3">Dernier texte</div>
                     <div class="text" id="descriptif_tshirt">
@@ -257,23 +324,20 @@
                         <p class="small-text">Parfait pour une tenue décontractée avec une touche de classe.</p>
                         <p> </p>
                     </div>
-                    <div class="text" id="photodrone_text">
-                        <p>bilan t-shirt........ ............... ............... ..................... .............. .............. ....... ................ .......... .............</p>
-                        <p>ils sont trop bien</p>
-                        <p>2</p>
-                        <p>3</p>
-                        <p>4</p>
-                    </div>
+
                     <div class="text" id="vous_josy">Vous aussi, faites partie de la team JOSY</div>
                     <div class="text" id="vous_josy_2">JOSY ce n'est pas qu'une histoire de vêtements. C'est aussi une communauté, un partage, des rencontres.</div>
                     <img src="https://static.wixstatic.com/media/091b9b_91d58ba7da1d42ddac8a0515a1ba2d90~mv2.png" class="T_shirt_Josy_2" alt="Image">
                     <img src="https://static.wixstatic.com/media/091b9b_fec32b19ccf54130a2d3f1fef45d1e97~mv2.png" class="Pull_Josydole" alt="Image">
                     <img src="https://static.wixstatic.com/media/091b9b_3bdbfd96343041d48d7562b22539de94~mv2.png" class="T_shirt_Josyimaginaire" alt="Image">
                     <img src="https://static.wixstatic.com/media/091b9b_57b281e336cd450eb873f0aa2a6823c0~mv2.png" class="Casquette_1" alt="Image">
-                    <!--  <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1" alt="Image">
-             <img src="https://static.wixstatic.com/media/091b9b_e68f5e63f468436e8b418ed0e3388a70~mv2.png" class="T_shirt_Josy_1_" alt="Image"> -->
                     <img src="https://static.wixstatic.com/media/091b9b_1c79e407629c4822a118d240d0b92e4d~mv2.png" class="T_shirt_Josy_1" alt="Image">
                     <img src="https://static.wixstatic.com/media/091b9b_1c79e407629c4822a118d240d0b92e4d~mv2.png" class="T_shirt_Josy_1_" alt="Image">
+                  
+                    <div class="text" id="txt_les_variantes">Les variantes JOSY</div>
+
+                    <div class="text" id="txt_tel_qualite">La qualité</div>
+                  
                     <!-- Scripts -->
                     <button onclick="open_carte()" id="four" class="button_carte">Accéder à notre carte</button>
                     <div class="carree3" id="carree3"></div>                     
@@ -283,64 +347,35 @@
                         <!-- Flèche gauche -->
                         <div class="gallery2-wrapper">
                             <div class="gallery2">
-                                <img src="../Image/Vous_1.JPG" alt="Image 1">
-                                <img src="../Image/Vous_2.PNG" alt="Image 2">
-                                <img src="../Image/Vous_3.jpg" alt="Image 3">
-                                <img src="../Image/Vous_4.jpg" alt="Image 4">
-                                <img src="../Image/Vous_5.JPG" alt="Image 5">
-                                <img src="../Image/Vous_5.JPG" alt="Image 6">
-                                <img src="../Image/Vous_5.JPG" alt="Image 7">
-                                <img src="../Image/Vous_5.JPG" alt="Image 8">
+                                <img src="Image/Vous_1.JPG" alt="Image 1">
+                                <img src="Image/Vous_2.PNG" alt="Image 2">
+                                <img src="Image/Vous_3.jpg" alt="Image 3">
+                                <img src="Image/Vous_4.jpg" alt="Image 4">
+                                <img src="Image/Vous_5.JPG" alt="Image 5">
+                                <img src="Image/Vous_5.JPG" alt="Image 6">
+                                <img src="Image/Vous_5.JPG" alt="Image 7">
+                                <img src="Image/Vous_5.JPG" alt="Image 8">
                             </div>
                         </div>
                         <button class="gallery2-nav right" onclick="scrollGallery(1)">&#10095;</button>                         
 
                         <!-- Flèche droite -->
                     </div>
-                    <div class="contact_form">
-                        <h2>Formulaire de Contact</h2>
-                        <form id="contactForm" method="POST" onsubmit="sendForm(event)">
-                            <div class="form-group">
-                                <label for="nom_prenom">Nom et Prénom :</label>
-                                <input type="text" id="nom_prenom" name="nom_prenom" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Adresse e-mail :</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="objet">Objet :</label>
-                                <input type="text" id="objet" name="objet" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="sujet">Sujet :</label>
-                                <textarea id="sujet" name="sujet" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Envoyer</button>
-                            </div>
-                            <div id="error" class="error"></div>
-                        </form>
-                    </div>
-                    <div id="popupOverlay" class="popup-overlay">
-                        <div class="popup">
-                            <button class="close-btn" onclick="closePopup()">x</button>
-                            <p>Message envoyé avec succès!</p>
-                        </div>
-                    </div>
+
+ 
+
               <!--    <img src="https://static.wixstatic.com/media/091b9b_ce24c6dbb13440e0868e9f9d532becbd~mv2.png" class="photodrone_sup" alt="Image"> 
                     Modal Container CARTE -->
                     <div id="modal-container_carte" class="modal-container_carte">
                         <div class="modal-background_carte">
                             <div class="modal_carte">
-                                <button onclick="close_carte()" id="close-modal" class="close-button">&times;</button>
+                                <button onclick="close_carte()" id="close-modal" class="close-button">&times;</button> 
                                 <h2>La JOSY carte</h2>
                                 <img src="https://static.wixstatic.com/media/091b9b_f554d4edb0064081afbe17a631981ae2~mv2.png" alt="Modal Image" class="modal-image">
                             </div>
                         </div>
                     </div>
                 </div>
-
 
 <!--   Section histoire JOSY-->
 
@@ -404,17 +439,27 @@
 
                 <div id="transitionOverlay" class="transition-overlay"></div>
                 <div class="rack">
-                    <img src="../Image/T_shirts/T_shirt_1.png" crossorigin="anonymous" id="T_shirt_1" class="tshirtss" style="--order: 1;" alt="T-shirt 1">
-                    <img src="../Image/T_shirts/T_shirt_2.png" crossorigin="anonymous" id="T_shirt_2" class="tshirtss" style="--order: 2;" alt="T-shirt 2">
-                    <img src="../Image/T_shirts/T_shirt_3.png" id="T_shirt_3" class="tshirtss" style="--order: 3;" alt="T-shirt 3">
-                    <img src="../Image/T_shirts/T_shirt_4.png" id="T_shirt_4" class="tshirtss" style="--order: 4;" alt="T-shirt 4">
-                    <img src="../Image/T_shirts/T_shirt_5.png" id="T_shirt_5" class="tshirtss" style="--order: 5;" alt="T-shirt 5">
-                    <img src="../Image/T_shirts/T_shirt_6.png" id="T_shirt_6" class="tshirtss" style="--order: 6;" alt="T-shirt 6">
-                    <img src="../Image/T_shirts/T_shirt_7.png" id="T_shirt_7" class="tshirtss" style="--order: 7;" alt="T-shirt 7">
-                    <img src="../Image/T_shirts/T_shirt_8.png" id="T_shirt_8" class="tshirtss" style="--order: 8;" alt="T-shirt 8">
-                    <img src="../Image/T_shirts/T_shirt_9.png" id="T_shirt_9" class="tshirtss" style="--order: 9;" alt="T-shirt 9">
-                    <img src="../Image/T_shirts/T_shirt_10.png" id="T_shirt_10" class="tshirtss" style="--order: 10;" alt="T-shirt 10">
+                    <img src="Image/T_shirts/T_shirt_1.png" id="T_shirt_1" class="tshirtss" style="--order: 1;" alt="T-shirt 1">
+                    <img src="Image/T_shirts/T_shirt_2.png" id="T_shirt_2" class="tshirtss" style="--order: 2;" alt="T-shirt 2">
+                    <img src="Image/T_shirts/T_shirt_3.png" id="T_shirt_3" class="tshirtss" style="--order: 3;" alt="T-shirt 3">
+                    <img src="Image/T_shirts/T_shirt_4.png" id="T_shirt_4" class="tshirtss" style="--order: 4;" alt="T-shirt 4">
+                    <img src="Image/T_shirts/T_shirt_5.png" id="T_shirt_5" class="tshirtss" style="--order: 5;" alt="T-shirt 5">
+                    <img src="Image/T_shirts/T_shirt_6.png" id="T_shirt_6" class="tshirtss" style="--order: 6;" alt="T-shirt 6">
+                    <img src="Image/T_shirts/T_shirt_7.png" id="T_shirt_7" class="tshirtss" style="--order: 7;" alt="T-shirt 7">
+                    <img src="Image/T_shirts/T_shirt_8.png" id="T_shirt_8" class="tshirtss" style="--order: 8;" alt="T-shirt 8">
+                    <img src="Image/T_shirts/T_shirt_9.png" id="T_shirt_9" class="tshirtss" style="--order: 9;" alt="T-shirt 9">
+                    <img src="Image/T_shirts/T_shirt_10.png" id="T_shirt_10" class="tshirtss" style="--order: 10;" alt="T-shirt 10">
                 </div>
+
+
+<div id="carousel_tshirt_tel">
+    <img src="Image/T_shirts/T_shirt_3.png" id="carousel-image-0" class="carousel-image">
+    <img src="Image/T_shirts/T_shirt_2.png" id="carousel-image-1" class="carousel-image">
+    <img src="Image/T_shirts/T_shirt_1.png" id="carousel-image-2" class="carousel-image">
+    <img src="Image/T_shirts/T_shirt_4.png" id="carousel-image-3" class="carousel-image">
+    <img src="Image/T_shirts/T_shirt_5.png" id="carousel-image-4" class="carousel-image">
+    <img src="Image/T_shirts/T_shirt_6.png" id="carousel-image-5" class="carousel-image">
+</div>
 
 <script src="script_Josy_9_pc.js"></script>
             </div>
