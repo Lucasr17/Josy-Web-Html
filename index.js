@@ -56,8 +56,8 @@ app.get('/:subdomain', (req, res) => {
         case 'test':
             res.sendFile(path.join(__dirname, 'public_html', 'TEST.html')); // Assurez-vous que le fichier existe
             break;
-        case 'test3':
-            res.sendFile(path.join(__dirname, 'public_html', 'TEST_3.html')); // Assurez-vous que le fichier existe
+        case 'MyJosy':
+            res.sendFile(path.join(__dirname, 'public_html', 'MyPersonnalisation.html')); // Assurez-vous que le fichier existe
             break;
         case 'Josy_Jeu':
             res.sendFile(path.join(__dirname, 'public_html', 'Josy_Jeu_mot.html')); // Assurez-vous que le fichier existe

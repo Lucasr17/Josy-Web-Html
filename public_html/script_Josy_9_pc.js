@@ -2513,7 +2513,7 @@ window.location.href = 'https://josyte.wixstudio.io/josys/category/all-products'
 
 function ToPersonnalisation() {
    console.log("clicked");
-window.location.href = 'https://josy2.fly.dev/test';
+window.location.href = 'https://josy2.fly.dev/MyJosy';
 }
 
 const openPopupButton = document.getElementById("open-popup_Jeu");
