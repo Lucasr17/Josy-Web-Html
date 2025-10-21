@@ -928,17 +928,33 @@ document.querySelectorAll("#colorOptions .color-dot2").forEach(dot => {
       // Personnalisation T-shirt simple
   const tshirtColors = document.querySelectorAll("#tshirtColors .color-dot2");
 
+let selectedColor_tshirt = "white"; // couleur réellement sélectionnée
+
 tshirtColors.forEach(dot => {
-    dot.addEventListener("click", () => {
-      document.querySelector("#tshirtColors .color-dot2.active")?.classList.remove("active");
-      dot.classList.add("active");
-      currentColor_tshirt = dot.dataset.color;
-     // colorJosy_ = colorJosy_active.dataset.color; // ← prends le data-color
-      const colorName = currentColor_tshirt; //.toLowerCase();
-       const view = tshirtViews[currentViewIndex_tshirt]; // récupère la vue actuelle
-      tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${(colorName)}-${view}.webp`;// Remplacer par logique de couleurs si plusieurs images
-    });
+  // 🟢 Survol : prévisualisation temporaire
+  dot.addEventListener("mouseenter", () => {
+    const tempColor = dot.dataset.color;
+    const view = tshirtViews[currentViewIndex_tshirt];
+    tshirtPreview.src = `Image/T_shirts/${style}/${colorJosy_}/unisex-staple-t-shirt-${tempColor}-${view}.webp`;
   });
+
+  // 🟢 Clic : sélection permanente
+  dot.addEventListener("click", () => {
+    document.querySelector("#tshirtColors .color-dot2.active")?.classList.remove("active");
+    dot.classList.add("active");
+    selectedColor_tshirt = dot.dataset.color;
+    currentColor_tshirt = selectedColor_tshirt;
+    updatePreview();
+  });
+});
+
+// 🔵 Quand on quitte la zone des couleurs → revenir à la couleur sélectionnée
+const tshirtColorsContainer = document.getElementById("tshirtColors");
+tshirtColorsContainer.addEventListener("mouseleave", () => {
+  currentColor_tshirt = selectedColor_tshirt;
+  updatePreview();
+});
+
 
 async function checkAvailableColors_tshirt() {
   console.time("checkAvailableColors_tshirt"); // 🔹 Début du timer global
