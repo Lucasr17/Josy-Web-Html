@@ -1270,48 +1270,39 @@ document.querySelector("#capBox .addToCartBtn").addEventListener("click", () => 
   updateCartUI();
 });
 
-// URL de base WooCommerce REST
-const WORDPRESS_URL = "https://josy.xo.je";
-const ADD_API = `${WORDPRESS_URL}/wp-json/wc/store/cart/add-item`; // endpoint REST
 
-// Bouton Commander
+
+const ADD_API = "https://josy.xo.je/wp-content/custom-api/add-to-cart.php";
+
 document.getElementById("checkoutBtn").addEventListener("click", async () => {
-  if(flyCart.length === 0) return alert("Le panier est vide !");
+  if(flyCart.length === 0) return alert("Panier vide !");
 
   try {
-    // Ajouter chaque produit séquentiellement via fetch
-    for (const item of flyCart) {
-      
-      // body pour WooCommerce REST : id produit + quantité
-      const body = {
-        id: parseInt(item.id),
-        quantity: parseInt(item.quantity)
-      };
+    // Envoyer tous les produits en un seul appel
+    const res = await fetch(ADD_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ products: flyCart })
+    });
 
-      const res = await fetch(ADD_API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(body)
-      });
+    const data = await res.json();
+    if(data.success) {
+      console.log("Produits ajoutés :", data.added);
+      flyCart = []; // vider le panier local
+      updateCartUI();
 
-      const data = await res.json();
-      if(data.code) console.error("Erreur ajout produit :", data);
-      else console.log("Produit ajouté :", data);
+      // Redirection vers le panier WooCommerce
+      window.location.href = "https://josy.xo.je/cart";
+    } else {
+      console.error("Erreur ajout produits :", data);
+      alert("Impossible d’ajouter les produits. Vérifie la console.");
     }
-
-    // Tous les produits ajoutés → rediriger vers le panier
-    window.location.href = `${WORDPRESS_URL}/cart`; // WooCommerce cart page
-
-    // Vider le panier local
-    flyCart = [];
-    updateCartUI();
-
-  } catch (err) {
-    console.error("Erreur lors de l’ajout au panier :", err);
-    alert("Impossible d’ajouter les produits. Vérifie la console.");
+  } catch(err) {
+    console.error("Erreur fetch :", err);
+    alert("Erreur lors de l’ajout au panier.");
   }
 });
+
 
 
 
