@@ -1939,7 +1939,7 @@ gsap.fromTo(".T_shirt_Josy_1", {
   x: () => -sreen_largeur,
   y: 500,
   scale: 0.7,
-  opacity: 0.5,
+  opacity: 0.2,
 }, {
   x: 0,
   y: 0,
