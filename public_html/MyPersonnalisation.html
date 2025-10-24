@@ -27,18 +27,21 @@
     }
 
 
-.add-to-cart-btn {
-  background-color: #222;
+.add-btn {
+  background: black;
   color: white;
-  padding: 12px 28px;
-  font-size: 16px;
+  border: none;
+  padding: 12px 20px;
   border-radius: 6px;
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-  transition: background 0.3s ease;
+  cursor: pointer;
+  font-weight: bold;
 }
-.add-to-cart-btn:hover {
-  background-color: #444;
+.add-btn:hover {
+  background: #333;
+}
+#cartDisplay {
+  margin-top: 20px;
+  font-family: sans-serif;
 }
 
 /* Effet zoom loupe */
@@ -366,18 +369,19 @@
 <div class="container">
   <!-- Box T-shirt -->
   <div class="box" id="tshirtBox">
+
+<button id="addToCart" data-product-id="56" class="add-btn">
+  Ajouter au panier
+</button>
+
+<div id="cartDisplay"></div>
+
     <div class="options" id="tshirtOptions">
 <label>Couleur du T-shirt</label>
 <div class="color-options" id="tshirtColors">
 
   <!-- Neutres -->
 
-<a 
-  href="https://josyte.wixstudio.com/josys/add-to-cart?productId=65F48073C32EB_9390&color=Heather%20Prism%20Dusty%20Blue&size=L&qty=1"
-  target="_blank"
->
-  Ajouter au panier
-</a>
 
 
   <div class="color-dot2 active" style="background:#ffffff" data-color="white"></div>
@@ -1121,6 +1125,70 @@ async function checkAvailableColors_tshirt_optimized() {
     // Init au chargement
     updatePreview();
     checkAvailableColors_tshirt_optimized()
+
+
+//------------WORDPRESS BOUTIQUE ---------------
+
+
+const WORDPRESS_URL = "http://josy.xo.je"; // ton site WordPress
+const CART_API = WORDPRESS_URL + "/wp-json/wc/store/cart";
+const ADD_API = CART_API + "/add-item";
+
+// Quand on clique sur "Ajouter au panier"
+document.getElementById("addToCart").addEventListener("click", async (e) => {
+  const productId = e.target.dataset.productId;
+
+  try {
+    const res = await fetch(ADD_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // important pour partager le panier
+      body: JSON.stringify({
+        id: parseInt(productId),
+        quantity: 1,
+      }),
+    });
+
+    const data = await res.json();
+    console.log("Produit ajouté :", data);
+    alert("Produit ajouté au panier !");
+    loadCart(); // recharger le panier
+  } catch (err) {
+    console.error("Erreur ajout panier :", err);
+  }
+});
+
+// Charger le contenu du panier
+async function loadCart() {
+  try {
+    const res = await fetch(CART_API, { credentials: "include" });
+    const cart = await res.json();
+
+    const container = document.getElementById("cartDisplay");
+    container.innerHTML = `
+      <h3>Panier</h3>
+      ${cart.items
+        .map(
+          (item) => `
+          <div>
+            <strong>${item.name}</strong> × ${item.quantity}
+          </div>
+        `
+        )
+        .join("")}
+      <p>Total : ${cart.totals.total_price} ${cart.totals.currency_code}</p>
+      <a href="${WORDPRESS_URL}/checkout" target="_blank">Passer commande</a>
+    `;
+  } catch (err) {
+    console.error("Erreur chargement panier :", err);
+  }
+}
+
+// Charger le panier au démarrage
+loadCart();
+
+//---------- FIN WORDPRESS BOUTIQUE -------------
+
 
 </script>
 
