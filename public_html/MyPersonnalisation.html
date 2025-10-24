@@ -1256,7 +1256,7 @@ cartIcon.addEventListener("click", () => {
 
 // Ajouter au panier T-shirt
 document.querySelector("#tshirtBox .addToCartBtn").addEventListener("click", () => {
-  const existing = flyCart.find(p => p.id === "48");
+  const existing = flyCart.find(p => p.id === "156");
   if(existing) existing.quantity += 1;
   else flyCart.push({ id:"48", name:"T-shirt Blanc", price:25, quantity:1 });
   updateCartUI();
@@ -1264,7 +1264,7 @@ document.querySelector("#tshirtBox .addToCartBtn").addEventListener("click", () 
 
 // Ajouter au panier Casquette
 document.querySelector("#capBox .addToCartBtn").addEventListener("click", () => {
-  const existing = flyCart.find(p => p.id === "65");
+  const existing = flyCart.find(p => p.id === "233");
   if(existing) existing.quantity += 1;
   else flyCart.push({ id:"65", name:"Casquette Blanc", price:15, quantity:1 });
   updateCartUI();
