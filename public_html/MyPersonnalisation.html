@@ -1270,14 +1270,49 @@ document.querySelector("#capBox .addToCartBtn").addEventListener("click", () => 
   updateCartUI();
 });
 
-// checkout
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  if(flyCart.length === 0) return alert("Panier vide !");
-  flyCart.forEach(item => {
-    window.open(`https://josy.xo.je/?add-to-cart=${item.id}&quantity=${item.quantity}`, "_blank");
-  });
-  alert("Vous êtes redirigé vers WooCommerce !");
+// URL de base WooCommerce REST
+const WORDPRESS_URL = "https://josy.xo.je";
+const ADD_API = `${WORDPRESS_URL}/wp-json/wc/store/cart/add-item`; // endpoint REST
+
+// Bouton Commander
+document.getElementById("checkoutBtn").addEventListener("click", async () => {
+  if(flyCart.length === 0) return alert("Le panier est vide !");
+
+  try {
+    // Ajouter chaque produit séquentiellement via fetch
+    for (const item of flyCart) {
+      
+      // body pour WooCommerce REST : id produit + quantité
+      const body = {
+        id: parseInt(item.id),
+        quantity: parseInt(item.quantity)
+      };
+
+      const res = await fetch(ADD_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      if(data.code) console.error("Erreur ajout produit :", data);
+      else console.log("Produit ajouté :", data);
+    }
+
+    // Tous les produits ajoutés → rediriger vers le panier
+    window.location.href = `${WORDPRESS_URL}/cart`; // WooCommerce cart page
+
+    // Vider le panier local
+    flyCart = [];
+    updateCartUI();
+
+  } catch (err) {
+    console.error("Erreur lors de l’ajout au panier :", err);
+    alert("Impossible d’ajouter les produits. Vérifie la console.");
+  }
 });
+
 
 
 //---------- FIN WORDPRESS BOUTIQUE -------------
