@@ -26,23 +26,76 @@
       overflow-x: hidden;
     }
 
+    .box .add-btn {
+  margin-top: 15px;
+  display: inline-block;
+  font-size: 16px;
+  width: 180px;
+}
 
-.add-btn {
-  background: black;
+
+.product-container {
+  display: flex;
+  flex-direction: column; /* vertical : image au dessus, bouton en dessous */
+  align-items: center;
+}
+.product-container img {
+  max-height: 60vh; /* ajuste la taille comme avant */
+}
+.product-container .add-btn {
+  margin-top: 10px;
+}
+
+
+/* Panier en haut à droite */
+#cartIcon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #9400D3;
   color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  cursor: pointer;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10000;
 }
-.add-btn:hover {
-  background: #333;
+
+#cartPopup {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #2a2a2a;
+  color: white;
+  border-radius: 12px;
+  padding: 15px;
+  width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  display: none;
+  z-index: 10000;
 }
-#cartDisplay {
-  margin-top: 20px;
-  font-family: sans-serif;
+
+#cartPopup div.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
+
+#cartPopup div.item button {
+  background: none;
+  border: none;
+  color: #FF6F61;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 
 /* Effet zoom loupe */
 .zoom-lens {
@@ -104,6 +157,8 @@
   position: relative;
   transition: flex 0.5s ease, transform 0.5s ease;
 }
+
+
 
 .box.active {
   transition: all 4.5s ease, flex 0.5s ease;
@@ -523,37 +578,38 @@
         </div>
       </div>
 
-   -<button id="addToCart" data-product-id="56">Ajouter au panier</button>
-<div id="cartDisplay"></div> 
-
-<div id="products">
-  <div class="product" data-id="48" data-name="T-shirt Blanc" data-price="25">
-    <p>T-shirt Blanc - 25€</p>
-    <button class="addToCartBtn">Ajouter au panier</button>
-  </div>
-  <div class="product" data-id="65" data-name="Casquette Noire" data-price="15">
-    <p>Casquette blanc - 15€</p>
-    <button class="addToCartBtn">Ajouter au panier</button>
-  </div>
-</div>
-
-<h3>Panier</h3>
+<button id="addToCart" data-product-id="56">Ajouter au panier</button>
 <div id="cartDisplay"></div>
-<button id="checkoutBtn">Commander</button>
 
 
     </div>
 
     <button class="leftBtn">‹</button> 
+   
+
+      <!-- Conteneur interne pour image + bouton -->
+  <div class="product-container">
     <img src="Image/T_shirts/signature/unisex-staple-t-shirt-white-front.webp" alt="T-shirt JOSY" id="tshirtPreview">
-    <button class="rightBtn">‹</button> 
+    <button class="add-btn addToCartBtn" data-id="48">Ajouter T-shirt au panier</button>
+  </div>
+   <button class="rightBtn">‹</button> 
+
   </div>
 
   <!-- Box Casquette -->
   <div class="box active" id="capBox">
-    <button class="leftBtn">‹</button>
+
+    
+  <button class="leftBtn">‹</button> 
+
+  <div class="product-container">
     <img id="productImage" src="Image/Casquette_Josy_mot/Logo_JOSYdiot/classic-dad-hat-black-right-side.webp" alt="Casquette JOSY">
-   <button class="rightBtn">‹</button>
+    <button class="add-btn addToCartBtn" data-id="65">Ajouter Casquette au panier</button>
+  </div>
+
+  <button class="rightBtn">›</button>
+
+
     <div class="options active" id="capOptions">
       <!-- Couleur produit -->
       <label>Couleur du produit</label>
@@ -600,6 +656,16 @@
     </div>
   </div>
 </div>
+
+<!-- Panier en haut à droite -->
+<div id="cartIcon">0</div>
+<div id="cartPopup">
+  <h4>Votre panier</h4>
+  <div id="cartItems"></div>
+  <p id="cartTotal"></p>
+  <button id="checkoutBtn">Commander</button>
+</div>
+
 
 <script>
 const tshirtBox = document.getElementById("tshirtBox");
@@ -1144,110 +1210,78 @@ async function checkAvailableColors_tshirt_optimized() {
 
 //------------WORDPRESS BOUTIQUE ---------------
 
-const WORDPRESS_URL = "https://josy.xo.je"; // ton site WordPress
-const CART_API = WORDPRESS_URL + "/wp-json/wc/store/cart";
-// 🔸 on remplace l'ancien endpoint par ton proxy PHP
-const ADD_API = "https://josy.xo.je/wp-json/myapi/v1/add-to-cart";
+const cartIcon = document.getElementById("cartIcon");
+const cartPopup = document.getElementById("cartPopup");
+const cartItemsContainer = document.getElementById("cartItems");
+const cartTotalContainer = document.getElementById("cartTotal");
 
-document.getElementById("addToCart").addEventListener("click", async (e) => {
-  const productId = e.target.dataset.productId;
-  try {
-    const res = await fetch(ADD_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ id: productId, quantity: 1 })
+let flyCart = []; // panier local Fly.io
+
+function updateCartUI() {
+  // compteur sur l’icône
+  const totalQty = flyCart.reduce((sum, i) => sum + i.quantity, 0);
+  cartIcon.textContent = totalQty;
+
+  // contenu popup
+  if(flyCart.length === 0){
+    cartItemsContainer.innerHTML = "<p>Panier vide</p>";
+    cartTotalContainer.textContent = "";
+    return;
+  }
+
+  cartItemsContainer.innerHTML = flyCart.map(item => `
+    <div class="item">
+      <span>${item.name} × ${item.quantity}</span>
+      <button data-id="${item.id}">×</button>
+    </div>
+  `).join('');
+
+  const totalPrice = flyCart.reduce((sum,i)=>sum+i.price*i.quantity,0);
+  cartTotalContainer.textContent = `Total: ${totalPrice}€`;
+
+  // bouton supprimer
+  cartItemsContainer.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const id = e.target.dataset.id;
+      flyCart = flyCart.filter(p => p.id != id);
+      updateCartUI();
     });
-    const data = await res.json();
-    console.log("Produit ajouté :", data);
-    alert("Produit ajouté au panier !");
-    loadCart();
-  } catch (err) {
-    console.error("Erreur ajout panier :", err);
-  }
-});
-
-
-
-// Charger le contenu du panier
-async function loadCart() {
-  try {
-    const res = await fetch(CART_API, { credentials: "include" });
-    const cart = await res.json();
-
-    const container = document.getElementById("cartDisplay");
-    container.innerHTML = `
-      <h3>Panier</h3>
-      ${cart.items
-        .map(
-          (item) => `
-          <div>
-            <strong>${item.name}</strong> × ${item.quantity}
-          </div>
-        `
-        )
-        .join("")}
-      <p>Total : ${cart.totals.total_price} ${cart.totals.currency_code}</p>
-      <a href="${WORDPRESS_URL}/checkout" target="_blank">Passer commande</a>
-    `;
-  } catch (err) {
-    console.error("Erreur chargement panier :", err);
-  }
+  });
 }
 
-// Charger le panier au démarrage
-loadCart();
+// toggle popup
+cartIcon.addEventListener("click", () => {
+  cartPopup.style.display = cartPopup.style.display === "block" ? "none" : "block";
+});
+
+// Ajouter au panier T-shirt
+document.querySelector("#tshirtBox .addToCartBtn").addEventListener("click", () => {
+  const existing = flyCart.find(p => p.id === "48");
+  if(existing) existing.quantity += 1;
+  else flyCart.push({ id:"48", name:"T-shirt Blanc", price:25, quantity:1 });
+  updateCartUI();
+});
+
+// Ajouter au panier Casquette
+document.querySelector("#capBox .addToCartBtn").addEventListener("click", () => {
+  const existing = flyCart.find(p => p.id === "65");
+  if(existing) existing.quantity += 1;
+  else flyCart.push({ id:"65", name:"Casquette Blanc", price:15, quantity:1 });
+  updateCartUI();
+});
+
+// checkout
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  if(flyCart.length === 0) return alert("Panier vide !");
+  flyCart.forEach(item => {
+    window.open(`https://josy.xo.je/?add-to-cart=${item.id}&quantity=${item.quantity}`, "_blank");
+  });
+  alert("Vous êtes redirigé vers WooCommerce !");
+});
+
 
 //---------- FIN WORDPRESS BOUTIQUE -------------
 
-// Panier local
-let cart = [];
-
-// Ajouter produit
-document.querySelectorAll(".addToCartBtn").forEach(btn => {
-  btn.addEventListener("click", e => {
-    const productEl = e.target.closest(".product");
-    const id = productEl.dataset.id;
-    const name = productEl.dataset.name;
-    const price = parseFloat(productEl.dataset.price);
-
-    // Vérifier si produit déjà dans le panier
-    const existing = cart.find(p => p.id === id);
-    if (existing) existing.quantity += 1;
-    else cart.push({ id, name, price, quantity: 1 });
-
-    renderCart();
-  });
-});
-
-// Afficher panier
-function renderCart() {
-  const container = document.getElementById("cartDisplay");
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Panier vide</p>";
-    return;
-  }
-  container.innerHTML = cart.map(item => `
-    <div>${item.name} × ${item.quantity} - ${item.price*item.quantity}€</div>
-  `).join('') + 
-  `<p>Total: ${cart.reduce((sum,i)=>sum+i.price*i.quantity,0)}€</p>`;
-}
-
-// Commander
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  if (cart.length === 0) {
-    alert("Le panier est vide !");
-    return;
-  }
-
-  // Construire l'URL checkout WooCommerce avec add-to-cart
-  // Ici on simule l'ajout d'un produit à la fois
-  cart.forEach(item => {
-    window.open(`https://josy.xo.je/?add-to-cart=${item.id}&quantity=${item.quantity}`, "_blank");
-  });
-
-  alert("Vous êtes redirigé vers WooCommerce pour finaliser la commande !");
-});
 
 
 
