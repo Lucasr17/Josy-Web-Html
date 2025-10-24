@@ -366,12 +366,10 @@
 </head>
 <body>
 
+
 <div class="container">
   <!-- Box T-shirt -->
   <div class="box" id="tshirtBox">
-
-<button id="addToCart" data-product-id="56">Ajouter au panier</button>
-<div id="cartDisplay"></div>
 
     <div class="options" id="tshirtOptions">
 <label>Couleur du T-shirt</label>
@@ -524,6 +522,26 @@
           </select>
         </div>
       </div>
+
+   <!--<button id="addToCart" data-product-id="56">Ajouter au panier</button>
+<div id="cartDisplay"></div> -->
+
+<div id="products">
+  <div class="product" data-id="42" data-name="T-shirt Blanc" data-price="25">
+    <p>T-shirt Blanc - 25€</p>
+    <button class="addToCartBtn">Ajouter au panier</button>
+  </div>
+  <div class="product" data-id="43" data-name="Casquette Noire" data-price="15">
+    <p>Casquette Noire - 15€</p>
+    <button class="addToCartBtn">Ajouter au panier</button>
+  </div>
+</div>
+
+<h3>Panier</h3>
+<div id="cartDisplay"></div>
+<button id="checkoutBtn">Commander</button>
+
+
     </div>
 
     <button class="leftBtn">‹</button> 
@@ -1181,6 +1199,56 @@ async function loadCart() {
 loadCart();
 
 //---------- FIN WORDPRESS BOUTIQUE -------------
+
+// Panier local
+let cart = [];
+
+// Ajouter produit
+document.querySelectorAll(".addToCartBtn").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const productEl = e.target.closest(".product");
+    const id = productEl.dataset.id;
+    const name = productEl.dataset.name;
+    const price = parseFloat(productEl.dataset.price);
+
+    // Vérifier si produit déjà dans le panier
+    const existing = cart.find(p => p.id === id);
+    if (existing) existing.quantity += 1;
+    else cart.push({ id, name, price, quantity: 1 });
+
+    renderCart();
+  });
+});
+
+// Afficher panier
+function renderCart() {
+  const container = document.getElementById("cartDisplay");
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Panier vide</p>";
+    return;
+  }
+  container.innerHTML = cart.map(item => `
+    <div>${item.name} × ${item.quantity} - ${item.price*item.quantity}€</div>
+  `).join('') + 
+  `<p>Total: ${cart.reduce((sum,i)=>sum+i.price*i.quantity,0)}€</p>`;
+}
+
+// Commander
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  if (cart.length === 0) {
+    alert("Le panier est vide !");
+    return;
+  }
+
+  // Construire l'URL checkout WooCommerce avec add-to-cart
+  // Ici on simule l'ajout d'un produit à la fois
+  cart.forEach(item => {
+    window.open(`https://josy.xo.je/?add-to-cart=${item.id}&quantity=${item.quantity}`, "_blank");
+  });
+
+  alert("Vous êtes redirigé vers WooCommerce pour finaliser la commande !");
+});
+
 
 
 </script>
