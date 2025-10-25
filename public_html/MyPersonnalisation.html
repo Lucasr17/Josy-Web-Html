@@ -578,9 +578,6 @@
         </div>
       </div>
 
-<button id="addToCart" data-product-id="56">Ajouter au panier</button>
-<div id="cartDisplay"></div>
-
 
     </div>
 
@@ -1272,30 +1269,28 @@ document.querySelector("#capBox .addToCartBtn").addEventListener("click", () => 
 
 
 
-const ADD_API = "https://josy.xo.je/wp-content/custom-api/add-to-cart.php";
+const ADD_API = "https://josy.xo.je/wp-json/myapi/v1/add-to-cart";
 
 document.getElementById("checkoutBtn").addEventListener("click", async () => {
   if(flyCart.length === 0) return alert("Panier vide !");
 
   try {
-    // Envoyer tous les produits en un seul appel
     const res = await fetch(ADD_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ products: flyCart })
     });
 
     const data = await res.json();
     if(data.success) {
-      console.log("Produits ajoutés :", data.added);
-      flyCart = []; // vider le panier local
+      console.log("Produits ajoutés :", data.cart);
+      flyCart = [];
       updateCartUI();
-
-      // Redirection vers le panier WooCommerce
       window.location.href = "https://josy.xo.je/cart";
     } else {
       console.error("Erreur ajout produits :", data);
-      alert("Impossible d’ajouter les produits. Vérifie la console.");
+      alert("Impossible d’ajouter les produits");
     }
   } catch(err) {
     console.error("Erreur fetch :", err);
