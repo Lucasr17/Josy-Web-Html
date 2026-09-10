@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modèle — Base de design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+
+<div class="gallery-topbar">
+  <div class="gallery-topbar__logo"><span></span> Modèle</div>
+  <nav class="subnav" data-subnav>
+    <a href="#navigation">Navigation</a>
+    <a href="#boutons">Boutons</a>
+    <a href="#animations">Animations</a>
+    <a href="#hero">Pages / Hero</a>
+    <a href="#cards">Cards</a>
+    <a href="#footer">Footer</a>
+  </nav>
+  <div class="gallery-topbar__tools">
+    <div class="swatches">
+      <button class="swatch is-active" style="background:#7C3AED" data-accent="#7C3AED,#A855F7" aria-label="Violet"></button>
+      <button class="swatch" style="background:#0EA5E9" data-accent="#0EA5E9,#38BDF8" aria-label="Bleu"></button>
+      <button class="swatch" style="background:#059669" data-accent="#059669,#34D399" aria-label="Vert"></button>
+      <button class="swatch" style="background:#E11D48" data-accent="#E11D48,#FB7185" aria-label="Rouge"></button>
+      <button class="swatch" style="background:#111827" data-accent="#111827,#4B5563" aria-label="Noir"></button>
+    </div>
+    <button data-theme-toggle>🌙 Sombre</button>
+  </div>
+</div>
+
+<main>
+
+  <section class="intro">
+    <div class="container">
+      <span class="eyebrow">Bibliothèque personnelle</span>
+      <h1>Une base propre, épurée et actuelle pour tes prochains sites.</h1>
+      <p>Chaque section ci-dessous est un modèle indépendant : navigation, boutons, animations, pages d'accueil, cartes, footer. Regarde, teste (clique sur les pastilles de couleur, bascule le thème sombre) et dis-moi section par section ce que tu gardes, ce que tu changes.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SYSTÈME (fondations) -->
+  <!-- ============================================================ -->
+  <section id="systeme" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">Fondations</span>
+          <h2>Palette &amp; typographie</h2>
+        </div>
+        <p>Les couleurs suivent la marque Josy (violet) par défaut — change-les avec les pastilles en haut à droite pour voir un autre univers.</p>
+      </div>
+
+      <div class="palette-row">
+        <div class="palette-chip"><div class="palette-chip__color" style="background:var(--accent)"></div><span>Accent</span></div>
+        <div class="palette-chip"><div class="palette-chip__color" style="background:var(--accent-2)"></div><span>Accent 2</span></div>
+        <div class="palette-chip"><div class="palette-chip__color" style="background:var(--ink)"></div><span>Encre</span></div>
+        <div class="palette-chip"><div class="palette-chip__color" style="background:var(--paper-soft)"></div><span>Papier</span></div>
+        <div class="palette-chip"><div class="palette-chip__color" style="background:var(--paper-alt)"></div><span>Papier alt.</span></div>
+      </div>
+
+      <div class="type-row">
+        <b style="font-size:2.4rem">Titre — Poppins 600</b>
+        <b style="font-size:1.4rem">Sous-titre — Poppins 500</b>
+        <span style="font-size:1rem">Texte courant — Inter 400, pour une lecture confortable et moderne.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- NAVIGATION -->
+  <!-- ============================================================ -->
+  <section id="navigation" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">01 — Navigation</span>
+          <h2>Deux barres de navigation</h2>
+        </div>
+        <p>Fais défiler à l'intérieur de chaque cadre pour voir le flou et la bordure apparaître au scroll.</p>
+      </div>
+
+      <div class="subgrid" style="grid-template-columns: 1fr 1fr;">
+
+        <div>
+          <span class="demo-tag">Minimale, sticky + blur</span>
+          <div class="device-frame">
+            <div class="device-frame__bar"><span></span><span></span><span></span></div>
+            <div class="device-frame__scroll">
+              <nav class="demo-nav">
+                <div class="demo-nav__logo">Studio</div>
+                <div class="demo-nav__links">
+                  <a href="#">Accueil</a>
+                  <a href="#">Projets</a>
+                  <a href="#">Contact</a>
+                </div>
+              </nav>
+              <div class="demo-filler">
+                <h4>Contenu de la page</h4>
+                <div class="line"></div>
+                <div class="line"></div>
+                <p>Fais défiler ici pour voir la barre devenir opaque avec une fine bordure.</p>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="demo-tag">Logo centré + menu plein écran</span>
+          <div class="device-frame">
+            <div class="device-frame__bar"><span></span><span></span><span></span></div>
+            <div class="device-frame__scroll">
+              <nav class="demo-nav demo-nav--centered" style="position:relative;">
+                <div class="demo-nav__logo">Atelier</div>
+                <button class="demo-nav__burger" data-burger="#overlay-1"><span></span><span></span><span></span></button>
+              </nav>
+              <div class="demo-overlay" id="overlay-1">
+                <a href="#">Accueil</a>
+                <a href="#">À propos</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+              </div>
+              <div class="demo-filler">
+                <h4>Menu plein écran</h4>
+                <p>Clique sur le bouton burger : les liens apparaissent un par un, décalés dans le temps.</p>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BOUTONS -->
+  <!-- ============================================================ -->
+  <section id="boutons" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">02 — Boutons</span>
+          <h2>Six styles d'appel à l'action</h2>
+        </div>
+        <p>Survole chaque bouton pour voir son animation.</p>
+      </div>
+
+      <div class="row" style="gap:28px;">
+        <div class="stack"><button class="btn btn-primary">Bouton primaire</button><span class="demo-tag" style="margin:0">Dégradé + reflet</span></div>
+        <div class="stack"><button class="btn btn-outline">Bouton contour</button><span class="demo-tag" style="margin:0">Remplissage au survol</span></div>
+        <div class="stack"><button class="btn btn-ghost"><span>Bouton texte</span></button><span class="demo-tag" style="margin:0">Soulignement animé</span></div>
+        <div class="stack"><button class="btn btn-pill-cta">Découvrir <span class="arrow">→</span></button><span class="demo-tag" style="margin:0">Pilule + flèche</span></div>
+        <div class="stack"><button class="btn btn-icon">→</button><span class="demo-tag" style="margin:0">Icône ronde</span></div>
+        <div class="stack"><button class="btn btn-outline btn-magnetic" data-magnetic>Magnétique</button><span class="demo-tag" style="margin:0">Suit la souris</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ANIMATIONS -->
+  <!-- ============================================================ -->
+  <section id="animations" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">03 — Animations</span>
+          <h2>Micro-interactions</h2>
+        </div>
+        <p>Ces blocs se révèlent en fondu quand ils entrent dans l'écran — c'est le même effet qui pourra habiller chaque section d'un futur site.</p>
+      </div>
+
+      <div class="subgrid">
+        <div class="anim-box" data-reveal="1">
+          <span class="demo-tag" style="margin:0">Texte dégradé animé</span>
+          <h3 class="gradient-text" style="font-size:1.6rem">Toujours en mouvement</h3>
+        </div>
+        <div class="anim-box" data-reveal="2">
+          <span class="demo-tag" style="margin:0">Loader — anneau</span>
+          <div class="loader"></div>
+        </div>
+        <div class="anim-box" data-reveal="3">
+          <span class="demo-tag" style="margin:0">Loader — points</span>
+          <div class="loader-dots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <div class="tilt-card" data-tilt data-reveal="1" style="margin-top:28px;">
+        <span class="demo-tag" style="margin:0">Carte inclinée (tilt au survol)</span>
+        <h3 style="margin-top:10px;font-size:1.4rem">Déplace ta souris sur cette carte</h3>
+        <p style="margin-top:8px;max-width:480px;">Un effet 3D léger, souvent utilisé sur les sites d'agences récents pour donner de la profondeur sans surcharger.</p>
+      </div>
+    </div>
+
+    <div class="marquee" data-reveal="1">
+      <div class="marquee__track">
+        <span>Design</span><span>Développement</span><span>Animation</span><span>Identité</span><span>Web</span>
+        <span>Design</span><span>Développement</span><span>Animation</span><span>Identité</span><span>Web</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- HERO / PAGE TEMPLATES -->
+  <!-- ============================================================ -->
+  <section id="hero" class="showcase-block" style="padding-top:20px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">04 — Pages d'accueil</span>
+          <h2>Deux modèles de hero</h2>
+        </div>
+        <p>Deux façons différentes d'ouvrir une page d'accueil selon le ton du site.</p>
+      </div>
+    </div>
+
+    <div class="hero-split" data-reveal="1">
+      <div class="container">
+        <div>
+          <span class="eyebrow">Modèle — Hero fractionné</span>
+          <h1>Un site qui donne envie de rester.</h1>
+          <p>Idéal pour présenter une activité avec du texte et un visuel côte à côte — parfait pour un site vitrine ou un portfolio.</p>
+          <div class="hero-split__actions">
+            <button class="btn btn-primary">Commencer</button>
+            <button class="btn btn-ghost"><span>Voir la démo</span></button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="blob blob--a"></div>
+          <div class="blob blob--b"></div>
+          <div class="hero-visual__card">
+            <div class="line"></div>
+            <div class="line short"></div>
+            <div class="line"></div>
+            <div class="hero-visual__stat"><b>98%</b><span style="font-size:.85rem;color:var(--ink-soft)">de clients satisfaits</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-center" data-reveal="1" style="background:var(--paper-soft);">
+      <div class="container">
+        <span class="eyebrow">Modèle — Hero centré</span>
+        <h1 class="gradient-text">Simple, clair, mémorable.</h1>
+        <p>Une mise en page minimale, centrée sur un message fort — parfaite pour une page de lancement ou une landing page.</p>
+        <button class="btn btn-primary">Démarrer maintenant</button>
+        <div class="hero-center__scroll"><span>Scroll</span><span class="stick"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CARDS -->
+  <!-- ============================================================ -->
+  <section id="cards" class="showcase-block" style="padding-top:64px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">05 — Cartes</span>
+          <h2>Projets &amp; fonctionnalités</h2>
+        </div>
+        <p>Deux familles de cartes : portfolio (avec visuel) et fonctionnalités (avec icône).</p>
+      </div>
+
+      <div class="grid grid-3" style="margin-bottom:40px;">
+        <div class="card" data-reveal="1">
+          <div class="card__media"></div>
+          <span class="card__tag">Branding</span>
+          <h3 class="card__title">Identité visuelle</h3>
+          <p style="font-size:.92rem;">Un projet de refonte de marque, présenté avec un visuel plein et une flèche animée.</p>
+          <div class="card__foot"><span style="font-size:.85rem;color:var(--ink-faint)">2026</span><span class="card__arrow">→</span></div>
+        </div>
+        <div class="card" data-reveal="2">
+          <div class="card__media"></div>
+          <span class="card__tag">Site web</span>
+          <h3 class="card__title">Plateforme e-commerce</h3>
+          <p style="font-size:.92rem;">Carte de projet avec dégradé, idéale pour un portfolio ou une page « réalisations ».</p>
+          <div class="card__foot"><span style="font-size:.85rem;color:var(--ink-faint)">2025</span><span class="card__arrow">→</span></div>
+        </div>
+        <div class="card" data-reveal="3">
+          <div class="card__media"></div>
+          <span class="card__tag">Application</span>
+          <h3 class="card__title">App mobile</h3>
+          <p style="font-size:.92rem;">Même structure, réutilisable pour n'importe quel type de projet.</p>
+          <div class="card__foot"><span style="font-size:.85rem;color:var(--ink-faint)">2025</span><span class="card__arrow">→</span></div>
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="feature" data-reveal="1">
+          <div class="feature__icon">⚡</div>
+          <h4>Rapide</h4>
+          <p>Un code léger, sans dépendance lourde, pour des sites qui chargent instantanément.</p>
+        </div>
+        <div class="feature" data-reveal="2">
+          <div class="feature__icon">✦</div>
+          <h4>Épuré</h4>
+          <p>Beaucoup d'espace blanc, une seule police de titre, des couleurs mesurées.</p>
+        </div>
+        <div class="feature" data-reveal="3">
+          <div class="feature__icon">◐</div>
+          <h4>Adaptable</h4>
+          <p>Les variables de couleur permettent de retinter tout le site en un instant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================================ -->
+  <section id="footer" class="showcase-block" style="padding-top:20px;">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">06 — Footer</span>
+          <h2>Pied de page complet</h2>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer" data-reveal="1">
+      <div class="container">
+        <div>
+          <div class="gallery-topbar__logo" style="color:#fff;margin-bottom:14px;"><span></span> Studio</div>
+          <p style="color:rgba(255,255,255,.6);max-width:280px;font-size:.9rem;">Un modèle de footer sobre, avec liens organisés par colonnes.</p>
+        </div>
+        <div><h4>Navigation</h4><ul><li><a href="#">Accueil</a></li><li><a href="#">Projets</a></li><li><a href="#">À propos</a></li></ul></div>
+        <div><h4>Services</h4><ul><li><a href="#">Design</a></li><li><a href="#">Développement</a></li><li><a href="#">Conseil</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li><a href="#">Email</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+      </div>
+      <div class="container site-footer__bottom">
+        <span>© 2026 — Modèle de base</span>
+        <span>Fait avec la bibliothèque « modèle »</span>
+      </div>
+    </footer>
+  </section>
+
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>
