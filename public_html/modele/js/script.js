@@ -110,6 +110,18 @@ document.querySelectorAll('.mask-spotlight').forEach((el) => {
   });
 });
 
+// --- Barre flottante en verre dépoli (pilule glassmorphism) ---
+document.querySelectorAll('[data-glass-nav]').forEach((nav) => {
+  const links = nav.querySelectorAll('.navbar-glass__links a');
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      links.forEach((l) => l.classList.remove('is-active'));
+      link.classList.add('is-active');
+    });
+  });
+});
+
 // --- Tab bar "île dynamique" (pilule qui glisse et s'étire) ---
 document.querySelectorAll('[data-island-tabbar]').forEach((group) => {
   const items = Array.from(group.querySelectorAll('.tabbar-island__item'));

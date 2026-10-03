@@ -82,12 +82,12 @@
       <div class="section-head">
         <div>
           <span class="demo-tag">01 — Navigation</span>
-          <h2>Deux barres de navigation</h2>
+          <h2>Trois barres de navigation</h2>
         </div>
         <p>Fais défiler à l'intérieur de chaque cadre pour voir le flou et la bordure apparaître au scroll.</p>
       </div>
 
-      <div class="subgrid" style="grid-template-columns: 1fr 1fr;">
+      <div class="subgrid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
         <div>
           <span class="demo-tag">Minimale, sticky + blur</span>
@@ -135,6 +135,31 @@
                 <p>Clique sur le bouton burger : les liens apparaissent un par un, décalés dans le temps.</p>
                 <div class="line"></div>
                 <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="demo-tag">Pilule flottante, verre dépoli</span>
+          <div class="device-frame" style="background:#0d0d12;">
+            <div class="device-frame__bar"><span></span><span></span><span></span></div>
+            <div class="device-frame__scroll">
+              <nav class="navbar-glass" data-glass-nav>
+                <div class="navbar-glass__logo"><span></span>Nav</div>
+                <div class="navbar-glass__links">
+                  <a href="#" class="is-active">Accueil</a>
+                  <a href="#">Services</a>
+                  <a href="#">Contact</a>
+                </div>
+                <a href="#" class="navbar-glass__cta">Connexion</a>
+              </nav>
+              <div class="demo-filler" style="background:linear-gradient(180deg,#17171f,#0d0d12);">
+                <h4 style="color:#fff;">Flotte au-dessus du contenu</h4>
+                <p style="color:rgba(255,255,255,.55);">Fais défiler : la pilule reste collée en haut, son flou laisse deviner ce qui passe dessous.</p>
+                <div class="line" style="background:rgba(255,255,255,.08);"></div>
+                <div class="line" style="background:rgba(255,255,255,.08);"></div>
+                <div class="line" style="background:rgba(255,255,255,.08);"></div>
               </div>
             </div>
           </div>
