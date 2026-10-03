@@ -15,10 +15,12 @@
   <div class="gallery-topbar__logo"><span></span> Modèle</div>
   <nav class="subnav" data-subnav>
     <a href="#navigation">Navigation</a>
+    <a href="#tabbar">Tab bar</a>
     <a href="#boutons">Boutons</a>
     <a href="#animations">Animations</a>
     <a href="#hero">Pages / Hero</a>
     <a href="#cards">Cards</a>
+    <a href="#calendrier">Calendrier</a>
     <a href="#footer">Footer</a>
   </nav>
   <div class="gallery-topbar__tools">
@@ -39,7 +41,7 @@
     <div class="container">
       <span class="eyebrow">Bibliothèque personnelle</span>
       <h1>Une base propre, épurée et actuelle pour tes prochains sites.</h1>
-      <p>Chaque section ci-dessous est un modèle indépendant : navigation, boutons, animations, pages d'accueil, cartes, footer. Regarde, teste (clique sur les pastilles de couleur, bascule le thème sombre) et dis-moi section par section ce que tu gardes, ce que tu changes.</p>
+      <p>Chaque section ci-dessous est un modèle indépendant : navigation, tab bar, boutons, animations, pages d'accueil, cartes, calendrier, footer. Regarde, teste (clique sur les pastilles de couleur, bascule le thème sombre) et dis-moi section par section ce que tu gardes, ce que tu changes.</p>
     </div>
   </section>
 
@@ -143,13 +145,74 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- TAB BAR -->
+  <!-- ============================================================ -->
+  <section id="tabbar" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">02 — Tab bar</span>
+          <h2>Deux barres d'onglets peu courantes</h2>
+        </div>
+        <p>Pensées pour une app mobile ou un dashboard — clique sur un onglet pour voir le repère glisser.</p>
+      </div>
+
+      <div class="subgrid" style="grid-template-columns: 1fr 1fr;">
+
+        <div>
+          <span class="demo-tag">Île dynamique — la pilule glisse et s'étire</span>
+          <div class="phone-frame">
+            <div class="phone-frame__notch"></div>
+            <div class="phone-frame__screen">
+              <div class="demo-filler" style="padding:40px 20px;">
+                <h4 style="font-size:1.1rem;">Contenu</h4>
+                <div class="line"></div>
+                <div class="line short"></div>
+              </div>
+              <nav class="tabbar-island" data-island-tabbar>
+                <span class="tabbar-island__thumb"></span>
+                <button type="button" class="tabbar-island__item is-active"><span class="tabbar-island__icon">⌂</span><span>Accueil</span></button>
+                <button type="button" class="tabbar-island__item"><span class="tabbar-island__icon">◎</span><span>Explorer</span></button>
+                <button type="button" class="tabbar-island__item"><span class="tabbar-island__icon">♡</span><span>Favoris</span></button>
+                <button type="button" class="tabbar-island__item"><span class="tabbar-island__icon">☰</span><span>Profil</span></button>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="demo-tag">Rail vertical — dock latéral</span>
+          <div class="phone-frame">
+            <div class="phone-frame__notch"></div>
+            <div class="phone-frame__screen" style="flex-direction:row;">
+              <nav class="tabbar-vertical" data-vertical-tabbar>
+                <button type="button" class="tabbar-vertical__item is-active" aria-label="Accueil">⌂</button>
+                <button type="button" class="tabbar-vertical__item" aria-label="Explorer">◎</button>
+                <button type="button" class="tabbar-vertical__item" aria-label="Messages">✉</button>
+                <button type="button" class="tabbar-vertical__item" aria-label="Profil">☰</button>
+              </nav>
+              <div class="demo-filler" style="padding:40px 20px;">
+                <h4 style="font-size:1.1rem;">Contenu</h4>
+                <div class="line"></div>
+                <div class="line short"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- BOUTONS -->
   <!-- ============================================================ -->
   <section id="boutons" class="showcase-block">
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="demo-tag">02 — Boutons</span>
+          <span class="demo-tag">03 — Boutons</span>
           <h2>Six styles d'appel à l'action</h2>
         </div>
         <p>Survole chaque bouton pour voir son animation.</p>
@@ -173,7 +236,7 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="demo-tag">03 — Animations</span>
+          <span class="demo-tag">04 — Animations</span>
           <h2>Micro-interactions</h2>
         </div>
         <p>Ces blocs se révèlent en fondu quand ils entrent dans l'écran — c'est le même effet qui pourra habiller chaque section d'un futur site.</p>
@@ -199,6 +262,21 @@
         <h3 style="margin-top:10px;font-size:1.4rem">Déplace ta souris sur cette carte</h3>
         <p style="margin-top:8px;max-width:480px;">Un effet 3D léger, souvent utilisé sur les sites d'agences récents pour donner de la profondeur sans surcharger.</p>
       </div>
+
+      <div class="subgrid" style="margin-top:28px;">
+        <div class="anim-box" data-reveal-blur>
+          <span class="demo-tag" style="margin:0">Flou qui se dissipe</span>
+          <h3 style="font-size:1.4rem;max-width:280px;">Une netteté qui arrive en douceur</h3>
+        </div>
+        <div class="anim-box" style="align-items:stretch;justify-content:center;">
+          <span class="demo-tag" style="margin:0">Halo-masque qui suit la souris</span>
+          <p class="mask-spotlight" data-text="Déplace ta souris ici">Déplace ta souris ici</p>
+        </div>
+        <div class="anim-box" style="align-items:center;">
+          <span class="demo-tag" style="margin:0">Forme liquide</span>
+          <div class="blob-liquid"></div>
+        </div>
+      </div>
     </div>
 
     <div class="marquee" data-reveal="1">
@@ -216,7 +294,7 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="demo-tag">04 — Pages d'accueil</span>
+          <span class="demo-tag">05 — Pages d'accueil</span>
           <h2>Deux modèles de hero</h2>
         </div>
         <p>Deux façons différentes d'ouvrir une page d'accueil selon le ton du site.</p>
@@ -265,7 +343,7 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="demo-tag">05 — Cartes</span>
+          <span class="demo-tag">06 — Cartes</span>
           <h2>Projets &amp; fonctionnalités</h2>
         </div>
         <p>Deux familles de cartes : portfolio (avec visuel) et fonctionnalités (avec icône).</p>
@@ -316,14 +394,62 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- CALENDRIER -->
+  <!-- ============================================================ -->
+  <section id="calendrier" class="showcase-block">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="demo-tag">07 — Calendrier</span>
+          <h2>Deux sélecteurs de date peu courants</h2>
+        </div>
+        <p>Pour un site de réservation (atelier, salon, séance) — fais défiler le ruban ou survole le heatmap.</p>
+      </div>
+
+      <div class="subgrid" style="grid-template-columns: 1fr 1fr;">
+
+        <div>
+          <span class="demo-tag">Ruban de dates — défilement horizontal</span>
+          <div class="date-strip" data-date-strip>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Lun</span><span class="date-strip__num">12</span></button>
+            <button type="button" class="date-strip__day is-active"><span class="date-strip__dow">Mar</span><span class="date-strip__num">13</span></button>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Mer</span><span class="date-strip__num">14</span></button>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Jeu</span><span class="date-strip__num">15</span></button>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Ven</span><span class="date-strip__num">16</span></button>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Sam</span><span class="date-strip__num">17</span></button>
+            <button type="button" class="date-strip__day"><span class="date-strip__dow">Dim</span><span class="date-strip__num">18</span></button>
+          </div>
+        </div>
+
+        <div>
+          <span class="demo-tag">Heatmap de disponibilité — intensité = places libres</span>
+          <div class="cal-heatmap">
+            <span data-heat="2"></span><span data-heat="4"></span><span data-heat="0"></span><span data-heat="3"></span><span data-heat="1"></span><span data-heat="4"></span><span data-heat="2"></span>
+            <span data-heat="1"></span><span data-heat="3"></span><span data-heat="4"></span><span data-heat="2"></span><span data-heat="0"></span><span data-heat="3"></span><span data-heat="4"></span>
+            <span data-heat="0"></span><span data-heat="2"></span><span data-heat="3"></span><span data-heat="4"></span><span data-heat="4"></span><span data-heat="1"></span><span data-heat="0"></span>
+            <span data-heat="3"></span><span data-heat="4"></span><span data-heat="1"></span><span data-heat="0"></span><span data-heat="2"></span><span data-heat="4"></span><span data-heat="3"></span>
+            <span data-heat="4"></span><span data-heat="2"></span><span data-heat="0"></span><span data-heat="1"></span><span data-heat="3"></span><span data-heat="2"></span><span data-heat="4"></span>
+          </div>
+          <div class="cal-heatmap__legend">
+            <span>Moins</span>
+            <span data-heat="0"></span><span data-heat="1"></span><span data-heat="2"></span><span data-heat="3"></span><span data-heat="4"></span>
+            <span>Plus</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- FOOTER -->
   <!-- ============================================================ -->
   <section id="footer" class="showcase-block" style="padding-top:20px;">
     <div class="container">
       <div class="section-head">
         <div>
-          <span class="demo-tag">06 — Footer</span>
-          <h2>Pied de page complet</h2>
+          <span class="demo-tag">08 — Footer</span>
+          <h2>Trois pieds de page</h2>
         </div>
       </div>
     </div>
@@ -341,6 +467,41 @@
       <div class="container site-footer__bottom">
         <span>© 2026 — Modèle de base</span>
         <span>Fait avec la bibliothèque « modèle »</span>
+      </div>
+    </footer>
+
+    <div class="container" style="padding-top:36px;">
+      <div class="section-head" style="padding-top:0;padding-bottom:20px;">
+        <span class="demo-tag">Heure réelle + statut</span>
+      </div>
+    </div>
+    <footer class="footer-clock" data-reveal="1">
+      <div class="container footer-clock__inner">
+        <div class="gallery-topbar__logo"><span></span> Studio</div>
+        <div class="footer-clock__status">
+          <span class="footer-clock__dot"></span>
+          Disponible — <span data-live-clock>--:--</span> à Paris
+        </div>
+        <nav class="footer-clock__links">
+          <a href="#">Accueil</a>
+          <a href="#">Projets</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <div class="container" style="padding-top:36px;">
+      <div class="section-head" style="padding-top:0;padding-bottom:20px;">
+        <span class="demo-tag">Grand texte — survole le lien</span>
+      </div>
+    </div>
+    <footer class="footer-bigtype" data-reveal="1">
+      <div class="container">
+        <a href="#" class="footer-bigtype__cta" data-magnetic>Démarrons<br>un projet →</a>
+        <div class="footer-bigtype__bottom">
+          <span>© 2026 — Studio</span>
+          <div class="footer-bigtype__social"><a href="#">in</a><a href="#">tw</a><a href="#">@</a></div>
+        </div>
       </div>
     </footer>
   </section>

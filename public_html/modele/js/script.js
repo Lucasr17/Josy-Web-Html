@@ -87,6 +87,82 @@ document.querySelectorAll('[data-subnav] a').forEach((link) => {
   });
 });
 
+// --- Révélation par un flou qui se dissipe ---
+const blurItems = document.querySelectorAll('[data-reveal-blur]');
+if (blurItems.length) {
+  const ioBlur = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        ioBlur.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  blurItems.forEach((el) => ioBlur.observe(el));
+}
+
+// --- Halo-masque qui suit la souris sur un texte ---
+document.querySelectorAll('.mask-spotlight').forEach((el) => {
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+    el.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
+  });
+});
+
+// --- Tab bar "île dynamique" (pilule qui glisse et s'étire) ---
+document.querySelectorAll('[data-island-tabbar]').forEach((group) => {
+  const items = Array.from(group.querySelectorAll('.tabbar-island__item'));
+  const thumb = group.querySelector('.tabbar-island__thumb');
+  const moveThumb = (el) => {
+    if (!thumb) return;
+    thumb.style.left = el.offsetLeft + 'px';
+    thumb.style.width = el.offsetWidth + 'px';
+  };
+  const active = group.querySelector('.tabbar-island__item.is-active') || items[0];
+  if (active) requestAnimationFrame(() => moveThumb(active));
+  items.forEach((item) => {
+    item.addEventListener('click', () => {
+      items.forEach((i) => i.classList.remove('is-active'));
+      item.classList.add('is-active');
+      moveThumb(item);
+      // le libellé met .4s à se déplier (max-width) : on recale le repère une fois sa largeur finale atteinte
+      setTimeout(() => moveThumb(item), 420);
+    });
+  });
+});
+
+// --- Tab bar verticale (rail latéral) ---
+document.querySelectorAll('[data-vertical-tabbar]').forEach((group) => {
+  const items = group.querySelectorAll('.tabbar-vertical__item');
+  items.forEach((item) => {
+    item.addEventListener('click', () => {
+      items.forEach((i) => i.classList.remove('is-active'));
+      item.classList.add('is-active');
+    });
+  });
+});
+
+// --- Sélecteur de date en ruban ---
+document.querySelectorAll('[data-date-strip]').forEach((strip) => {
+  const days = strip.querySelectorAll('.date-strip__day');
+  days.forEach((day) => {
+    day.addEventListener('click', () => {
+      days.forEach((d) => d.classList.remove('is-active'));
+      day.classList.add('is-active');
+    });
+  });
+});
+
+// --- Horloge locale en direct (footer) ---
+document.querySelectorAll('[data-live-clock]').forEach((el) => {
+  const update = () => {
+    el.textContent = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  };
+  update();
+  setInterval(update, 30000);
+});
+
 const sections = document.querySelectorAll('main > section[id]');
 const subnavLinks = document.querySelectorAll('[data-subnav] a');
 if (sections.length && subnavLinks.length) {

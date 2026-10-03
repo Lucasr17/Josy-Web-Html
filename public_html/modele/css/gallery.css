@@ -107,6 +107,10 @@ html[data-theme="dark"] .gallery-topbar { background: rgba(16,14,23,.75); }
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 28px;
 }
+@media (max-width: 640px) {
+  /* passe en une colonne même quand une section force 2 colonnes en ligne (style="grid-template-columns: 1fr 1fr") */
+  .subgrid { grid-template-columns: 1fr !important; }
+}
 
 .showcase-block {
   padding-bottom: 70px;
