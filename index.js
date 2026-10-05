@@ -45,6 +45,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public_html', 'home.html'));
 });
 
+// Jeu de gestion d'entrepôt (lucasriche.com/jeu)
+app.get('/jeu', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public_html', 'jeu.html'));
+});
+
 // Route pour gérer les sous-domaines
 app.get('/:subdomain', (req, res) => {
     const subdomain = req.params.subdomain;

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>WareTrack – Jeu de gestion d'entrepôt</title>
+<style>
+  :root{
+    --bg1:#dfe8ff; --bg2:#b9cbff; --ink:#1b2a52; --muted:#6b7aa8;
+    --card:rgba(255,255,255,.92); --blue:#2f5bff; --blue2:#1e3fcf; --ok:#17b26a; --bad:#e5484d; --warn:#f5a524;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
+    user-select:none;-webkit-user-select:none;touch-action:manipulation}
+  canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+  .top{position:fixed;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top) + 8px) 10px 0;display:flex;gap:8px;align-items:stretch;pointer-events:none}
+  .logo{background:var(--card);border-radius:14px;padding:8px 12px;font-weight:800;letter-spacing:.2px;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(30,63,207,.12)}
+  .logo i{width:14px;height:14px;background:var(--blue);border-radius:4px;transform:rotate(45deg);display:inline-block}
+  .stats{display:flex;gap:6px;flex:1;overflow:hidden}
+  .stat{background:var(--card);border-radius:14px;padding:6px 10px;min-width:0;flex:1;box-shadow:0 4px 14px rgba(30,63,207,.12)}
+  .stat small{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .stat b{font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .bar{height:5px;border-radius:3px;background:#dde5ff;margin-top:3px;overflow:hidden}
+  .bar>div{height:100%;background:var(--ok);width:100%;transition:width .3s,background .3s}
+  .dock{position:fixed;left:0;right:0;bottom:0;padding:8px 10px calc(env(safe-area-inset-bottom) + 10px);display:flex;gap:8px;overflow-x:auto;}
+  .dock>:first-child{margin-left:auto}.dock>:last-child{margin-right:auto}
+  .btn{flex:0 0 auto;background:var(--card);border:2px solid transparent;border-radius:16px;padding:10px 14px;min-width:0;text-align:left;
+    font:inherit;color:var(--ink);box-shadow:0 6px 18px rgba(30,63,207,.16);cursor:pointer;transition:transform .08s}
+  .btn:active{transform:scale(.96)}
+  .btn b{display:block;font-size:14px;white-space:nowrap}
+  .btn span{font-size:11.5px;color:var(--muted);white-space:nowrap}
+  @media(max-width:520px){.logo{display:none}.btn{padding:8px 10px}.stat{padding:5px 8px}.stat b{font-size:15px}.stat small{font-size:9px}.dock{gap:6px}}
+  .btn.on{border-color:var(--blue);background:#fff}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .btn.price span::before{content:"$";}
+  .toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 74px);transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;padding:8px 14px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center}
+  .toast.show{opacity:.95}
+  .overlay{position:fixed;inset:0;background:rgba(27,42,82,.45);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}
+  .overlay.hide{display:none}
+  .modal{background:#fff;border-radius:22px;padding:24px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .modal h1{margin:0 0 6px;font-size:24px}
+  .modal p{margin:8px 0;color:#41507d;line-height:1.45;font-size:14.5px}
+  .modal li{margin:4px 0;font-size:14px;color:#41507d}
+  .go{margin-top:14px;width:100%;background:var(--blue);color:#fff;border:0;border-radius:14px;padding:14px;font-size:16px;font-weight:700;cursor:pointer}
+  .go:active{background:var(--blue2)}
+  .big{font-size:34px;font-weight:800;color:var(--blue)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div class="top">
+  <div class="logo"><i></i>WareTrack</div>
+  <div class="stats">
+    <div class="stat"><small>Cash</small><b id="sCash">$0</b></div>
+    <div class="stat"><small>Jour <span id="sDayT"></span></small><b id="sDay">1</b></div>
+    <div class="stat"><small>Stock</small><b id="sStock">0</b></div>
+    <div class="stat"><small>Réputation</small><b id="sRep">100%</b><div class="bar"><div id="repBar"></div></div></div>
+  </div>
+</div>
+
+<div class="dock" id="dock">
+  <button class="btn price" id="bHire"><b>🚜 Chariot</b><span id="pHire"></span></button>
+  <button class="btn price" id="bRack"><b>📦 Rack</b><span id="pRack"></span></button>
+  <button class="btn price" id="bSpeed"><b>⚡ Vitesse</b><span id="pSpeed"></span></button>
+  <button class="btn" id="bPrio"><b>🎯 Priorité</b><span id="pPrio">Auto</span></button>
+  <button class="btn" id="bTime"><b>⏩ Temps</b><span id="pTime">x1</span></button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="overlay" id="intro">
+  <div class="modal">
+    <h1>WareTrack 📦</h1>
+    <p>Gère ton entrepôt&nbsp;: les camions arrivent, tes chariots font le reste… si tu les organises bien&nbsp;!</p>
+    <ul>
+      <li><b>Camion « IN »</b> (gauche) : décharge ses caisses dans les racks.</li>
+      <li><b>Camion « OUT »</b> (droite) : charge des caisses prises dans les racks.</li>
+      <li>Un camion qui attend trop longtemps fait chuter ta <b>réputation</b>.</li>
+      <li>Utilise ton cash pour <b>acheter des chariots</b>, <b>construire des racks</b> (touche une case) et <b>booster la vitesse</b>.</li>
+    </ul>
+    <button class="go" id="start">Commencer</button>
+  </div>
+</div>
+
+<div class="overlay hide" id="over">
+  <div class="modal" style="text-align:center">
+    <h1>Entrepôt fermé 😵</h1>
+    <p>Ta réputation est tombée à zéro.</p>
+    <div class="big" id="oScore">0</div>
+    <p id="oDetail"></p>
+    <button class="go" id="again">Rejouer</button>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+
+/* ------------------------------------------------------------ config */
+const MAP_W = 11, FLOOR_D = 8.0, APRON_Y = 8.5, ROAD_Y0 = 9, ROAD_Y1 = 11;
+const HW = 32, HH = 16, ZU = 30;               // demi-tuile iso, hauteur d'une unité z
+const RACK_CAP = 4;
+const DAY_LEN = 50;
+const BAY_IN = 3, BAY_OUT = 8;                 // x centre des quais
+const TRUCK_Y = 9.85;                          // y centre camion
+const RACK_SPOTS = [];
+for (const y of [5, 3, 1]) for (const x of [1, 3, 5, 7, 9]) RACK_SPOTS.push({x, y, built: false, stock: 0, resIn: 0, resOut: 0});
+const START_RACKS = 4;
+
+const COL = {
+  crate:  ['#efc07f', '#d19a5b', '#b27f45'],
+  rack:   ['#6f8dff', '#3f63e6', '#2d4cc0'],
+  fork:   ['#ffcf4a', '#f0a91c', '#c98708'],
+  forkD:  ['#454d66', '#353c52', '#2a3042'],
+  trIn:   ['#ffffff', '#dfe6fb', '#c1ccef'],
+  trOut:  ['#4d78ff', '#2f58e8', '#2344bd'],
+  cab:    ['#ffffff', '#e8ecf8', '#c9d1ea'],
+  wall:   ['#5f86ff', '#3d63f0', '#2f50cc']
+};
+
+/* ------------------------------------------------------------ state */
+let G, W = 0, H = 0, S = 1, OX = 0, OY = 0, DPR = 1;
+let buildMode = false, started = false, raf = 0, last = 0;
+
+function reset() {
+  G = {
+    cash: 350, rep: 100, day: 1, dayT: 0, time: 0,
+    delivered: 0, stored: 0, lost: 0,
+    speedLvl: 0, speedMul: 1, prio: 0, // 0 auto, 1 IN, 2 OUT
+    fork: [], racks: RACK_SPOTS.map((r, i) => ({...r, built: i < START_RACKS, stock: i < START_RACKS ? 2 : 0, resIn: 0, resOut: 0})),
+    trucks: [], bay: {in: null, out: null}, queue: {in: [], out: []},
+    spawnT: 3, spawnNext: 'in', over: false, parts: [], tid: 1
+  };
+  addForklift(2.5, 7.5); addForklift(6.5, 7.5);
+  buildMode = false;
+  refreshUI();
+}
+
+function addForklift(x, y) {
+  G.fork.push({x, y, dx: 1, dy: 0, path: [], state: 'idle', job: null, carry: false, wait: 0, lvl: 0});
+}
+
+/* ------------------------------------------------------------ geometry */
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = innerWidth; H = innerHeight;
+  cv.width = W * DPR; cv.height = H * DPR;
+  const topPad = 70, botPad = 110;
+  const worldW = 22.6 * HW;       // largeur projetée (x-y étendu)
+  const worldH = (MAP_W + 11) * HH + ZU * 2.2 + 30;
+  S = Math.min(W / worldW, (H - topPad - botPad) / worldH);
+  S = Math.max(S, 0.4);
+  OX = W / 2 + 0.2 * HW * S;
+  OY = topPad + (H - topPad - botPad - worldH * S) / 2 + ZU * 1.8 * S;
+}
+function P(x, y, z = 0) { return [OX + (x - y) * HW * S, OY + (x + y) * HH * S - z * ZU * S]; }
+function unP(px, py) { const u = (px - OX) / (HW * S), v = (py - OY) / (HH * S); return [(u + v) / 2, (v - u) / 2]; }
+
+function poly(pts, fill, stroke) {
+  ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+}
+function tile(x, y, fill, stroke, z = 0, w = 1, d = 1) {
+  poly([P(x, y, z), P(x + w, y, z), P(x + w, y + d, z), P(x, y + d, z)], fill, stroke);
+}
+// boîte iso : (x,y,z) coin arrière-bas, tailles w (x), d (y), h (z)
+function box(x, y, z, w, d, h, c, edge) {
+  const e = edge || 'rgba(0,0,0,.12)';
+  poly([P(x, y, z + h), P(x + w, y, z + h), P(x + w, y + d, z + h), P(x, y + d, z + h)], c[0], e);
+  poly([P(x, y + d, z + h), P(x + w, y + d, z + h), P(x + w, y + d, z), P(x, y + d, z)], c[1], e);
+  poly([P(x + w, y, z + h), P(x + w, y + d, z + h), P(x + w, y + d, z), P(x + w, y, z)], c[2], e);
+}
+function shadow(cx, cy, rw, rd, a = .16) {
+  poly([P(cx - rw, cy - rd), P(cx + rw, cy - rd), P(cx + rw, cy + rd), P(cx - rw, cy + rd)], `rgba(30,50,120,${a})`);
+}
+function crate(cx, cy, z, s = .34) { box(cx - s / 2, cy - s / 2, z, s, s, s, COL.crate); }
+
+/* ------------------------------------------------------------ logic */
+const free = (r) => RACK_CAP - r.stock - r.resIn;
+const stockAvail = (r) => r.stock - r.resOut;
+const rackPt = (r) => [r.x + 1.5, r.y + .5];
+const bayPt = (b) => [b, APRON_Y];
+
+function route(f, tx, ty) {
+  const pts = [];
+  pts.push([f.x, 6.5]);
+  pts.push([tx, 6.5]);
+  pts.push([tx, ty]);
+  return pts;
+}
+
+function pickJob(f) {
+  const tin = G.bay.in, tout = G.bay.out;
+  const jobs = [];
+  if (tin && tin.state === 'docked' && tin.crates - tin.res > 0) {
+    let best = null, bd = 1e9;
+    for (const r of G.racks) if (r.built && free(r) > 0) {
+      const d = Math.abs(r.x + 1.5 - BAY_IN) + (APRON_Y - r.y);
+      if (d < bd) { bd = d; best = r; }
+    }
+    if (best) jobs.push({type: 'in', truck: tin, rack: best, urg: 1 - tin.pat / tin.patMax});
+  }
+  if (tout && tout.state === 'docked' && tout.need - tout.loaded - tout.res > 0) {
+    let best = null, bd = 1e9;
+    for (const r of G.racks) if (r.built && stockAvail(r) > 0) {
+      const d = Math.abs(r.x + 1.5 - BAY_OUT) + (APRON_Y - r.y);
+      if (d < bd) { bd = d; best = r; }
+    }
+    if (best) jobs.push({type: 'out', truck: tout, rack: best, urg: 1 - tout.pat / tout.patMax});
+  }
+  if (!jobs.length) return null;
+  jobs.sort((a, b) => {
+    if (G.prio === 1 && a.type !== b.type) return a.type === 'in' ? -1 : 1;
+    if (G.prio === 2 && a.type !== b.type) return a.type === 'out' ? -1 : 1;
+    return b.urg - a.urg;
+  });
+  return jobs[0];
+}
+
+function startJob(f, j) {
+  f.job = j;
+  if (j.type === 'in') { j.truck.res++; j.rack.resIn++; const [x, y] = bayPt(j.truck.bay); f.path = route(f, x, y); }
+  else { j.truck.res++; j.rack.resOut++; const [x, y] = rackPt(j.rack); f.path = route(f, x, y); }
+  f.state = 'toPick';
+}
+
+function updateForklift(f, dt) {
+  const spd = 2.6 * G.speedMul;
+  if (f.wait > 0) { f.wait -= dt; return; }
+  if (f.state === 'idle') {
+    const j = pickJob(f);
+    if (j) startJob(f, j);
+    else {
+      // retourne se garer sur l'apron
+      if (Math.abs(f.y - 7.5) > .05 && f.path.length === 0) f.path = [[f.x, 7.5]];
+    }
+  }
+  if (f.path.length) {
+    const [tx, ty] = f.path[0];
+    const ddx = tx - f.x, ddy = ty - f.y, d = Math.hypot(ddx, ddy);
+    const step = spd * dt;
+    if (d <= step) { f.x = tx; f.y = ty; f.path.shift(); }
+    else { f.x += ddx / d * step; f.y += ddy / d * step; }
+    if (d > .001) { f.dx = Math.abs(ddx) > Math.abs(ddy) ? Math.sign(ddx) : 0; f.dy = f.dx === 0 ? Math.sign(ddy) : 0; }
+    return;
+  }
+  const j = f.job;
+  if (!j) return;
+  if (f.state === 'toPick') {
+    f.wait = .35; f.carry = true;
+    if (j.type === 'in') { j.truck.crates--; j.truck.res--; const [x, y] = rackPt(j.rack); f.path = route(f, x, y); }
+    else { j.rack.stock--; j.rack.resOut--; const [x, y] = bayPt(j.truck.bay); f.path = route(f, x, y); }
+    f.state = 'toDrop';
+  } else if (f.state === 'toDrop') {
+    f.wait = .35; f.carry = false;
+    if (j.type === 'in') {
+      j.rack.stock++; j.rack.resIn--; G.cash += 15; G.stored++;
+      fx(j.rack.x + .5, j.rack.y + .5, '+$15', '#17b26a');
+    } else {
+      j.truck.loaded++; j.truck.res--; G.cash += 40; G.delivered++;
+      fx(j.truck.x, j.truck.y, '+$40', '#17b26a');
+    }
+    f.job = null; f.state = 'idle';
+  }
+}
+
+function fx(x, y, text, color) { G.parts.push({x, y, z: 1.2, t: 0, text, color}); }
+
+function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+
+function spawnTruck(kind) {
+  const q = G.queue[kind];
+  if (q.length >= 2) { G.rep = Math.max(0, G.rep - 3); toast('Camion refusé : file pleine (-3 réputation)'); return; }
+  const day = G.day;
+  const t = {
+    id: G.tid++, kind, bay: kind === 'in' ? BAY_IN : BAY_OUT,
+    x: -3.5, y: TRUCK_Y, state: 'arrive',
+    crates: 0, need: 0, loaded: 0, res: 0,
+    pat: 0, patMax: 0
+  };
+  if (kind === 'in') { t.crates = rnd(3, 4 + Math.min(3, day)); t.total = t.crates; t.patMax = t.pat = 42; }
+  else { t.need = rnd(2, 3 + Math.min(3, day)); t.patMax = t.pat = 46; }
+  q.push(t); G.trucks.push(t);
+}
+
+function updateTrucks(dt) {
+  for (const k of ['in', 'out']) {
+    if (!G.bay[k] && G.queue[k].length) {
+      const t = G.queue[k][0];
+      if (t.state === 'wait' || t.state === 'arrive') { G.bay[k] = t; G.queue[k].shift(); t.state = 'arrive'; }
+    }
+  }
+  for (const t of G.trucks) {
+    const queued = G.queue[t.kind].indexOf(t);
+    if (t.state === 'arrive') {
+      const target = G.bay[t.kind] === t ? t.bay : (queued >= 0 ? t.bay - 3.2 * (queued + 1) : t.bay);
+      const sp = 4 * dtScale;
+      if (t.x < target - .02) t.x = Math.min(target, t.x + sp * dt);
+      else if (G.bay[t.kind] === t && Math.abs(t.x - t.bay) < .05) { t.x = t.bay; t.state = 'docked'; }
+    } else if (t.state === 'docked') {
+      t.pat -= dt;
+      const done = t.kind === 'in' ? (t.crates <= 0 && t.res === 0) : (t.loaded >= t.need);
+      if (done) {
+        if (t.kind === 'out') { G.cash += 40; fx(t.x, t.y, 'Bonus +$40', '#2f5bff'); }
+        G.rep = Math.min(100, G.rep + 2);
+        t.state = 'leave';
+      } else if (t.pat <= 0) {
+        const left = t.kind === 'in' ? t.crates : t.need - t.loaded;
+        G.rep = Math.max(0, G.rep - 6); G.lost += left;
+        toast(t.kind === 'in' ? 'Camion IN parti avec des caisses (-6 réputation)' : 'Commande OUT incomplète (-6 réputation)');
+        t.state = 'leave';
+      }
+    } else if (t.state === 'leave') {
+      if (G.bay[t.kind] === t) G.bay[t.kind] = null;
+      t.x += 4.5 * dtScale * dt;
+      if (t.x > MAP_W + 6) t.dead = true;
+    }
+  }
+  G.trucks = G.trucks.filter(t => !t.dead);
+}
+let dtScale = 1;
+
+function update(dt) {
+  if (G.over) return;
+  dt *= dtScale;
+  G.time += dt; G.dayT += dt;
+  if (G.dayT >= DAY_LEN) { G.dayT = 0; G.day++; G.cash += 40 * G.day; toast(`Jour ${G.day} ! Prime +$${40 * G.day}`); }
+  G.spawnT -= dt;
+  if (G.spawnT <= 0) {
+    spawnTruck(G.spawnNext);
+    G.spawnNext = G.spawnNext === 'in' ? 'out' : 'in';
+    G.spawnT = Math.max(6, 15 - G.day * 1.2) * (.8 + Math.random() * .4);
+  }
+  const prev = dtScale; dtScale = 1;
+  updateTrucks(dt);
+  for (const f of G.fork) updateForklift(f, dt);
+  dtScale = prev;
+  for (const p of G.parts) { p.t += dt; p.z += dt * .8; }
+  G.parts = G.parts.filter(p => p.t < 1.2);
+  if (G.rep <= 0) gameOver();
+}
+
+function gameOver() {
+  G.over = true;
+  let best = 0;
+  const score = G.delivered * 10 + G.stored * 3 + G.day * 50;
+  try { best = +localStorage.getItem('waretrack_best') || 0; if (score > best) { best = score; localStorage.setItem('waretrack_best', best); } } catch (e) {}
+  $('oScore').textContent = score + ' pts';
+  $('oDetail').innerHTML = `Jour ${G.day} · ${G.delivered} caisses livrées · ${G.stored} rangées<br>Meilleur score : ${best} pts`;
+  $('over').classList.remove('hide');
+}
+
+/* ------------------------------------------------------------ render */
+function drawWorld() {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+
+  // sol hors map (grand losange doux)
+  tile(-2.5, -2.5, 'rgba(255,255,255,.35)', null, 0, MAP_W + 5, 16);
+  // sol entrepôt
+  for (let x = 0; x < MAP_W; x++) for (let y = 0; y < FLOOR_D; y++) {
+    tile(x, y, ((x + y) & 1) ? '#f3f6ff' : '#eaf0ff', 'rgba(120,140,220,.12)');
+  }
+  // apron
+  for (let x = -2; x < MAP_W + 3; x++) tile(x, 8, '#dde5fa', 'rgba(120,140,220,.12)');
+  // marquage zones quais
+  for (const bx of [BAY_IN, BAY_OUT]) {
+    const out = bx === BAY_OUT;
+    tile(bx - 1.5, 8, out ? 'rgba(47,91,255,.18)' : 'rgba(23,178,106,.2)', out ? '#2f5bff' : '#17b26a', 0, 3, 1);
+  }
+  // route
+  for (let x = -5; x < MAP_W + 6; x++) for (let y = ROAD_Y0; y < ROAD_Y1; y++) tile(x, y, '#c4cde8', null);
+  for (let x = -5; x < MAP_W + 6; x += 1) tile(x + .15, 10 - .03, '#ffffff', null, 0, .5, .06);
+  // trottoir
+  for (let x = -5; x < MAP_W + 6; x++) box(x, ROAD_Y1, 0, 1, .25, .12, ['#f6f8ff', '#d7defa', '#c1caee'], 'rgba(0,0,0,.05)');
+
+  // murs du fond
+  for (let x = 0; x < MAP_W; x++) box(x, -.3, 0, 1, .3, 1.7, COL.wall, 'rgba(255,255,255,.18)');
+  for (let y = 0; y < FLOOR_D; y++) box(-.3, y, 0, .3, 1, 1.7, COL.wall, 'rgba(255,255,255,.18)');
+  box(-.3, -.3, 0, .3, .3, 1.7, COL.wall, 'rgba(255,255,255,.18)');
+  // bandeau blanc
+  poly([P(0, -.3, 1.25), P(MAP_W, -.3, 1.25), P(MAP_W, -.3, 1.1), P(0, -.3, 1.1)], 'rgba(255,255,255,.55)');
+
+  // spots de construction
+  if (buildMode) {
+    const pulse = .5 + .5 * Math.sin(G.time * 5 + performance.now() / 300);
+    for (const r of G.racks) if (!r.built) {
+      tile(r.x + .05, r.y + .05, `rgba(47,91,255,${.18 + .18 * pulse})`, '#2f5bff', 0, .9, .9);
+      const [px, py] = P(r.x + .5, r.y + .5, .1);
+      ctx.fillStyle = '#2f5bff'; ctx.font = `700 ${16 * S + 6}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('+', px, py);
+    }
+  }
+
+  // entités triées
+  const ents = [];
+  for (const r of G.racks) if (r.built) ents.push({k: r.x + r.y + 1, d: () => drawRack(r)});
+  for (const f of G.fork) ents.push({k: f.x + f.y + .5, d: () => drawFork(f)});
+  for (const t of G.trucks) ents.push({k: t.x + t.y + 1.2, d: () => drawTruck(t)});
+  ents.sort((a, b) => a.k - b.k);
+  for (const e of ents) e.d();
+
+  // pins quais
+  for (const k of ['in', 'out']) {
+    const t = G.bay[k];
+    const bx = k === 'in' ? BAY_IN : BAY_OUT;
+    const [px, py] = P(bx, 8.4, 2.1);
+    drawPin(px, py, k, t);
+  }
+  // particules
+  for (const p of G.parts) {
+    const [px, py] = P(p.x, p.y, p.z);
+    ctx.globalAlpha = Math.max(0, 1 - p.t / 1.2);
+    ctx.fillStyle = p.color; ctx.font = `800 ${13 * Math.max(S, .8) + 3}px sans-serif`; ctx.textAlign = 'center';
+    ctx.fillText(p.text, px, py);
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawRack(r) {
+  const x = r.x + .06, y = r.y + .06, s = .88;
+  shadow(r.x + .5, r.y + .5, .5, .5, .1);
+  box(x, y, 0, s, s, .38, COL.rack);
+  // montants
+  for (const [dx, dy] of [[0, 0], [s - .08, 0], [0, s - .08], [s - .08, s - .08]]) box(x + dx, y + dy, .38, .08, .08, .3, COL.rack);
+  const n = r.stock, off = [[.27, .27], [.63, .27], [.27, .63], [.63, .63]];
+  for (let i = 0; i < Math.min(n, RACK_CAP); i++) crate(r.x + off[i][0] + .06, r.y + off[i][1] + .06, .38, .32);
+}
+
+function drawFork(f) {
+  const cx = f.x, cy = f.y;
+  shadow(cx, cy, .3, .3, .16);
+  const dx = f.dx || 0, dy = f.dy || 0;
+  // fourches devant
+  const fx_ = cx + dx * .32, fy_ = cy + dy * .32;
+  if (dx > 0 || dy > 0) { /* devant = dessiné après */ }
+  const drawFront = () => {
+    box(fx_ - .1, fy_ - .1, .02, .2, .2, .06, COL.forkD);
+    if (f.carry) crate(fx_, fy_, .08, .3);
+    box(cx + dx * .2 - .05, cy + dy * .2 - .05, .02, .1, .1, .6, COL.forkD);
+  };
+  if (dx < 0 || dy < 0) drawFront();
+  // roues
+  box(cx - .27, cy - .27, 0, .54, .54, .12, COL.forkD);
+  // corps
+  box(cx - .26, cy - .26, .1, .52, .52, .22, COL.fork);
+  // cabine
+  box(cx - dx * .06 - .17, cy - dy * .06 - .17, .32, .34, .34, .08, COL.forkD);
+  box(cx - .05 - dx * .1, cy - .05 - dy * .1, .32, .1, .1, .24, COL.forkD);
+  if (dx >= 0 && dy >= 0) drawFront();
+}
+
+function drawTruck(t) {
+  const x = t.x, y = t.y;
+  const L = 1.7, Cw = .75, Wd = .95;
+  shadow(x + .1, y, 1.2, .55, .15);
+  // roues
+  for (const wx of [-1.1, -.4, .8]) box(x + wx, y - Wd / 2 - .05, 0, .38, Wd + .1, .22, COL.forkD);
+  // remorque
+  const c = t.kind === 'in' ? COL.trIn : COL.trOut;
+  box(x - 1.3, y - Wd / 2, .18, L, Wd, .9, c, 'rgba(0,0,0,.14)');
+  // caisses sur le plateau (IN)
+  if (t.kind === 'in' && t.crates > 0) {
+    for (let i = 0; i < Math.min(t.crates, 6); i++) crate(x - 1.05 + (i % 3) * .5, y - .22 + Math.floor(i / 3) * .44, 1.08, .36);
+  }
+  if (t.kind === 'out') {
+    // bandeau blanc
+    poly([P(x - 1.3 + L, y + Wd / 2, .75), P(x - 1.3, y + Wd / 2, .75), P(x - 1.3, y + Wd / 2, .55), P(x - 1.3 + L, y + Wd / 2, .55)], 'rgba(255,255,255,.9)');
+  }
+  // cabine
+  box(x + .45, y - Wd / 2, .18, Cw, Wd, .75, COL.cab);
+  box(x + .45 + Cw - .02, y - .3, .45, .02, .6, .3, ['#7fa0ff', '#7fa0ff', '#4a6fe0']);
+  box(x + .45 + Cw - .05, y - .32, .45, .06, .64, .3, ['#9db6ff', '#7f9cf0', '#587be0']);
+}
+
+function drawPin(px, py, kind, t) {
+  const r = 17 * Math.max(S, .75);
+  ctx.save();
+  ctx.translate(px, py);
+  ctx.beginPath(); ctx.moveTo(0, r * 1.15); ctx.lineTo(-r * .45, r * .55); ctx.lineTo(r * .45, r * .55); ctx.closePath();
+  ctx.fillStyle = kind === 'in' ? '#17b26a' : '#2f5bff'; ctx.fill();
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill();
+  ctx.lineWidth = 4; ctx.strokeStyle = '#e3e9ff'; ctx.stroke();
+  if (t && t.state === 'docked') {
+    const frac = Math.max(0, t.pat / t.patMax);
+    ctx.beginPath(); ctx.arc(0, 0, r, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2);
+    ctx.strokeStyle = frac > .5 ? '#17b26a' : frac > .25 ? '#f5a524' : '#e5484d'; ctx.stroke();
+  }
+  ctx.fillStyle = '#1b2a52'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `800 ${r * .62}px sans-serif`;
+  let label = kind === 'in' ? 'IN' : 'OUT', sub = '';
+  if (t) sub = kind === 'in' ? `${t.total - t.crates - 0}/${t.total}` : `${t.loaded}/${t.need}`;
+  ctx.fillText(sub || label, 0, 1);
+  if (sub) { ctx.font = `700 ${r * .42}px sans-serif`; ctx.fillStyle = kind === 'in' ? '#17b26a' : '#2f5bff'; ctx.fillText(label, 0, -r - 8); }
+  ctx.restore();
+}
+
+/* ------------------------------------------------------------ UI */
+let toastT = 0;
+function toast(msg) {
+  const el = $('toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2200);
+}
+const costHire = () => 220 + 140 * (G.fork.length - 2);
+const costRack = () => 110 + 15 * (G.racks.filter(r => r.built).length - START_RACKS);
+const costSpeed = () => 250 + 200 * G.speedLvl;
+const MAX_FORK = 8, MAX_SPEED = 5;
+
+function refreshUI() {
+  $('sCash').textContent = '$' + Math.floor(G.cash);
+  $('sDay').textContent = G.day + ' · ' + Math.floor(G.dayT / DAY_LEN * 100) + '%';
+  $('sDayT').textContent = '';
+  $('sStock').textContent = G.racks.reduce((s, r) => s + r.stock, 0) + '/' + G.racks.filter(r => r.built).length * RACK_CAP;
+  $('sRep').textContent = Math.round(G.rep) + '%';
+  const rb = $('repBar'); rb.style.width = G.rep + '%'; rb.style.background = G.rep > 60 ? '#17b26a' : G.rep > 30 ? '#f5a524' : '#e5484d';
+  const nf = G.fork.length, nr = G.racks.filter(r => !r.built).length;
+  $('pHire').textContent = nf >= MAX_FORK ? `Max (${nf})` : `${costHire()} (${nf}/${MAX_FORK})`;
+  $('pRack').textContent = nr === 0 ? 'Complet' : costRack();
+  $('pSpeed').textContent = G.speedLvl >= MAX_SPEED ? 'Max' : `${costSpeed()} (niv ${G.speedLvl}/${MAX_SPEED})`;
+  $('pPrio').textContent = ['Auto', 'Priorité IN', 'Priorité OUT'][G.prio];
+  $('pTime').textContent = dtScale === 0 ? 'Pause' : 'x' + dtScale;
+  $('bHire').disabled = nf >= MAX_FORK || G.cash < costHire();
+  $('bRack').disabled = nr === 0 || G.cash < costRack();
+  $('bSpeed').disabled = G.speedLvl >= MAX_SPEED || G.cash < costSpeed();
+  $('bRack').classList.toggle('on', buildMode);
+}
+
+$('bHire').onclick = () => {
+  if (G.cash < costHire() || G.fork.length >= MAX_FORK) return;
+  G.cash -= costHire(); addForklift(2.5 + 2 * (G.fork.length % 5), 7.5); toast('Nouveau chariot embauché !');
+};
+$('bRack').onclick = () => { buildMode = !buildMode; if (buildMode) toast('Touche une case bleue pour construire un rack'); };
+$('bSpeed').onclick = () => {
+  if (G.cash < costSpeed() || G.speedLvl >= MAX_SPEED) return;
+  G.cash -= costSpeed(); G.speedLvl++; G.speedMul = 1 + .25 * G.speedLvl; toast(`Chariots plus rapides (x${G.speedMul.toFixed(2)})`);
+};
+$('bPrio').onclick = () => { G.prio = (G.prio + 1) % 3; };
+$('bTime').onclick = () => { dtScale = dtScale === 1 ? 2 : dtScale === 2 ? 0 : 1; };
+
+cv.addEventListener('pointerdown', e => {
+  if (!started || G.over || !buildMode) return;
+  const [wx, wy] = unP(e.clientX, e.clientY);
+  const r = G.racks.find(r => !r.built && wx >= r.x && wx < r.x + 1 && wy >= r.y && wy < r.y + 1);
+  if (!r) return;
+  if (G.cash < costRack()) { toast('Pas assez de cash'); return; }
+  G.cash -= costRack(); r.built = true; buildMode = !G.racks.every(r => r.built) && G.cash >= costRack() ? buildMode : false;
+  fx(r.x + .5, r.y + .5, 'Rack !', '#2f5bff');
+});
+
+$('start').onclick = () => { $('intro').classList.add('hide'); started = true; };
+$('again').onclick = () => { $('over').classList.add('hide'); reset(); };
+
+addEventListener('resize', resize);
+resize(); dtScale = 1; reset();
+
+function loop(ts) {
+  const dt = Math.min(.05, (ts - last) / 1000 || 0); last = ts;
+  if (started) update(dt);
+  drawWorld();
+  if (ts % 4 < 1.2 || true) refreshUI();
+  raf = requestAnimationFrame(loop);
+}
+raf = requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
