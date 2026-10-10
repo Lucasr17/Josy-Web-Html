@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/starac/api/:path*", "destination": "/api/:path*" },
+    { "source": "/starac", "destination": "/index.html" },
+    { "source": "/starac/:file*", "destination": "/:file*" }
+  ]
+}

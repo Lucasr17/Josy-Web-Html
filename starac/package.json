@@ -1,0 +1,10 @@
+{
+  "name": "starac-2027",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Appli mobile pour suivre et noter les primes de Star Académie 2027",
+  "scripts": {
+    "dev": "node dev.js"
+  },
+  "engines": { "node": ">=18" }
+}
